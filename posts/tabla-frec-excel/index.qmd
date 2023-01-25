@@ -47,7 +47,7 @@ Al ejecutar la fórmula mediante `<INTRO>`, Excel rellena la columna a la derech
 
 ![](image-20230121162516745.png)
 
-Hay que tener en cuenta que Excel no nos define en la tabla el tipo de intervalo que hemos obtenido. Pero sabemos que la fórmula de cálculo es tal que la frecuencia indicada corresponde a `<=` que el valor de clase. Para evitar confusiones, es útil añadir una columna con los intervalos especificados de forma manual.
+Hay que tener en cuenta que, aunque Excel no nos define en la tabla el tipo de intervalo que hemos obtenido. la fórmula de cálculo es tal que la frecuencia indicada corresponde a un `<=` que el valor de clase. Es decir, Excel calcula los intervalos considerando el valor que damos en la clase como el límite superior del intervalo, *incluído el propio valor*. Para evitar confusiones, es útil añadir una columna con los intervalos especificados de forma manual.
 
 ![](image-20230121162809700.png)
 
