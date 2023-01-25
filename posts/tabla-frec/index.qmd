@@ -19,7 +19,9 @@ library(tidyverse)
 df <- read_csv2("camembert.csv") 
 ```
 
-Vamos a utilizar los *pipes* de $R$ para construir nuestra tabla paso a paso. El primer paso es seleccionar la variable de la que vamos a hacer la tabla, en este caso es $est$, el $extracto\ seco\ total$.
+Vamos a utilizar los *pipes* de $R$ para construir nuestra tabla paso a paso. En cada paso, iremos añadiendo instrucciones adicionales para llegar al bloque de código que buscamos.
+
+El primer paso es seleccionar la variable de la que vamos a hacer la tabla, en este caso es $est$, el $extracto\ seco\ total$.
 
 ```{r paged.print = FALSE}
  df |>

@@ -8,7 +8,7 @@ editor: visual
 
 Hay varias formas de preparar una tabla de frecuencia en Excel. Aquí usaremos dos métodos:
 
--   la funcion 'FRECUENCIA()\`
+-   la funcion `FRECUENCIA()`
 -   la agrupación en una tabla dinámica
 
 ## Construir una tabla de frecuencias usando la función `FRECUENCIA()` de Excel.
