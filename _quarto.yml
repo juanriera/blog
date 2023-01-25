@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "jrblog"
+  title: "Blog de Juan Riera"
   navbar:
     right:
       - about.qmd
