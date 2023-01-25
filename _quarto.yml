@@ -5,12 +5,17 @@ project:
 website:
   title: "Blog de Juan Riera"
   navbar:
+    background: "#0074e4"
     right:
       - about.qmd
+      - icon: linkedin
+        href: https://www.linkedin.com/in/juanriera/
       - icon: github
-        href: https://github.com/
+        href: https://github.com/juanriera/
       - icon: twitter
-        href: https://twitter.com
+        href: https://twitter.com/@rieraprieto/
+      - icon: mastodon
+        href: https://mstdn.social/@juanriera/
 format:
   html:
     theme: cosmo
