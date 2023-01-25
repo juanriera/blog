@@ -1,0 +1,102 @@
+---
+title: " Cómo hacer una tabla de frecuencias en Excel"
+author: "Juan Riera"
+date: 2023-01-21
+format: html
+editor: visual
+---
+
+Hay varias formas de preparar una tabla de frecuencia en Excel. Aquí usaremos dos métodos:
+
+-   la funcion 'FRECUENCIA()\`
+-   la agrupación en una tabla dinámica
+
+## Construir una tabla de frecuencias usando la función `FRECUENCIA()` de Excel.
+
+Suponemos que nuestros datos están en una tabla de Excel.
+
+![](2023-01-20-1.png)
+
+Vamos a hacer una tabla de frecuencias de los datos de $extracto\ seco\ total$, que están guardados en la tabla en la variable(columna) $est$.
+
+Recordemos que la tabla de datos es intocable, no vamos a introducir ningún cálculo en esta tabla. Lo que haremos será crear una nueva hoja a continuación.
+
+En esta hoja introduciremos las clases de frecuencia que deseamos utilizar, empezando por un valor redondeado por debajo del mínimo de los valores. Podemos introducir este valor mediante fórmula o simplemente a mano.
+
+![](2023-01-21-3.png)
+
+La fórmula nos asegura no equivocarnos en el valor, pero es menos complicado comprobar este valor mínimo en la flechita del filtro de la tabla
+
+![](image-20230121160129196.png)
+
+En la primera fila, celda `A1`, colocamos el rótulo de la serie, que en nuestro caso vamos a llamar $est\_clases$
+
+Por cualquiera de los dos métodos (fórmula o directo), establecemos el valor inicial de nuestra serie de clases, en este caso, 42.
+
+A partir de este valor, utilizando el intervalo que deseemos, rellenamos hacia abajo hasta un valor por encima del máximo.
+
+![](image-20230121162235599.png)
+
+De nuevo, rotulamos la celda superior (`B1`en este caso) con la descripción de lo que vamos a obtener, `Frecuencia`
+
+La fórmula `FRECUENCIA()`necesita dos rangos: el de entrada, con los valores originales, y el de las clases, que hemos creado. Los valores originales están en la columna `est`de nuestra tabla original, y el rango de clases, en la nueva hoja.
+
+![](image-20230121162407460.png)
+
+Al ejecutar la fórmula mediante `<INTRO>`, Excel rellena la columna a la derecha de nuestro rango de clases con la frecuencia correspondiente a cada clase.
+
+![](image-20230121162516745.png)
+
+Hay que tener en cuenta que Excel no nos define en la tabla el tipo de intervalo que hemos obtenido. Pero sabemos que la fórmula de cálculo es tal que la frecuencia indicada corresponde a `<=` que el valor de clase. Para evitar confusiones, es útil añadir una columna con los intervalos especificados de forma manual.
+
+![](image-20230121162809700.png)
+
+A partir de la tabla de frecuencia, puede hacerse un diagrama de barras
+
+![](image-20230121163619049.png)
+
+## Construir una tabla de frecuencias utilizando las tablas dinámicas
+
+Lo primero que haremos será insertar una tabla dinámica, y la crearemos en una hoja nueva.
+
+Para ello, colocamos el cursor en una celda cualquiera dentro de la tabla de datos y buscamos la opción en el menú `Insertar`\>`Tabla dinámica`. Aceptamos las opciones de `Tabla o rango` y de `Nueva hoja de cálculo`:
+
+![](image-20230121164040941.png)
+
+Una vez creada la nueva tabla dinámica, en la definición de campos de tabla dinámica colocamos en `Filas` y en `Valores`la variable de la cual queremos hacer la tabla de frecuencias, en nuestro caso, $est$.
+
+![](image-20230121164323987.png)
+
+Ahora modificamos la definición de `Valores`, sustituyendo `Suma` por `Recuento`. Para ello, pulsamos en la flecha de opciones a la derecha y elegimos la opción `Configuración de campo de valor`:
+
+![](image-20230121164605973.png)
+
+Seleccionamos `Recuento` y aceptamos
+
+![](image-20230121164746899.png)
+
+Nuestra tabla debe tener este aspecto:
+
+![](image-20230121164839640.png)
+
+Ahora hacemos click derecho en el ratón sobre uno cualquiera de los valores de $est$ en la columna `A` y elegimos `Agrupar...`Aquí podemos mantener la opción por defecto presentada o elegir nuestra configuración. En este caso, yo he elegido agrupar desde 42 hasta 56 de 2 en 2
+
+![](image-20230121165125271.png)
+
+La tabla dinámica nos agrupa los resultados, presentando la tabla de frecuencia
+
+![](image-20230121165313394.png)
+
+De nuevo, podemos insertar un diagrama de barras desde el menú `Insertar`, escogiendo el gráfico de barras. Esto inserta un gráfico dinámico que se modificará automáticamente si cambiamos el diseño de nuestra tabla.
+
+![](image-20230121165459880.png)
+
+Una cuestión muy importante a tener en cuenta es que el contenido de una tabla dinámica no se puede editar manualmente, todas las modificaciones deben hacerse manejando la interface de las tablas dinámicas.
+
+Otra consideración es que la tabla dinámica ignorará las clases vacías (con valor de frecuencia $cero$). Es necesario prestar atención a que, si fuese el caso, esta característica no nos introduzca efectos no deseados en la gráfica, falseando los resultados.
+
+A veces es posible que la agrupación de la tabla dinámica presente un mensaje de que los datos no pueden ser agrupados. Esto sucede cuando hay un error en los datos (por ejemplo, si hay datos de texto entre los valores numéricos que no hemos detectado) o si hay valores en blanco en la tabla original. El uso de los filtros sobre la tabla original permite encontrar este tipo de errores con cierta facilidad
+
+## Para probar
+
+Intenta rehacer la tabla anterior reagrupando las clases de la tabla dinámica por intervalos de $1$. Haz lo mismo mediante la función `FRECUENCIA()`

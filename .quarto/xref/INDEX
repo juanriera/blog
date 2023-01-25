@@ -10,5 +10,11 @@
   },
   "posts/welcome/index.qmd": {
     "index.html": "52df9bca"
+  },
+  "posts/tabla-frec/index.qmd": {
+    "index.html": "c5d2f941"
+  },
+  "posts/tabla-frec-excel/index.qmd": {
+    "index.html": "ae70a59c"
   }
 }

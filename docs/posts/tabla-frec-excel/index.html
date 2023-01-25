@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Juan Riera">
+<meta name="dcterms.date" content="2023-01-21">
+
+<title>Blog de Juan Riera - Cómo hacer una tabla de frecuencias en Excel</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Blog de Juan Riera</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Juan Riera</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/juanriera/"><i class="bi bi-linkedin" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/juanriera/"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/@rieraprieto/"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://mstdn.social/@juanriera/"><i class="bi bi-mastodon" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Cómo hacer una tabla de frecuencias en Excel</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Juan Riera </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 21, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Hay varias formas de preparar una tabla de frecuencia en Excel. Aquí usaremos dos métodos:</p>
+<ul>
+<li>la funcion ’FRECUENCIA()`</li>
+<li>la agrupación en una tabla dinámica</li>
+</ul>
+<section id="construir-una-tabla-de-frecuencias-usando-la-función-frecuencia-de-excel." class="level2">
+<h2 class="anchored" data-anchor-id="construir-una-tabla-de-frecuencias-usando-la-función-frecuencia-de-excel.">Construir una tabla de frecuencias usando la función <code>FRECUENCIA()</code> de Excel.</h2>
+<p>Suponemos que nuestros datos están en una tabla de Excel.</p>
+<p><img src="2023-01-20-1.png" class="img-fluid"></p>
+<p>Vamos a hacer una tabla de frecuencias de los datos de <span class="math inline">\(extracto\ seco\ total\)</span>, que están guardados en la tabla en la variable(columna) <span class="math inline">\(est\)</span>.</p>
+<p>Recordemos que la tabla de datos es intocable, no vamos a introducir ningún cálculo en esta tabla. Lo que haremos será crear una nueva hoja a continuación.</p>
+<p>En esta hoja introduciremos las clases de frecuencia que deseamos utilizar, empezando por un valor redondeado por debajo del mínimo de los valores. Podemos introducir este valor mediante fórmula o simplemente a mano.</p>
+<p><img src="2023-01-21-3.png" class="img-fluid"></p>
+<p>La fórmula nos asegura no equivocarnos en el valor, pero es menos complicado comprobar este valor mínimo en la flechita del filtro de la tabla</p>
+<p><img src="image-20230121160129196.png" class="img-fluid"></p>
+<p>En la primera fila, celda <code>A1</code>, colocamos el rótulo de la serie, que en nuestro caso vamos a llamar <span class="math inline">\(est\_clases\)</span></p>
+<p>Por cualquiera de los dos métodos (fórmula o directo), establecemos el valor inicial de nuestra serie de clases, en este caso, 42.</p>
+<p>A partir de este valor, utilizando el intervalo que deseemos, rellenamos hacia abajo hasta un valor por encima del máximo.</p>
+<p><img src="image-20230121162235599.png" class="img-fluid"></p>
+<p>De nuevo, rotulamos la celda superior (<code>B1</code>en este caso) con la descripción de lo que vamos a obtener, <code>Frecuencia</code></p>
+<p>La fórmula <code>FRECUENCIA()</code>necesita dos rangos: el de entrada, con los valores originales, y el de las clases, que hemos creado. Los valores originales están en la columna <code>est</code>de nuestra tabla original, y el rango de clases, en la nueva hoja.</p>
+<p><img src="image-20230121162407460.png" class="img-fluid"></p>
+<p>Al ejecutar la fórmula mediante <code>&lt;INTRO&gt;</code>, Excel rellena la columna a la derecha de nuestro rango de clases con la frecuencia correspondiente a cada clase.</p>
+<p><img src="image-20230121162516745.png" class="img-fluid"></p>
+<p>Hay que tener en cuenta que Excel no nos define en la tabla el tipo de intervalo que hemos obtenido. Pero sabemos que la fórmula de cálculo es tal que la frecuencia indicada corresponde a <code>&lt;=</code> que el valor de clase. Para evitar confusiones, es útil añadir una columna con los intervalos especificados de forma manual.</p>
+<p><img src="image-20230121162809700.png" class="img-fluid"></p>
+<p>A partir de la tabla de frecuencia, puede hacerse un diagrama de barras</p>
+<p><img src="image-20230121163619049.png" class="img-fluid"></p>
+</section>
+<section id="construir-una-tabla-de-frecuencias-utilizando-las-tablas-dinámicas" class="level2">
+<h2 class="anchored" data-anchor-id="construir-una-tabla-de-frecuencias-utilizando-las-tablas-dinámicas">Construir una tabla de frecuencias utilizando las tablas dinámicas</h2>
+<p>Lo primero que haremos será insertar una tabla dinámica, y la crearemos en una hoja nueva.</p>
+<p>Para ello, colocamos el cursor en una celda cualquiera dentro de la tabla de datos y buscamos la opción en el menú <code>Insertar</code>&gt;<code>Tabla dinámica</code>. Aceptamos las opciones de <code>Tabla o rango</code> y de <code>Nueva hoja de cálculo</code>:</p>
+<p><img src="image-20230121164040941.png" class="img-fluid"></p>
+<p>Una vez creada la nueva tabla dinámica, en la definición de campos de tabla dinámica colocamos en <code>Filas</code> y en <code>Valores</code>la variable de la cual queremos hacer la tabla de frecuencias, en nuestro caso, <span class="math inline">\(est\)</span>.</p>
+<p><img src="image-20230121164323987.png" class="img-fluid"></p>
+<p>Ahora modificamos la definición de <code>Valores</code>, sustituyendo <code>Suma</code> por <code>Recuento</code>. Para ello, pulsamos en la flecha de opciones a la derecha y elegimos la opción <code>Configuración de campo de valor</code>:</p>
+<p><img src="image-20230121164605973.png" class="img-fluid"></p>
+<p>Seleccionamos <code>Recuento</code> y aceptamos</p>
+<p><img src="image-20230121164746899.png" class="img-fluid"></p>
+<p>Nuestra tabla debe tener este aspecto:</p>
+<p><img src="image-20230121164839640.png" class="img-fluid"></p>
+<p>Ahora hacemos click derecho en el ratón sobre uno cualquiera de los valores de <span class="math inline">\(est\)</span> en la columna <code>A</code> y elegimos <code>Agrupar...</code>Aquí podemos mantener la opción por defecto presentada o elegir nuestra configuración. En este caso, yo he elegido agrupar desde 42 hasta 56 de 2 en 2</p>
+<p><img src="image-20230121165125271.png" class="img-fluid"></p>
+<p>La tabla dinámica nos agrupa los resultados, presentando la tabla de frecuencia</p>
+<p><img src="image-20230121165313394.png" class="img-fluid"></p>
+<p>De nuevo, podemos insertar un diagrama de barras desde el menú <code>Insertar</code>, escogiendo el gráfico de barras. Esto inserta un gráfico dinámico que se modificará automáticamente si cambiamos el diseño de nuestra tabla.</p>
+<p><img src="image-20230121165459880.png" class="img-fluid"></p>
+<p>Una cuestión muy importante a tener en cuenta es que el contenido de una tabla dinámica no se puede editar manualmente, todas las modificaciones deben hacerse manejando la interface de las tablas dinámicas.</p>
+<p>Otra consideración es que la tabla dinámica ignorará las clases vacías (con valor de frecuencia <span class="math inline">\(cero\)</span>). Es necesario prestar atención a que, si fuese el caso, esta característica no nos introduzca efectos no deseados en la gráfica, falseando los resultados.</p>
+<p>A veces es posible que la agrupación de la tabla dinámica presente un mensaje de que los datos no pueden ser agrupados. Esto sucede cuando hay un error en los datos (por ejemplo, si hay datos de texto entre los valores numéricos que no hemos detectado) o si hay valores en blanco en la tabla original. El uso de los filtros sobre la tabla original permite encontrar este tipo de errores con cierta facilidad</p>
+</section>
+<section id="para-probar" class="level2">
+<h2 class="anchored" data-anchor-id="para-probar">Para probar</h2>
+<p>Intenta rehacer la tabla anterior reagrupando las clases de la tabla dinámica por intervalos de <span class="math inline">\(1\)</span>. Haz lo mismo mediante la función <code>FRECUENCIA()</code></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

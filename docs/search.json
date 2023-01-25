@@ -2,29 +2,57 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "Sobre mí",
+    "title": "Juan Riera",
     "section": "",
-    "text": "About this blog"
+    "text": "Actualmente estoy retirado por jubilación, y me he propuesto el objetivo de transmitir lo que me sea posible de mi experiencia profesional y conocimientos que he podido adquirir en el ejercicio de la profesión. Con este motivo, colaboro con proyectos de formación tecnológica en la Formación Profesional y en la Universidad, y he puesto en marcha este blog para escribir notas tecnológicas referentes sobre todo a la estadística industrial y el uso de algunas herramientas básicas como Excel y R en este contexto."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Blog de Juan Riera",
     "section": "",
-    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nJan 25, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nJan 22, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Jan 21, 2023\n\n\nJuan Riera\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJan 21, 2023\n\n\nJuan Riera\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "objectID": "posts/tabla-frec/index.html",
+    "href": "posts/tabla-frec/index.html",
+    "title": "Cómo hacer una tabla de frecuencias en R con tidyverse",
     "section": "",
-    "text": "1 + 1\n\n[1] 2"
+    "text": "Para hacer una tabla de frecuencias, el primer paso es cargar la librería tidyverse y leer los datos en \\(R\\), en este caso a partir de un archivo CSV.\nComo el .CSV ha sido generado desde Excel en español, los separadores son puntos y comas, y el separador de los decimales será la coma, y tendrá este aspecto èn un editor de texto básico:\nPara leer este archivo, utilizaremos la función read_csv2()que se adapta a este formato usado en Europa (utiizamos la función de tidyversey no la función read.csv2()de \\(R\\) básico)\nVamos a utilizar los pipes de \\(R\\) para construir nuestra tabla paso a paso. El primer paso es seleccionar la variable de la que vamos a hacer la tabla, en este caso es \\(est\\), el \\(extracto\\ seco\\ total\\).\nA continuación, agrupamos los valores por intervalos. Para ello usamos la función cut_width() de la librería ggplot2, que nos permite cortar los valores en intervalos, definidos por el parámetro width=; en este caso, damos al intervalo una amplitud de \\(1\\).\nLo que hemos hecho es designar el intervalo al que pertenecen todos los valores de \\(est\\), con la amplitud de intervalo que hemos definido mediante el parámetro elegido.\nEl paso siguiente es agrupar los intervalos, contando el número de veces que aparece cada uno.\nParece que no ha sucedido nada porque en tidyversenecesitamos indicar cómo vamos a utilizar la agrupación. En este caso, queremos contar el nímero de veces que aparece cada intervalo, lo que nos dará la frecuencia de valores que aparecen en ese intervalo. Para ello, usamos summarize(). Esta función sustituye el dataframe original por un nuevo dataframe con el resultado de la agrupación de est_group, creando además una nueva variable, que llamaremos \\(frec\\) y que cuenta el número de veces que aparece cada valor de intervalo mediante la función n()\nYa tenemos nuestra tabla de frecuencias. Sin embargo, tenemos un inconveniente, y es que la agrupación se salta aquellos intervalos que tienen frecuencia \\(cero\\): no nos apararece el intervalo \\((50.5,51.5]\\) ni el \\((51.5,52.5]\\) porque no hay ningún valor en estos intervalos. Por defecto, al igual que pasa en Excel, los casos inexistentes (con una frecuencia de \\(cero\\)) no aparecen en la tabla de frecuencias. Pero, al contrario que en Excel, en \\(R\\) sí tenemos una forma de decir que queremos que aparezcan, y es rellenar los casos \\(cero\\) con el valor \\(0\\). Utilizamos para ello la función complete()\nAhora sí está completa nuestra tabla de frecuencias.\nResumiendo los pasos que hemos dado,\nSi queremos utilizar la tabla de frecuencias, podemos guardarla en una variable.\nVerificamos nuestra tabla, imprimiendo la variable que hemos creado:\nCon esta tabla de frecuencia podemos hacer un gráfico de barras\nque es equivalente a un histograma con la parametrización adecuada"
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "objectID": "posts/tabla-frec/index.html#otras-alternativas",
+    "href": "posts/tabla-frec/index.html#otras-alternativas",
+    "title": "Cómo hacer una tabla de frecuencias en R con tidyverse",
+    "section": "Otras alternativas",
+    "text": "Otras alternativas\nLa elección de la función de corte nos permite agrupar los intervalos de forma ligeramente diferente. Si utiizamos como opción cut_interval= en vez de cut_width=, y utilizamos el parámetro n=, definiremos el número de intervalos y no la amplitud. Veamos el efecto en el diagrama de utilizar esta opción con n = 9:\n\ndf |>\n  select(est) |>\n  mutate(est_group = cut_interval(est, n = 9)) |>\n  group_by(est_group) |>\n  summarize (frec = n()) |>\n  complete(est_group, fill = list(frec = 0)) |>\n  ggplot(aes(x=est_group, y = frec)) +\n    geom_col()\n\n\n\n\nEl parámetro opcional cut_interval= también permite definir la amplitud del intervalo (no siempre es compatible con el parámetro n= ya que el intervalo que proporcionemos en length= puede no corresponderse con el número de clases que definimos con n=)\n\ndf |>\n  select(est) |>\n  mutate(est_group = cut_interval(est, length = 1)) |>\n  group_by(est_group) |>\n  summarize (frec = n()) |>\n  complete(est_group, fill = list(frec = 0)) |>\n  ggplot(aes(x=est_group, y = frec)) +\n    geom_col()\n\n\n\n\n\nPara probar\nA partir del último bloque de código, encuentra la forma de obtener e imprimir la tabla de frecuencias que se obtiene con cut_interval="
+  },
+  {
+    "objectID": "posts/tabla-frec-excel/index.html",
+    "href": "posts/tabla-frec-excel/index.html",
+    "title": "Cómo hacer una tabla de frecuencias en Excel",
     "section": "",
-    "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "Hay varias formas de preparar una tabla de frecuencia en Excel. Aquí usaremos dos métodos:"
+  },
+  {
+    "objectID": "posts/tabla-frec-excel/index.html#construir-una-tabla-de-frecuencias-usando-la-función-frecuencia-de-excel.",
+    "href": "posts/tabla-frec-excel/index.html#construir-una-tabla-de-frecuencias-usando-la-función-frecuencia-de-excel.",
+    "title": "Cómo hacer una tabla de frecuencias en Excel",
+    "section": "Construir una tabla de frecuencias usando la función FRECUENCIA() de Excel.",
+    "text": "Construir una tabla de frecuencias usando la función FRECUENCIA() de Excel.\nSuponemos que nuestros datos están en una tabla de Excel.\n\nVamos a hacer una tabla de frecuencias de los datos de \\(extracto\\ seco\\ total\\), que están guardados en la tabla en la variable(columna) \\(est\\).\nRecordemos que la tabla de datos es intocable, no vamos a introducir ningún cálculo en esta tabla. Lo que haremos será crear una nueva hoja a continuación.\nEn esta hoja introduciremos las clases de frecuencia que deseamos utilizar, empezando por un valor redondeado por debajo del mínimo de los valores. Podemos introducir este valor mediante fórmula o simplemente a mano.\n\nLa fórmula nos asegura no equivocarnos en el valor, pero es menos complicado comprobar este valor mínimo en la flechita del filtro de la tabla\n\nEn la primera fila, celda A1, colocamos el rótulo de la serie, que en nuestro caso vamos a llamar \\(est\\_clases\\)\nPor cualquiera de los dos métodos (fórmula o directo), establecemos el valor inicial de nuestra serie de clases, en este caso, 42.\nA partir de este valor, utilizando el intervalo que deseemos, rellenamos hacia abajo hasta un valor por encima del máximo.\n\nDe nuevo, rotulamos la celda superior (B1en este caso) con la descripción de lo que vamos a obtener, Frecuencia\nLa fórmula FRECUENCIA()necesita dos rangos: el de entrada, con los valores originales, y el de las clases, que hemos creado. Los valores originales están en la columna estde nuestra tabla original, y el rango de clases, en la nueva hoja.\n\nAl ejecutar la fórmula mediante <INTRO>, Excel rellena la columna a la derecha de nuestro rango de clases con la frecuencia correspondiente a cada clase.\n\nHay que tener en cuenta que Excel no nos define en la tabla el tipo de intervalo que hemos obtenido. Pero sabemos que la fórmula de cálculo es tal que la frecuencia indicada corresponde a <= que el valor de clase. Para evitar confusiones, es útil añadir una columna con los intervalos especificados de forma manual.\n\nA partir de la tabla de frecuencia, puede hacerse un diagrama de barras"
+  },
+  {
+    "objectID": "posts/tabla-frec-excel/index.html#construir-una-tabla-de-frecuencias-utilizando-las-tablas-dinámicas",
+    "href": "posts/tabla-frec-excel/index.html#construir-una-tabla-de-frecuencias-utilizando-las-tablas-dinámicas",
+    "title": "Cómo hacer una tabla de frecuencias en Excel",
+    "section": "Construir una tabla de frecuencias utilizando las tablas dinámicas",
+    "text": "Construir una tabla de frecuencias utilizando las tablas dinámicas\nLo primero que haremos será insertar una tabla dinámica, y la crearemos en una hoja nueva.\nPara ello, colocamos el cursor en una celda cualquiera dentro de la tabla de datos y buscamos la opción en el menú Insertar>Tabla dinámica. Aceptamos las opciones de Tabla o rango y de Nueva hoja de cálculo:\n\nUna vez creada la nueva tabla dinámica, en la definición de campos de tabla dinámica colocamos en Filas y en Valoresla variable de la cual queremos hacer la tabla de frecuencias, en nuestro caso, \\(est\\).\n\nAhora modificamos la definición de Valores, sustituyendo Suma por Recuento. Para ello, pulsamos en la flecha de opciones a la derecha y elegimos la opción Configuración de campo de valor:\n\nSeleccionamos Recuento y aceptamos\n\nNuestra tabla debe tener este aspecto:\n\nAhora hacemos click derecho en el ratón sobre uno cualquiera de los valores de \\(est\\) en la columna A y elegimos Agrupar...Aquí podemos mantener la opción por defecto presentada o elegir nuestra configuración. En este caso, yo he elegido agrupar desde 42 hasta 56 de 2 en 2\n\nLa tabla dinámica nos agrupa los resultados, presentando la tabla de frecuencia\n\nDe nuevo, podemos insertar un diagrama de barras desde el menú Insertar, escogiendo el gráfico de barras. Esto inserta un gráfico dinámico que se modificará automáticamente si cambiamos el diseño de nuestra tabla.\n\nUna cuestión muy importante a tener en cuenta es que el contenido de una tabla dinámica no se puede editar manualmente, todas las modificaciones deben hacerse manejando la interface de las tablas dinámicas.\nOtra consideración es que la tabla dinámica ignorará las clases vacías (con valor de frecuencia \\(cero\\)). Es necesario prestar atención a que, si fuese el caso, esta característica no nos introduzca efectos no deseados en la gráfica, falseando los resultados.\nA veces es posible que la agrupación de la tabla dinámica presente un mensaje de que los datos no pueden ser agrupados. Esto sucede cuando hay un error en los datos (por ejemplo, si hay datos de texto entre los valores numéricos que no hemos detectado) o si hay valores en blanco en la tabla original. El uso de los filtros sobre la tabla original permite encontrar este tipo de errores con cierta facilidad"
+  },
+  {
+    "objectID": "posts/tabla-frec-excel/index.html#para-probar",
+    "href": "posts/tabla-frec-excel/index.html#para-probar",
+    "title": "Cómo hacer una tabla de frecuencias en Excel",
+    "section": "Para probar",
+    "text": "Para probar\nIntenta rehacer la tabla anterior reagrupando las clases de la tabla dinámica por intervalos de \\(1\\). Haz lo mismo mediante la función FRECUENCIA()"
   }
 ]
