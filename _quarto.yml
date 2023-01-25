@@ -5,7 +5,6 @@ project:
 website:
   title: "Blog de Juan Riera"
   navbar:
-    background: "#0074e4"
     right:
       - about.qmd
       - icon: linkedin
@@ -18,7 +17,7 @@ website:
         href: https://mstdn.social/@juanriera/
 format:
   html:
-    theme: cosmo
+    theme: flatly
     css: styles.css
 
 editor: visual
