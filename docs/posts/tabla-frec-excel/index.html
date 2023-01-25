@@ -197,8 +197,13 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="image-20230121165313394.png" class="img-fluid"></p>
 <p>De nuevo, podemos insertar un diagrama de barras desde el menú <code>Insertar</code>, escogiendo el gráfico de barras. Esto inserta un gráfico dinámico que se modificará automáticamente si cambiamos el diseño de nuestra tabla.</p>
 <p><img src="image-20230121165459880.png" class="img-fluid"></p>
+<p>El uso de las tablas dinámicas tiene dos ventajas principales:</p>
+<ul>
+<li><p>La rapidez con la que se puede cambiar la configuración del agrupamiento, y</p></li>
+<li><p>la posibilidad de crear gráficos dinámicos enlazados, como hemos visto</p></li>
+</ul>
 <p>Una cuestión muy importante a tener en cuenta es que el contenido de una tabla dinámica no se puede editar manualmente, todas las modificaciones deben hacerse manejando la interface de las tablas dinámicas.</p>
-<p>Otra consideración es que la tabla dinámica ignorará las clases vacías (con valor de frecuencia <span class="math inline">\(cero\)</span>). Es necesario prestar atención a que, si fuese el caso, esta característica no nos introduzca efectos no deseados en la gráfica, falseando los resultados.</p>
+<p>Otra consideración es que la tabla dinámica ignorará las clases vacías (con valor de frecuencia <span class="math inline">\(cero\)</span>). Es necesario prestar atención a que, si fuese el caso, esta característica no nos introduzca efectos no deseados en la gráfica, falseando los resultados. Por esta razón, casi siempre es más seguro hacer nuestras tablas de frecuencia utilizando el primer método, la fórmula <code>FRECUENCIA()</code>, y ajustando los ceros si es necesario.</p>
 <p>A veces es posible que la agrupación de la tabla dinámica presente un mensaje de que los datos no pueden ser agrupados. Esto sucede cuando hay un error en los datos (por ejemplo, si hay datos de texto entre los valores numéricos que no hemos detectado) o si hay valores en blanco en la tabla original. El uso de los filtros sobre la tabla original permite encontrar este tipo de errores con cierta facilidad</p>
 </section>
 <section id="para-probar" class="level2">
