@@ -8,9 +8,9 @@ editor: visual
 
 Para hacer una tabla de frecuencias, el primer paso es cargar la librería `tidyverse` y leer los datos en $R$, en este caso a partir de un archivo *CSV*.
 
-Como el `.CSV` ha sido generado desde Excel en español, los separadores son puntos y comas, y el separador de los decimales será la coma, y tendrá este aspecto èn un editor de texto básico:
+Como el `.CSV` ha sido generado desde Excel en español, los separadores son puntos y comas, y el separador de los decimales será la coma, y tendrá este aspecto en un editor de texto básico:
 
-![CSV separado por comas en un editor de texto](2023-01-21.png)
+![CSV en el Notepad de Windows](2023-01-21.png)
 
 Para leer este archivo, utilizaremos la función `read_csv2()`que se adapta a este formato usado en Europa (utiizamos la función de `tidyverse`y no la función `read.csv2()`de $R$ básico)
 
