@@ -56,11 +56,13 @@ Esta tabla ya nos permite representar pares de valores. Como hemos visto, si int
 
 ![](excel-mensaje-xy.png)
 
-El único gráfico de puntos que podríamos insertar como gráfico dinámico es un gráfico de líneas y puntos al que podríamos borrar las líneas, pero no es lo que buscamos, porque presenta los valores X como secuencia, y no como valores numéricos en una escala.
+El único gráfico de puntos que podríamos insertar como gráfico dinámico es un gráfico de líneas y puntos al que podemos borrar las líneas de forma que sólo queden los puntos, Pero este gráfico no es el que buscamos, porque presenta los valores X siguiendo la secuencia que tienen los números en la fila de la tabla dinámica,, sin respetar que la distancia entre los valores y los intervalos se correspondan con la magnitud del valor numérico.
+
+Si observamos el gráfico, vemos que los valores al principio del eje X se separan 0,2 unidades, mientras que los últimos valores se separan 0,3 unidades. Esto hace que la escala horizontal no se respete correctamente., y convierte el gráfico en falso.
 
 ![](excel-graf-dinamico.png)
 
-Para conseguir un gráfico XY real, empezamos insertando un gráfico XY en blanco a la derecha de la tabla dinámica. Para ello, colocamos el cursor dos columnas a la derecha de la tabla dinámica e insertamos un nuevo gráfico XY, que nos aparecerá como un marco en blanco, ya que no hemos establecido ningún rango de datos. Esto es lo que haremos a continuación.
+Para conseguir un gráfico XY verdadero, en el que ambos ejes respeten la posición de los valores según su magnitud, empezamos insertando un gráfico XY en blanco a la derecha de la tabla dinámica. Para ello, colocamos el cursor dos columnas a la derecha de la tabla dinámica e insertamos un nuevo gráfico XY, que nos aparecerá como un marco en blanco, ya que no hemos establecido ningún rango de datos. Esto es lo que haremos a continuación.
 
 ![](excel-crear-series-0.png)
 
