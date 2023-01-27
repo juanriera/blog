@@ -108,11 +108,13 @@ Sustituimos la fórmula `Recuento`por la fórmula `Promedio`y repetimos todo el 
 -   Añadimos las series una a una tal como hemos hecho antes
 -   Añadimos rótulos de ejes y gráfico, y otros detalles y retoques que creamos oportunos
 
-Este es mi gráfico XY final en Excel, que se puede comparar con el que hace `ggplot`.
+Modificando con el factor de multiplicación en las fórmulas de las columnas calculadas, podemos aumentar el efecto de `jitter` en caso de que el solapamiento sea excesivo. Al recalcular la tabla dinámica podremos ver el efecto producido y decidir si es bajo, excesivo, o es el que queremos.
+
+Este es mi gráfico XY final en Excel:
 
 ![](excel-graf-XY-final.png)
 
-Y este es el gráfico en `ggplot`, que vimos al principio del artículo
+Y este es el gráfico en `ggplot`, ligeramente modificado respecto al que vimos al principio del artículo
 
 ```{r}
  library (ggplot2)
@@ -122,12 +124,13 @@ ggplot (iris, aes(x = Sepal.Length, y = Petal.Width, colour = Species)) +
   theme_minimal() +
   theme(
     title = element_text(size=16, face='plain', colour = "dimgray"),
-    axis.title.x = element_text(colour = "dimgray"),
-    axis.title.y = element_text(colour = "dimgray"),
-    axis.title = element_text(colour = "dimgray"),
+    axis.title.x = element_text(size = 14, colour = "dimgray"),
+    axis.title.y = element_text(size = 14, colour = "dimgray"),
   )
 ```
 
-En Excel, jugando con el factor de multiplicación en las fórmulas de las columnas calculadas, podemos aumentar el efecto de `jitter` en caso de que el solapamiento sea excesivo. Al recalcular la tabla dinámica podremos ver el efecto producido y decidir si es bajo, excesivo, o es el que queremos.
+El gráfico XY en Excel es mucho más largo de hacer que en `ggplot`, pero es perfectamente realizable, como hemos visto. Tiene la ventaja de la gran facilidad de edición de la hoja de cálculo, que permite un grado de personalización casi ilimitado.
 
-El gráfico XY en Excel es mucho más largo de hacer que en `ggplot`, pero es perfectamente realizable, como hemos visto. Tiene la ventaja de la gran facilidad de edición de la hoja de cálculo, que permite un grado de personalización casi ilimitado. Como inconveniente, citar que el uso de estas opciones de personalización no se presentan en forma de código y por lo tanto no siempre son fáciles de reproducir por otras personas. Esa es una de la grandes ventajas del código R: la reproducibilidad de los informes, y una de las razones para promover su utilización no sólo en el mundo de la investigación y la Universidad, sino en la empresa en general.
+Como inconveniente, en Excel el uso de estas opciones de personalización no se presentan en el gráfico de ninguna manera, y por lo tanto no siempre son fáciles de reproducir por otras personas. Es necesario acceder a la hoja original y bucear entre las opciones, algunas de las cuales puede que no sean fáciles de encontrar. En la versión final del gráfico en Excel no hay nada que indique cómo se ha dado el formato de los títulos, las series, los colores, etc. En cambio, en el fragmento de código R, podemos leer con claridad cada opción de formato y de personalización utilizada, y por lo tanto podemos repetir exactamente el gráfico, o utilizar el formato en otro gráfico.
+
+Esa es una de la grandes ventajas del código R: la reproducibilidad de los informes, y una de las razones para promover su utilización no sólo en el mundo de la investigación y la Universidad, sino en la empresa en general.
