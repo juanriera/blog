@@ -90,15 +90,17 @@ Ajustamos la escala del eje X para un mínimo de 4, añadimos rótulos de ejes y
 
 ![](excel-crear-series-6.png)
 
-Este es un gráfico XY verdadero, en el que los valores del eje X y del eje Y son valores numéricos. Es un gráfico que puede ser útil en algunas circunstancias, nos simplifica la representación gracias a que la fórmula `Promedio`nos reduce a un punto todos los valores de Y que se corresponden con un valor determinado de X. Esto nos permite visualizar claramente las diferencias entre las tres poblaciones que estamos representando. Sin embargo, no es un verdadero gráfico XY porque no hemos representado todos los pares de valores.
+Este es un gráfico XY verdadero, en el que la escala de los ejes X e Y respeta la distancia que indica la magnitud del valor numérico, y por lo tanto, sitúa los puntos en una posición correcta. Este gráfico XY, en el que los valores Y están resumidos en un valor único, puede ser útil en algunas circunstancias; nos simplifica la representación gracias a que la fórmula `Promedio`nos reduce a un punto todos los valores de Y que se corresponden con un valor determinado de X. Nos permite visualizar claramente las diferencias entre las tres poblaciones que estamos representando; sin embargo, no es el gráfico que buscamos, porque no hemos representado cada par de valores que existe en la tabla de datos original, estén repetidos o no.
 
-La forma de construir el gráfico que buscamos es, de nuevo, engañar a Excel, haciendo que cada valor de X y cada valor de Y sea diferente. Así Excel no podrá agruparlos, y la fórmula de resumen `Promedio` nos devolverá en realidad el promedio de un solo valor en cada celda de la tabla dinámica. Esto no es un problema para Excel, porque simplemente utiliza 1 como divisor del promedio.
+Para construir el gráfico correcto tenemos que "engañar" a Excel de nuevo, haciendo que cada valor de X y cada valor de Y sea diferente. Así Excel no podrá agruparlos, y la fórmula de resumen `Promedio` nos devolverá en realidad el promedio de un solo valor en cada celda de la tabla dinámica. Tener un valor único no es un problema para Excel, porque simplemente utiliza 1 como divisor del promedio.
 
-Para conseguir nuestro objetivo, tenemos que volver a la tabla original y crear dos nuevas columnas, que se corresponderán con el eje X y el eje Y. Calcularemos los nuevos valores mediante una fórmula que sume un valor aleatorio suficientemente largo al valor original como para que la probabilidad de que coincidan dos valores sea casi cero. Para evitar modificar el valor original, dividimos el valor aleatorio por un exponente de 10 tal que la serie de decimales que obtenemos esté siempre por detrás del último valor decimal de la serie original. Por ejemplo, si nuestros valores tienen un decimal, dividimos el valor aleatorio entre 100. Las fórmulas que utilizo son `=[@[Sepal.Length]]+ALEATORIO()/100`y `=[@[Petal.Width]]+ALEATORIO()/100`. Este método tiene un efecto semejante a la utilización de `jitter`en `ggplot`.
+Para conseguir nuestro objetivo, tenemos que volver a la tabla original y crear dos nuevas columnas, que se corresponderán con los ejes X e Y. Calcularemos los nuevos valores mediante una fórmula que sume un valor aleatorio suficientemente largo al valor original como para que la probabilidad de que coincidan dos valores sea casi cero. Para evitar modificar el valor original, dividimos el valor aleatorio por un exponente de 10 tal que la serie de decimales que obtenemos esté siempre por detrás del último valor decimal de la serie original. Por ejemplo, si nuestros valores tienen un decimal, dividimos el valor aleatorio entre 100. Las fórmulas que utilizo son `=[@[Sepal.Length]]+ALEATORIO()/100`y `=[@[Petal.Width]]+ALEATORIO()/100`. Este método tiene un efecto semejante a la utilización de `jitter`en `ggplot`.
 
 Esta es la tabla modificada:
 
 ![](excel-tabla-iris-modif.png)
+
+Vemos que los valores de las dos columnas añadidas son idénticos en las dos primeras cifras significativas al valor de la columna original (el valor original entero más un decimal); el segundo decimal es un cero, y a continuación viene la secuencia de números aleatorios. Dado que esta secuencia comienza en el tercer decimal, el efecto sobre la posición de cada valor en el gráfico será prácticamente indetectable y no la falseará.
 
 Insertamos una nueva tabla dinámica a partir de esta tabla, utilizando en filas y en valores las nuevas variables calculadas; verificamos mediante la fórmula `Recuento` que ahora ya no hay valores acumulados, cada pareja de valores es única.
 
@@ -109,8 +111,6 @@ Sustituimos la fórmula `Recuento`por la fórmula `Promedio`y repetimos todo el 
 -   Con el cursor en una celda en blanco fuera de la tabla dinámica y a la derecha, insertamos gráfico XY en blanco,
 -   Añadimos las series una a una tal como hemos hecho antes
 -   Añadimos rótulos de ejes y gráfico, y otros detalles y retoques que creamos oportunos
-
-Modificando con el factor de multiplicación en las fórmulas de las columnas calculadas, podemos aumentar el efecto de `jitter` en caso de que el solapamiento sea excesivo. Al recalcular la tabla dinámica podremos ver el efecto producido y decidir si es bajo, excesivo, o es el que queremos.
 
 Este es mi gráfico XY final en Excel:
 
@@ -136,3 +136,7 @@ El gráfico XY en Excel es mucho más largo de hacer que en `ggplot`, pero es pe
 Como inconveniente, en Excel el uso de estas opciones de personalización no se presentan en el gráfico de ninguna manera, y por lo tanto no siempre son fáciles de reproducir por otras personas. Es necesario acceder a la hoja original y bucear entre las opciones, algunas de las cuales puede que no sean fáciles de encontrar. En la versión final del gráfico en Excel no hay nada que indique cómo se ha dado el formato de los títulos, las series, los colores, etc. En cambio, en el fragmento de código R, podemos leer con claridad cada opción de formato y de personalización utilizada, y por lo tanto podemos repetir exactamente el gráfico, o utilizar el formato en otro gráfico.
 
 Esa es una de la grandes ventajas del código R: la reproducibilidad de los informes, y una de las razones para promover su utilización no sólo en el mundo de la investigación y la Universidad, sino en la empresa en general.
+
+## Para probar
+
+Al construir las columnas de valores modificados, vimos que el efecto del cálculo sobre la posición de cada valor es prácticamente inapreciable, debido a que la secuencia aleatoria empieza sólo en el tercer decimal. Modificando el factor de multiplicación y división las fórmulas de las columnas calculadas, podemos aumentar el efecto de `jitter` en caso de que el solapamiento sea excesivo. Si recalculamos manualmente la tabla dinámica podremos ver el efecto producido por la modificación de los decimales y decidir si el efecto es bajo, excesivo, o es el que queremos.
