@@ -40,7 +40,9 @@ Utilizaremos el dataset `iris`([Conjunto de datos Iris en Wikipedia](https://es.
 
 ![](excel-tabla-iris.png)
 
-Queremos hacer una gráfica XY de la columna `Sepal.Length` frente a `Petal.Width`. Comenzamos insertando una tabla dinámica a partir de esta tabla, y colocamos`Species`en columnas,`Sepal.Length`en filas y`Petal.Width`en valores.
+Queremos hacer una gráfica XY de la columna `Sepal.Length` frente a `Petal.Width`, agrupada por `Species`, igual que hemos visto en el gráfico hecho con `ggplot`.
+
+Comenzamos insertando una tabla dinámica a partir de esta tabla, y colocamos`Species`en columnas,`Sepal.Length`en filas y`Petal.Width`en valores.
 
 Vamos a introducir algunas opciones de diseño de la tabla dinámica que nos facilitan el trabajo de construcción del gráfico. Haciendo *click* derecho en cualquier parte de la tabla, seleccionamos `Opciones de la tabla dinámica`. En la pestaña `Diseño y formato`, deseleccionamos la opción `Autoajustar anchos de columnas al actualizar`(de forma que quitemos la marca de *check*). En la pestaña `Totales y filtros`, deseleccionamos las dos opciones de `Totales generales`, de manera que quitemos la marca de `Mostrar totales generales de filas`y de `Mostrar totales generales de las columnas`.
 
