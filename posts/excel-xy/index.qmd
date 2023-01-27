@@ -7,7 +7,7 @@ execute:
   freeze: false
 ---
 
-En el mundo de la empresa, la utilización de las hojas de cálculo, sobre todo de Microsoft Excel, está mucho más extendida que la de lenguajes como R o python, y por eso siempre que enseño métodos de análisis de datos en R, intento presentar de forma simultánea cómo se realizarían en Excel, si es posible; comparando ventajas e inconvenientes de ambas herramientas. Así, aquellas personas que no están formadas en R, pero sí tienen experiencia en Excel, pueden imaginar un camino de aprendizaje hacia la nueva herramienta, o simplemente adoptar la técnica con la hoja de cálculo conocida.
+En el mundo de la empresa, la utilización de las hojas de cálculo, sobre todo de Microsoft Excel, está mucho más extendida que la de lenguajes como R o python. Por esta razón, siempre que enseño métodos de análisis de datos en R, intento presentar también, si es posible, cómo se realizarían los mismos análisis en Excel, comparando ventajas e inconvenientes de ambas herramientas. Así, aquellas personas que no están formadas en R, pero sí tienen experiencia en Excel, pueden optar por el aprendizaje de R, o simplemente realizar el método presentado con la hoja de cálculo.
 
 Una de las cosas que siempre he echado de menos en Excel, y que es muy fácil en R o python, es la posibilidad de hacer gráficos XY segmentados por una columna adicional que se utiliza para codificar en color de acuerdo con los valores de esa columna. Con `ggplot` en R, es inmediato utilizar `colour` para las categorías:
 
@@ -32,9 +32,9 @@ El inconveniente de este gráfico en Excel es que para asignar diferentes colore
 
 He encontrado algunas soluciones creativas a este problema, entre ellas la de [Vidya](http://daydreamingnumbers.com/about/) en su blog [Daydreaming Numbers](http://daydreamingnumbers.com/). [La solución que ella propone](http://daydreamingnumbers.com/how-to/conditional-colouring-to-scatterplots-in-excel/) es la creación de las columnas necesarias con los campos de clasificación, y mediante fórmulas condicionales, recolocar los valores en estas nuevas columnas. Sin embargo, aunque la solución funciona, no cumple con mi requerimiento de respetar el formato de datos arreglados (*tidy*), y no es compatible con el uso avanzado de tablas en Excel y en Power Pilot / Power BI.
 
-La solución que yo estoy buscando debe llegar a través de métodos que no alteren la estructura de los datos originales, y sean compatibles con las nuevas herramientas como Power Pivot, Power BI, o lenguajes como R o python. Esto exige no modificar la estructura de la tabla de datos original, o en todo caso, hacerlo respetando los datos originales y la estructura original.
+La solución que yo estoy buscando debe llegar a través de métodos que no alteren la estructura de los datos originales, y sean compatibles con las nuevas herramientas como Power Pivot, Power BI, o lenguajes como R o python. Esto exige no modificar la tabla de datos original, o en todo caso, hacerlo respetando los datos y la estructura originales.
 
-El método que he elegido es utilizar las tablas dinámicas. Desgraciadamente (e inexplicablemente), las tablas dinámicas no permiten la utilización de gráficos dinámicos XY, por lo que los usuarios han buscado formas alternativas de crearlos. La que vamos a utilizar aquí es la creación de un gráfico XY a partir de la asignación manual de los rangos de datos de la tabla dinámica. Es un proceso algo largo, pero no es complicado.
+El método que he elegido es utilizar las tablas dinámicas. Desgraciadamente (e inexplicablemente), las tablas dinámicas no permiten la utilización de gráficos dinámicos XY, por lo que los usuarios han buscado formas alternativas de crearlos. La que vamos a utilizar aquí es la creación de un gráfico XY a partir de la asignación manual de los rangos de datos de la tabla dinámica.
 
 Utilizaremos el dataset `iris`([Conjunto de datos Iris en Wikipedia](https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris), [Conjunto de datos Iris en kaggle](https://www.kaggle.com/datasets/uciml/iris)), exportado desde R, que convertimos en una tabla de Excel mediante `Menu`\>`Insertar`\>`Tabla`
 
@@ -118,7 +118,14 @@ Y este es el gráfico en `ggplot`, que vimos al principio del artículo
  library (ggplot2)
 ggplot (iris, aes(x = Sepal.Length, y = Petal.Width, colour = Species)) +
   geom_jitter(size = 3, alpha = 0.3, stroke = 1) +
-  theme_minimal()
+  labs(title = "Gráfico XY en R con ggplot") +
+  theme_minimal() +
+  theme(
+    title = element_text(size=16, face='plain', colour = "dimgray"),
+    axis.title.x = element_text(colour = "dimgray"),
+    axis.title.y = element_text(colour = "dimgray"),
+    axis.title = element_text(colour = "dimgray"),
+  )
 ```
 
 En Excel, jugando con el factor de multiplicación en las fórmulas de las columnas calculadas, podemos aumentar el efecto de `jitter` en caso de que el solapamiento sea excesivo. Al recalcular la tabla dinámica podremos ver el efecto producido y decidir si es bajo, excesivo, o es el que queremos.
