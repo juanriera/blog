@@ -96,7 +96,7 @@ Este es un gráfico XY verdadero, en el que la escala de los ejes X e Y respeta 
 
 Para construir el gráfico correcto tenemos que "engañar" a Excel de nuevo, haciendo que cada valor de X y cada valor de Y sea diferente. Así Excel no podrá agruparlos, y la fórmula de resumen `Promedio` nos devolverá en realidad el promedio de un solo valor en cada celda de la tabla dinámica. Tener un valor único no es un problema para Excel, porque simplemente utiliza 1 como divisor del promedio.
 
-Para conseguir nuestro objetivo, tenemos que volver a la tabla original y crear dos nuevas columnas, que se corresponderán con los ejes X e Y. Calcularemos los nuevos valores mediante una fórmula que sume un valor aleatorio suficientemente largo al valor original como para que la probabilidad de que coincidan dos valores sea casi cero. Para evitar modificar el valor original, dividimos el valor aleatorio por un exponente de 10 tal que la serie de decimales que obtenemos esté siempre por detrás del último valor decimal de la serie original. Por ejemplo, si nuestros valores tienen un decimal, dividimos el valor aleatorio entre 100. Las fórmulas que utilizo son `=[@[Sepal.Length]]+ALEATORIO()/100`y `=[@[Petal.Width]]+ALEATORIO()/100`. Este método tiene un efecto semejante a la utilización de `jitter`en `ggplot`.
+Para conseguir nuestro objetivo, tenemos que volver a la tabla original y crear dos nuevas columnas, que se corresponderán con los ejes X e Y. Calcularemos los nuevos valores mediante una fórmula que sume un valor aleatorio suficientemente largo al valor original como para que la probabilidad de que coincidan dos valores sea casi cero. Para evitar modificar el valor original, dividimos el valor aleatorio por un exponente de 10 tal que la serie de decimales que obtenemos esté siempre por detrás del último valor decimal de la serie original. Por ejemplo, si nuestros valores tienen un decimal, dividimos el valor aleatorio entre 100. Las fórmulas que utilizo son `=[@[Sepal.Length]]+ALEATORIO()/100`y `=[@[Petal.Width]]+ALEATORIO()/100`. Este método tiene un efecto semejante a la utilización de `jitter`en `ggplot`. Para minimizar el efecto de `jitter` no hay más que dividir el número aleatorio por un factor mayor, según la magnitud del número. En nuestros datos, un factor de 10000 nos proporciona un gráfico XY sin ninguna distorsión, aunque con solapamiento en bastantes puntos.
 
 Esta es la tabla modificada:
 
@@ -141,4 +141,14 @@ Esa es una de la grandes ventajas del código R: la reproducibilidad de los info
 
 ## Para probar
 
-Al construir las columnas de valores modificados, vimos que el efecto del cálculo sobre la posición de cada valor es prácticamente inapreciable, debido a que la secuencia aleatoria empieza sólo en el tercer decimal. Modificando el factor de multiplicación y división en las fórmulas de las columnas calculadas, podemos aumentar el efecto de `jitter` en caso de que el solapamiento sea excesivo. Si recalculamos manualmente la tabla dinámica podremos ver el efecto producido por la modificación de los decimales y decidir si el efecto es bajo, excesivo, o es el que queremos.
+Al construir las columnas de valores modificados, vimos que el efecto del cálculo sobre la posición de cada valor es prácticamente inapreciable, debido a que la secuencia aleatoria empieza sólo en el tercer decimal. Modificando el factor de multiplicación y división en las fórmulas de las columnas calculadas, podemos aumentar el efecto de `jitter` en caso de que el solapamiento sea excesivo. Si recalculamos manualmente la tabla dinámica podremos ver el efecto producido por la modificación de los decimales y decidir si el efecto es bajo, excesivo, o es el que queremos. 
+
+Con un factor de división de 10000, tal como indicaba en el texto, prácticamente eliminamos el efecto `jitter`; el gráfico obtenido será este:
+
+![](excel-graf-XY-final-2.png)
+
+Con un factor de 10, el efecto `jitter`aumenta:
+
+![](excel-graf-XY-final-3.png)
+
+
