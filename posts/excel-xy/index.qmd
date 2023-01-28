@@ -110,7 +110,7 @@ Esta es la tabla modificada:
 
 ![](excel-tabla-iris-modif.png)
 
-Vemos que los valores de las dos columnas añadidas son idénticos en las dos primeras cifras significativas al valor de la columna original (el valor original entero más un decimal); el segundo decimal es un cero, y a continuación viene la secuencia de números aleatorios. Dado que esta secuencia comienza en el tercer decimal, el efecto sobre la posición de cada valor en el gráfico será prácticamente indetectable y no la falseará.
+Vemos que los valores de las dos columnas añadidas son idénticos en las dos primeras cifras significativas al valor de la columna original (el valor original entero más un decimal); el segundo decimal es un cero, y a continuación viene la secuencia de números aleatorios. Dado que esta secuencia comienza en el tercer decimal, el efecto de `jitter`sobre la posición de cada valor en el gráfico será muy reducido.
 
 Insertamos una nueva tabla dinámica a partir de esta tabla, utilizando en filas y en valores las nuevas variables calculadas; verificamos mediante la fórmula `Recuento` que ahora ya no hay valores acumulados, cada pareja de valores es única.
 
