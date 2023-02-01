@@ -1,0 +1,10 @@
+---
+title: "Gráficos de dispersión multiserie en Microsoft Excel (parte 3)"
+subtitle: "Un ejemplo real de una fabricación de queso Camembert."
+author: "Juan Riera"
+date: 2023-02-01
+format: html
+draft: TRUE
+execute: 
+  freeze: false
+---
