@@ -169,6 +169,6 @@ He añadido en YouTube un [vídeo](https://youtu.be/tD2P5wabb1k) con la secuenci
 
 La tabla de datos *Iris* puede descargarse enn el repositorio [datasets](https://github.com/juanriera/datasets) de mi GitHub.
 
-El gráfico exportado a PDF puede descargarse [aquí](https://github.com/juanriera/blog/galeria/excel-graf-xy-final.pdf) para verificar la calidad que puede obtenerse mediante una exportación desde Excel.
+El gráfico exportado a PDF puede descargarse [aquí](https://juanriera.github.io/galeria/excel-graf-xy-final.pdf) para verificar la calidad que puede obtenerse mediante una exportación desde Excel.
 
 Una hoja de cálculo Excel con todos los gráficos puede descargarse [aquí](iris_fisher.xlsx) o en el repositorio [datasets](https://github.com/juanriera/datasets) de mi GitHub.
