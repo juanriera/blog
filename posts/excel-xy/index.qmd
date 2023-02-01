@@ -163,4 +163,12 @@ Con un factor de 10, el efecto `jitter`aumenta:
 
 ![](excel-graf-XY-final-3.png)
 
-He añadido en YouTube un [vídeo](https://youtu.be/tD2P5wabb1k) con la secuencia de creación del gráfico. La tabla de datos *Iris* está en un [repositorio de mi Github](https://github.com/juanriera/excel-xy) y puede descargaarse libremente.
+## Ejemplos disponibles
+
+He añadido en YouTube un [vídeo](https://youtu.be/tD2P5wabb1k) con la secuencia de creación del gráfico.
+
+La tabla de datos *Iris* puede descargarse enn el repositorio [datasets]](https://github.com/juanriera/datasets) de mi GitHub.
+
+El gráfico exportado a PDF puede descargarse [aquí](excel-graf-xy-final.pdf) para verificar la calidad que puede obtenerse mediante una exportación desde Excel.
+
+Una hoja de cálculo excel con todos los gráficos puede descargarse [aquí](iris_fisher.xlsx) o en el repositorio [datasets](https://github.com/juanriera/dataset)  de mi GitHub.

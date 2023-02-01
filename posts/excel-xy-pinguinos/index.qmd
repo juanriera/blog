@@ -1,0 +1,11 @@
+---
+title: "Gráficos de dispersión multiserie en Microsoft Excel (parte 2)"
+subtitle: "Uso de Power Pivot"
+author: "Juan Riera"
+date: 2023-02-01
+format: html
+draft: TRUE
+execute: 
+  freeze: false
+---
+

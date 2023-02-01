@@ -32,7 +32,7 @@
     "href": "posts/excel-xy/index.html#para-probar",
     "title": "Cómo hacer gráficos de dispersión multiserie en Microsoft Excel a partir de datos arreglados (tidy data)",
     "section": "Para probar",
-    "text": "Para probar\nAl construir las columnas de valores modificados, vimos que el efecto del cálculo sobre la posición de cada valor es prácticamente inapreciable, debido a que la secuencia aleatoria empieza sólo en el tercer decimal. Modificando el factor de multiplicación y división en las fórmulas de las columnas calculadas, podemos aumentar el efecto de jitter en caso de que el solapamiento sea excesivo. Si recalculamos manualmente la tabla dinámica podremos ver el efecto producido por la modificación de los decimales y decidir si el efecto es bajo, excesivo, o es el que queremos.\nCon un factor de división de 10000, tal como indicaba en el texto, prácticamente eliminamos el efecto jitter; el gráfico obtenido será este:\n\nCon un factor de 10, el efecto jitteraumenta:\n\nHe añadido en YouTube un vídeo con la secuencia de creación del gráfico. La tabla de datos Iris está en un repositorio de mi Github y puede descargaarse libremente."
+    "text": "Para probar\nAl construir las columnas de valores modificados, vimos que el efecto del cálculo sobre la posición de cada valor es prácticamente inapreciable, debido a que la secuencia aleatoria empieza sólo en el tercer decimal. Modificando el factor de multiplicación y división en las fórmulas de las columnas calculadas, podemos aumentar el efecto de jitter en caso de que el solapamiento sea excesivo. Si recalculamos manualmente la tabla dinámica podremos ver el efecto producido por la modificación de los decimales y decidir si el efecto es bajo, excesivo, o es el que queremos.\nCon un factor de división de 10000, tal como indicaba en el texto, prácticamente eliminamos el efecto jitter; el gráfico obtenido será este:\n\nCon un factor de 10, el efecto jitteraumenta:"
   },
   {
     "objectID": "posts/tabla-frec/index.html",
@@ -75,5 +75,12 @@
     "title": "Cómo hacer una tabla de frecuencias en Excel",
     "section": "Para probar",
     "text": "Para probar\nIntenta rehacer la tabla anterior reagrupando las clases de la tabla dinámica por intervalos de \\(1\\). Haz lo mismo mediante la función FRECUENCIA()"
+  },
+  {
+    "objectID": "posts/excel-xy/index.html#ejemplos-disponibles",
+    "href": "posts/excel-xy/index.html#ejemplos-disponibles",
+    "title": "Cómo hacer gráficos de dispersión multiserie en Microsoft Excel a partir de datos arreglados (tidy data)",
+    "section": "Ejemplos disponibles",
+    "text": "Ejemplos disponibles\nHe añadido en YouTube un vídeo con la secuencia de creación del gráfico.\nLa tabla de datos Iris puede descargarse enn el repositorio [datasets]](https://github.com/juanriera/datasets) de mi GitHub.\nEl gráfico exportado a PDF puede descargarse aquí para verificar la calidad que puede obtenerse mediante una exportación desde Excel.\nUna hoja de cálculo excel con todos los gráficos puede descargarse aquí o en el repositorio datasets de mi GitHub."
   }
 ]
