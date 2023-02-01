@@ -25,5 +25,8 @@
   },
   "posts/camembert/index.qmd": {
     "index.html": "b7c4e18e"
+  },
+  "about_blog.qmd": {
+    "about_blog.html": "d2db5339"
   }
 }

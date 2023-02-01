@@ -15,6 +15,9 @@ website:
         href: https://twitter.com/@rieraprieto/
       - icon: mastodon
         href: https://mstdn.social/@juanriera/
+    left:
+      - text: "Sobre este blog"
+        file: about_blog.qmd
 format:
   html:
     theme: flatly

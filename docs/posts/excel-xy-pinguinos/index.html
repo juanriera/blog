@@ -80,6 +80,11 @@ ul.task-list li input[type="checkbox"] {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about_blog.html">Sobre este blog</a>
+  </li>  
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html">Juan Riera</a>
@@ -149,10 +154,33 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>En el post anterior hemos visto cómo crear un gráfico de dispersión multiserie a partir de una tabla de datos arreglados, en la que una columna proporciona los criterios para la agrupación en clases, y para conseguir diferenciar los puntos individuales construíamos dos nuevas columnas en la tabla de datos.</p>
-<p>Excel proporciona otro método para añadir columnas modificadas, que parte del <a href="https://support.microsoft.com/en-us/office/data-models-in-excel-services-c6fec347-5203-4c03-bc35-00910fc10099">modelo de datos</a> incorporado en la hoja de cálculo a partir de la versión 2010.y que se ha refinado y consolidado a partir de la introducción de <a href="https://en.wikipedia.org/wiki/Microsoft_Power_BI">Power BI</a> en 2011 y de Excel 2016.</p>
+<p>En el post anterior hemos visto cómo crear un gráfico de dispersión multiserie a partir de una tabla de datos arreglados, en la que una columna proporciona los criterios para la agrupación en clases; para conseguir diferenciar los puntos individuales construíamos dos nuevas columnas en la misma tabla de datos original.</p>
+<p>Excel proporciona otro método para añadir columnas modificadas, que parte del <a href="https://support.microsoft.com/en-us/office/data-models-in-excel-services-c6fec347-5203-4c03-bc35-00910fc10099">modelo de datos</a> incorporado en la hoja de cálculo a partir de la versión 2013.y que se ha refinado y consolidado a partir de la introducción de <a href="https://en.wikipedia.org/wiki/Microsoft_Power_BI">Power BI</a> y de Excel 2016.</p>
+<section id="cómo-hacer-un-gráfico-de-dispersión-desde-el-complemento-power-pivotde-excel" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-hacer-un-gráfico-de-dispersión-desde-el-complemento-power-pivotde-excel">Cómo hacer un gráfico de dispersión desde el complemento <code>Power Pivot</code>de Excel</h2>
+<p>Queremos hacer un gráfico de dispersión de los datos de <code>flipper_length_cm</code> (longitud de la aleta en cm) frente a <code>bill_length_cm</code> (longitud del pico en cm)</p>
+<p>Para utilizarlo (<a href="https://support.microsoft.com/es-es/office/iniciar-el-complemento-power-pivot-para-excel-a891a66d-36e3-43fc-81e8-fc4798f39ea8">ver indicaciones de Soporte Microsoft</a>), tenemos que activar el complemento Power Pivot en Excel. Para hacerlo, iremos al <code>Menú</code>&gt;<code>Opciones</code>&gt;<code>Complementos</code>, y en la parte inferior, en <code>Administrar:</code>, seleccionaremos <code>Complementos COM</code>&gt;<code>Ir</code></p>
+<p><img src="excel-com-1.png" class="img-fluid"></p>
+<p>Marcamos las opciones <code>Microsoft Power Map for Excel</code> y <code>Microsoft Power Pivot for Excel</code>.</p>
+<p><img src="excel-com-2.png" class="img-fluid"></p>
+<p>En el menú principal de Excel debe aparecernos ahora la opción <code>Power Pivot</code>.</p>
+<p><img src="excel-com-3.png" class="img-fluid"></p>
+<p>A continuación, abrimos el dataset <code>pinguinos.csv</code> y lo guardamos como Libro Excel <code>pinguinos.xlsx</code> (Power Pivot sólo estará activo si la hoja de cálculo tiene este formato).</p>
+<p>Con el cursor dentro de nuestra tabla de datos, seleccionamos <code>Menú</code>&gt; <code>Power Pivot</code>&gt; <code>Agregar a modelo de datos</code>.</p>
+<p>Esto tiene tres efectos:</p>
+<ul>
+<li>convierte nuestra tabla de datos al formato de tabla de Excel, y</li>
+<li>Añade la tabla a un nuevo modelo de datos de Power Pivot</li>
+<li>Excel nos abre la ventana del administrador del modelo de datos de Power Pivot</li>
+</ul>
+<p><img src="excel-powerpivot-1.png" class="img-fluid"></p>
+<p>Excel mantiene esta tabla en memoria sin alterar nuestra tabla original, como podemos verificar cerrando la ventana (<code>Archivo</code>&gt; <code>Cerrar</code>), si bien, como vimos antes, ha convertido nuestra tabla de datos en una tabla Excel.</p>
+<p><img src="excel-powerpivot-2.png" class="img-fluid"></p>
+<p>Hacemos click en <code>Administrar</code>para volver a nuestro modelo de datos. Vamos a crear dos nuevas columnas en el el modelo, que como veremos, no afectarán a la tabla original. Para añadir una columna, dentro de Power Pivot, seleccionamos <code>Menú</code>&gt;<code>Diseñar</code>&gt;<code>Agregar</code></p>
+<p>La fórmula que vamos a utilizar a continuación es una fórmula del lenguaje DAX Tabla pinguinos: blancos Diferencias Excel, M y DAX</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
