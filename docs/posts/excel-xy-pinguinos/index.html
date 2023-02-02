@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Juan Riera">
-<meta name="dcterms.date" content="2023-02-01">
+<meta name="dcterms.date" content="2023-02-02">
 
 <title>Blog de Juan Riera - Gráficos de dispersión multiserie en Microsoft Excel (parte 2)</title>
 <style>
@@ -120,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Gráficos de dispersión multiserie en Microsoft Excel (parte 2)</h1>
-            <p class="subtitle lead">Uso de Power Pivot</p>
+            <p class="subtitle lead">Uso del modelo de datos de Power Pivot y de las fórmulas DAX</p>
                       </div>
   </div>
     
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 1, 2023</p>
+        <p class="date">February 2, 2023</p>
       </div>
     </div>
       
@@ -156,6 +156,41 @@ ul.task-list li input[type="checkbox"] {
 
 <p>En el post anterior hemos visto cómo crear un gráfico de dispersión multiserie a partir de una tabla de datos arreglados, en la que una columna proporciona los criterios para la agrupación en clases; para conseguir diferenciar los puntos individuales construíamos dos nuevas columnas en la misma tabla de datos original.</p>
 <p>Excel proporciona otro método para añadir columnas modificadas, que parte del <a href="https://support.microsoft.com/en-us/office/data-models-in-excel-services-c6fec347-5203-4c03-bc35-00910fc10099">modelo de datos</a> incorporado en la hoja de cálculo a partir de la versión 2013.y que se ha refinado y consolidado a partir de la introducción de <a href="https://en.wikipedia.org/wiki/Microsoft_Power_BI">Power BI</a> y de Excel 2016.</p>
+<section id="el-modelo-de-datos-de-microsoft-excel-y-power-bi-y-los-lenguajes-m-y-dax." class="level2">
+<h2 class="anchored" data-anchor-id="el-modelo-de-datos-de-microsoft-excel-y-power-bi-y-los-lenguajes-m-y-dax.">El modelo de datos de Microsoft Excel y Power BI, y los lenguajes M y DAX.</h2>
+<p>La introducción de Power Pivot y, posteriormente, de Power BI, ha llevado anexa la introducción de dos nuevos <strong>y diferentes</strong> lenguajes de programación para estos entornos, de uso específico en cada herramienta. Estos lenguajes son <strong>M</strong> y <strong>DAX</strong>. Para entender sus diferencias es necesario entender las bases del modelo de datos de Microsoft.</p>
+<p>Con el desarrollo de la ciencia de datos en el último decenio, se pusieron de manifiesto nuevas necesidades de consolidación grandes volúmenes de datos de fuentes muy heterogéneas. Esto necesitó el desarrollo de una herramienta diferente de Excel, ya que la utilidad de query original de Microsoft (Microsoft Query) había quedado completamente obsoleta. Esta nueva herramienta fue denominada <strong>Power Pivot</strong>, y está orientada a la consulta, consolidación, limpieza y reelaboración de las tablas de datos; es capaz de interrogar hojas de cálculo, bases de datos, páginas web e incluso páginas de texto o documentos en formatos WORD o PDF, entre otrosutilizando un nuevo lenguaje desarrollado por Microsoft para <strong>PowePivot</strong>, el lenguage <strong>M</strong>.</p>
+<p>Microsoft ha desarrollado también una herramienta de análisis y presentación de la información, Power BI, que utiliza los datos consolidados por Power Pivot. Power BI se desarrolló junto con un nuevo lenguaje de programación llamado <strong>DAX</strong>(Data Analysis Expressions), orientado a la creación de nuevas dimensiones (columnas) o nuevas medidas que faciliten el análisis de las tablas de datos consolidadas.</p>
+<p>Un esquema muy sencillo de las diferencias entre M y DAX es éste:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DAX-vs-M-2048x1366.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><a href="https://powerpartners.pro/en/power-query-vs-dax/">Fuente de la imagen</a></figcaption><p></p>
+</figure>
+</div>
+<p>En resumen, Power Query / M se utiliza para la ingeniería de datos:</p>
+<ul>
+<li><strong><em>Data Ingestion</em></strong>: Power Query permite importar, combinar y actualizar datos de varias fuentes (por ejemplo, desde una carpeta local, SharePoint, base de datos, API, Azure y muchos más).</li>
+<li><strong>Procesos ETL y ELT</strong>: Extraer–Transformar–Cargar y Extraer–Cargar–Transformar son los dos enfoques para el procesamiento de datos. En ambos casos, Power Query es la herramienta a utilizar.</li>
+<li><strong>Gestión de datos</strong>: Limpieza y transformación de los datos. Se realizan uniones, se filtran, se asignan nombres uniformes, se eliminan columnas innecesarias, etc.</li>
+</ul>
+<p>Se aplican las siguientes reglas:</p>
+<ul>
+<li>Los conjuntos de datos que no vamos a necesitar en el análisis de datos se filtran en M</li>
+<li>No agregamos registros en M</li>
+<li>Las columnas que no vamos a necesitar se eliminan en M</li>
+<li>En general, no hacemos cálculos en M</li>
+</ul>
+<p>DAX se utiliza para el análisis de datos, por tanto, para realizar:</p>
+<ul>
+<li><strong>Agregaciones</strong>: si necesitamos recuperar valores agregados de una tabla o un conjunto de datos, la forma mejor y más rápida de hacerlo es con las funciones de agregado DAX.</li>
+<li><strong>Filtrado</strong>: en las medidas, las funciones de filtrado se encuentran entre las más utilizadas. Ayudan a filtrar solo la información relevante y/o editar el contexto de datos para crear cálculos dinámicos sin cambiar el modelo de datos y sus tablas. Esto es importante para visualizar y agregar valores específicos para informes y paneles y otros cálculos en Power BI, utilizando estas métricas de filtro.</li>
+<li><strong>Definir relaciones</strong>: Power Query no conoce relaciones. En DAX, por otro lado, puede definir y cambiar las relaciones, pero también aplicarlas mediante la integridad referencial.</li>
+<li><strong>Funciones de relación (jerarquías)</strong>.</li>
+<li><strong>Columna calculada que hace referencia a una columna de otra tabla</strong>. Con DAX, el usuario puede insertar fácilmente columnas de diferentes tablas en la fórmula. En Power Query, esta maniobra requiere uniones complejas y se complica muy rápidamente.</li>
+</ul>
+<p>En nuestro ejemplo, vamos a utilizar una función DAX sencilla para calcular las nuevas columnas que necesitamos en nuestro gráfico.</p>
+</section>
 <section id="cómo-hacer-un-gráfico-de-dispersión-desde-el-complemento-power-pivotde-excel" class="level2">
 <h2 class="anchored" data-anchor-id="cómo-hacer-un-gráfico-de-dispersión-desde-el-complemento-power-pivotde-excel">Cómo hacer un gráfico de dispersión desde el complemento <code>Power Pivot</code>de Excel</h2>
 <p>Queremos hacer un gráfico de dispersión de los datos de <code>flipper_length_cm</code> (longitud de la aleta en cm) frente a <code>bill_length_cm</code> (longitud del pico en cm)</p>
@@ -169,15 +204,54 @@ ul.task-list li input[type="checkbox"] {
 <p>Con el cursor dentro de nuestra tabla de datos, seleccionamos <code>Menú</code>&gt; <code>Power Pivot</code>&gt; <code>Agregar a modelo de datos</code>.</p>
 <p>Esto tiene tres efectos:</p>
 <ul>
-<li>convierte nuestra tabla de datos al formato de tabla de Excel, y</li>
-<li>Añade la tabla a un nuevo modelo de datos de Power Pivot</li>
-<li>Excel nos abre la ventana del administrador del modelo de datos de Power Pivot</li>
+<li>convierte nuestra tabla de datos al formato de tabla de Excel,</li>
+<li>añade la tabla a un nuevo modelo de datos de Power Pivot, y</li>
+<li>hace que Excel nos abra la ventana del administrador del modelo de datos de Power Pivot</li>
 </ul>
 <p><img src="excel-powerpivot-1.png" class="img-fluid"></p>
 <p>Excel mantiene esta tabla en memoria sin alterar nuestra tabla original, como podemos verificar cerrando la ventana (<code>Archivo</code>&gt; <code>Cerrar</code>), si bien, como vimos antes, ha convertido nuestra tabla de datos en una tabla Excel.</p>
 <p><img src="excel-powerpivot-2.png" class="img-fluid"></p>
 <p>Hacemos click en <code>Administrar</code>para volver a nuestro modelo de datos. Vamos a crear dos nuevas columnas en el el modelo, que como veremos, no afectarán a la tabla original. Para añadir una columna, dentro de Power Pivot, seleccionamos <code>Menú</code>&gt;<code>Diseñar</code>&gt;<code>Agregar</code></p>
-<p>La fórmula que vamos a utilizar a continuación es una fórmula del lenguaje DAX Tabla pinguinos: blancos Diferencias Excel, M y DAX</p>
+<p>La fórmula que vamos a utilizar a continuación es una fórmula en <a href="https://learn.microsoft.com/es-es/dax/dax-overview">enguaje DAX</a> equivalente a la que hemos utilizado en nuestra hoja de cálculo anteriormente: <code>=Tabla1[bill_length_mm]+CALCULATE(RAND()/100)</code></p>
+<p>Sin embargo, el dataset <code>pinguinos.csv</code> tiene una diferencia con respecto al dataset <code>iris</code>: hay datos que faltan (celdas en blanco). En las columnas que vamos a calcular, debemos prever esta situación para evitar que la fórmula devuelva un valor erróneo.</p>
+<p><img src="excel-powerpivot-3.png" class="img-fluid"></p>
+<p>Esta es la fórmula corregida: <code>=IF(ISBLANK(Tabla1[bill_length_mm]);BLANK();Tabla1[bill_depth_mm]+CALCULATE(RAND()/100))</code> que devuelve un valor en blanco cuando el valor original es un valor en blanco.</p>
+<p>Una vez introducidas las fórmulas para las dos nuevas columnas, insertamos una nueva tabla dinámica <strong><em>desde Power Pilot</em></strong> en una nueva hoja de cálculo. De esta forma, la nueva tabla dinámica toma como tabla de datos el modelo que acabamos de crear.</p>
+<p><img src="excel-powerpivot-5.png" class="img-fluid"></p>
+<p>Construimos nuestro gráfico de dispersión a partir de esta tabla dinámica, igual que hemos hecho en el <a href="https://juanriera.github.io/blog/posts/excel-xy/">post anterior</a>, insertando un gráfico de dispersión en blanco e insertando las series manualmente.</p>
+<p>En este gráfico, en vez de introducir una leyenda para las series, vamos a utilizar rótulos del color de las series para mostrar cada serie</p>
+<p><img src="graf-dispersion-pinguinos-1.png" class="img-fluid"></p>
+<p>También insertaremos dos imágenes que proporcionan información adicional sobre los tres grupos de pinguinos y las medidas del pico. Recuperamos estas imágenes del <a href="https://allisonhorst.github.io/palmerpenguins/">repositorio del dataset <code>palmerpenguins</code></a>.</p>
+<div id="fig-pinguinos" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-grupos-pinguinos" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="lter_penguins.png" class="img-fluid figure-img" data-ref-parent="fig-pinguinos"></p>
+<p></p><figcaption class="figure-caption">(a) Los grupos de pinguinos</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-pico-pinguinos" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="culmen_depth.png" class="img-fluid figure-img" data-ref-parent="fig-pinguinos"></p>
+<p></p><figcaption class="figure-caption">(b) Medidas del pico</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Graficos explicativos que insertaremos en nuestro gráfico de dispersión</figcaption><p></p>
+</figure>
+</div>
+<p>Este es el gráfico final:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pinguinos.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Comparación de la longitud de la aleta vs la longitud del pico en el dataset Pinguinos Palmer</figcaption><p></p>
+</figure>
+</div>
 
 
 </section>
