@@ -3,6 +3,7 @@ title: "Cómo hacer gráficos de dispersión multiserie en Microsoft Excel a par
 author: "Juan Riera"
 date: 2023-01-28
 format: html
+image: "excel-graf-XY-final.png"
 execute: 
   freeze: false
 ---

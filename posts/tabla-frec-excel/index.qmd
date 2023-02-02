@@ -3,7 +3,8 @@ title: " Cómo hacer una tabla de frecuencias en Excel"
 author: "Juan Riera"
 date: 2023-01-14
 format: html
-editor: visual
+image: "image-20230121163619049.png"
+
 ---
 
 Hay varias formas de preparar una tabla de frecuencia en Excel. Aquí usaremos dos métodos:

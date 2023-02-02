@@ -4,6 +4,7 @@ subtitle: "Uso del modelo de datos de Power Pivot y de las fórmulas DAX"
 author: "Juan Riera"
 date: 2023-02-02
 format: html
+image: "pinguinos.png"
 execute: 
   freeze: false
 ---
