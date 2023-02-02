@@ -168,27 +168,6 @@ ul.task-list li input[type="checkbox"] {
 <p></p><figcaption class="figure-caption"><a href="https://powerpartners.pro/en/power-query-vs-dax/">Fuente de la imagen</a></figcaption><p></p>
 </figure>
 </div>
-<p>En resumen, Power Query / M se utiliza para la ingeniería de datos:</p>
-<ul>
-<li><strong><em>Data Ingestion</em></strong>: Power Query permite importar, combinar y actualizar datos de varias fuentes (por ejemplo, desde una carpeta local, SharePoint, base de datos, API, Azure y muchos más).</li>
-<li><strong>Procesos ETL y ELT</strong>: Extraer–Transformar–Cargar y Extraer–Cargar–Transformar son los dos enfoques para el procesamiento de datos. En ambos casos, Power Query es la herramienta a utilizar.</li>
-<li><strong>Gestión de datos</strong>: Limpieza y transformación de los datos. Se realizan uniones, se filtran, se asignan nombres uniformes, se eliminan columnas innecesarias, etc.</li>
-</ul>
-<p>Se aplican las siguientes reglas:</p>
-<ul>
-<li>Los conjuntos de datos que no vamos a necesitar en el análisis de datos se filtran en M</li>
-<li>No agregamos registros en M</li>
-<li>Las columnas que no vamos a necesitar se eliminan en M</li>
-<li>En general, no hacemos cálculos en M</li>
-</ul>
-<p>DAX se utiliza para el análisis de datos, por tanto, para realizar:</p>
-<ul>
-<li><strong>Agregaciones</strong>: si necesitamos recuperar valores agregados de una tabla o un conjunto de datos, la forma mejor y más rápida de hacerlo es con las funciones de agregado DAX.</li>
-<li><strong>Filtrado</strong>: en las medidas, las funciones de filtrado se encuentran entre las más utilizadas. Ayudan a filtrar solo la información relevante y/o editar el contexto de datos para crear cálculos dinámicos sin cambiar el modelo de datos y sus tablas. Esto es importante para visualizar y agregar valores específicos para informes y paneles y otros cálculos en Power BI, utilizando estas métricas de filtro.</li>
-<li><strong>Definir relaciones</strong>: Power Query no conoce relaciones. En DAX, por otro lado, puede definir y cambiar las relaciones, pero también aplicarlas mediante la integridad referencial.</li>
-<li><strong>Funciones de relación (jerarquías)</strong>.</li>
-<li><strong>Columna calculada que hace referencia a una columna de otra tabla</strong>. Con DAX, el usuario puede insertar fácilmente columnas de diferentes tablas en la fórmula. En Power Query, esta maniobra requiere uniones complejas y se complica muy rápidamente.</li>
-</ul>
 <p>En nuestro ejemplo, vamos a utilizar una función DAX sencilla para calcular las nuevas columnas que necesitamos en nuestro gráfico.</p>
 </section>
 <section id="cómo-hacer-un-gráfico-de-dispersión-desde-el-complemento-power-pivotde-excel" class="level2">

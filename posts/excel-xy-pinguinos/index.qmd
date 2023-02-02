@@ -8,50 +8,30 @@ image: "pinguinos.png"
 execute: 
   freeze: false
 ---
+
 En el post anterior hemos visto cómo crear un gráfico de dispersión multiserie a partir de una tabla de datos arreglados, en la que una columna proporciona los criterios para la agrupación en clases; para conseguir diferenciar los puntos individuales construíamos dos nuevas columnas en la misma tabla de datos original.
 
 Excel proporciona otro método para añadir columnas modificadas, que parte del [modelo de datos](https://support.microsoft.com/en-us/office/data-models-in-excel-services-c6fec347-5203-4c03-bc35-00910fc10099) incorporado en la hoja de cálculo a partir de la versión 2013.y que se ha refinado y consolidado a partir de la introducción de [Power BI](https://en.wikipedia.org/wiki/Microsoft_Power_BI) y de Excel 2016.
 
 ## El modelo de datos de Microsoft Excel y Power BI, y los lenguajes M y DAX.
 
-La introducción de Power Pivot y, posteriormente, de Power BI, ha llevado anexa la introducción de dos nuevos  **y diferentes** lenguajes de programación para estos entornos, de uso específico en cada herramienta. Estos lenguajes son **M** y **DAX**. Para entender sus diferencias es necesario entender las bases del modelo de datos de Microsoft.
+La introducción de Power Pivot y, posteriormente, de Power BI, ha llevado anexa la introducción de dos nuevos **y diferentes** lenguajes de programación para estos entornos, de uso específico en cada herramienta. Estos lenguajes son **M** y **DAX**. Para entender sus diferencias es necesario entender las bases del modelo de datos de Microsoft.
 
 Con el desarrollo de la ciencia de datos en el último decenio, se pusieron de manifiesto nuevas necesidades de consolidación grandes volúmenes de datos de fuentes muy heterogéneas. Esto necesitó el desarrollo de una herramienta diferente de Excel, ya que la utilidad de query original de Microsoft (Microsoft Query) había quedado completamente obsoleta. Esta nueva herramienta fue denominada **Power Pivot**, y está orientada a la consulta, consolidación, limpieza y reelaboración de las tablas de datos; es capaz de interrogar hojas de cálculo, bases de datos, páginas web e incluso páginas de texto o documentos en formatos WORD o PDF, entre otrosutilizando un nuevo lenguaje desarrollado por Microsoft para **PowePivot**, el lenguage **M**.
 
-Microsoft ha desarrollado también una herramienta de análisis y presentación de la información, Power BI, que utiliza los datos consolidados por Power Pivot. Power BI se desarrolló junto con un nuevo lenguaje de programación llamado **DAX**(Data Analysis Expressions), orientado a la creación de nuevas dimensiones (columnas) o nuevas medidas que faciliten el análisis de las tablas de datos consolidadas. 
+Microsoft ha desarrollado también una herramienta de análisis y presentación de la información, Power BI, que utiliza los datos consolidados por Power Pivot. Power BI se desarrolló junto con un nuevo lenguaje de programación llamado **DAX**(Data Analysis Expressions), orientado a la creación de nuevas dimensiones (columnas) o nuevas medidas que faciliten el análisis de las tablas de datos consolidadas.
 
 Un esquema muy sencillo de las diferencias entre M y DAX es éste:
 
 ![[Fuente de la imagen](https://powerpartners.pro/en/power-query-vs-dax/)](DAX-vs-M-2048x1366.png)
 
-En resumen,
-Power Query / M se utiliza para la ingeniería de datos:
-
-- ***Data Ingestion***: Power Query permite importar, combinar y actualizar datos de varias fuentes (por ejemplo, desde una carpeta local, SharePoint, base de datos, API, Azure y muchos más).
-- **Procesos ETL y ELT**: Extraer–Transformar–Cargar y Extraer–Cargar–Transformar son los dos enfoques para el procesamiento de datos. En ambos casos, Power Query es la herramienta a utilizar.
-- **Gestión de datos**: Limpieza y transformación de los datos. Se realizan uniones, se filtran, se asignan nombres uniformes, se eliminan columnas innecesarias, etc.
-
-Se aplican las siguientes reglas:
-
-- Los conjuntos de datos que no vamos a necesitar en el análisis de datos se filtran en M
-- No agregamos registros en M
-- Las columnas que no vamos a necesitar se eliminan en M
-- En general, no hacemos cálculos en M
-
-DAX se utiliza para el análisis de datos, por tanto, para realizar:
-
-- **Agregaciones**: si necesitamos recuperar valores agregados de una tabla o un conjunto de datos, la forma mejor y más rápida de hacerlo es con las funciones de agregado DAX.
-- **Filtrado**: en las medidas, las funciones de filtrado se encuentran entre las más utilizadas. Ayudan a filtrar solo la información relevante y/o editar el contexto de datos para crear cálculos dinámicos sin cambiar el modelo de datos y sus tablas. Esto es importante para visualizar y agregar valores específicos para informes y paneles y otros cálculos en Power BI, utilizando estas métricas de filtro.
-- **Definir relaciones**: Power Query no conoce relaciones. En DAX, por otro lado, puede definir y cambiar las relaciones, pero también aplicarlas mediante la integridad referencial.
-- **Funciones de relación (jerarquías)**. 
-- **Columna calculada que hace referencia a una columna de otra tabla**. Con DAX, el usuario puede insertar fácilmente columnas de diferentes tablas en la fórmula. En Power Query, esta maniobra requiere uniones complejas y se complica muy rápidamente.
-
 En nuestro ejemplo, vamos a utilizar una función DAX sencilla para calcular las nuevas columnas que necesitamos en nuestro gráfico.
 
 ## Cómo hacer un gráfico de dispersión desde el complemento `Power Pivot`de Excel
+
 Queremos hacer un gráfico de dispersión de los datos de `flipper_length_cm` (longitud de la aleta en cm) frente a `bill_length_cm` (longitud del pico en cm)
 
-Para utilizarlo ([ver indicaciones de Soporte Microsoft](https://support.microsoft.com/es-es/office/iniciar-el-complemento-power-pivot-para-excel-a891a66d-36e3-43fc-81e8-fc4798f39ea8)), tenemos que activar el complemento Power Pivot en Excel. Para hacerlo, iremos al `Menú`>`Opciones`>`Complementos`, y en la parte inferior, en `Administrar:`, seleccionaremos `Complementos COM`>`Ir`
+Para utilizarlo ([ver indicaciones de Soporte Microsoft](https://support.microsoft.com/es-es/office/iniciar-el-complemento-power-pivot-para-excel-a891a66d-36e3-43fc-81e8-fc4798f39ea8)), tenemos que activar el complemento Power Pivot en Excel. Para hacerlo, iremos al `Menú`\>`Opciones`\>`Complementos`, y en la parte inferior, en `Administrar:`, seleccionaremos `Complementos COM`\>`Ir`
 
 ![](excel-com-1.png)
 
@@ -65,38 +45,35 @@ En el menú principal de Excel debe aparecernos ahora la opción `Power Pivot`.
 
 A continuación, abrimos el dataset `pinguinos.csv` y lo guardamos como Libro Excel `pinguinos.xlsx` (Power Pivot sólo estará activo si la hoja de cálculo tiene este formato).
 
-Con el cursor dentro de nuestra tabla de datos, seleccionamos `Menú`> `Power Pivot`> `Agregar a modelo de datos`. 
+Con el cursor dentro de nuestra tabla de datos, seleccionamos `Menú`\> `Power Pivot`\> `Agregar a modelo de datos`.
 
-Esto tiene tres efectos: 
+Esto tiene tres efectos:
 
-- convierte nuestra tabla de datos al formato de tabla de Excel, 
-- añade la tabla a un nuevo modelo de datos de Power Pivot, y
-- hace que Excel nos abra la ventana del administrador del modelo de datos de Power Pivot
-
+-   convierte nuestra tabla de datos al formato de tabla de Excel,
+-   añade la tabla a un nuevo modelo de datos de Power Pivot, y
+-   hace que Excel nos abra la ventana del administrador del modelo de datos de Power Pivot
 
 ![](excel-powerpivot-1.png)
 
-Excel mantiene esta tabla en memoria sin alterar nuestra tabla original, como podemos verificar cerrando la ventana (`Archivo`> `Cerrar`), si bien, como vimos antes, ha convertido nuestra tabla de datos en una tabla Excel.
+Excel mantiene esta tabla en memoria sin alterar nuestra tabla original, como podemos verificar cerrando la ventana (`Archivo`\> `Cerrar`), si bien, como vimos antes, ha convertido nuestra tabla de datos en una tabla Excel.
 
 ![](excel-powerpivot-2.png)
 
-Hacemos click en `Administrar`para volver a nuestro modelo de datos. Vamos a crear dos nuevas columnas en el el modelo, que como veremos, no afectarán a la tabla original. Para añadir una columna, dentro de Power Pivot, seleccionamos `Menú`>`Diseñar`>`Agregar`
+Hacemos click en `Administrar`para volver a nuestro modelo de datos. Vamos a crear dos nuevas columnas en el el modelo, que como veremos, no afectarán a la tabla original. Para añadir una columna, dentro de Power Pivot, seleccionamos `Menú`\>`Diseñar`\>`Agregar`
 
-La fórmula que vamos a utilizar a continuación es una fórmula en [enguaje DAX](https://learn.microsoft.com/es-es/dax/dax-overview) equivalente a la que hemos utilizado en  nuestra hoja de cálculo  anteriormente: `=Tabla1[bill_length_mm]+CALCULATE(RAND()/100)` 
+La fórmula que vamos a utilizar a continuación es una fórmula en [enguaje DAX](https://learn.microsoft.com/es-es/dax/dax-overview) equivalente a la que hemos utilizado en nuestra hoja de cálculo anteriormente: `=Tabla1[bill_length_mm]+CALCULATE(RAND()/100)`
 
 Sin embargo, el dataset `pinguinos.csv` tiene una diferencia con respecto al dataset `iris`: hay datos que faltan (celdas en blanco). En las columnas que vamos a calcular, debemos prever esta situación para evitar que la fórmula devuelva un valor erróneo.
 
 ![](excel-powerpivot-3.png)
 
-Esta es la fórmula corregida: `=IF(ISBLANK(Tabla1[bill_length_mm]);BLANK();Tabla1[bill_depth_mm]+CALCULATE(RAND()/100))`
-que devuelve un valor en blanco cuando el valor original es un valor en blanco.
-
+Esta es la fórmula corregida: `=IF(ISBLANK(Tabla1[bill_length_mm]);BLANK();Tabla1[bill_depth_mm]+CALCULATE(RAND()/100))` que devuelve un valor en blanco cuando el valor original es un valor en blanco.
 
 Una vez introducidas las fórmulas para las dos nuevas columnas, insertamos una nueva tabla dinámica ***desde Power Pilot*** en una nueva hoja de cálculo. De esta forma, la nueva tabla dinámica toma como tabla de datos el modelo que acabamos de crear.
 
 ![](excel-powerpivot-5.png)
 
-Construimos nuestro gráfico de dispersión a partir de esta tabla dinámica, igual que hemos hecho en el [post anterior](https://juanriera.github.io/blog/posts/excel-xy/), insertando un gráfico de dispersión en blanco e insertando las series manualmente. 
+Construimos nuestro gráfico de dispersión a partir de esta tabla dinámica, igual que hemos hecho en el [post anterior](https://juanriera.github.io/blog/posts/excel-xy/), insertando un gráfico de dispersión en blanco e insertando las series manualmente.
 
 En este gráfico, en vez de introducir una leyenda para las series, vamos a utilizar rótulos del color de las series para mostrar cada serie
 
@@ -104,8 +81,7 @@ En este gráfico, en vez de introducir una leyenda para las series, vamos a util
 
 También insertaremos dos imágenes que proporcionan información adicional sobre los tres grupos de pinguinos y las medidas del pico. Recuperamos estas imágenes del [repositorio del dataset `palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/).
 
-::: {#fig-pinguinos layout-ncol=2}
-
+::: {#fig-pinguinos layout-ncol="2"}
 ![Los grupos de pinguinos](lter_penguins.png){#fig-grupos-pinguinos}
 
 ![Medidas del pico](culmen_depth.png){#fig-pico-pinguinos}
@@ -116,4 +92,3 @@ Graficos explicativos que insertaremos en nuestro gráfico de dispersión
 Este es el gráfico final:
 
 ![Comparación de la longitud de la aleta vs la longitud del pico en el dataset Pinguinos Palmer](pinguinos.png)
-
