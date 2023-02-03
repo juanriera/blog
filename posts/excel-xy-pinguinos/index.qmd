@@ -4,7 +4,7 @@ subtitle: "Uso del modelo de datos de Power Pivot y de las fórmulas DAX"
 author: "Juan Riera"
 date: 2023-02-02
 format: html
-image: "pinguinos.png"
+image: "pinguinos2.png"
 execute: 
   freeze: false
 ---
@@ -91,4 +91,15 @@ Graficos explicativos que insertaremos en nuestro gráfico de dispersión
 
 Este es el gráfico final:
 
-![Comparación de la longitud de la aleta vs la longitud del pico en el dataset Pinguinos Palmer](pinguinos.png)
+![Comparación de la longitud de la aleta vs la longitud del pico en el dataset [*Palmer Penguins*](https://allisonhorst.github.io/palmerpenguins/) ](pinguinos.png)
+
+La posibilidad de edición visual de Excel nos permite modificar y ajustar el gráfico con facilidad; incluyo otra versión posible, dando más importancia a los elementos gráficos que actúan como leyenda visual:
+
+![Comparación de la longitud de la aleta vs la longitud del pico en el dataset [*Palmer Penguins*](https://allisonhorst.github.io/palmerpenguins/) (v. 2)](pinguinos2.png)
+
+
+El gráfico de dispersión nos ha permitido realizar dos funciones:
+
+- Visualizar la relación entre los valores de dos variables numéricas. En este caso, hemos podido separar los grupos de población de pinguinos en función de dos características anatómicas.
+- Comunicar de manera eficaz y visualmente atractiva la información analizada.
+
