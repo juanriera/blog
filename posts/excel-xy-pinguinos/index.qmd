@@ -106,16 +106,9 @@ El gráfico de dispersión nos ha permitido realizar dos funciones:
 ## Cómo hacerlo en R
 Adjunto el código R para hacer un gráfico equivalente al anterior en R. El posicionamiento de las imágenes es más engorroso; hay que detallar las coordenadas de cada imagen. El resultado definitivo sólo se consigue por ensayo y error. al no ser posible la edición visual de la que dispone Excel.
 
-```{r message = FALSE, warning = FALSE}
-## packages
+```{r rpenguins, message = FALSE, warning = FALSE}
+## librerias
 library(tidyverse)
-library(colorspace)
-library(ragg)
-library(cowplot)
-library(ggtext)
-library(pdftools)
-library(scales)
-library(showtext)
 
 theme_set(theme_minimal(base_size = 15))
 
@@ -146,7 +139,7 @@ scat <-
     theme(
       plot.title = element_text(size=22),
       legend.position = "none",
-      plot.margin = margin(1,6,1.5,1.5, "cm"),
+      plot.margin = margin(1,6.5,1.5,1.5, "cm"),
       plot.caption = element_text(hjust=0, face="italic")
     ) +
   scale_fill_manual(values=paleta_color) +
@@ -178,9 +171,9 @@ scat <-
     size = 4,
     lineheight = .9
   ) +
-  annotation_custom(i1, ymin = 45, ymax = 65, xmin = 235, xmax =275) +
-  annotation_custom(i2, ymin = 20, ymax = 55, xmin = 225, xmax =275) +
-  annotation_custom(i3, ymin = 63.5, ymax = 70, xmin = 255, xmax =275) +
+  annotation_custom(i1, ymin = 45, ymax = 65, xmin = 235, xmax =280) +
+  annotation_custom(i2, ymin = 20, ymax = 55, xmin = 230, xmax =280) +
+  annotation_custom(i3, ymin = 63.5, ymax = 70, xmin = 260, xmax =280) +
   coord_cartesian(clip = "off")
 
 plot(scat)
