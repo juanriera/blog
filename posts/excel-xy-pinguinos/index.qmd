@@ -173,8 +173,8 @@ scat <-
     size = 4,
     lineheight = .9
   ) +
-  annotation_custom(i1, ymin = 45, ymax = 65, xmin = 235, xmax =280) +
-  annotation_custom(i2, ymin = 20, ymax = 55, xmin = 230, xmax =280) +
+  annotation_custom(i1, ymin = 43, ymax = 63, xmin = 235, xmax =280) +
+  annotation_custom(i2, ymin = 18, ymax = 55, xmin = 228, xmax =280) +
   annotation_custom(i3, ymin = 63.5, ymax = 70, xmin = 260, xmax =280) +
   coord_cartesian(clip = "off")
 
