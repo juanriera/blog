@@ -104,7 +104,7 @@ El gráfico de dispersión nos ha permitido realizar dos funciones:
 - Comunicar de manera eficaz y visualmente atractiva la información analizada.
 
 ## Cómo hacerlo en R
-Adjunto el código R para hacer un gráfico equivalente al anterior en R. El posicionamiento de las imágenes es más engorroso; hay que detallar las coordenadas de cada imagen. El resultado definitivo sólo se consigue por ensayo y error. al no ser posible la edición visual de la que dispone Excel.
+Adjunto el código R para hacer un gráfico equivalente al anterior en R. El posicionamiento de las imágenes es más engorroso; hay que detallar las coordenadas de cada imagen. El resultado definitivo sólo se consigue por ensayo y error, al no ser posible la edición visual de la que dispone Excel. Sin embargo, tiene la ventaja de que todas las opciones que se han usado en la configuración del gráfico están recogidas en el código, lo que hace que sea totalmente reproducible.
 
 ```{r rpenguins, message = FALSE, warning = FALSE}
 ## librerias
@@ -133,9 +133,11 @@ scat <-
   ggplot(df_penguins, aes(flipper_length_mm, bill_length_mm, colour = species)) +
     geom_point(size = 3, alpha = 0.3, stroke = 1) +
     theme_minimal() +
-    labs (title = "Flipper and bill length",
-          subtitle="Dimensions for Adélie, Chinstrap and Gentoo penguins at Palmer Station LTER",
-          caption = "Dataset and images by Allison Horst https://allisonhorst.github.io/palmerpenguins/") +
+    labs (
+      title = "Flipper and bill length",
+      subtitle="Dimensions for Adélie, Chinstrap and Gentoo penguins at Palmer Station LTER",
+      caption = "Dataset and images by Allison Horst https://allisonhorst.github.io/palmerpenguins/"
+    ) +
     theme(
       plot.title = element_text(size=22),
       legend.position = "none",
