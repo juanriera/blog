@@ -193,7 +193,7 @@ scat <-
   ) +
   annotation_custom(i1, ymin = 43, ymax = 63, xmin = 235, xmax =280) +
   annotation_custom(i2, ymin = 18, ymax = 55, xmin = 228, xmax =280) +
-  annotation_custom(i3, ymin = 59.5, ymax = 71.5, xmin = 153, xmax =166) +
+  annotation_custom(i3, ymin = 59, ymax = 71, xmin = 153, xmax =166) +
   coord_cartesian(clip = "off")
 
 plot(scat)
