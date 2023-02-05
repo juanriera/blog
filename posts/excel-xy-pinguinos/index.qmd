@@ -135,7 +135,7 @@ df_penguins <- readr::read_csv2('pinguinos.csv') |>
   mutate(species = if_else(species == "Adelie", "Adélie", species))
 
 ## lee las imágenes
-img <- png::readPNG("culmen_depth-transparente.png")
+img <- png::readPNG("culmen_depth.png")
 i1 <- grid::rasterGrob(img, interpolate = T)
 
 img <- png::readPNG("lter_penguins.png")
