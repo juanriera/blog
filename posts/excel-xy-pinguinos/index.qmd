@@ -109,6 +109,7 @@ Adjunto el código R para hacer un gráfico equivalente al anterior en R. El pos
 ```{r rpenguins, message = FALSE, warning = FALSE}
 ## librerias
 library(tidyverse)
+library(ggtext) # element_markdown()
 
 theme_set(theme_minimal(base_size = 15))
 
@@ -142,7 +143,7 @@ scat <-
       plot.title = element_text(size=22),
       legend.position = "none",
       plot.margin = margin(1,6.5,1.5,1.5, "cm"),
-      plot.caption = element_text(hjust=0, face="italic")
+      plot.caption = element_text(hjust=0),
     ) +
   scale_fill_manual(values=paleta_color) +
   scale_color_manual(values=paleta_color) +
@@ -175,7 +176,7 @@ scat <-
   ) +
   annotation_custom(i1, ymin = 43, ymax = 63, xmin = 235, xmax =280) +
   annotation_custom(i2, ymin = 18, ymax = 55, xmin = 228, xmax =280) +
-  annotation_custom(i3, ymin = 63.5, ymax = 70, xmin = 260, xmax =280) +
+  annotation_custom(i3, ymin = 60, ymax = 72, xmin = 155, xmax =168) +
   coord_cartesian(clip = "off")
 
 plot(scat)
