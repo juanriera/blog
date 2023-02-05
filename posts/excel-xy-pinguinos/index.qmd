@@ -73,7 +73,7 @@ Una vez introducidas las fórmulas para las dos nuevas columnas, insertamos una 
 
 ![](excel-powerpivot-5.png)
 
-Construimos nuestro gráfico de dispersión a partir de esta tabla dinámica, igual que hemos hecho en el [post anterior](https://juanriera.github.io/blog/posts/excel-xy/), insertando un gráfico de dispersión en blanco e insertando las series manualmente.
+Construimos nuestro gráfico de dispersión a partir de esta tabla dinámica, igual que hemos hecho en el [post anterior](https://juanriera.github.io/blog/posts/excel-xy/), insertando un gráfico de dispersión en blanco e insertando las series manualmente (puedes ver un vídeo demostrativo en [este enlace](https://youtu.be/tD2P5wabb1k)).
 
 En este gráfico, en vez de introducir una leyenda para las series, vamos a utilizar rótulos del color de las series para mostrar cada serie
 
