@@ -3,8 +3,6 @@ title: "Gráficos de dispersión multiserie en Microsoft Excel (parte 2)"
 subtitle: "Uso del modelo de datos de Power Pivot y de las fórmulas DAX"
 author: "Juan Riera"
 date: 2023-02-02
-author-title: AUTOR
-published-title: PUBLICADO
 format: html
 image: "pinguinos2.png"
 execute: 
