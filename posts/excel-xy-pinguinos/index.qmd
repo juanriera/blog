@@ -101,7 +101,7 @@ En este gráfico, en vez de introducir una leyenda para las series, vamos a util
 También insertaremos dos imágenes que proporcionan información adicional sobre los tres grupos de pinguinos y las medidas del pico; recuperamos estas imágenes del [repositorio del dataset `palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/).
 
 ::: {#fig-pinguinos layout-ncol="2"}
-![Los grupos de pinguinos](lter_penguins.png){#fig-grupos-pinguinos}
+![Los grupos de pingüinos](lter_penguins.png){#fig-grupos-pinguinos}
 
 ![Medidas del pico](culmen_depth.png){#fig-pico-pinguinos}
 
@@ -120,7 +120,7 @@ Nuestra versión final del gráfico en Excel queda así:
 
 El gráfico de dispersión nos ha permitido realizar dos funciones:
 
--   Visualizar la relación entre los valores de dos variables numéricas. En este caso, hemos podido separar los grupos de población de pinguinos en función de dos características anatómicas.
+-   Visualizar la relación entre los valores de dos variables numéricas. En este caso, hemos podido separar los grupos de población de pingüinos en función de dos características anatómicas.
 -   Comunicar de manera eficaz y visualmente atractiva la información analizada.
 
 ## Cómo hacerlo en R
