@@ -154,7 +154,7 @@ scat <-
     labs (
       title = "Flipper and bill length",
       subtitle="Dimensions for Adélie, Chinstrap and Gentoo penguins at Palmer Station LTER",
-      caption = "Dataset and images by Allison Horst https://allisonhorst.github.io/palmerpenguins/"
+      caption = "Dataset and artwork by Allison Horst https://allisonhorst.github.io/palmerpenguins/"
     ) +
     theme(
       plot.title = element_text(size=22),
