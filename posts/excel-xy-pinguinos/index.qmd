@@ -27,21 +27,43 @@ Un esquema muy sencillo de las diferencias entre M y DAX es éste:
 
 En nuestro ejemplo, vamos a utilizar una función DAX sencilla para calcular las nuevas columnas que necesitamos en nuestro gráfico.
 
+## Preparación de los datos
+
+Utilizaré en este ejemplo el [dataset `palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/), preparado por [Allison Horst](https://allisonhorst.github.io/) en GitHub. Lo he guardado como `CSV` desde R, mediante la función básica `write.csv2()`, que genera el `CSV` con el formato español (punto y coma `;` como separador de columnas, coma `,` como separador de decimales), para que se pueda recuperar en Excel en español sin problema. En la exportación, he evitado números de filas, y he reemplazando los `N/A` de R por blancos, que en Excel serán celdas vacías.
+
+```{r warning= FALSE, messages=FALSE}
+library(palmerpenguins)
+write.csv2(penguins, "pinguinos.csv", row.names = FALSE, na="")
+
+knitr::kable(head(penguins)) # para mostrar el encabezado de la tabla
+```
+que en Excel será
+
+![](2023-02-05_head_tabla.png)
+
 ## Cómo hacer un gráfico de dispersión desde el complemento `Power Pivot`de Excel
 
-Queremos hacer un gráfico de dispersión de los datos de `flipper_length_cm` (longitud de la aleta en cm) frente a `bill_length_cm` (longitud del pico en cm)
+Queremos hacer un gráfico de dispersión de los datos de `flipper_length_cm` (longitud de la aleta en cm) frente a `bill_length_cm` (longitud del pico en cm), agrupado por `species`.
 
-Para utilizarlo ([ver indicaciones de Soporte Microsoft](https://support.microsoft.com/es-es/office/iniciar-el-complemento-power-pivot-para-excel-a891a66d-36e3-43fc-81e8-fc4798f39ea8)), tenemos que activar el complemento Power Pivot en Excel. Para hacerlo, iremos al `Menú`\>`Opciones`\>`Complementos`, y en la parte inferior, en `Administrar:`, seleccionaremos `Complementos COM`\>`Ir`
+Para utilizar **Power Pivot** debemos verificar si el complemento está activo en Excel. Si lo está, nos aparecerá en el menú principal.
+
+![](excel-com-3.png)
+
+
+Si no está activo, tenemos que activarlo en el `Menú`\>`Opciones`\>`Complementos`, y en la parte inferior, en `Administrar:`, seleccionaremos `Complementos COM`\>`Ir` ([ver indicaciones de Soporte Microsoft](https://support.microsoft.com/es-es/office/iniciar-el-complemento-power-pivot-para-excel-a891a66d-36e3-43fc-81e8-fc4798f39ea8))
 
 ![](excel-com-1.png)
+
 
 Marcamos las opciones `Microsoft Power Map for Excel` y `Microsoft Power Pivot for Excel`.
 
 ![](excel-com-2.png)
 
+
 En el menú principal de Excel debe aparecernos ahora la opción `Power Pivot`.
 
 ![](excel-com-3.png)
+
 
 A continuación, abrimos el dataset `pinguinos.csv` y lo guardamos como Libro Excel `pinguinos.xlsx` (Power Pivot sólo estará activo si la hoja de cálculo tiene este formato).
 
@@ -89,11 +111,13 @@ También insertaremos dos imágenes que proporcionan información adicional sobr
 Graficos explicativos que insertaremos en nuestro gráfico de dispersión
 :::
 
-Este es el gráfico final:
+Esta esla primera versión del gráfico con las imágenes insertadas:
 
 ![Comparación de la longitud de la aleta vs la longitud del pico en el dataset [*Palmer Penguins*](https://allisonhorst.github.io/palmerpenguins/)](pinguinos.png)
 
-La posibilidad de edición visual de Excel nos permite modificar y ajustar el gráfico con facilidad; incluyo otra versión posible, dando más importancia a los elementos gráficos que actúan como leyenda visual:
+La posibilidad de edición visual de Excel nos permite modificar y ajustar el gráfico con facilidad, dando más importancia a los elementos gráficos que actúan como leyenda visual.
+
+Nuestra versión final del gráfico en Excel queda así:
 
 ![Comparación de la longitud de la aleta vs la longitud del pico en el dataset [*Palmer Penguins*](https://allisonhorst.github.io/palmerpenguins/) (v. 2)](pinguinos2.png)
 
