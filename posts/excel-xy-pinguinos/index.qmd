@@ -91,30 +91,47 @@ Graficos explicativos que insertaremos en nuestro gráfico de dispersión
 
 Este es el gráfico final:
 
-![Comparación de la longitud de la aleta vs la longitud del pico en el dataset [*Palmer Penguins*](https://allisonhorst.github.io/palmerpenguins/) ](pinguinos.png)
+![Comparación de la longitud de la aleta vs la longitud del pico en el dataset [*Palmer Penguins*](https://allisonhorst.github.io/palmerpenguins/)](pinguinos.png)
 
 La posibilidad de edición visual de Excel nos permite modificar y ajustar el gráfico con facilidad; incluyo otra versión posible, dando más importancia a los elementos gráficos que actúan como leyenda visual:
 
 ![Comparación de la longitud de la aleta vs la longitud del pico en el dataset [*Palmer Penguins*](https://allisonhorst.github.io/palmerpenguins/) (v. 2)](pinguinos2.png)
 
-
 El gráfico de dispersión nos ha permitido realizar dos funciones:
 
-- Visualizar la relación entre los valores de dos variables numéricas. En este caso, hemos podido separar los grupos de población de pinguinos en función de dos características anatómicas.
-- Comunicar de manera eficaz y visualmente atractiva la información analizada.
+-   Visualizar la relación entre los valores de dos variables numéricas. En este caso, hemos podido separar los grupos de población de pinguinos en función de dos características anatómicas.
+-   Comunicar de manera eficaz y visualmente atractiva la información analizada.
 
 ## Cómo hacerlo en R
-Adjunto el código R para hacer un gráfico equivalente al anterior en R. El posicionamiento de las imágenes es más engorroso; hay que detallar las coordenadas de cada imagen. El resultado definitivo sólo se consigue por ensayo y error, al no ser posible la edición visual de la que dispone Excel. Sin embargo, tiene la ventaja de que todas las opciones que se han usado en la configuración del gráfico están recogidas en el código, lo que hace que sea totalmente reproducible.
+
+En R, el gráfico de dispersión básico es muy sencillo usando `ggplot`.
+
+```{r rpenguins-basic, message = FALSE, warning = FALSE}
+## librerias
+library(ggplot2)
+
+# establece el tema por defecto, en caso de que se haya modificado
+theme_set(theme_gray()) 
+
+## lee los datos
+df_penguins <- read.csv2('pinguinos.csv')
+
+## hace el gráfico
+ggplot(df_penguins, aes(flipper_length_mm, bill_length_mm, colour = species)) +
+    geom_point()
+
+```
+
+Para hacer en R un gráfico equivalente al gráfico final en Excel, más personalizado y con imágenes incrustadas y anotaciones, el código es algo más complejo, como vemos a continuación.
 
 ```{r rpenguins, message = FALSE, warning = FALSE}
 ## librerias
 library(tidyverse)
-library(ggtext) # element_markdown()
 
 theme_set(theme_minimal(base_size = 15))
 
 ## lee los datos
-df_penguins <- readr::read_csv('penguins.csv') |>
+df_penguins <- readr::read_csv2('pinguinos.csv') |>
   mutate(species = if_else(species == "Adelie", "Adélie", species))
 
 ## lee las imágenes
@@ -176,8 +193,26 @@ scat <-
   ) +
   annotation_custom(i1, ymin = 43, ymax = 63, xmin = 235, xmax =280) +
   annotation_custom(i2, ymin = 18, ymax = 55, xmin = 228, xmax =280) +
-  annotation_custom(i3, ymin = 60, ymax = 72, xmin = 155, xmax =168) +
+  annotation_custom(i3, ymin = 59.7, ymax = 71.7, xmin = 153.8, xmax =166.8) +
   coord_cartesian(clip = "off")
 
 plot(scat)
 ```
+
+## Ventajas e inconvenientes de cada herramienta
+
+A continuación he resumido en una tabla comparativa alguna de las ventajas e inconvenientes de cada método.
+
++--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                    | Excel                                                                                                                                                 | R                                                                                                                                                                                                                                   |
++====================+=======================================================================================================================================================+=====================================================================================================================================================================================================================================+
+| **Ventajas**       | -   La edición del gráfico se realiza de forma visual, es muy sencilla.                                                                               | -   Todas las opciones que se han usado en la configuración del gráfico están recogidas en el código, lo que hace que sea totalmente reproducible.                                                                                  |
+|                    |                                                                                                                                                       | -   La ubicación de las imágenes incrustadas es muy precisa, basándose en coordenadas X,Y cuyas unidades son las mismas del gráfico.                                                                                                |
+|                    | -   La exportación del gráfico es muy sencilla (botón derecho), y puede exportarse a cualquier formato (JPG, PNG, BITMAP, SVG)                        |                                                                                                                                                                                                                                     |
++--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Inconvenientes** | -   La preparación del gráfico es un poco engorrosa, debido a que las tablas dinámicas no ofrecen gráficos de dispersión                              | -   Para hacer un formato complejo, es necesario conocer bastante en detalle la codificación en R y en `ggplot`                                                                                                                     |
+|                    |                                                                                                                                                       | -   El posicionamiento de las imágenes es más engorroso; hay que detallar las coordenadas de cada imagen. El resultado definitivo sólo se consigue por ensayo y error, al no ser posible la edición visual de la que dispone Excel. |
+|                    | -   Las opciones utilizadas en la configuración no son explícitas, y no resulta fácil encontrar el detalle de cada opción de configuración utilizada. |                                                                                                                                                                                                                                     |
++--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                    |                                                                                                                                                       |                                                                                                                                                                                                                                     |
++--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
