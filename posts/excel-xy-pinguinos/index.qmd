@@ -37,6 +37,7 @@ write.csv2(penguins, "pinguinos.csv", row.names = FALSE, na="")
 
 knitr::kable(head(penguins)) # para mostrar el encabezado de la tabla
 ```
+
 que en Excel será
 
 ![](2023-02-05_head_tabla.png)
@@ -49,21 +50,17 @@ Para utilizar **Power Pivot** debemos verificar si el complemento está activo e
 
 ![](excel-com-3.png)
 
-
 Si no está activo, tenemos que activarlo en el `Menú`\>`Opciones`\>`Complementos`, y en la parte inferior, en `Administrar:`, seleccionaremos `Complementos COM`\>`Ir` ([ver indicaciones de Soporte Microsoft](https://support.microsoft.com/es-es/office/iniciar-el-complemento-power-pivot-para-excel-a891a66d-36e3-43fc-81e8-fc4798f39ea8))
 
 ![](excel-com-1.png)
-
 
 Marcamos las opciones `Microsoft Power Map for Excel` y `Microsoft Power Pivot for Excel`.
 
 ![](excel-com-2.png)
 
-
 En el menú principal de Excel debe aparecernos ahora la opción `Power Pivot`.
 
 ![](excel-com-3.png)
-
 
 A continuación, abrimos el dataset `pinguinos.csv` y lo guardamos como Libro Excel `pinguinos.xlsx` (Power Pivot sólo estará activo si la hoja de cálculo tiene este formato).
 
@@ -71,7 +68,7 @@ Con el cursor dentro de nuestra tabla de datos, seleccionamos `Menú`\> `Power P
 
 Esto tiene tres efectos:
 
--   convierte nuestra tabla de datos al formato de tabla de Excel,
+-   convierte nuestro rango de datos al formato de tabla de Excel,
 -   añade la tabla a un nuevo modelo de datos de Power Pivot, y
 -   hace que Excel nos abra la ventana del administrador del modelo de datos de Power Pivot
 
@@ -91,7 +88,7 @@ Sin embargo, el dataset `pinguinos.csv` tiene una diferencia con respecto al dat
 
 Esta es la fórmula corregida: `=IF(ISBLANK(Tabla1[bill_length_mm]);BLANK();Tabla1[bill_depth_mm]+CALCULATE(RAND()/100))` que devuelve un valor en blanco cuando el valor original es un valor en blanco.
 
-Una vez introducidas las fórmulas para las dos nuevas columnas, insertamos una nueva tabla dinámica ***desde Power Pilot*** en una nueva hoja de cálculo. De esta forma, la nueva tabla dinámica toma como tabla de datos el modelo que acabamos de crear.
+Una vez introducidas las fórmulas para las dos nuevas columnas, insertamos una nueva tabla dinámica ***desde Power Pivot*** en una nueva hoja de cálculo. De esta forma, la nueva tabla dinámica toma como tabla de datos el modelo que acabamos de crear.
 
 ![](excel-powerpivot-5.png)
 
@@ -101,7 +98,7 @@ En este gráfico, en vez de introducir una leyenda para las series, vamos a util
 
 ![](graf-dispersion-pinguinos-1.png)
 
-También insertaremos dos imágenes que proporcionan información adicional sobre los tres grupos de pinguinos y las medidas del pico. Recuperamos estas imágenes del [repositorio del dataset `palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/).
+También insertaremos dos imágenes que proporcionan información adicional sobre los tres grupos de pinguinos y las medidas del pico; recuperamos estas imágenes del [repositorio del dataset `palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/).
 
 ::: {#fig-pinguinos layout-ncol="2"}
 ![Los grupos de pinguinos](lter_penguins.png){#fig-grupos-pinguinos}

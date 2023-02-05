@@ -348,7 +348,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Con el cursor dentro de nuestra tabla de datos, seleccionamos <code>Menú</code>&gt; <code>Power Pivot</code>&gt; <code>Agregar a modelo de datos</code>.</p>
 <p>Esto tiene tres efectos:</p>
 <ul>
-<li>convierte nuestra tabla de datos al formato de tabla de Excel,</li>
+<li>convierte nuestro rango de datos al formato de tabla de Excel,</li>
 <li>añade la tabla a un nuevo modelo de datos de Power Pivot, y</li>
 <li>hace que Excel nos abra la ventana del administrador del modelo de datos de Power Pivot</li>
 </ul>
@@ -360,12 +360,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Sin embargo, el dataset <code>pinguinos.csv</code> tiene una diferencia con respecto al dataset <code>iris</code>: hay datos que faltan (celdas en blanco). En las columnas que vamos a calcular, debemos prever esta situación para evitar que la fórmula devuelva un valor erróneo.</p>
 <p><img src="excel-powerpivot-3.png" class="img-fluid"></p>
 <p>Esta es la fórmula corregida: <code>=IF(ISBLANK(Tabla1[bill_length_mm]);BLANK();Tabla1[bill_depth_mm]+CALCULATE(RAND()/100))</code> que devuelve un valor en blanco cuando el valor original es un valor en blanco.</p>
-<p>Una vez introducidas las fórmulas para las dos nuevas columnas, insertamos una nueva tabla dinámica <strong><em>desde Power Pilot</em></strong> en una nueva hoja de cálculo. De esta forma, la nueva tabla dinámica toma como tabla de datos el modelo que acabamos de crear.</p>
+<p>Una vez introducidas las fórmulas para las dos nuevas columnas, insertamos una nueva tabla dinámica <strong><em>desde Power Pivot</em></strong> en una nueva hoja de cálculo. De esta forma, la nueva tabla dinámica toma como tabla de datos el modelo que acabamos de crear.</p>
 <p><img src="excel-powerpivot-5.png" class="img-fluid"></p>
 <p>Construimos nuestro gráfico de dispersión a partir de esta tabla dinámica, igual que hemos hecho en el <a href="https://juanriera.github.io/blog/posts/excel-xy/">post anterior</a>, insertando un gráfico de dispersión en blanco e insertando las series manualmente (puedes ver un vídeo demostrativo en <a href="https://youtu.be/tD2P5wabb1k">este enlace</a>).</p>
 <p>En este gráfico, en vez de introducir una leyenda para las series, vamos a utilizar rótulos del color de las series para mostrar cada serie</p>
 <p><img src="graf-dispersion-pinguinos-1.png" class="img-fluid"></p>
-<p>También insertaremos dos imágenes que proporcionan información adicional sobre los tres grupos de pinguinos y las medidas del pico. Recuperamos estas imágenes del <a href="https://allisonhorst.github.io/palmerpenguins/">repositorio del dataset <code>palmerpenguins</code></a>.</p>
+<p>También insertaremos dos imágenes que proporcionan información adicional sobre los tres grupos de pinguinos y las medidas del pico; recuperamos estas imágenes del <a href="https://allisonhorst.github.io/palmerpenguins/">repositorio del dataset <code>palmerpenguins</code></a>.</p>
 <div id="fig-pinguinos" class="quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
