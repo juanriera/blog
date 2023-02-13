@@ -28,5 +28,11 @@
   },
   "about_blog.qmd": {
     "about_blog.html": "d2db5339"
+  },
+  "posts/clima-economist/index.qmd": {
+    "index.html": "680a75cc"
+  },
+  "posts/excel-normal/index.qmd": {
+    "index.html": "99c256d9"
   }
 }

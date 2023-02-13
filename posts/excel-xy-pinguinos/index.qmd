@@ -6,7 +6,7 @@ date: 2023-02-02
 format: html
 image: "pinguinos2.png"
 execute: 
-  freeze: TRUE
+  freeze: true
 ---
 
 En el post anterior hemos visto cómo crear un gráfico de dispersión multiserie a partir de una tabla de datos arreglados, en la que una columna proporciona los criterios para la agrupación en clases; para conseguir diferenciar los puntos individuales construíamos dos nuevas columnas en la misma tabla de datos original.

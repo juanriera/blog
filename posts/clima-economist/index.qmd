@@ -1,0 +1,13 @@
+---
+title: "Gráficos de dispersión: dibujando la curva normal"
+subtitle: ""
+author: "Juan Riera"
+date: 2023-02-15
+format: html
+image: "spread-betting-2.png"
+draft: true
+execute: 
+  freeze: false
+---
+
+## Utilizando los gráficos de dispersión para dibujar la curva normal
