@@ -2,7 +2,7 @@
 title: "La curva de distribución normal en Excel"
 subtitle: "Aplicando los gráficos de dispersión"
 author: "Juan Riera"
-date: 2023-02-13
+date: 2023-02-19
 format: html
 image: "excel-norm-11.png"
 draft: false
@@ -69,3 +69,42 @@ Ahora vamos al gráfico y, en la opción `Seleccionar datos…`, añadimos una n
 Editamos la línea de la nueva serie, ajustando color y tipo de línea, y completamos el gráfico:
 
 ![](excel-norm-11.png)
+
+
+## Como hacer el gráfico en R
+
+Para hacer la curva normal en `ggplot`, desde  -4 $\sigma$ hasta +4 $\sigma$, usamos este código, en el que creamos directamente el *dataframe* que vamos a dibujar dentro de la propia instrucción `ggplot`:
+
+```{r message=FALSE}
+library(ggplot2)
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+  stat_function(fun = dnorm) +
+  theme_minimal()
+  
+```
+
+Podemos hacer más genérico el código para que dibuje cualquier curva normal a partir de una media y ua desviación típica cualquiera, incluyendo la línea vertical al valor medio. Una alternativa es hacer una secuencia de valores X, pero realmente no los necesitamos para dibujar la curva; nos basta con la media y la desviacióin típica. Para calcular la escala del eje X necesitamos el valor mínimo y máximo. La función `dnorm()` de R es equivalente a la función `=DISTRIBUCION.NORMAL()` de Excel, nos devuelve los valores de densidad de la función para los valores `X` especificados. En el caso de R, al especificar esta función dentro de `ggplot`, la gráfica utiliza internamente la función para calcular la curva sin necesidad de crear los valores, como habíamos hecho en Excel.
+
+
+```{r message=FALSE}
+library(ggplot2)
+
+Xmedia <- 125
+Xdt <- 2
+
+Xmin <- Xmedia-4*Xdt
+Xmax <- Xmedia+4*Xdt
+
+Ymax <- max(dnorm(Xmedia, Xmedia, Xdt))
+
+ggplot(data.frame(X = c(Xmin, Xmax)), aes(x = X)) +
+  stat_function(fun = dnorm, args = c(Xmedia, Xdt), 
+                linewidth = 1, 
+                colour = "blue") +
+  geom_segment(aes(x = Xmedia, y = 0, xend = Xmedia, yend = Ymax), 
+               linetype = "dashed", 
+               linewidth = 1, 
+               colour = "blue") +
+  theme_minimal() +
+  xlim(c(Xmin, Xmax))
+```
