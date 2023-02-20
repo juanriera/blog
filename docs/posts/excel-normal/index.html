@@ -278,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Xmin <span class="ot">&lt;-</span> Xmedia<span class="dv">-4</span><span class="sc">*</span>Xdt</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Xmax <span class="ot">&lt;-</span> Xmedia<span class="sc">+</span><span class="dv">4</span><span class="sc">*</span>Xdt</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Ymax <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">dnorm</span>(Xmedia, Xmedia, Xdt))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Ymax <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(Xmedia, Xmedia, Xdt)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">X =</span> <span class="fu">c</span>(Xmin, Xmax)), <span class="fu">aes</span>(<span class="at">x =</span> X)) <span class="sc">+</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">c</span>(Xmedia, Xdt), </span>

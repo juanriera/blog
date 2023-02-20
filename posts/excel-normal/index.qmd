@@ -95,7 +95,7 @@ Xdt <- 2
 Xmin <- Xmedia-4*Xdt
 Xmax <- Xmedia+4*Xdt
 
-Ymax <- max(dnorm(Xmedia, Xmedia, Xdt))
+Ymax <- dnorm(Xmedia, Xmedia, Xdt)
 
 ggplot(data.frame(X = c(Xmin, Xmax)), aes(x = X)) +
   stat_function(fun = dnorm, args = c(Xmedia, Xdt), 
