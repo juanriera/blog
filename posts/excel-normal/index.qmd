@@ -83,7 +83,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
   
 ```
 
-Podemos hacer más genérico el código para que dibuje cualquier curva normal a partir de una media y ua desviación típica cualquiera, incluyendo la línea vertical al valor medio. Una alternativa es hacer una secuencia de valores X, pero realmente no los necesitamos para dibujar la curva; nos basta con la media y la desviacióin típica. Para calcular la escala del eje X necesitamos el valor mínimo y máximo. La función `dnorm()` de R es equivalente a la función `=DISTRIBUCION.NORMAL()` de Excel, nos devuelve los valores de densidad de la función para los valores `X` especificados. En el caso de R, al especificar esta función dentro de `ggplot`, la gráfica utiliza internamente la función para calcular la curva sin necesidad de crear los valores, como habíamos hecho en Excel.
+Podemos hacer más genérico el código para que dibuje cualquier curva normal a partir de una media y ua desviación típica cualquiera, incluyendo la línea vertical al valor medio. Una alternativa es hacer una secuencia de valores X, pero realmente no los necesitamos para dibujar la curva; nos basta con la media y la desviación típica. Para calcular la escala del eje X necesitamos el valor mínimo y máximo. La función `dnorm()` de R es equivalente a la función `=DISTRIBUCION.NORMAL()` de Excel, nos devuelve los valores de densidad de la función para los valores `X` especificados. En el caso de R, al especificar esta función dentro de `ggplot`, la gráfica utiliza internamente la función para calcular la curva sin necesidad de crear los valores, como habíamos hecho en Excel.
 
 
 ```{r message=FALSE}
