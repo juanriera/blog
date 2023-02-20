@@ -73,7 +73,7 @@ Editamos la línea de la nueva serie, ajustando color y tipo de línea, y comple
 
 ## Como hacer el gráfico en R
 
-Para hacer la curva normal en `ggplot`, desde  -4 $\sigma$ hasta +4 $\sigma$, usamos este código, en el que creamos directamente el *dataframe* que vamos a dibujar dentro de la propia instrucción `ggplot`:
+Para hacer la curva normal en `ggplot`, desde  -4 $\sigma$ hasta +4 $\sigma$, usamos este código. Creamos el *dataframe* que vamos a dibujar directamente dentro de la propia instrucción `ggplot`:
 
 ```{r message=FALSE}
 library(ggplot2)
