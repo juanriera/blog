@@ -19,7 +19,7 @@ website:
       - text: "Sobre este blog"
         file: about_blog.qmd
       - text: "Libro"
-        file: https://github.com/juanriera/industrial-stats/docs/
+        file: https://juanriera.github.io/industrial-stats/
 format:
   html:
     theme: flatly
