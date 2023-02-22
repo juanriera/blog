@@ -1,5 +1,4 @@
 library(ggplot2)
-library(ggh4x)
 
 # https://stackoverflow.com/questions/75502312/in-ggplot-how-to-fill-area-between-two-normal-curves/
 #
@@ -18,26 +17,26 @@ graf_normal <- function(Xmedia1, Xdt1, Xmedia2, Xdt2, n = 1000) {
   
   ggplot(dat, aes(x)) +
     geom_hline(yintercept = 0, colour = "grey", linewidth = 1) +
-    ggh4x::stat_difference(
-      data =  ~ subset(.x, x >= Xmedia2 + 1.5 * Xdt2),
+    geom_ribbon(
+      data =  subset(dat, x >= Xmedia2 + 1.5 * Xdt2),
       aes(ymin = y1, ymax = y2),
       fill = "red", alpha = 0.8
     ) +
-    ggh4x::stat_difference(
-      data =  ~ subset(.x, (x <= Xmedia2 + 1.5 * Xdt2) & (y2 > y1)),
+    geom_ribbon(
+      data =  subset(dat, (y2 > y1)),
       aes(ymin = y1, ymax = y2),
       fill = "red", alpha = 0.2
     ) +
-    ggh4x::stat_difference(
-      data =  ~ subset(.x, x <= Xmedia1 - 1.5 * Xdt2),
-      aes(ymin = y1, ymax = y2),
+    geom_ribbon(
+      data = subset(dat, x <= Xmedia1 - 1.5 * Xdt2),
+      aes(ymin = y2, ymax = y1),
       fill = "blue", alpha = 0.8
     ) +
-    ggh4x::stat_difference(
-      data =  ~ subset(.x, (x <= Xmedia2 ) & (y1 > y2)),
-      aes(ymin = y1, ymax = y2),
+     geom_ribbon(
+      data = subset(dat, (y1 > y2)),
+      aes(ymin = y2, ymax = y1),
       fill = "blue", alpha = 0.2
-    ) +
+     ) +
     annotate(
       geom = "segment",
       x = c(Xmedia1, Xmedia2), y = 0,
@@ -48,7 +47,6 @@ graf_normal <- function(Xmedia1, Xdt1, Xmedia2, Xdt2, n = 1000) {
     ) +
     geom_line(aes(y = y1), linewidth = 1, colour = "grey") +
     geom_line(aes(y = y2), linewidth = 1, colour = "black") +
-#    scale_fill_manual(values = c(scales::alpha("red", .3), "transparent")) +
     theme(
       line = element_blank(),
       axis.line.y = element_blank(),
@@ -61,5 +59,4 @@ graf_normal <- function(Xmedia1, Xdt1, Xmedia2, Xdt2, n = 1000) {
     )
 }
 
-graf_normal(250, 7, 253, 7)
-
+graf_normal(250, 7, 255, 7)

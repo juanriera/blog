@@ -1,7 +1,7 @@
 library(ggplot2)
 library(ggthemes)
 
-graf_normal <- function(Xmedia1, Xdt1, Xmedia2, Xdt2) {
+graf_normal <- function(Xmedia1, Xdt1, Xmedia2, Xdt2, titulo, texto1, texto2) {
   
   Xmin1 <- Xmedia1-4*Xdt1
   Xmax1 <- Xmedia1+4*Xdt1
@@ -72,148 +72,93 @@ graf_normal <- function(Xmedia1, Xdt1, Xmedia2, Xdt2) {
       alpha = 0.8,
       size = 7,
       lineheight = .9
-    ) 
-}
-
-g1 <- graf_normal(250, 7, 253, 7)
-g2 <- graf_normal(250, 7, 250, 9)
-g3 <- graf_normal(250, 7, 253, 9)
-
-g1 <- g1 + 
-  labs(title = "Aumento del valor medio") +
-  geom_segment( x = Xmedia1, 
-                y = 0.03, 
-                xend = Xmedia2 - 1, 
-                yend = 0.03, 
-                colour='grey', 
-                size=2,
-                arrow = arrow(length = unit(0.5, "cm"))) +
-  annotate(
-    "text",
-    x = 230, y = 0.03,
-    label = stringr::str_wrap("Menos frío extremo",
-                              width = 15),
-    color = "blue",
-    alpha = 0.8,
-    size = 7,
-    lineheight = .9
-  ) +
-  geom_segment(aes(x = 229.5, y = 0.025, xend = 233.5, yend = 0.007), 
-               alpha = 0.8,
-               linewidth = 0, 
-               colour = "blue") +
-  annotate(
-    "text",
-    x = 275, y = 0.03,
-    label = stringr::str_wrap("Más calor extremo",
-                              width = 15),
-    color = "red",
-    alpha = 0.8,
-    size = 7,
-    lineheight = .9
-  ) +
-  geom_segment(aes(x = 274, y = 0.025, xend = 269, yend = 0.008), 
+    )  +
+  labs(title = titulo) +
+    annotate(
+      "text",
+      x = 230, y = 0.03,
+      label = stringr::str_wrap(texto1,
+                                width = 15),
+      color = "blue",
+      alpha = 0.8,
+      size = 7,
+      lineheight = .9
+    ) +
+    geom_segment(aes(x = 229.5, y = 0.025, xend = 233.5, yend = 0.007), 
+                 alpha = 0.8,
+                 linewidth = 0, 
+                 colour = "blue") +
+    annotate(
+      "text",
+      x = 275, y = 0.03,
+      label = stringr::str_wrap(texto2,
+                                width = 15),
+      color = "red",
+      alpha = 0.8,
+      size = 7,
+      lineheight = .9
+    ) +
+    geom_segment(aes(x = 274, y = 0.025, xend = 269, yend = 0.008), 
                  alpha = 0.8,
                  linewidth = 0, 
                  colour = "red")
+  
+}
+
+g1 <- graf_normal(250, 7, 253, 7, "Aumento del valor medio", "Menos frío extremo", "Más calor extremo")
+g2 <- graf_normal(250, 7, 250, 9, "Aumento de la varianza", "Más frío extremo", "Más calor extremo")
+g3 <- graf_normal(250, 7, 253, 9, "Aumento del valor medio y de la varianza", 
+                  "Menos impacto en frío extremo", "Más calor extremo")
+
+g1 <- g1 + 
+  geom_segment( x = 250, 
+                y = 0.03, 
+                xend = 253, 
+                yend = 0.03, 
+                colour='grey', 
+                linewidth=2,
+                arrow = arrow(length = unit(0.5, "cm"))) 
 
 g2 <- g2 + 
-  labs(title = "Aumento de la varianza") +
-  geom_segment( x = Xmedia1 + 3, 
+  geom_segment( x = 250 + 3, 
                 y = 0.02, 
-                xend = Xmedia1 + 6, 
+                xend = 256, 
                 yend = 0.015, 
                 colour='grey', 
                 size=2,
                 arrow = arrow(length = unit(0.5, "cm"))) +
-  geom_segment( x = Xmedia1 - 3, 
+  geom_segment( x = 247, 
                 y = 0.02, 
-                xend = Xmedia1 - 6, 
+                xend = 244, 
                 yend = 0.015, 
                 colour='grey', 
                 size=2,
-                arrow = arrow(length = unit(0.5, "cm"))) +
-  annotate(
-    "text",
-    x = 230, y = 0.03,
-    label = stringr::str_wrap("Más frío extremo",
-                              width = 15),
-    color = "blue",
-    alpha = 0.8,
-    size = 7,
-    lineheight = .9
-  ) +
-  geom_segment(aes(x = 229.5, y = 0.025, xend = 233 , yend = 0.01), 
-               alpha = 0.8,
-               linewidth = 0, 
-               colour = "blue") +
-  annotate(
-    "text",
-    x = 275, y = 0.03,
-    label = stringr::str_wrap("Más calor extremo",
-                              width = 15),
-    color = "red",
-    alpha = 0.8,
-    size = 7,
-    lineheight = .9
-  ) +
-  geom_segment(aes(x = 274, y = 0.025, xend = 269, yend = 0.008), 
-               alpha = 0.8,
-               linewidth = 0, 
-               colour = "red") 
+                arrow = arrow(length = unit(0.5, "cm")))
 
 g3 <- g3 + 
-  labs(title = "Aumento del valor medio y de la varianza") +
-  geom_segment( x = Xmedia1, 
+  geom_segment( x = 250, 
                 y = 0.035, 
-                xend = Xmedia2 - 1, 
+                xend = 253, 
                 yend = 0.035, 
                 colour='gray',
                 size=2,
                 arrow = arrow(length = unit(0.5, "cm"))) +
-  geom_segment( x = 253 + 4, 
+  geom_segment( x = 257, 
                 y = 0.02, 
-                xend = 253 + 6, 
+                xend = 259, 
                 yend = 0.015, 
                 colour='gray', 
                 size=2,
                 arrow = arrow(length = unit(0.5, "cm"))) +
-  geom_segment( x = 253 - 4, 
+  geom_segment( x = 249, 
                 y = 0.02, 
-                xend = 253 - 6, 
+                xend = 247, 
                 yend = 0.015, 
                 colour='gray', 
                 size=2,
-                arrow = arrow(length = unit(0.5, "cm"))) +
-  annotate(
-    "text",
-    x = 230, y = 0.03,
-    label = stringr::str_wrap("Menos impacto en frío extremo",
-                              width = 15),
-    color = "blue",
-    alpha = 0.8,
-    size = 7,
-    lineheight = .9
-  ) +
-  geom_segment(aes(x = 229.5, y = 0.025, xend = 233 , yend = 0.01), 
-               alpha = 0.8,
-               linewidth = 0, 
-               colour = "blue") +
-  annotate(
-    "text",
-    x = 275, y = 0.03,
-    label = stringr::str_wrap("Más calor extremo",
-                              width = 15),
-    color = "red",
-    alpha = 0.8,
-    size = 7,
-    lineheight = .9
-  ) +
-  geom_segment(aes(x = 274, y = 0.025, xend = 271, yend = 0.01), 
-               alpha = 0.8,
-               linewidth = 0, 
-               colour = "red") 
-
+                arrow = arrow(length = unit(0.5, "cm"))) 
+  
 g1
 g2
 g3
+
