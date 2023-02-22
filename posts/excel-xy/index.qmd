@@ -6,6 +6,10 @@ format: html
 image: "excel-graf-XY-final.png"
 execute: 
   freeze: true
+categories:
+  - estadística
+  - Excel
+  - código R
 ---
 
 ## Gráficos de dispersión (*scatter plot*)

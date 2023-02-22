@@ -7,7 +7,11 @@ format: html
 image: "excel-norm-11.png"
 draft: false
 execute: 
-  freeze: false
+  freeze: true
+categories:
+  - estadística
+  - Excel
+  - código R
 ---
 
 Hay muchos métodos en internet para hacer el gráfico de la distribución normal con Microsoft Excel. Aquí vamos a utilizar un método sencillo mediante los gráficos de dispersión, que permite redibujar la curva para cualquier valor de la media y desviación típica, añadiendo una línea vertical en la posición de la media.
@@ -20,12 +24,10 @@ En Excel, introducimos en la columna A una secuencia entre -4 y +4, con un incre
 
 A continuación, colocamos en la columna B nuestros valores de media y varianza (en este caso empezaremos con una normal de media 0 y desv t 1), y, a la derecha de la serie de valores de intervalos del eje X que hemos introducido, añadimos una fórmula que nos calcula el valor X como media + n veces la desv t
 
-
-::: {layout-ncol=2}
+::: {layout-ncol="2"}
 ![](excel-norm-3.png)
 
 ![](excel-norm-2.png)
-
 :::
 
 No nos queda más que calcular el valor de la función normal que corresponde a ese valor X. Para ello, Excel dispone de la función `=DISTR.NORM(valor; media; desviación típica; acumular)`:
@@ -34,7 +36,7 @@ No nos queda más que calcular el valor de la función normal que corresponde a 
 
 -   Introducimos en `B1` el valor de la *media*
 
--   Introducimos en `B2` el valor de la *desviación típica* 
+-   Introducimos en `B2` el valor de la *desviación típica*
 
 -   En el valor que hemos llamado *acumular*, introducimos `FALSO`, puesto que no queremos la función acumulada (la veremos más tarde)
 
@@ -46,7 +48,7 @@ Para hacer el gráfico, seleccionamos los valores de las columnas `B`y `C`que so
 
 ![](excel-norm-5.png)
 
-y a continuación, en el `Menu`>`Ìnsertar`, elegimos el gráfico de dispersión con curvas suavizadas:
+y a continuación, en el `Menu`\>`Ìnsertar`, elegimos el gráfico de dispersión con curvas suavizadas:
 
 ![](excel-norm-6.png)
 
@@ -70,10 +72,9 @@ Editamos la línea de la nueva serie, ajustando color y tipo de línea, y comple
 
 ![](excel-norm-11.png)
 
-
 ## Como hacer el gráfico en R
 
-Para hacer la curva normal en `ggplot`, desde  -4 $\sigma$ hasta +4 $\sigma$, usamos este código. Creamos el *dataframe* que vamos a dibujar directamente dentro de la propia instrucción `ggplot`:
+Para hacer la curva normal en `ggplot`, desde -4 $\sigma$ hasta +4 $\sigma$, usamos este código. Creamos el *dataframe* que vamos a dibujar directamente dentro de la propia instrucción `ggplot`:
 
 ```{r message=FALSE}
 library(ggplot2)
@@ -84,7 +85,6 @@ ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
 ```
 
 Podemos hacer más genérico el código para que dibuje cualquier curva normal a partir de una media y ua desviación típica cualquiera, incluyendo la línea vertical al valor medio. Una alternativa es hacer una secuencia de valores X, pero realmente no los necesitamos para dibujar la curva; nos basta con la media y la desviación típica. Para calcular la escala del eje X necesitamos el valor mínimo y máximo. La función `dnorm()` de R es equivalente a la función `=DISTRIBUCION.NORMAL()` de Excel, nos devuelve los valores de densidad de la función para los valores `X` especificados. En el caso de R, al especificar esta función dentro de `ggplot`, la gráfica utiliza internamente la función para calcular la curva sin necesidad de crear los valores, como habíamos hecho en Excel.
-
 
 ```{r message=FALSE}
 library(ggplot2)

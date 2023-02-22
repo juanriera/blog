@@ -6,6 +6,9 @@ format: html
 image: "image-20230121163619049.png"
 execute: 
   freeze: true
+categories:
+  - estadística
+  - Excel
 ---
 
 Hay varias formas de preparar una tabla de frecuencia en Excel. Aquí usaremos dos métodos:
