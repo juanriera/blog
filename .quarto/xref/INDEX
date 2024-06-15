@@ -34,5 +34,8 @@
   },
   "posts/excel-normal/index.qmd": {
     "index.html": "99c256d9"
+  },
+  "prueba_julia.qmd": {
+    "prueba_julia.html": "a661d0c6"
   }
 }

@@ -125,14 +125,14 @@ g2 <- g2 +
                 xend = 256, 
                 yend = 0.015, 
                 colour='grey', 
-                size=2,
+                linewidth=2,
                 arrow = arrow(length = unit(0.5, "cm"))) +
   geom_segment( x = 247, 
                 y = 0.02, 
                 xend = 244, 
                 yend = 0.015, 
                 colour='grey', 
-                size=2,
+                linewidth=2,
                 arrow = arrow(length = unit(0.5, "cm")))
 
 g3 <- g3 + 
@@ -141,21 +141,21 @@ g3 <- g3 +
                 xend = 253, 
                 yend = 0.035, 
                 colour='gray',
-                size=2,
+                linewidth=2,
                 arrow = arrow(length = unit(0.5, "cm"))) +
   geom_segment( x = 257, 
                 y = 0.02, 
                 xend = 259, 
                 yend = 0.015, 
                 colour='gray', 
-                size=2,
+                linewidth=2,
                 arrow = arrow(length = unit(0.5, "cm"))) +
   geom_segment( x = 249, 
                 y = 0.02, 
                 xend = 247, 
                 yend = 0.015, 
                 colour='gray', 
-                size=2,
+                linewidth=2,
                 arrow = arrow(length = unit(0.5, "cm"))) 
   
 g1

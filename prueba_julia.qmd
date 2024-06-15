@@ -1,0 +1,47 @@
+---
+title: "Plots Demo"
+author: "Norah Jones"
+date: "5/22/2021"
+format:
+  html:
+    code-fold: true
+jupyter: julia-1.8
+---
+
+## Parametric Plots {#parametric-plots}
+
+Plot function pair (x(u), y(u)). See @fig-parametric for an example.
+
+```{julia}
+#| label: fig-parametric
+#| fig-cap: "Parametric Plots"
+
+using Plots
+
+plot(sin, 
+     x->sin(2x), 
+     0, 
+     2π, 
+     leg=false, 
+     fill=(0,:lavender))
+```
+
+Here is the modified code that uses Gadfly instead of Plots:
+
+```{julia}
+using Gadfly
+using Distributions
+
+Xmedia = 125
+Xdt = 2
+
+Xmin = Xmedia - 4 * Xdt
+Xmax = Xmedia + 4 * Xdt
+
+Ymax = pdf(Normal(Xmedia, Xdt), Xmedia)
+
+x = range(Xmin, stop=Xmax, length=100)
+y = pdf.(Normal(Xmedia, Xdt), x)
+
+Gadfly.plot(x=x, y=y, Geom.line, Theme(default_color=colorant"blue"))
+```
