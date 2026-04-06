@@ -10,9 +10,9 @@ about:
     - icon: github
       text: Github
       href: https://github.com/juanriera/    
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/@rieraprieto
+    - icon: bluesky
+      text: Bluesky
+      href: https://bsky.app/profile/juanriera.bsky.social
     - icon: mastodon
       text: Mastodon
       href: https://mstdn.social/@juanriera
