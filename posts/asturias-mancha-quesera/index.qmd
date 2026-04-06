@@ -1,10 +1,10 @@
 ---
-title: "Asturias, ¿la mayor mancha quesera de Europa?"
+title: "Asturias, ¿la mayor mancha quesera de Europa? Una revisión."
 subtitle: "Un análisis de la producción quesera en Asturias"
-date: 2025-04-22
+date: 2026-04-22
 date-format: "DD/MM/YYYY"
 categories: [queso]
-image: "quesos-asturianos.jpg"
+image: "quesos-asturianos-2.jpg"
 draft: false
 lang: es
 editor: source
@@ -21,8 +21,9 @@ nocite: |
 ---
 
 # Resumen
+Este trabajo revisa la [publicacion que hice en LinkedIn](https://www.linkedin.com/pulse/asturias-la-mayor-mancha-quesera-de-europa-juan-riera-udwwf/) el 18 de abril de 2025, actualizando algunos datos de producción con la información disponible en Eurostat para 2024. Los datos referentes a algunos países, así como al número de empresas *queseras* sigue siendo difícil de encontrar. Los nuevos datos no introducen diferencias significativas en las conclusiones.
 
-Este trabajo examina la producción de queso en Asturias, incluyendo los quesos amparados por Denominación de Origen Protegida (DOP) e Indicación Geográfica Protegida (IGP), y la contrasta con datos de España y Europa. La información, obtenida de diversas fuentes online, que se incluyen en las referencias, se centra en el análisis del queso producido y el número de empresas. No se incluyen en el estudio otras variables económicas como inversión, empleo o contribución al PIB debido a la falta de datos detallados del sector. La información referente al número de empresas queseras es bastante precisa en Asturias, pero muy desigual o inexistente en el resto de las áreas estudiadas. La información sobre la producción de queso está en el mismo caso, dificultando la obtención de conclusiones precisas. Además, no ha sido posible cuantificar con detalle el volumen de producción fuera de la certificación DOP/IGP.
+Se examina la producción de queso en Asturias, incluyendo los quesos amparados por Denominación de Origen Protegida (DOP) e Indicación Geográfica Protegida (IGP), y se contrasta con datos de España y Europa. La información, obtenida de diversas fuentes online, que se incluyen en las referencias, se centra en el análisis del queso producido y el número de empresas. No se incluyen en el estudio otras variables económicas como inversión, empleo o contribución al PIB debido a la falta de datos detallados del sector. La información referente al número de empresas queseras es bastante precisa en Asturias, pero muy desigual o inexistente en el resto de las áreas estudiadas. La información sobre la producción de queso está en el mismo caso, dificultando la obtención de conclusiones precisas. Además, no ha sido posible cuantificar con detalle el volumen de producción fuera de la certificación DOP/IGP.
 
 El análisis revela que la producción de queso de Asturias no se sitúa como la más elevada a nivel nacional o europeo, ni en el total ni en la de quesos catalogados. Algunos quesos frescos fabricados por grandes multinacionales han tenido y siguen teniendo un papel clave en la producción regional; actualmente representan un 36% de la producción total de queso en la región. Asturias destaca por una relativa alta densidad de empresas queseras, calculada en este estudio bien como número de empresas por 1000 $km^2$ (especialmente en el ámbito de los quesos con certificación DOP/IGP, sólo por detrás de Suiza), o bien por millón de habitantes. Este número de empresas, más que la cantidad de queso producido, podría haber motivado la afirmación de que Asturias es ***la mayor mancha quesera de Europa***. 
 
@@ -46,11 +47,11 @@ library(ggrepel)
 library(readxl)
 
 
-df_tabla_quesos <- read_excel("AOC-Mancha_quesera_europa.xlsx", "Producción DOP" )
-df_paises <- read_excel("AOC-Mancha_quesera_europa.xlsx","Prod por pais")
-df_DOP_esp <- read_excel("AOC-Mancha_quesera_europa.xlsx","DOP España")
-df_consumo <- read_excel("AOC-Mancha_quesera_europa.xlsx","España-consumo")
-df_asturias <- read_excel("AOC-Mancha_quesera_europa.xlsx","SADEI-Asturias-2023")
+df_tabla_quesos <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx", "Producción DOP" )
+df_paises <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","Prod por pais")
+df_DOP_esp <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","DOP España")
+df_consumo <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","España-consumo")
+df_asturias <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","SADEI-Asturias-2023")
 
 colnames(df_tabla_quesos) <- c("queso", "tipo", "toneladas", "año", "pais","leche")
 
