@@ -1,7 +1,7 @@
 ---
 title: "Asturias, ¿la mayor mancha quesera de Europa? Una revisión."
 subtitle: "Un análisis de la producción quesera en Asturias"
-date: 2026-04-22
+date: 2026-04-06
 date-format: "DD/MM/YYYY"
 categories: [queso]
 image: "quesos-asturianos-2.jpg"
