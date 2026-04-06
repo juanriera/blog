@@ -1,5 +1,6 @@
 ---
-title: "El Gamonéu como queso azul: argumentación histórica, geográfica, tecnológica y bioquímica"
+title: "El Gamonéu es un queso azul"
+subtitle: "Argumentación histórica, geográfica, tecnológica y bioquímica"
 author: "Juan Riera"
 date: 2026-03-25
 categories: [queso]
