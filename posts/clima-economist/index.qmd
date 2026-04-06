@@ -1,13 +1,360 @@
 ---
-title: "Gráficos de dispersión: dibujando la curva normal"
-subtitle: ""
+title: "Media, varianza y eventos extremos"
+subtitle: "Por qué un pequeño cambio en la media tiene grandes consecuencias"
 author: "Juan Riera"
-date: 2023-02-15
-format: html
-image: "spread-betting-2.png"
-draft: true
-execute: 
-  freeze: false
+date: "2026-04-06"
+categories: [estadística, clima, código R]
+image: "grafico-media.png"
+draft: false
+code-fold: true
+code-summary: "Mostrar código R"
+execute:
+  freeze: true
 ---
 
-## Utilizando los gráficos de dispersión para dibujar la curva normal
+## ¿Qué tiene que ver la estadística con el clima?
+
+Cuando hablamos del clima, solemos pensar en la temperatura media: "este verano ha sido 
+más cálido que el anterior" o "el invierno ha sido más frío de lo normal". Pero la media 
+es solo una parte de la historia. Para entender por qué los fenómenos meteorológicos 
+extremos — olas de calor, heladas tardías, lluvias torrenciales — son cada vez más 
+frecuentes e intensos, necesitamos entender dos conceptos estadísticos fundamentales: 
+la **media** y la **varianza**.
+
+La distribución de las temperaturas a lo largo del tiempo sigue aproximadamente una 
+**distribución normal**: la mayoría de los días tienen temperaturas cercanas a la media, 
+y los días muy fríos o muy calurosos son poco frecuentes. En los gráficos siguientes, 
+la curva gris representa la distribución de referencia — el clima "habitual" — y la 
+curva negra muestra cómo se modifica esa distribución según tres escenarios posibles.
+
+## Escenario 1: aumenta la media
+
+El primer escenario es el más intuitivo: la temperatura media sube. La curva se desplaza 
+hacia la derecha — hacia valores más altos — manteniendo la misma forma. 
+
+¿Qué consecuencias tiene esto sobre los extremos? En la cola izquierda — los días muy 
+fríos — la curva nueva queda por debajo de la original: hay **menos días de frío extremo**. 
+En la cola derecha — los días muy calurosos — la curva nueva supera a la original: hay 
+**más días de calor extremo**. Un desplazamiento aparentemente pequeño de la media tiene 
+un efecto desproporcionado sobre los valores extremos, porque en las colas de la 
+distribución normal incluso pequeños cambios multiplican la frecuencia de los eventos 
+poco habituales.
+
+```{r}
+#| label: grafico-media
+#| message: false
+#| warning: false
+
+library(ggplot2)
+library(dplyr)
+
+# Parámetros
+media_ref <- 0;  sd_ref <- 1
+media_new <- 1;  sd_new <- 1
+x_min <- -4;     x_max <- 5
+umbral_frio  <- -2.5
+umbral_calor <-  2.5
+
+# Colores
+col_fondo     <- "#d6e4f0"
+col_curva_ref <- "#a0aec0"
+col_curva_new <- "#1a1a1a"
+col_frio      <- "#4299e1"
+col_calor     <- "#c0392b"
+col_texto     <- "#2d3748"
+
+# Datos para áreas sombreadas
+x_seq <- seq(x_min, x_max, length.out = 1000)
+
+df_frio <- data.frame(x = x_seq) |>
+  mutate(
+    y_ref = dnorm(x, media_ref, sd_ref),
+    y_new = dnorm(x, media_new, sd_new)
+  ) |>
+  filter(x <= umbral_frio, y_ref > y_new)
+
+df_calor <- data.frame(x = x_seq) |>
+  mutate(
+    y_ref = dnorm(x, media_ref, sd_ref),
+    y_new = dnorm(x, media_new, sd_new)
+  ) |>
+  filter(x >= umbral_calor, y_new > y_ref)
+
+ggplot(data.frame(x = c(x_min, x_max)), aes(x)) +
+  geom_ribbon(data = df_frio,
+              aes(x = x, ymin = y_new, ymax = y_ref),
+              fill = col_frio, alpha = 0.6) +
+  geom_ribbon(data = df_calor,
+              aes(x = x, ymin = y_ref, ymax = y_new),
+              fill = col_calor, alpha = 0.8) +
+  stat_function(fun = dnorm, args = list(media_ref, sd_ref),
+                colour = col_curva_ref, linewidth = 1.2) +
+  stat_function(fun = dnorm, args = list(media_new, sd_new),
+                colour = col_curva_new, linewidth = 1.4) +
+  geom_vline(xintercept = media_ref, colour = col_curva_ref,
+             linetype = "dashed", linewidth = 0.6) +
+  annotate("segment",
+           x = 0.1, xend = 0.85,
+           y = dnorm(0, 0, 1) * 1.05,
+           yend = dnorm(0, 0, 1) * 1.05,
+           colour = "darkblue", linewidth = 1,
+           arrow = arrow(length = unit(0.3, "cm"), type = "open")) +
+  annotate("text", x = umbral_frio - 0.1,
+           y = dnorm(umbral_frio, media_ref, sd_ref) + 0.06,
+           label = "Menos frío\nextremo",
+           colour = col_frio, size = 4.5, hjust = 1) +
+  annotate("text", x = 3.8,
+           y = dnorm(umbral_calor, media_ref, sd_ref) + 0.06,
+           label = "Más calor\nextremo",
+           colour = col_calor, size = 4.5, hjust = 0.5) +
+  annotate("text", x = x_min + 0.1, y = -0.012, label = "Frío",
+           colour = col_texto, size = 4, hjust = 0) +
+  annotate("text", x = x_max - 0.1, y = -0.012, label = "Calor",
+           colour = col_texto, size = 4, hjust = 1) +
+  annotate("text", x = media_ref, y = -0.018, label = "Temperatura \nmedia",
+           colour = col_curva_ref, size = 4, hjust = 0.5) +
+  annotate("segment",
+           x = -2.9, xend = -2.7,
+           y = 0.05, yend = 0.02,
+           colour = col_frio, linewidth = 1.1) +
+  annotate("segment",
+           x = 3.8, xend = 3.6,
+           y = 0.05, yend = 0.02,
+           colour = col_calor, linewidth = 1.1) +
+  labs(title = "Aumento de la media") +
+  xlim(x_min, x_max) +
+  theme_void() +
+  theme(
+    plot.background  = element_rect(fill = col_fondo, colour = NA),
+    panel.background = element_rect(fill = col_fondo, colour = NA),
+    plot.title = element_text(colour = col_texto, size = 14, face = "bold",
+                              margin = margin(t = 12, l = 12, b = 8)),
+    plot.margin = margin(10, 20, 15, 20),
+    panel.grid.major.y = element_line(colour = "#b8cfe0", linewidth = 0.4)
+  )
+```
+
+## Escenario 2: aumenta la varianza
+
+El segundo escenario es menos intuitivo pero igual de importante: la media no cambia, 
+pero la distribución se hace más ancha. Esto significa que hay más días con temperaturas 
+alejadas de la media — tanto por arriba como por abajo.
+
+Una mayor varianza implica un clima más **irregular e impredecible**: los días de 
+temperatura moderada son menos frecuentes, y tanto los días de frío extremo como los 
+de calor extremo son más frecuentes que antes. La curva negra tiene el mismo centro 
+que la gris, pero sus colas son más pesadas — hay más probabilidad de encontrar valores 
+en los extremos.
+```{r}
+#| label: grafico-varianza
+#| code-fold: true
+#| message: false
+#| warning: false
+
+media_ref <- 0;  sd_ref <- 1
+media_new <- 0;  sd_new <- 1.3
+x_min <- -4;     x_max <- 5
+umbral_frio  <- -2.5
+umbral_calor <-  2.5
+
+df_frio <- data.frame(x = x_seq) |>
+  mutate(
+    y_ref = dnorm(x, media_ref, sd_ref),
+    y_new = dnorm(x, media_new, sd_new)
+  ) |>
+  filter(x <= umbral_frio, y_new > y_ref)
+
+df_calor <- data.frame(x = x_seq) |>
+  mutate(
+    y_ref = dnorm(x, media_ref, sd_ref),
+    y_new = dnorm(x, media_new, sd_new)
+  ) |>
+  filter(x >= umbral_calor, y_new > y_ref)
+
+ggplot(data.frame(x = c(x_min, x_max)), aes(x)) +
+  geom_ribbon(data = df_frio,
+              aes(x = x, ymin = y_ref, ymax = y_new),
+              fill = col_frio, alpha = 0.6) +
+  geom_ribbon(data = df_calor,
+              aes(x = x, ymin = y_ref, ymax = y_new),
+              fill = col_calor, alpha = 0.8) +
+  stat_function(fun = dnorm, args = list(media_ref, sd_ref),
+                colour = col_curva_ref, linewidth = 1.2) +
+  stat_function(fun = dnorm, args = list(media_new, sd_new),
+                colour = col_curva_new, linewidth = 1.4) +
+  geom_vline(xintercept = media_ref, colour = col_curva_ref,
+             linetype = "dashed", linewidth = 0.6) +
+  annotate("segment",
+           x = -0.1, xend = -0.9,
+           y = dnorm(0, 0, 1) * 0.3,
+           yend = dnorm(0, 0, 1) * 0.3,
+           colour = "darkblue", linewidth = 1,
+           arrow = arrow(length = unit(0.3, "cm"), type = "open")) +
+  annotate("segment",
+           x = 0.1, xend = 0.9,
+           y = dnorm(0, 0, 1) * 0.3,
+           yend = dnorm(0, 0, 1) * 0.3,
+           colour = "darkblue", linewidth = 1,
+           arrow = arrow(length = unit(0.3, "cm"), type = "open")) +
+  annotate("text", x = umbral_frio - 0.1,
+           y = dnorm(umbral_frio, media_ref, sd_ref) + 0.08,
+           label = "Más frío\nextremo",
+           colour = col_frio, size = 4.5, hjust = 1) +
+  annotate("text", x = 3.8,
+           y = dnorm(umbral_calor, media_ref, sd_ref) + 0.08,
+           label = "Más calor\nextremo",
+           colour = col_calor, size = 4.5, hjust = 0.5) +
+  annotate("text", x = x_min + 0.1, y = -0.012, label = "Frío",
+           colour = col_texto, size = 4, hjust = 0) +
+  annotate("text", x = x_max - 0.1, y = -0.012, label = "Calor",
+           colour = col_texto, size = 4, hjust = 1) +
+  annotate("text", x = media_ref, y = -0.018, label = "Temperatura \nmedia",
+           colour = col_curva_ref, size = 4, hjust = 0.5) +
+  annotate("segment",
+           x = -2.9, xend = -2.7,
+           y = 0.07, yend = 0.04,
+           colour = col_frio, linewidth = 1.1) +
+  annotate("segment",
+           x = 3.6, xend = 3.3,
+           y = 0.07, yend = 0.02,
+           colour = col_calor, linewidth = 1.1) +
+  labs(title = "Aumento de la varianza") +
+  xlim(x_min, x_max) +
+  theme_void() +
+  theme(
+    plot.background  = element_rect(fill = col_fondo, colour = NA),
+    panel.background = element_rect(fill = col_fondo, colour = NA),
+    plot.title = element_text(colour = col_texto, size = 14, face = "bold",
+                              margin = margin(t = 12, l = 12, b = 8)),
+    plot.margin = margin(10, 20, 15, 20),
+    panel.grid.major.y = element_line(colour = "#b8cfe0", linewidth = 0.4)
+  )
+```
+
+## Escenario 3: aumentan la media y la varianza
+
+El tercer escenario combina los dos anteriores y es el más preocupante desde el punto 
+de vista climático: la media sube **y** la distribución se hace más ancha al mismo tiempo.
+
+El efecto sobre la cola fría es ambiguo: el desplazamiento de la media reduce los 
+episodios de frío extremo, pero el aumento de la varianza los incrementa; el resultado 
+neto depende de la magnitud relativa de cada cambio. En la cola caliente, en cambio, 
+los dos efectos se suman: tanto el desplazamiento como el ensanchamiento contribuyen 
+a aumentar la frecuencia e intensidad de los episodios de calor extremo. El resultado 
+es una asimetría clara: **mucho más calor extremo**, con un efecto menos definido sobre 
+el frío.
+
+Este tercer escenario es el que mejor describe lo que los modelos climáticos actuales 
+proyectan para las próximas décadas, según el quinto informe de evaluación del IPCC.
+```{r}
+#| label: grafico-media-varianza
+#| code-fold: true
+#| message: false
+#| warning: false
+
+
+media_ref <- 0;  sd_ref <- 1
+media_new <- 1;  sd_new <- 1.3
+x_min <- -4;     x_max <- 5
+umbral_frio  <- -2.5
+umbral_calor <-  2.5
+
+df_frio <- data.frame(x = x_seq) |>
+  mutate(
+    y_ref = dnorm(x, media_ref, sd_ref),
+    y_new = dnorm(x, media_new, sd_new)
+  ) |>
+  filter(x <= umbral_frio, y_ref > y_new)
+
+df_calor <- data.frame(x = x_seq) |>
+  mutate(
+    y_ref = dnorm(x, media_ref, sd_ref),
+    y_new = dnorm(x, media_new, sd_new)
+  ) |>
+  filter(x >= umbral_calor, y_new > y_ref)
+
+ggplot(data.frame(x = c(x_min, x_max)), aes(x)) +
+  geom_ribbon(data = df_frio,
+              aes(x = x, ymin = y_new, ymax = y_ref),
+              fill = col_frio, alpha = 0.6) +
+  geom_ribbon(data = df_calor,
+              aes(x = x, ymin = y_ref, ymax = y_new),
+              fill = col_calor, alpha = 0.8) +
+  stat_function(fun = dnorm, args = list(media_ref, sd_ref),
+                colour = col_curva_ref, linewidth = 1.2) +
+  stat_function(fun = dnorm, args = list(media_new, sd_new),
+                colour = col_curva_new, linewidth = 1.4) +
+  geom_vline(xintercept = media_ref, colour = col_curva_ref,
+             linetype = "dashed", linewidth = 0.6) +
+  geom_vline(xintercept = media_new, colour = col_curva_new,
+             linetype = "dashed", linewidth = 0.6) +
+  annotate("segment",
+           x = 0.1, xend = 0.85,
+           y = dnorm(0, 0, 1) * 1.05,
+           yend = dnorm(0, 0, 1) * 1.05,
+           colour = "darkblue", linewidth = 1,
+           arrow = arrow(length = unit(0.3, "cm"), type = "open")) +
+  annotate("segment",
+           x = 0.9, xend = 0.1,
+           y = dnorm(0, 0, 1) * 0.3,
+           yend = dnorm(0, 0, 1) * 0.3,
+           colour = "darkblue", linewidth = 1,
+           arrow = arrow(length = unit(0.3, "cm"), type = "open")) +
+  annotate("segment",
+           x = 1.1, xend = 1.9,
+           y = dnorm(0, 0, 1) * 0.3,
+           yend = dnorm(0, 0, 1) * 0.3,
+           colour = "darkblue", linewidth = 1,
+           arrow = arrow(length = unit(0.3, "cm"), type = "open")) +
+  annotate("text", x = umbral_frio - 0.1,
+           y = dnorm(umbral_frio, media_ref, sd_ref) + 0.08,
+           label = "Mucho menos\nfrío extremo",
+           colour = col_frio, size = 4.5, hjust = 1) +
+  annotate("text", x = 4,
+           y = dnorm(umbral_calor, media_ref, sd_ref) + 0.09,
+           label = "Mucho más calor\nextremo",
+           colour = col_calor, size = 4.5, hjust = 0.5) +
+  annotate("text", x = x_min + 0.1, y = -0.012, label = "Frío",
+           colour = col_texto, size = 4, hjust = 0) +
+  annotate("text", x = x_max - 0.1, y = -0.012, label = "Calor",
+           colour = col_texto, size = 4, hjust = 1) +
+  annotate("text", x = media_ref, y = -0.018, label = "Temperatura \nmedia",
+           colour = col_curva_ref, size = 4, hjust = 0.5) +
+  annotate("segment",
+           x = -2.9, xend = -2.7,
+           y = 0.07, yend = 0.02,
+           colour = col_frio, linewidth = 1.1) +
+  annotate("segment",
+           x = 3.9, xend = 3.7,
+           y = 0.08, yend = 0.05,
+           colour = col_calor, linewidth = 1.1) +
+  labs(title = "Aumento de la media y de la varianza") +
+  xlim(x_min, x_max) +
+  theme_void() +
+  theme(
+    plot.background  = element_rect(fill = col_fondo, colour = NA),
+    panel.background = element_rect(fill = col_fondo, colour = NA),
+    plot.title = element_text(colour = col_texto, size = 14, face = "bold",
+                              margin = margin(t = 12, l = 12, b = 8)),
+    plot.margin = margin(10, 20, 15, 20),
+    panel.grid.major.y = element_line(colour = "#b8cfe0", linewidth = 0.4)
+  )
+```
+
+## La estadística detrás del titular
+
+La próxima vez que leas que "las olas de calor son cada vez más frecuentes e intensas", 
+recuerda estos tres gráficos. No es solo que haga más calor en promedio — es que la 
+distribución completa se ha desplazado y ensanchado, y en las colas de una distribución 
+normal los cambios se amplifican. Un aumento de un grado en la media puede duplicar 
+o triplicar la frecuencia de los eventos que antes considerábamos excepcionales.
+
+Entender la media y la varianza no es solo un ejercicio académico: es la clave para 
+leer correctamente las noticias sobre el clima.
+
+## Referencias
+
+IPCC. *Climate Change 2013: The Physical Science Basis. Contribution of Working Group I to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change*. 
+Stocker TF, Qin D, Plattner G-K, et al., eds. Cambridge University Press; 2013.
+
+The Economist. Extreme weather events are getting more frequent. *The Economist*. February 8, 2023. https://www.economist.com/science-and-technology/2023/02/08/extreme-weather-events-are-getting-more-frequent

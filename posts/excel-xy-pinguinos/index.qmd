@@ -90,7 +90,7 @@ Sin embargo, el dataset `pinguinos.csv` tiene una diferencia con respecto al dat
 
 ![](excel-powerpivot-3.png)
 
-Esta es la fórmula corregida: `=IF(ISBLANK(Tabla1[bill_length_mm]);BLANK();Tabla1[bill_depth_mm]+CALCULATE(RAND()/100))` que devuelve un valor en blanco cuando el valor original es un valor en blanco.
+Esta es la fórmula corregida: `=IF(ISBLANK(Tabla1[bill_length_mm]);BLANK();Tabla1[bill_length_mm]+CALCULATE(RAND()/100))` que devuelve un valor en blanco cuando el valor original es un valor en blanco.
 
 Una vez introducidas las fórmulas para las dos nuevas columnas, insertamos una nueva tabla dinámica ***desde Power Pivot*** en una nueva hoja de cálculo. De esta forma, la nueva tabla dinámica toma como tabla de datos el modelo que acabamos de crear.
 

@@ -22,7 +22,7 @@ En Excel, introducimos en la columna A una secuencia entre -4 y +4, con un incre
 
 ![](excel-norm-1.png)
 
-A continuación, colocamos en la columna B nuestros valores de media y varianza (en este caso empezaremos con una normal de media 0 y desv t 1), y, a la derecha de la serie de valores de intervalos del eje X que hemos introducido, añadimos una fórmula que nos calcula el valor X como media + n veces la desv t
+A continuación, colocamos en la columna B nuestros valores de media y desviación típica (en este caso empezaremos con una normal de media 0 y desv t 1), y, a la derecha de la serie de valores de intervalos del eje X que hemos introducido, añadimos una fórmula que nos calcula el valor X como media + n veces la desv t
 
 ::: {layout-ncol="2"}
 ![](excel-norm-3.png)
