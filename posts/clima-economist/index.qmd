@@ -4,7 +4,7 @@ subtitle: "Por qué un pequeño cambio en la media tiene grandes consecuencias"
 author: "Juan Riera"
 date: "2026-04-06"
 categories: [estadística, clima, código R]
-image: "grafico-media.png"
+image: "grafico-media-varianza.png"
 draft: false
 code-fold: true
 code-summary: "Mostrar código R"
