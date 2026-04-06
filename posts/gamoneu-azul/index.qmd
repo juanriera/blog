@@ -1,5 +1,5 @@
 ---
-title: "El Gamonéu es un queso azul"
+title: "El Gamonéu, un queso azul"
 subtitle: "Argumentación histórica, geográfica, tecnológica y bioquímica"
 author: "Juan Riera"
 date: 2026-03-25
