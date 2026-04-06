@@ -8,8 +8,8 @@ image: "grafico-media-varianza.png"
 draft: false
 code-fold: true
 code-summary: "Mostrar código R"
-execute:
-  freeze: true
+#execute:
+#  freeze: true
 ---
 
 ## ¿Qué tiene que ver la estadística con el clima?
