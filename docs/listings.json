@@ -3,8 +3,10 @@
     "listing": "/index.html",
     "items": [
       "/posts/clima-economist/index.html",
+      "/posts/frecuencia-probabilidad/index.html",
       "/posts/excel-normal/index.html",
       "/posts/excel-xy-pinguinos/index.html",
+      "/posts/camembert/index.html",
       "/posts/excel-xy/index.html",
       "/posts/tabla-frec/index.html",
       "/posts/tabla-frec-excel/index.html"

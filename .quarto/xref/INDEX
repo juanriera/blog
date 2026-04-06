@@ -37,5 +37,11 @@
   },
   "prueba_julia.qmd": {
     "prueba_julia.html": "a661d0c6"
+  },
+  "posts/frrecuencia-probabilidad/index.qmd": {
+    "index.html": "c52d84dc"
+  },
+  "posts/frecuencia-probabilidad/index.qmd": {
+    "index.html": "6bee6780"
   }
 }
