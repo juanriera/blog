@@ -14,7 +14,19 @@ execute:
 
 ## Resumen {.unnumbered}
 
-El queso Gamonéu (DOP), elaborado en los concejos asturianos de Cangas de Onís y Onís, se define en su pliego de condiciones como «**queso graso, madurado**, de corteza natural, elaborado con leche cruda de vaca, oveja y cabra, o con mezclas de dos o de los tres tipos de leche indicados, **ligeramente ahumado** y con **leves afloraciones verde-azuladas de Penicillium cerca de los bordes**»[^1]. Este artículo argumenta que dicha clasificación es tecnológicamente incorrecta y culturalmente empobrecedora: el Gamonéu **es un queso azul** con la particularidad añadida del ahumado, no un queso ahumado que casualmente presenta *Penicillium*. El argumento se desarrolla a través de cinco pilares convergentes: (1) el sustrato geológico calizo compartido con el Cabrales, el Picón Bejes-Tresviso y el azul de Valdeón, que determina las condiciones microbiológicas de la zona; (2) la hipótesis del origen común a partir de una práctica quesera ancestral de montaña en el macizo de los Picos de Europa; (3) el papel original del ahumado como técnica de conservación pasiva —no como factor diferenciador deliberado— y su evolución moderna hacia el ahumado forzado en ahumaderos, con el efecto paradójico de dificultar la penetración del azul; (4) el mecanismo bioquímico de la maduración en los quesos azules, en el que la proteólisis y la lipólisis son procesos internos conducidos por *P. roqueforti* en el interior de la pasta, no por el moho superficial de cueva; y (5) el paralelo con el Bleu de Termignon (Alpes franceses), queso azul de contaminación espontánea sin inoculación, funcionalmente equivalente al Gamonéu. Se concluye que reconocer el azul como rasgo identitario del Gamonéu, en lugar de tolerarlo como defecto menor, no requiere ningún cambio en la tecnología de elaboración, y que la capa de brea generada por el ahumado excesivo es, irónicamente, un obstáculo real al desarrollo del azul que define al queso.
+El queso Gamonéu (DOP), elaborado en los concejos asturianos de Cangas de Onís y Onís, se define en su pliego de condiciones como «**queso graso, madurado**, de corteza natural, elaborado con leche cruda de vaca, oveja y cabra, o con mezclas de dos o de los tres tipos de leche indicados, **ligeramente ahumado** y con **leves afloraciones verde-azuladas de Penicillium cerca de los bordes**»[^1].
+
+Este artículo argumenta que dicha clasificación es tecnológicamente incorrecta y culturalmente empobrecedora: el Gamonéu **es un queso azul** con la particularidad añadida del ahumado, no un queso ahumado que casualmente presenta *Penicillium*. 
+
+El argumento se desarrolla a través de cinco pilares convergentes: 
+
+1. El sustrato geológico calizo compartido con el Cabrales, el Picón Bejes-Tresviso y el azul de Valdeón, que determina las condiciones microbiológicas de la zona; 
+2. La hipótesis del origen común a partir de una práctica quesera ancestral de montaña en el macizo de los Picos de Europa; 
+3. El papel original del ahumado como técnica de conservación pasiva —no como factor diferenciador deliberado— y su evolución moderna hacia el ahumado forzado en ahumaderos, con el efecto paradójico de dificultar la penetración del azul; 
+4. El mecanismo bioquímico de la maduración en los quesos azules, en el que la proteólisis y la lipólisis son procesos internos conducidos por *P. roqueforti* en el interior de la pasta, no por el moho superficial de cueva; y 
+5. El paralelo con el Bleu de Termignon (Alpes franceses), queso azul de contaminación espontánea sin inoculación, funcionalmente equivalente al Gamonéu. 
+
+Se concluye que reconocer el azul como rasgo identitario del Gamonéu, en lugar de tolerarlo como defecto menor, no requiere ningún cambio en la tecnología de elaboración, y que la capa de brea generada por el ahumado excesivo es, irónicamente, un obstáculo real al desarrollo del azul que define al queso.
 
 **Palabras clave:** Gamonéu, queso azul, *Penicillium roqueforti*, Picos de Europa, ahumado, maduración, proteólisis, lipólisis, Bleu de Termignon, DOP.
 
