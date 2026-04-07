@@ -1,0 +1,270 @@
+---
+title: "Velocidad de acidificación, desmineralización y textura del queso"
+subtitle: "Interpretación tecnológica del parámetro *r* del modelo de Gompertz"
+date: 2026-04-10
+categories: [queso]
+image: "linkedin-curvas-pH"
+draft: true
+execute:
+  freeze: true
+lang: es
+# original: nota_acidificacion_textura_v2.qmd
+---
+
+## El mecanismo de desmineralización durante la acidificación
+
+Durante la elaboración del queso, el descenso de pH provocado por los fermentos lácticos desencadena la solubilización del calcio coloidal asociado a las micelas de caseína. El fosfato cálcico coloidal (CCP, del inglés *colloidal calcium phosphate*) actúa como agente cementante que mantiene unidas las subunidades de la micela y confiere rigidez a la red proteica. Su solubilización progresiva a medida que baja el pH debilita esa red y permite la contracción del gel, el desuerado y la formación de la textura final del queso.
+
+Este proceso no es instantáneo: es un proceso de equilibrio químico que depende tanto del pH alcanzado como del tiempo de permanencia a cada valor de pH. Una cuajada que permanece más tiempo a pH 5,8 habrá solubilizado más calcio que una que atraviesa ese mismo pH en pocos minutos para llegar al mismo pH final.
+
+::: callout-important
+## Principio fundamental
+
+La desmineralización no depende solo del pH final (K en el modelo de Gompertz) sino de la historia completa de la curva de acidificación. Dos cuajadas que llegan al mismo pH final pero con velocidades de caída distintas pueden tener contenidos de calcio insoluble muy diferentes, y por tanto texturas muy distintas.
+:::
+
+------------------------------------------------------------------------
+
+## El papel del parámetro *r* de Gompertz
+
+En el modelo de Gompertz invertido para la acidificación del queso:
+
+$$\text{pH}(t) = K + (A - K) \cdot \exp\!\bigl(-\exp(r \cdot (t - t_0))\bigr)$$
+
+el parámetro **r** (curvatura, en h⁻¹) controla la brusquedad de la transición entre el pH inicial A y el pH final K. Un valor alto de r produce una caída corta y pronunciada; un valor bajo produce una transición larga y gradual. En ambos casos el pH de partida (A) y el pH final (K) son idénticos — solo cambia la velocidad a la que se recorre ese trayecto.
+
+### r alto: acidificación rápida y desmineralización incompleta
+
+Cuando r es alto, la cuajada atraviesa cada pH intermedio muy rápidamente. El equilibrio de solubilización del calcio no tiene tiempo de completarse en cada punto antes de que el pH haya bajado más. Al llegar a K, una proporción mayor de calcio permanece en forma insoluble asociado a la caseína. Las consecuencias sobre la textura son:
+
+-   **Mayor calcio insoluble en la cuajada:** los puentes de calcio entre grupos fosfoserina de las caseínas mantienen la red proteica más rígida y menos contráctil.
+-   **Menor contracción del gel:** la cuajada no se desuera con la misma facilidad bajo prensa, reteniendo más humedad.
+-   **Textura más elástica o gomosa:** más calcio asociado a la caseína implica más interacciones entre micelas, lo que se traduce en mayor elasticidad y resistencia a la deformación.
+-   **Menor fundibilidad:** el calcio insoluble forma entrecruzamientos que dificultan la fusión y el flujo de la caseína al calentar el queso.
+
+### r bajo: acidificación lenta y desmineralización más completa
+
+Con r bajo, la cuajada permanece más tiempo a cada pH intermedio durante el descenso. El equilibrio de solubilización del calcio avanza más en cada etapa antes de que el pH continúe bajando. Al llegar al mismo K, la desmineralización es más completa y menos calcio queda asociado a la caseína. Las consecuencias son las opuestas:
+
+-   **Menor calcio insoluble:** menos puentes entre caseínas, red proteica más hidratable y contráctil.
+-   **Mejor contracción del gel y desuerado:** la cuajada se compacta más eficientemente bajo prensa.
+-   **Textura más abierta y quebradiza en maduración:** menos calcio insoluble implica menos cohesión entre partículas de cuajada.
+-   **Mayor fundibilidad:** con menos entrecruzamientos de calcio, la caseína se hidrata y fluye más fácilmente al calentar.
+
+::: callout-note
+## Intuición correcta, explicación invertida
+
+Es habitual pensar que «una acidificación más rápida produce más desmineralización y por tanto más elasticidad». La observación es correcta — r alto sí produce textura más elástica y gomosa — pero la causa es la contraria: precisamente porque la acidificación rápida deja la desmineralización incompleta, se retiene más calcio en la cuajada, y ese calcio adicional es el que confiere la textura elástica o gomosa.
+:::
+
+------------------------------------------------------------------------
+
+## Implicaciones por tipo de queso
+
+### Pasta prensada
+
+En los quesos de pasta prensada (K ∈ \[5,2–5,4\]) el prensado mecánico ocurre cuando el pH está en la zona de caída activa o recién estabilizado. La eficacia del prensado depende crucialmente del estado de desmineralización en ese momento.
+
+Con **r alto**: la cuajada llega al prensado con más calcio insoluble para el mismo pH. La red proteica es más rígida, resiste la compresión mecánica, y el desuerado es menos eficiente. El queso resultante tiene mayor humedad residual, textura más cerrada y elástica, y menor aptitud para la maduración proteolítica.
+
+Con **r bajo**: la cuajada llega al prensado más desmineralizada para el mismo pH. El gel es más plástico, el desuerado bajo prensa es más eficiente, y el queso resulta con menor humedad, textura más abierta y mayor aptitud para la maduración enzimática.
+
+### Pasta blanda
+
+En los quesos de pasta blanda (K ∈ \[4,6–4,9\]) no hay prensado mecánico — la textura depende casi exclusivamente del estado de la red de caseína en el momento del moldeo. Por eso el efecto de r sobre la textura es aún más pronunciado en este tipo de queso.
+
+Con **r alto**: el queso entra en el molde con una caseína poco desmineralizada para su pH. La pasta tiene textura más firme, menos fundente, con tendencia a la textura elástica o gomosa.
+
+Con **r bajo**: la desmineralización es más completa al llegar al pH objetivo. La pasta tiene más tendencia a la textura cremosa y fundente típica de los quesos de pasta blanda de calidad.
+
+::: callout-tip
+## Implicación para el control de proceso
+
+Dado que K (pH final) determina el tipo de acidificación y r determina la textura para el mismo K, en la práctica industrial el quesero controla K a través de la dosis y el tipo de fermento, y puede modular r a través de la temperatura de cuba. Como demuestran las curvas de referencia Danisco, la temperatura tiene un efecto significativo sobre r y t₀ con escasa influencia sobre K (al menos en la cepa MA). Esto abre la posibilidad de ajustar la textura sin cambiar el pH objetivo.
+:::
+
+------------------------------------------------------------------------
+
+## El queso azul: acidificación láctica y maduración por moho
+
+### La curva de acidificación se modela igual que en otros tipos
+
+En el queso azul, la acidificación láctica es perfectamente modelable con el mismo modelo de Gompertz. Las bacterias lácticas mesófilas (*Lactococcus lactis* y *Leuconostoc* spp.) llevan el pH de la cuajada a un rango de 4,6–4,9 al día siguiente de la fabricación — este es el K del modelo, y representa el final del proceso de elaboración, no del ciclo de pH del producto.
+
+Lo que ocurre después — el remonte del pH hasta valores superiores a 6,0 durante la maduración, consecuencia de la degradación del ácido láctico por *Penicillium roqueforti* — es un proceso completamente independiente, con sus propios actores y su propia cinética. No interfiere con el ajuste del modelo de Gompertz ni lo invalida: simplemente no forma parte del proceso que el modelo describe.
+
+### Rangos de K y comparación entre tipos
+
+El parámetro K varía de forma significativa entre los tres tipos principales:
+
+| Tipo de queso | Rango de K | Observaciones |
+|------------------------|------------------------|------------------------|
+| Pasta prensada | 5,2–5,4 | Acidificación moderada; mayor Ca insoluble; apta para maduración larga |
+| Pasta blanda | 4,6–4,9 | Acidificación intensa; mayor desmineralización; textura cremosa |
+| Queso azul | 4,6–4,9 | Final de la fase láctica; inicio de la maduración por moho |
+
+Pasta blanda y queso azul comparten un rango de K similar (4,6–4,9) y también comparten una dinámica posterior: en ambos casos la acidificación láctica es solo la primera fase de un ciclo de pH más complejo, en el que la actividad de hongos y flora de maduración eleva el pH durante la maduración. La diferencia está en los actores microbianos y en cómo se distribuyen dentro del queso: en el azul el remonte ocurre desde el interior por acción del *Penicillium roqueforti* a través de los canales aireados; en la pasta blanda con corteza enmohecida ocurre desde la superficie hacia el centro por acción de *P. camemberti*, levaduras y flora bacteriana superficial.
+
+### El papel de r en el queso azul
+
+El razonamiento sobre r y desmineralización es válido en el queso azul — r alto produce más calcio retenido y textura más elástica, r bajo favorece una cuajada más abierta — pero su importancia es secundaria respecto a otros factores tecnológicos que determinan la textura en este tipo de queso.
+
+La textura abierta necesaria para el crecimiento del moho en el interior se consigue principalmente mediante tres mecanismos deliberados:
+
+-   **Corte de la cuajada en trozos grandes**, que deja huecos entre partículas al moldear.
+-   **Ausencia de prensado intenso**, que preserva la porosidad de la masa.
+-   **Uso de cepas heterofermentativas** (*Leuconostoc* spp.), que producen CO₂ durante la fermentación, creando cavidades adicionales dentro de la cuajada.
+
+En ese contexto, r influye sobre la textura de base de la cuajada antes del moldeo, pero los factores mecánicos y microbiológicos anteriores son los que determinan de forma más directa la porosidad disponible para el moho.
+
+::: callout-note
+## El queso azul y el modelo de Gompertz
+
+El modelo describe correctamente la fase de acidificación láctica del queso azul, igual que en cualquier otro tipo. La particularidad del azul no es que la curva tenga una forma diferente, sino que K está restringido tecnológicamente a un rango estrecho (4,6–4,9) para no inhibir el *Penicillium roqueforti*, y que ese K es el punto de inicio de la maduración, no el estado final del producto.
+:::
+
+------------------------------------------------------------------------
+
+## Factores para el buen desarrollo del *Penicillium roqueforti* y palancas de modificación de textura
+
+### Condiciones necesarias para el *Penicillium roqueforti*
+
+El desarrollo correcto del moho dentro del queso azul requiere que se cumplan simultáneamente varias condiciones durante la maduración:
+
+-   **pH de partida adecuado (K ≈ 4,6–4,9):** un pH demasiado bajo inhibiría el crecimiento del moho; demasiado alto comprometería la inocuidad y la competencia con flora no deseada.
+-   **Disponibilidad de oxígeno en el interior:** el *Penicillium roqueforti* es aerobio estricto. Solo puede crecer en las cavidades aireadas tras el picado del queso (*needling*). Sin canales de aire, el moho no prospera en el interior.
+-   **Temperatura de cámara de 8–12 °C:** rango óptimo para el crecimiento del moho y para la actividad de sus lipasas y proteasas. Temperaturas más altas aceleran el proceso pero pueden producir perfiles de sabor desequilibrados.
+-   **Humedad relativa del 85–95 %:** necesaria para evitar la desecación superficial y mantener la actividad metabólica del moho.
+-   **Estructura abierta de la cuajada:** el moho crece en la interfase cuajada–aire. Cuanto mayor sea la superficie de contacto interna (mayor porosidad), mayor será el desarrollo del azul.
+-   **Ausencia de inhibidores:** el *P. roqueforti* es sensible a bacteriocinas producidas por algunas cepas de bacterias lácticas, así como a fungicidas. La flora natural de la leche cruda puede favorecer o inhibir su desarrollo según su composición.
+
+### Palancas de modificación de textura
+
+A la luz del análisis de los parámetros de Gompertz y de los mecanismos discutidos, las palancas de acción sobre la textura pueden ordenarse según el parámetro al que afectan principalmente.
+
+**Palancas sobre K (pH final — grado total de desmineralización):**
+
+-   **Tipo y dosis de fermento:** determinan la intensidad total de la acidificación y el pH final alcanzado. Mayor dosis → K más bajo (más desmineralización, textura más abierta).
+-   **Temperatura de cuba:** influye sobre K en cepas termófilas (efecto pronunciado en TA050) y menos en cepas mesófilas (efecto menor en MA, donde K es prácticamente estable).
+-   **Duración de la fermentación:** más tiempo en cuba o en molde → pH más bajo → K más bajo.
+
+**Palancas sobre r (curvatura — brusquedad de la transición):**
+
+-   **Temperatura de cuba:** es la palanca más directa sobre r. Como muestran las curvas Danisco, la temperatura modifica r y t₀ con escasa influencia sobre K en cepa MA, lo que permite ajustar la textura sin cambiar el pH objetivo.
+-   **Cepa de fermento:** MA presenta r 3–5 veces mayor que TA050 a temperaturas equivalentes. La elección de cepa es la palanca más potente sobre r.
+-   **Mezclas de cepas:** aunque no modelizables directamente con Gompertz, combinar cepas de r distinto permite modular la velocidad de transición. No cuantificable sin datos experimentales de la mezcla.
+
+**Palancas sobre la textura con independencia de r y K:**
+
+-   **Tamaño del corte de la cuajada:** grano fino → mayor desuerado, textura más seca y cerrada; grano grueso → menor desuerado, textura más abierta y húmeda. Es especialmente determinante en queso azul.
+-   **Intensidad del prensado:** en pasta prensada, mayor presión compensa un r alto, forzando el desuerado que la desmineralización incompleta no facilita espontáneamente.
+-   **Temperatura de prensado:** temperaturas más altas durante el prensado favorecen la contracción de la cuajada y el desuerado, con efecto sobre la humedad final y por tanto sobre la textura.
+-   **Salado:** el salado ralentiza la actividad de los fermentos, actuando como freno sobre la postacidificación. En queso azul el salado en seco favorece además la formación de la corteza y regula la humedad superficial.
+
+::: callout-tip
+## Resumen de palancas
+
+-   Para modificar **K** (pH final, grado de desmineralización): actuar sobre dosis, tipo de fermento y duración de la fermentación.
+-   Para modificar **r** (velocidad de la transición, textura con K constante): actuar principalmente sobre temperatura de cuba y elección de cepa.
+-   Para modificar la textura **con independencia de la acidificación**: actuar sobre el corte, el prensado y el salado.
+:::
+
+------------------------------------------------------------------------
+
+## Resumen: efecto de r sobre la textura
+
+|   | r alto (acidificación rápida) | r bajo (acidificación lenta) |
+|------------------------|------------------------|------------------------|
+| Desmineralización | Incompleta: más calcio insoluble retenido | Más completa: menos calcio insoluble |
+| Red proteica | Más rígida, más entrecruzada | Más contráctil, más hidratable |
+| Desuerado | Menos eficiente bajo prensa | Más eficiente |
+| Textura final | Elástica, gomosa, cerrada | Abierta, quebradiza, cremosa |
+| Fundibilidad | Menor | Mayor |
+| Pasta prensada | Mayor humedad, textura más cerrada | Menor humedad, textura más abierta |
+| Pasta blanda | Textura más firme, menos cremosa | Textura cremosa y fundente |
+
+------------------------------------------------------------------------
+
+## Conexión con los parámetros del modelo de Gompertz
+
+| Parámetro | Unidades | Implicación tecnológica sobre textura |
+|------------------------|------------------------|------------------------|
+| A | pH | pH de partida. Influye sobre la amplitud A−K y por tanto sobre la magnitud total de la desmineralización posible. |
+| K | pH | pH final estabilizado al término de la acidificación láctica. Determina el grado total de desmineralización alcanzado. Parámetro de clasificación del lote. |
+| r | h⁻¹ | Curvatura de la transición. Determina cuán rápidamente se atraviesa cada pH intermedio. Con A y K iguales, r alto → desmineralización incompleta → textura más elástica; r bajo → desmineralización más completa → textura más abierta. |
+| t₀ | h | Tiempo de inflexión. Indica cuándo ocurre la máxima velocidad de acidificación. Relevante para planificar el momento del moldeo y el prensado. |
+| Vmax | pH/h | Velocidad máxima de descenso del pH en t₀. Combina r y la amplitud A−K. Indicador directo de la intensidad de la acidificación en su momento álgido. |
+
+------------------------------------------------------------------------
+
+## El papel del tiempo: «the journey matters»
+
+La frase del quesero — *the journey matters* — resume perfectamente por qué no es suficiente controlar el pH final. El modelo de Gompertz captura exactamente esa historia: no solo dónde empieza (A) y dónde acaba (K) la curva, sino cómo transcurre ese recorrido (r y t₀).
+
+Dos fabricaciones con idénticos A y K pero con r distintos producirán quesos con texturas diferentes, porque la desmineralización acumulada a lo largo de la curva será distinta. Esto tiene consecuencias directas para el control de calidad:
+
+-   Un pH final correcto **no garantiza** una textura correcta si la velocidad de la acidificación fue inadecuada.
+-   La **temperatura de cuba** modifica r y t₀ sin cambiar necesariamente K. El quesero puede modificar la textura ajustando la temperatura sin cambiar el pH objetivo.
+-   El **análisis de la curva completa** mediante el modelo de Gompertz proporciona más información sobre la textura esperada que el simple registro del pH final.
+
+------------------------------------------------------------------------
+
+## Referencias
+
+Lucey, J.A. & Fox, P.F. (1993). Importance of calcium and phosphate in cheese manufacture: A review. *Journal of Dairy Science*, 76(6), 1714–1724. <https://doi.org/10.3168/jds.S0022-0302(93)77504-9>
+
+Lucey, J.A., Johnson, M.E. & Horne, D.S. (2003). Perspectives on the basis of the rheology and texture properties of cheese. *Journal of Dairy Science*, 86(9), 2725–2743.
+
+Lee, M.R., Johnson, M.E. & Lucey, J.A. (2005). Impact of modifications in acid development on the insoluble calcium content and rheological properties of Cheddar cheese. *Journal of Dairy Science*, 88(11), 3798–3809.
+
+Fox, P.F., Guinee, T.P., Cogan, T.M. & McSweeney, P.L.H. (2017). *Fundamentals of Cheese Science* (2ª ed.). Springer.
+
+López-Díaz, T.M. et al. (2023). Blue Cheeses: Microbiology and Its Role in the Sensory Characteristics. *Dairy*, 4(3), 410–422.
+
+Leroy, F. & De Vuyst, L. (2004). Lactic acid bacteria as functional starter cultures for the food fermentation industry. *Trends in Food Science & Technology*, 15(1), 67–78.
+
+Trmčić, A. et al. (2016). The evolving role of coliforms as indicators of unhygienic processing conditions in dairy foods. *Frontiers in Microbiology*, 7, 1549. <https://doi.org/10.3389/fmicb.2016.01549>
+
+------------------------------------------------------------------------
+
+## El dilema seguridad–textura: acidificación rápida frente a desmineralización eficiente
+
+### La tensión tecnológica
+
+Del análisis anterior se desprende una aparente contradicción: conseguir una buena desmineralización y evitar una textura gomosa requiere un r bajo, es decir, una acidificación lenta y gradual. Sin embargo, uno de los objetivos fundamentales de la acidificación es inhibir el crecimiento de bacterias coliformes y potencialmente patógenas en las fases iniciales de la elaboración. Una acidificación lenta deja más tiempo a esos microorganismos para multiplicarse antes de que el pH los inhiba.
+
+En términos del modelo de Gompertz, el problema se puede formular con precisión: t₀ elevado y r bajo implican que la cuajada permanece a pH \> 6,0 durante más tiempo. Los coliformes crecen bien por encima de pH 5,5 y a temperaturas de cuba de 28–35 °C, condiciones que coinciden exactamente con las fases iniciales de la elaboración de cualquier pasta prensada o blanda.
+
+### Estrategias para resolver la dualidad
+
+La literatura propone esencialmente cuatro líneas de actuación, que son complementarias y se aplican de forma simultánea:
+
+**Higiene de partida como primera barrera**
+
+La más eficaz y más barata. Si la carga inicial de coliformes en la leche es baja (\<10 UFC/ml), la competencia con las bacterias lácticas se resuelve a favor de estas aunque la acidificación sea lenta. Los coliformes necesitan multiplicarse durante varios ciclos antes de poder causar defectos (hinchazón precoz, sabores anómalos); si la carga de partida es muy baja, el pH ya habrá bajado lo suficiente antes de que alcancen concentraciones problemáticas. Esta línea actúa sobre las condiciones de ordeño, limpieza del equipo y calidad microbiológica de la leche — no sobre el proceso de elaboración en sí.
+
+**Cultivos bacteriocinogénicos como adjuntos**
+
+Es la estrategia más desarrollada en la literatura reciente y la que mejor resuelve el dilema de forma directa. Las bacteriocinas son péptidos antimicrobianos producidos por las propias bacterias lácticas que actúan independientemente del pH — inhiben coliformes y patógenos desde el inicio de la fermentación, cuando el pH todavía está alto, sin necesidad de que la acidificación haya avanzado. La combinación de un fermento principal con r bajo (para la textura) más un adjunto bacteriocinogénico (para la seguridad) permite desacoplar las dos funciones que antes debía cumplir la velocidad de acidificación por sí sola.
+
+Esta aproximación está bien documentada para el control de *Listeria monocytogenes* en varios tipos de queso, y hay evidencia de efectividad también frente a coliformes y enterobacterias. La limitación es que la eficacia es fuertemente dependiente de la cepa y del sistema quesero — no todos los cultivos bacteriocinogénicos funcionan igual en todos los contextos.
+
+**Preacidificación de la leche**
+
+Bajar el pH de la leche 0,1–0,2 unidades antes de añadir el fermento principal, ya sea mediante una pequeña cantidad de ácido láctico, GDL (glucono-delta-lactona) o un fermento de arranque rápido que se inactiva térmicamente. Esta intervención ralentiza inmediatamente el crecimiento de coliformes sin comprometer la desmineralización posterior, porque la cuajada seguirá atravesando el rango crítico de pH de forma gradual con el fermento principal de r bajo. La preacidificación actúa sobre A (el pH inicial del modelo de Gompertz), reduciendo ligeramente su valor de partida.
+
+**Control de temperatura como palanca combinada**
+
+Temperaturas de cuba más bajas ralentizan tanto al fermento (r algo menor, t₀ más tardío) como a los coliformes, pero la relación entre temperatura y velocidad de crecimiento favorece a las bacterias lácticas frente a los coliformes en ese rango, porque las BAL están presentes en concentraciones iniciales mucho mayores. No es una solución per se sino un factor modulador que puede reforzar las otras estrategias.
+
+::: callout-important
+## La solución no es una sola barrera
+
+Ninguna de estas estrategias es suficiente por sí sola. La respuesta que propone la literatura es una aproximación de barreras múltiples (*hurdle technology*): higiene de partida + adjuntos bacteriocinogénicos + opcionalmente preacidificación. El resultado es que se puede trabajar con r bajo sin comprometer la seguridad, porque la protección deja de depender exclusivamente de la velocidad de caída del pH y se distribuye entre varias líneas de defensa independientes.
+
+Desde el punto de vista del modelo de Gompertz, esto equivale a decir que r puede optimizarse para la textura sin restricciones de seguridad, siempre que las otras barreras estén en su lugar.
+:::
+
+### Implicación para el diseño experimental del TFG
+
+Si el TFG incluye fabricaciones con fermentos de r distinto (por ejemplo, MA a 32 °C frente a 25 °C, o MA frente a TA050), sería conveniente registrar también recuentos de coliformes en puntos clave — al menos en la leche de partida, a la entrada en salmuera y al final del prensado. Eso permitiría verificar si las diferencias en r tienen consecuencias microbiológicas observables en las condiciones higiénicas reales de la escuela o de la empresa quesera donde se realice la práctica.
