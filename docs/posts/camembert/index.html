@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Gráficos de dispersión multiserie con R – Blog de Juan Riera</title>
+<title>Gráfico de dispersión multiserie anotado con R – Blog de Juan Riera</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Gráficos de dispersión multiserie con R</h1>
+      <h1 class="title">Gráfico de dispersión multiserie anotado con R</h1>
             <p class="subtitle lead">Un ejemplo real de una fabricación de queso Camembert.</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">queso</div>
@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según la época del año en que se elaboró el queso.</p>
+<p>El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según la época del año en que se elaboró el queso. Es un ejemplo de cómo las anotaciones pueden ayudr a la comprensión de los datos representados.</p>
 <p>Los puntos naranjas corresponden a fabricaciones de verano (julio-septiembre) y los azules a fabricaciones de invierno (diciembre-febrero); el resto del año aparece en gris neutro en segundo plano. Las elipses de confianza al 75% permiten visualizar de un vistazo cómo se agrupan ambas temporadas: en verano el elaborador reduce la HFD para facilitar la conservación del queso con temperatura ambiente más alta, reduciendo el riesgo de proteólisis, mientras que en invierno puede subir HFD, permitiendo una textura más blanda y mayor nivel de proteolisis. Las variaciones de pH son consecuencia de las modificaciones de la tecnología.</p>
 <p>Esta variación estacional refleja las diferencias en el manejo de la tecnología, con consecuencias directas sobre la textura y la evolución del queso durante la maduración.</p>
 <p>El script está escrito en R con tidyverse, cowplot y magick. La variable HFD se calcula directamente a partir de los datos de extracto seco total (EST) y materia grasa (MG) registrados en el control de producción, y las imágenes del queso se componen sobre el gráfico como anotaciones visuales para ilustrar el aspecto real de la pasta en cada temporada.</p>

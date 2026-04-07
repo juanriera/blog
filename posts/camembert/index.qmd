@@ -1,5 +1,5 @@
 ---
-title: "Gráficos de dispersión multiserie con R"
+title: "Gráfico de dispersión multiserie anotado con R"
 subtitle: "Un ejemplo real de una fabricación de queso Camembert."
 date: 2023-02-10
 categories: [queso, R]
@@ -12,7 +12,7 @@ execute:
   freeze: false
 ---
 
-El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según la época del año en que se elaboró el queso. 
+El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según la época del año en que se elaboró el queso. Es un ejemplo de cómo las anotaciones pueden ayudr a la comprensión de los datos representados.
 
 Los puntos naranjas corresponden a fabricaciones de verano (julio-septiembre) y los azules a fabricaciones de invierno (diciembre-febrero); el resto del año aparece en gris neutro en segundo plano.
 Las elipses de confianza al 75% permiten visualizar de un vistazo cómo se agrupan ambas temporadas: en verano el elaborador reduce la HFD para  facilitar la conservación del queso con temperatura ambiente más alta, reduciendo el riesgo de proteólisis, mientras que en invierno puede subir HFD, permitiendo una textura más blanda y mayor nivel de proteolisis. Las variaciones de pH son consecuencia de las modificaciones de la tecnología. 
