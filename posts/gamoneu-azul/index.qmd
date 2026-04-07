@@ -1,7 +1,6 @@
 ---
 title: "El Gamonéu, un queso azul"
 subtitle: "Argumentación histórica, geográfica, tecnológica y bioquímica"
-author: "Juan Riera"
 date: 2026-03-25
 categories: [queso]
 image: "imagenes/_DSC5588-2011-10-23-1749.png"

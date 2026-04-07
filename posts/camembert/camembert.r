@@ -1,22 +1,3 @@
----
-title: "Gráficos de dispersión multiserie con R"
-subtitle: "Un ejemplo real de una fabricación de queso Camembert."
-date: 2023-02-10
-categories: [queso, R]
-image: "imagenes/camembert_hfd_ph.png"
-lang: es
-draft: false
-code-fold: true
-code-summary: "Mostrar código"
-execute: 
-  freeze: false
----
-
-
-```{r}
-#| message: false
-#| warning: false
-
 library(tidyverse)
 library(cowplot)
 library(magick)
@@ -94,5 +75,6 @@ ggdraw(p) +
   draw_label("En invierno", x = 0.77, y = 0.56,
              color = "#1B3A6B", fontface = "bold", size = 12)
 
-```
-
+# ggsave("imagenes/camembert_hfd_ph.png",
+#        plot = last_plot(),
+#        width = 10, height = 7, dpi = 300)
