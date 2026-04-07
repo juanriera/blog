@@ -1,8 +1,9 @@
 ---
 title: "Modelizar la curva de acidificación del queso: qué nos dice el pH cuando aprendemos a escucharlo"
-author: "Juan Riera"
-date: today
+date: 2026-04-08
 lang: es
+image: "linkedin-curvas-pH.jpg"
+categories: [queso, estadística, modelos, R]
 bibliography: acidificacion.bib
 format:
   html:
