@@ -12,12 +12,13 @@ execute:
   freeze: false
 ---
 
-El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según la época del año en que se elaboró el queso. Es un ejemplo de cómo las anotaciones pueden ayudr a la comprensión de los datos representados.
+El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según la época del año en que se elaboró el queso. Es un ejemplo de cómo las anotaciones sobre el gráfico pueden ayudar a la comprensión de los datos representados.
 
 Los puntos naranjas corresponden a fabricaciones de verano (julio-septiembre) y los azules a fabricaciones de invierno (diciembre-febrero); el resto del año aparece en gris neutro en segundo plano.
+
 Las elipses de confianza al 75% permiten visualizar de un vistazo cómo se agrupan ambas temporadas: en verano el elaborador reduce la HFD para  facilitar la conservación del queso con temperatura ambiente más alta, reduciendo el riesgo de proteólisis, mientras que en invierno puede subir HFD, permitiendo una textura más blanda y mayor nivel de proteolisis. Las variaciones de pH son consecuencia de las modificaciones de la tecnología. 
 
-Esta variación estacional refleja las diferencias en el manejo de la tecnología, con consecuencias directas sobre la textura y la evolución del queso durante la maduración.
+Esta variación estacional refleja las diferencias en el manejo de la tecnología, con consecuencias directas sobre la textura y la evolución del queso durante la maduración. El elaborador consigue el objetivo de mejorar el comportamiento del queso en el mercado en momentos de más calor, pero a costa de introducir variaciones excesivas en la textura y el pH.
 
 El script está escrito en R con tidyverse, cowplot y magick. La variable HFD se calcula directamente a partir de los datos de extracto seco total (EST) y materia grasa (MG) registrados en el control de producción, y las imágenes del queso se componen sobre el gráfico como anotaciones visuales para ilustrar el aspecto real de la pasta en cada temporada.
 
