@@ -203,6 +203,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p>El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según la época del año en que se elaboró el queso.</p>
+<p>Los puntos naranjas corresponden a fabricaciones de verano (julio-septiembre) y los azules a fabricaciones de invierno (diciembre-febrero); el resto del año aparece en gris neutro en segundo plano. Las elipses de confianza al 75% permiten visualizar de un vistazo cómo se agrupan ambas temporadas: en verano el queso tiende a presentar mayor HFD con pH más bajo, mientras que en invierno el comportamiento se desplaza hacia valores de HFD menores y pH algo más elevado.</p>
+<p>Esta variación estacional refleja las diferencias en la composición de la leche y en la dinámica de acidificación según la época, y tiene consecuencias directas sobre la textura y la evolución del queso durante la maduración.</p>
+<p>El script está escrito en R con tidyverse, cowplot y magick. La variable HFD se calcula directamente a partir de los datos de extracto seco total (EST) y materia grasa (MG) registrados en el control de producción, y las imágenes del queso se componen sobre el gráfico como anotaciones visuales para ilustrar el aspecto real de la pasta en cada temporada.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Mostrar código</summary>
