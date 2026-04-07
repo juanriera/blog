@@ -9,7 +9,7 @@ execute:
 categories:
   - estadística
   - Excel
-  - código R
+  - R
 ---
 
 ## Gráficos de dispersión (*scatter plot*)

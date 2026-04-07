@@ -3,7 +3,7 @@ title: "De la frecuencia a la probabilidad"
 subtitle: "Cómo la distribución normal describe la variabilidad de los datos"
 author: "Juan Riera"
 date: "2026-04-05"
-categories: [estadística, código R]
+categories: [estadística, R]
 image: "histograma-normal.png"
 draft: false
 execute:
@@ -18,13 +18,9 @@ format:
 
 ## ¿Qué es una distribución de frecuencias?
 
-Cuando medimos una variable en un conjunto de muestras — por ejemplo, el extracto seco
-total de una serie de quesos — obtenemos una colección de valores numéricos. El primer
-paso para entender esos datos es organizarlos: ¿cuántas veces aparece cada valor,
-o cada rango de valores? Eso es exactamente lo que hace una **tabla de frecuencias**.
+Cuando medimos una variable en un conjunto de muestras — por ejemplo, el extracto seco total de una serie de quesos — obtenemos una colección de valores numéricos. El primer paso para entender esos datos es organizarlos: ¿cuántas veces aparece cada valor, o cada rango de valores? Eso es exactamente lo que hace una **tabla de frecuencias**.
 
-Vamos a construirla paso a paso usando datos reales de elaboración de queso camembert,
-y veremos cómo esta tabla nos lleva de forma natural al concepto de **probabilidad**.
+Vamos a construirla paso a paso usando datos reales de elaboración de queso camembert, y veremos cómo esta tabla nos lleva de forma natural al concepto de **probabilidad**.
 
 ```{r}
 #| label: setup
@@ -39,8 +35,7 @@ df <- read_csv2("camembert.csv")
 
 ## Paso 1: la tabla de frecuencias absolutas
 
-Agrupamos los valores de extracto seco total (`est`) en intervalos de amplitud 1 y
-contamos cuántas veces aparece cada intervalo. Ese recuento es la **frecuencia absoluta**.
+Agrupamos los valores de extracto seco total (`est`) en intervalos de amplitud 1 y contamos cuántas veces aparece cada intervalo. Ese recuento es la **frecuencia absoluta**.
 
 ```{r}
 #| label: tabla-absoluta
@@ -57,16 +52,11 @@ tabla_frec <- df |>
 tabla_frec
 ```
 
-La tabla nos dice, por ejemplo, cuántas muestras tienen un extracto seco entre 45 y 46 g,
-entre 46 y 47 g, etc. Pero el número absoluto depende del tamaño de la muestra — si
-tuviéramos el doble de muestras, todas las frecuencias se duplicarían. Para comparar
-distribuciones de distinto tamaño necesitamos algo más útil.
+La tabla nos dice, por ejemplo, cuántas muestras tienen un extracto seco entre 45 y 46 g, entre 46 y 47 g, etc. Pero el número absoluto depende del tamaño de la muestra — si tuviéramos el doble de muestras, todas las frecuencias se duplicarían. Para comparar distribuciones de distinto tamaño necesitamos algo más útil.
 
 ## Paso 2: las frecuencias relativas
 
-La **frecuencia relativa** es la proporción de veces que aparece cada intervalo respecto
-al total. Se calcula dividiendo cada frecuencia absoluta entre el número total de
-observaciones. La suma de todas las frecuencias relativas es siempre 1.
+La **frecuencia relativa** es la proporción de veces que aparece cada intervalo respecto al total. Se calcula dividiendo cada frecuencia absoluta entre el número total de observaciones. La suma de todas las frecuencias relativas es siempre 1.
 
 ```{r}
 #| label: tabla-relativa
@@ -79,13 +69,11 @@ tabla_frec <- tabla_frec |>
 tabla_frec
 ```
 
-La frecuencia relativa ya nos da una idea de **proporción**: el intervalo con frecuencia
-relativa 0.28 significa que el 28% de las muestras tienen ese valor de extracto seco.
+La frecuencia relativa ya nos da una idea de **proporción**: el intervalo con frecuencia relativa 0.28 significa que el 28% de las muestras tienen ese valor de extracto seco.
 
 ## Paso 3: el histograma de frecuencias absolutas
 
-El histograma es la representación gráfica de la tabla de frecuencias. Cada barra
-corresponde a un intervalo y su altura representa la frecuencia absoluta.
+El histograma es la representación gráfica de la tabla de frecuencias. Cada barra corresponde a un intervalo y su altura representa la frecuencia absoluta.
 
 ```{r}
 #| label: histograma-absoluto
@@ -103,15 +91,11 @@ df |>
   theme_bw()
 ```
 
-La forma del histograma ya nos sugiere algo: los valores se concentran en el centro
-y se van haciendo menos frecuentes hacia los extremos. Esta forma de campana es muy
-característica y aparece en muchos fenómenos naturales y de producción.
+La forma del histograma ya nos sugiere algo: los valores se concentran en el centro y se van haciendo menos frecuentes hacia los extremos. Esta forma de campana es muy característica y aparece en muchos fenómenos naturales y de producción.
 
 ## Paso 4: el histograma de frecuencias relativas
 
-Si sustituimos las frecuencias absolutas por las relativas, el histograma mantiene
-exactamente la misma forma, pero el eje Y cambia de escala. Ahora cada barra nos
-indica la **proporción** de observaciones en ese intervalo.
+Si sustituimos las frecuencias absolutas por las relativas, el histograma mantiene exactamente la misma forma, pero el eje Y cambia de escala. Ahora cada barra nos indica la **proporción** de observaciones en ese intervalo.
 
 ```{r}
 #| label: histograma-relativo
@@ -131,13 +115,9 @@ df |>
 
 ## Paso 5: la curva normal
 
-La forma de campana del histograma se puede aproximar matemáticamente mediante la
-**distribución normal**, definida por dos parámetros: la **media** — que determina
-dónde se centra la curva — y la **desviación típica** — que determina cuánto se
-dispersan los valores alrededor de la media.
+La forma de campana del histograma se puede aproximar matemáticamente mediante la **distribución normal**, definida por dos parámetros: la **media** — que determina dónde se centra la curva — y la **desviación típica** — que determina cuánto se dispersan los valores alrededor de la media.
 
-Calculamos estos parámetros a partir de nuestros datos y superponemos la curva normal
-al histograma:
+Calculamos estos parámetros a partir de nuestros datos y superponemos la curva normal al histograma:
 
 ```{r}
 #| label: histograma-normal
@@ -163,14 +143,11 @@ df |>
   theme_bw()
 ```
 
-La curva normal es una idealización matemática que describe bien la forma general de
-la distribución. Cuantos más datos tengamos, mejor se ajustará el histograma a la curva.
+La curva normal es una idealización matemática que describe bien la forma general de la distribución. Cuantos más datos tengamos, mejor se ajustará el histograma a la curva.
 
 ## Paso 6: el área bajo la curva es una probabilidad
 
-Antes de usar la curva normal, podemos calcular estas mismas proporciones directamente
-a partir de la tabla de frecuencias relativas que ya tenemos. Para el intervalo entre
-45 y 47 g, sumamos las frecuencias relativas de los intervalos correspondientes:
+Antes de usar la curva normal, podemos calcular estas mismas proporciones directamente a partir de la tabla de frecuencias relativas que ya tenemos. Para el intervalo entre 45 y 47 g, sumamos las frecuencias relativas de los intervalos correspondientes:
 
 ```{r}
 #| label: frec-acumulada
@@ -185,7 +162,7 @@ tabla_frec |>
   knitr::kable()
 ```
 
-y para los valores superiores a 48, 
+y para los valores superiores a 48,
 
 ```{r}
 #| label: frec-acumulada-2
@@ -204,13 +181,7 @@ tabla_frec |>
 
 Este cálculo es exacto para nuestra muestra, pero depende de los datos que tenemos.
 
-La precisión de este cálculo depende de la amplitud de los intervalos que hemos elegido.
-Con intervalos de amplitud 1, cada barra del histograma agrupa todos los valores en un
-rango de un gramo, lo que introduce un error de redondeo en los límites. Si reducimos
-la amplitud — aumentando el número de barras — el histograma se aproxima más a la curva
-continua y los porcentajes calculados desde la tabla se acercan más a los que obtenemos
-con la curva normal. En el límite, cuando la amplitud tiende a cero, el histograma y la
-curva normal coinciden exactamente, y los valores de la frecuencia relativa y la probabilidad también.
+La precisión de este cálculo depende de la amplitud de los intervalos que hemos elegido. Con intervalos de amplitud 1, cada barra del histograma agrupa todos los valores en un rango de un gramo, lo que introduce un error de redondeo en los límites. Si reducimos la amplitud — aumentando el número de barras — el histograma se aproxima más a la curva continua y los porcentajes calculados desde la tabla se acercan más a los que obtenemos con la curva normal. En el límite, cuando la amplitud tiende a cero, el histograma y la curva normal coinciden exactamente, y los valores de la frecuencia relativa y la probabilidad también.
 
 ```{r}
 #| label: histograma-bins30
@@ -260,17 +231,9 @@ tabla_frec_04 |>
   knitr::kable()
 ```
 
-que está muy cerca del valor proporcionado por el área bajo la curva normal, como veremos a continuación. 
+que está muy cerca del valor proporcionado por el área bajo la curva normal, como veremos a continuación.
 
-La curva normal nos permite generalizar: una vez ajustada a nuestros datos — es decir,
-usando la media y la desviación típica de la muestra — podemos calcular la probabilidad
-de cualquier intervalo, incluso para valores que no aparecen en la muestra. Esta
-generalización es válida siempre que la distribución de los datos se aproxime a la
-forma de campana de la curva normal, también llamada **campana de Gauss**. El área
-bajo la curva entre dos valores es exactamente esa probabilidad. Como el área total
-bajo la curva es siempre 1, todas las probabilidades están entre 0 y 1.
-Veamos primero un intervalo concreto: ¿qué proporción de muestras tiene un extracto
-seco entre 45 y 47 g?
+La curva normal nos permite generalizar: una vez ajustada a nuestros datos — es decir, usando la media y la desviación típica de la muestra — podemos calcular la probabilidad de cualquier intervalo, incluso para valores que no aparecen en la muestra. Esta generalización es válida siempre que la distribución de los datos se aproxime a la forma de campana de la curva normal, también llamada **campana de Gauss**. El área bajo la curva entre dos valores es exactamente esa probabilidad. Como el área total bajo la curva es siempre 1, todas las probabilidades están entre 0 y 1. Veamos primero un intervalo concreto: ¿qué proporción de muestras tiene un extracto seco entre 45 y 47 g?
 
 ```{r}
 #| label: area-intervalo
@@ -306,13 +269,9 @@ df |>
 
 ## Paso 7: la cola de la distribución
 
-El segundo caso es especialmente importante: ¿qué probabilidad hay de que una muestra
-tenga un extracto seco **superior a un valor umbral**? Esta pregunta equivale a calcular
-el área bajo la curva a partir de ese umbral — la **cola derecha** de la distribución.
+El segundo caso es especialmente importante: ¿qué probabilidad hay de que una muestra tenga un extracto seco **superior a un valor umbral**? Esta pregunta equivale a calcular el área bajo la curva a partir de ese umbral — la **cola derecha** de la distribución.
 
-Este concepto es exactamente el mismo que usamos para analizar los eventos extremos
-en el post sobre el clima: la probabilidad de un evento extremo de calor es el área
-bajo la cola derecha de la distribución a partir de un umbral determinado.
+Este concepto es exactamente el mismo que usamos para analizar los eventos extremos en el post sobre el clima: la probabilidad de un evento extremo de calor es el área bajo la cola derecha de la distribución a partir de un umbral determinado.
 
 ```{r}
 #| label: area-cola
@@ -351,20 +310,16 @@ ggsave("histograma-normal.png", width = 8, height = 5, dpi = 150)
 
 ## De la frecuencia a la probabilidad
 
-El recorrido que hemos hecho en este post resume la lógica fundamental de la estadística
-descriptiva e inferencial:
+El recorrido que hemos hecho en este post resume la lógica fundamental de la estadística descriptiva e inferencial:
 
-- Las **frecuencias absolutas** nos dicen cuántas veces ocurre algo.
-- Las **frecuencias relativas** nos dicen en qué proporción ocurre.
-- El **histograma** visualiza esa distribución.
-- La **curva normal** la idealiza matemáticamente.
-- El **área bajo la curva** nos da la probabilidad de que un valor caiga en un intervalo.
+-   Las **frecuencias absolutas** nos dicen cuántas veces ocurre algo.
+-   Las **frecuencias relativas** nos dicen en qué proporción ocurre.
+-   El **histograma** visualiza esa distribución.
+-   La **curva normal** la idealiza matemáticamente.
+-   El **área bajo la curva** nos da la probabilidad de que un valor caiga en un intervalo.
 
-En el siguiente post veremos cómo los cambios en la media y la varianza de esta
-distribución tienen consecuencias muy concretas sobre la frecuencia de los eventos
-extremos.
+En el siguiente post veremos cómo los cambios en la media y la varianza de esta distribución tienen consecuencias muy concretas sobre la frecuencia de los eventos extremos.
 
 ## Referencias
 
-Wickham H, Çetinkaya-Rundel M, Grolemund G. *R for Data Science*. 2nd ed. O'Reilly;
-2023. https://r4ds.hadley.nz
+Wickham H, Çetinkaya-Rundel M, Grolemund G. *R for Data Science*. 2nd ed. O'Reilly; 2023. https://r4ds.hadley.nz
