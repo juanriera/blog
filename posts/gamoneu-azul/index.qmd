@@ -15,48 +15,34 @@ execute:
 
 El queso Gamonéu (DOP), elaborado en los concejos asturianos de Cangas de Onís y Onís, se define en su pliego de condiciones como «**queso graso, madurado**, de corteza natural, elaborado con leche cruda de vaca, oveja y cabra, o con mezclas de dos o de los tres tipos de leche indicados, **ligeramente ahumado** y con **leves afloraciones verde-azuladas de Penicillium cerca de los bordes**»[^1].
 
+[^1]: En la definición de el queso Gamonéu he utilizado inicialmente la especificación del pliego de condiciones publicado en la web de su DOP y utilizada en la descripción del producto en ese mismo sitio web. Tras acabar este artículo, he encontrado que este pliego de condiciones tiene una actualización de enero de 2024, publicada por el Ministerio de Agricultura, Pesca y Alimentación, en la que la definición del queso se distancia aún más de la de queso azul:
+
+    > Es un queso graso, madurado, de corteza natural, elaborado con leche cruda de vaca, oveja o cabra, o con mezclas de los dos o de los tres tipos de leche indicados.
+
+    La mención existente originalmente a las "leves afloraciones de azul", antes incluida en la definición del producto, se reduce ahora a unas notas al hablar del color de la pasta, y redactado en una forma que casi parece indicar que estas afloraciones azules serían en todo caso ocasionales:
+
+    > Color: en su interior, blanco o blanco-amarillento, pudiendo aparecer leves afloraciones verde-azuladas en los bordes.
+
+    mientras que se insiste en la predominancia del sabor ahumado:
+
+    > Sabor: predominio suave de humo y un punto ligeramente picante. En boca evoluciona mantecoso, con regusto persistente a frutos secos como la avellana.
+
+    En las referencias incluyo ambas ediciones, que muestran la evolución del criterio de la DOP sobre el queso. La referencia principal es al texto original; dado que el nuevo texto se distancia aún más de la denominación propuesta de queso azul ahumado, el razonamiento utilizado en el artículo sigue siendo válido.
+
 Este artículo argumenta que dicha clasificación es tecnológicamente incorrecta y culturalmente empobrecedora: el Gamonéu **es un queso azul** con la particularidad añadida del ahumado, no un queso ahumado que puede presentar afloraciones de *Penicillium* de forma ocasional.
 
-El argumento se desarrolla a través de cinco pilares convergentes: 
+El argumento se desarrolla a través de cinco pilares convergentes:
 
-1. El sustrato geológico calizo compartido con el Cabrales, el Picón Bejes-Tresviso y el azul de Valdeón, que determina las condiciones microbiológicas de la zona; 
-2. La hipótesis del origen común a partir de una práctica quesera ancestral de montaña en el macizo de los Picos de Europa; 
-3. El papel original del ahumado como técnica de conservación pasiva —no como factor diferenciador deliberado— y su evolución moderna hacia el ahumado forzado en ahumaderos, con el efecto paradójico de dificultar la penetración del azul; 
-4. El mecanismo bioquímico de la maduración en los quesos azules, en el que la proteólisis y la lipólisis son procesos internos conducidos por *P. roqueforti* en el interior de la pasta, no por el moho superficial de cueva; y 
-5. El paralelo con el Bleu de Termignon (Alpes franceses), queso azul de contaminación espontánea sin inoculación, funcionalmente equivalente al Gamonéu. 
+1.  El sustrato geológico calizo compartido con el Cabrales, el Picón Bejes-Tresviso y el azul de Valdeón, que determina las condiciones microbiológicas de la zona;
+2.  La hipótesis del origen común a partir de una práctica quesera ancestral de montaña en el macizo de los Picos de Europa;
+3.  El papel original del ahumado como técnica de conservación pasiva —no como factor diferenciador deliberado— y su evolución moderna hacia el ahumado forzado en ahumaderos, con el efecto paradójico de dificultar la penetración del azul;
+4.  El mecanismo bioquímico de la maduración en los quesos azules, en el que la proteólisis y la lipólisis son procesos internos conducidos por *P. roqueforti* en el interior de la pasta, no por el moho superficial de cueva; y
+5.  El paralelo con el Bleu de Termignon (Alpes franceses), queso azul de contaminación espontánea sin inoculación, funcionalmente equivalente al Gamonéu.
 
 Se concluye que reconocer el azul como rasgo identitario del Gamonéu, en lugar de tolerarlo como defecto menor, no requiere ningún cambio en la tecnología de elaboración, y que la capa de brea generada por el ahumado excesivo es, irónicamente, un obstáculo real al desarrollo del azul que define al queso.
 
 **Palabras clave:** Gamonéu, queso azul, *Penicillium roqueforti*, Picos de Europa, ahumado, maduración, proteólisis, lipólisis, Bleu de Termignon, DOP.
 
-[^1]: En la definición de el queso Gamonéu he utilizado inicialmente la especificación
-    del pliego de condiciones publicado en la web de su DOP y utilizada en la descripción
-    del producto en ese mismo sitio web. Tras acabar este artículo, he encontrado que este
-    pliego de condiciones tiene una actualización de enero de 2024, publicada por el
-    Ministerio de Agricultura, Pesca y Alimentación, en la que la definición del queso se
-    distancia aún más de la de queso azul:
-
-    > Es un queso graso, madurado, de corteza natural, elaborado con leche cruda de vaca,
-    > oveja o cabra, o con mezclas de los dos o de los tres tipos de leche indicados.
-
-    La mención existente originalmente a las "leves afloraciones de azul", antes incluida
-    en la definición del producto, se reduce ahora a unas notas al hablar del color de la 
-    pasta, y redactado en una forma que casi parece indicar que estas afloraciones azules
-    serían en todo caso ocasionales:
-
-    > Color: en su interior, blanco o blanco-amarillento, pudiendo aparecer leves
-    > afloraciones verde-azuladas en los bordes.
-
-    mientras que se insiste en la predominancia del sabor ahumado:
-
-    > Sabor: predominio suave de humo y un punto ligeramente picante. En boca evoluciona
-    > mantecoso, con regusto persistente a frutos secos como la avellana.
-
-    En las referencias incluyo ambas ediciones, que muestran la evolución del criterio de
-    la DOP sobre el queso. La referencia principal es al texto original; dado que el nuevo
-    texto se distancia aún más de la denominación propuesta de queso azul ahumado, el
-    razonamiento utilizado en el artículo sigue siendo válido.
-    
 ## Introducción
 
 La denominación de origen protegida del queso Gamonéu, reconocida por la Unión Europea mediante el Reglamento (CE) 676/2008, describe el producto como «queso graso, madurado, de corteza natural, ligeramente ahumado, con leves afloraciones de *Penicillium* cerca de los bordes» [@dopgamoneu_pliego; @pliego_gamoneu_2024]. La formulación es reveladora por lo que omite: el azul no aparece en el nombre de la denominación, no preside la descripción del producto y queda reducido a un adjetivo menor («leves»). El resultado es que una fracción significativa de los consumidores, distribuidores e incluso técnicos no reconoce el Gamonéu como queso azul, cuando en realidad lo es desde cualquier perspectiva técnica coherente.
@@ -64,7 +50,6 @@ La denominación de origen protegida del queso Gamonéu, reconocida por la Unió
 La pregunta no es trivial. La categorización de un queso determina sus mercados, su precio, su contexto de degustación y su relación con otros productos. Un Gamonéu comprendido como queso azul ahumado se sitúa naturalmente junto al Cabrales, el Picón Bejes-Tresviso y el azul de Valdeón —los otros grandes azules del macizo calizo de los Picos de Europa— como parte de una familia coherente con un origen geográfico y microbiológico común [@lopezdiaz_blue_cheese_2023]. Un Gamonéu comprendido como «queso ahumado que a veces tiene un poco de verde» queda huérfano de familia y privado de su identidad más profunda.
 
 Este artículo construye el argumento con base histórica, geográfica, tecnológica y bioquímica, incorporando los nuevos elementos relativos al papel original del ahumado y al mecanismo interno de maduración de los quesos azules.
-
 
 ## Los azules de los Picos de Europa: una familia geográfica
 
@@ -74,10 +59,10 @@ Los Picos de Europa constituyen el mayor macizo kárstico de la Península Ibér
 
 Este macizo no respeta fronteras administrativas. Las zonas de producción de los cuatro quesos azules protegidos del arco cantábrico —DOP Cabrales, DOP Gamonéu, DOP Picón Bejes-Tresviso y IGP Valdeón— se distribuyen sobre el mismo sustrato geológico, siguiendo los límites del afloramiento calizo:
 
-- **DOP Cabrales**: concejos de Cabrales, Peñamellera Alta y Peñamellera Baja (Asturias) [@pliego_cabrales_2011].
-- **DOP Gamonéu**: concejos de Cangas de Onís y Onís (Asturias) [@pliego_gamoneu_2024].
-- **DOP Picón Bejes-Tresviso**: comarca de Liébana y municipio de Peñarrubia (Cantabria) [@pliego_picon_1996].
-- **IGP Valdeón**: término municipal de Posada de Valdeón (León) [@pliego_valdeon_2004].
+-   **DOP Cabrales**: concejos de Cabrales, Peñamellera Alta y Peñamellera Baja (Asturias) [@pliego_cabrales_2011].
+-   **DOP Gamonéu**: concejos de Cangas de Onís y Onís (Asturias) [@pliego_gamoneu_2024].
+-   **DOP Picón Bejes-Tresviso**: comarca de Liébana y municipio de Peñarrubia (Cantabria) [@pliego_picon_1996].
+-   **IGP Valdeón**: término municipal de Posada de Valdeón (León) [@pliego_valdeon_2004].
 
 ![](imagenes/mapa_concejos.png){#fig-mapa1}
 
@@ -85,9 +70,7 @@ Este macizo no respeta fronteras administrativas. Las zonas de producción de lo
 
 La distribución geográfica de la @fig-mapa1 no es una coincidencia histórica: es la expresión cartográfica de un único fenómeno geológico y microbiológico. En la @fig-mapa2 se ve claramente cómo las cuatro zonas de producción de queso se sitúan en los Picos de Europa. Las cuevas calizas de la zona favorecen especialmente el desarrollo del *Penicillium roqueforti* gracias a su temperatura y humedad naturalmente controladas.
 
-
-
-![Macizo occidental de los Picos de Europa, zona de producción del queso Gamonéu, y cabaña de pastor](imagenes/cabana-paisaje.png)
+![Macizo occidental de los Picos de Europa, zona de producción del queso Gamonéu. A la izquierda, una cabaña de pastor, donde se elabora el queso *Gamoneu del puertu*; a la derecha, el entorno de la montaña caliza y el Lago de La Ercina](imagenes/cabana-paisaje.png)
 
 ### La hipótesis del origen común: un queso ancestral de montaña
 
@@ -99,7 +82,7 @@ La diferenciación posterior entre Cabrales, Gamonéu, Picón y Valdeón es una 
 
 ![Los quesos azules de los Picos de Europa: 1.Cabrales 2.Picón Bejes Tresviso 3.Valdeón 4. Gamonéu](imagenes/4-quesos-picos.png)
 
-## El ahumado: de conservante a signo de identidad 
+## El ahumado: de conservante a signo de identidad
 
 ### El origen del ahumado: proteger el queso durante el secado en las cabañas
 
@@ -115,9 +98,9 @@ Con la profesionalización de la producción quesera y la necesidad de diferenci
 
 En el ahumado intensivo en ahumadero, los compuestos fenólicos del humo forman sobre la corteza una capa densa —coloquialmente llamada «brea»— que actúa como barrera física y química. Esta capa:
 
-1. **Reduce la permeabilidad de la corteza** al intercambio gaseoso, dificultando la entrada del oxígeno necesario para el crecimiento de *P. roqueforti* desde el exterior [@junta_andalucia_pasta_azul_2020].
-2. **Inhibe el crecimiento de mohos superficiales** por sus propiedades antimicrobianas, lo que reduce la contaminación externa de *Penicillium* durante la maduración en cueva.
-3. **Dificulta la penetración** del azul desde los bordes hacia el interior, que es precisamente el mecanismo natural del Gamonéu.
+1.  **Reduce la permeabilidad de la corteza** al intercambio gaseoso, dificultando la entrada del oxígeno necesario para el crecimiento de *P. roqueforti* desde el exterior [@junta_andalucia_pasta_azul_2020].
+2.  **Inhibe el crecimiento de mohos superficiales** por sus propiedades antimicrobianas, lo que reduce la contaminación externa de *Penicillium* durante la maduración en cueva.
+3.  **Dificulta la penetración** del azul desde los bordes hacia el interior, que es precisamente el mecanismo natural del Gamonéu.
 
 El resultado paradójico es que cuanto más se ahúma el Gamonéu en ahumadero —buscando intensificar un rasgo diferenciador— más se obstaculiza el desarrollo del azul que lo define como queso de los Picos de Europa. El ahumado excesivo produce un queso con corteza más llamativa pero con menos azul interior: una inversión del orden natural de prioridades.
 
@@ -151,15 +134,15 @@ En términos más precisos:
 
 Para que *P. roqueforti* realice su función en el interior de la pasta, necesita cinco condiciones simultáneas [@junta_andalucia_pasta_azul_2020]:
 
-1. **Oxígeno**: El *Penicillium* es aerobio estricto. Necesita acceso al oxígeno para crecer y producir las enzimas proteolíticas y lipolíticas. En los azules industriales esto se garantiza mediante perforación sistemática con agujas, lo que a veces ha llevado a los consumidores a hablar de "quesos *inyectados*", en la creencia de que el hongo ha sido introducido en el queso mediante una *inyección*. En el Gamonéu, el oxígeno penetra a través de las grietas naturales de la corteza y los ojos irregulares de la pasta.
+1.  **Oxígeno**: El *Penicillium* es aerobio estricto. Necesita acceso al oxígeno para crecer y producir las enzimas proteolíticas y lipolíticas. En la mayoría de los quesos azules, industriales o artesanales, esto se garantiza mediante perforación con agujas, para crear canales que permitan la entrada al aire. Esto a veces ha llevado a los consumidores a hablar de "quesos *inyectados*", en la creencia de que el hongo ha sido introducido en el queso mediante una *inyección*. En el Gamonéu, como en el Bleu de Termignon, el *Penicillium* llega a la masa del queso durante la elaboración y en mucha menor medida durante la maduración, y el oxígeno penetra a través de las grietas naturales de la corteza y los ojos irregulares de la pasta.
 
-2. **Temperatura**: El crecimiento óptimo de *P. roqueforti* se produce entre 8 y 12 °C, exactamente las condiciones de las cuevas calizas de los Picos de Europa. A temperaturas más altas el crecimiento es más rápido pero la producción enzimática es menos equilibrada.
+2.  **Temperatura**: El crecimiento óptimo de *P. roqueforti* se produce entre 8 y 12 °C, exactamente las condiciones de las cuevas calizas de los Picos de Europa. A temperaturas más altas el crecimiento es más rápido pero la producción enzimática es menos equilibrada.
 
-3. **Actividad de agua y salinidad**: *P. roqueforti* es tolerante a la sal (hasta un 6 % de NaCl), lo que le confiere una ventaja competitiva sobre otros microorganismos que serían inhibidos por la salinidad del queso.
+3.  **Actividad de agua y salinidad**: *P. roqueforti* es tolerante a la sal (hasta un 6 % de NaCl), lo que le confiere una ventaja competitiva sobre otros microorganismos que serían inhibidos por la salinidad del queso.
 
-4. **pH**: El pH del Gamonéu —condicionado por la coagulación ácido-láctica y la actividad de las bacterias lácticas— debe estar en un rango compatible con el crecimiento fúngico. El incremento de pH por el catabolismo de aminoácidos durante la proteólisis es parte del proceso de retroalimentación positiva que mantiene las condiciones óptimas.
+4.  **pH**: El pH del Gamonéu —condicionado por la coagulación ácido-láctica y la actividad de las bacterias lácticas— debe estar en un rango compatible con el crecimiento fúngico. El incremento de pH por el catabolismo de aminoácidos durante la proteólisis es parte del proceso de retroalimentación positiva que mantiene las condiciones óptimas.
 
-5. **Humedad relativa**: *P. roqueforti* requiere una humedad relativa elevada, en torno al 90–95 %, para desarrollarse en el interior de la pasta. La humedad cumple dos funciones simultáneas: mantiene la actividad de agua de la masa del queso en un rango compatible con el crecimiento fúngico ($a_w > 0,92$) y evita la desecación de la corteza, que de otro modo formaría una barrera física impermeable que bloquearía el intercambio gaseoso.
+5.  **Humedad relativa**: *P. roqueforti* requiere una humedad relativa elevada, en torno al 90–95 %, para desarrollarse en el interior de la pasta. La humedad cumple dos funciones simultáneas: mantiene la actividad de agua de la masa del queso en un rango compatible con el crecimiento fúngico ($a_w > 0,92$) y evita la desecación de la corteza, que de otro modo formaría una barrera física impermeable que bloquearía el intercambio gaseoso.
 
 Las cuevas demasiado secas plantean un riesgo específico para el Gamonéu: cuando la humedad relativa cae por debajo del 80 %, la corteza se endurece y se agrieta de forma irregular, lo que paradójicamente puede favorecer entradas puntuales de aire pero inhibe el crecimiento uniforme del moho al reducir su actividad enzimática. Además, aumenta el riesgo de que el queso pueda ser atacado por ácaros que se refugian en estas grietas. El resultado es un azul distribuido de forma errática, concentrado en las grietas y ausente en el resto de la pasta. Este efecto se suma al ya descrito de la capa de brea del ahumado: un Gamonéu elaborado en una cueva seca y ahumado en exceso acumula dos obstáculos independientes al desarrollo del azul, lo que explica en parte la alta variabilidad que se observa entre productores y entre temporadas en la intensidad del veteado azul.
 
@@ -176,7 +159,7 @@ El Bleu de Termignon es un queso azul de producción estacional elaborado en los
 El paralelo con el Gamonéu es punto por punto:
 
 | Característica | Bleu de Termignon | Gamonéu |
-|---|---|---|
+|------------------------|------------------------|------------------------|
 | Origen del *Penicillium* | Espontáneo, ambiental | Espontáneo, ambiental |
 | Inoculación deliberada | No | No |
 | Perforación de la pasta | No sistemática | No |
@@ -190,32 +173,29 @@ Las únicas diferencias sustanciales están en la composición de la leche y en 
 
 La variedad de *Penicillium* empleada para fermentar el Termignon es una tercera variante domesticada que podría introducir variedad genética en las futuras cepas empleadas en los quesos azules, lo que es relevante para la biodiversidad microbiana del sector. La misma observación aplica a las cepas salvajes de *P. roqueforti* del entorno de los Picos de Europa, que no han sido sometidas a selección artificial y representan un patrimonio microbiológico singular. Por esta razón deben tratarse con sumo cuidado las experiencias de aislamiento de cepas naturales para su replicación industrial en laboratorios biotecnológicos externos; en el momento en el que estos microorganismos se producen de manera industrial, dejan precisamente de ser cepas salvajes naturales y reducen su biodiversidad.
 
-::: {#fig-termignon layout-ncol=2}
-
+::: {#fig-termignon layout-ncol="2"}
 ![](imagenes/bleu-termignon-1.jpg){#fig-termignon1}
 
-![](imagenes/bleu-de-termignon-2.jpg){#fig-termignon2 height=6cm}
+![](imagenes/bleu-de-termignon-2.jpg){#fig-termignon2 height="6cm"}
 
 Queso Bleu de Termignon
 :::
 
-::: {#fig-gamoneu layout-ncol=3}
+::: {#fig-gamoneu layout-ncol="3"}
+![](imagenes/queso-gamoneu.jpg){#fig-gamoneu1 height="6cm"}
 
-![](imagenes/queso-gamoneu.jpg){#fig-gamoneu1 height=6cm}
+![](imagenes/quesogamoneu2b.jpg){#fig-gamoneu2 height="6cm"}
 
-![](imagenes/quesogamoneu2b.jpg){#fig-gamoneu2 height=6cm}
-
-![](imagenes/_DSC5588-2011-10-23-1749.png){#fig-gamoneu2 height=6cm}
+![](imagenes/_DSC5588-2011-10-23-1749.png){height="6cm"}
 
 Queso Gamonéu
 :::
-
 
 ## El error del pliego y su corrección implícita
 
 El pliego de condiciones de la DOP Gamonéu describe las afloraciones de *Penicillium* como rasgo secundario con el adjetivo «leves». Esta formulación tuvo probablemente una motivación comercial defensiva: los redactores del pliego temían que piezas con desarrollo azul abundante fueran rechazadas por el mercado de consumidores no habituados, o confundidas con Cabrales de segunda categoría.
 
-El resultado, sin embargo, fue un texto que describe el azul como algo que «se acepta» en lugar de algo que «se busca». Esta distinción semántica ha tenido consecuencias prácticas: algunos productores perciben el azul desarrollado como un defecto de control de calidad, cuando es exactamente lo contrario. De hecho, los quesos de Gamoneu más apreciados tradicionalmente eran los que presentaban *cardenillo*, palabra del vocabulario tradicional para referirse a las vetas azules de  *Penicillium*.
+El resultado, sin embargo, fue un texto que describe el azul como algo que «se acepta» en lugar de algo que «se busca». Esta distinción semántica ha tenido consecuencias prácticas: algunos productores perciben el azul desarrollado como un defecto de control de calidad, cuando es exactamente lo contrario. De hecho, los quesos de Gamoneu más apreciados tradicionalmente eran los que presentaban *cardenillo*, palabra del vocabulario tradicional para referirse a las vetas azules de *Penicillium*.
 
 El propio sitio web de la DOP describe que «la acción de los hongos y las levaduras sobre el queso Gamonéu proporciona a éste su aroma y sabor definitivos» —una formulación que reconoce implícitamente que sin el *Penicillium* no hay Gamonéu. La contradicción entre este reconocimiento implícito y la formulación restrictiva del pliego es el núcleo del problema que señala este artículo.
 
@@ -239,7 +219,7 @@ El Gamonéu es un queso azul. Esta conclusión se sostiene sobre cinco argumento
 
 **5. Normativo**: El propio pliego de condiciones describe afloraciones de *Penicillium* como rasgo definitorio del producto y reconoce que «la acción de los hongos y las levaduras proporciona al queso su aroma y sabor definitivos». La calificación de «leves» para las afloraciones es una descripción de una realidad —el azul es menos extenso que en el Cabrales— no una limitación de su papel como agente de maduración.
 
-El desarrollo de azul en el queso Gamonéu debe ser considerado un factor de calidad: el buen desarrollo de *Penicillium* es esencial en los procesos de desarrollo de sabor y textura. Reconocer el Gamonéu como queso azul ahumado no requiere ningún cambio en la tecnología de elaboración, aunque sería recomendable un cambio en los pliegos de condiciones, sustituyendo «leves afloraciones verde-azuladas cerca de los bordes» por  «afloraciones verde-azuladas cerca de los bordes y en el interior, que habitualmente no sobrepasan el 50% de la masa del queso», evitando que los quesos con un desarrollo moderado de azul se vean penalizados. Requiere también un cambio en el orden de prioridades semánticas: decir que el Gamonéu es un azul que se ahúma, en lugar de un queso ahumado que a veces presenta azul. El queso sería exactamente el mismo. Su comprensión, y su lugar en el patrimonio quesero europeo, radicalmente distintos.
+El desarrollo de azul en el queso Gamonéu debe ser considerado un factor de calidad: el buen desarrollo de *Penicillium* es esencial en los procesos de desarrollo de sabor y textura. Reconocer el Gamonéu como queso azul ahumado no requiere ningún cambio en la tecnología de elaboración, aunque sería recomendable un cambio en los pliegos de condiciones, sustituyendo «leves afloraciones verde-azuladas cerca de los bordes» por «afloraciones verde-azuladas cerca de los bordes y en el interior, que habitualmente no sobrepasan el 50% de la masa del queso», evitando que los quesos con un desarrollo moderado de azul se vean penalizados. Requiere también un cambio en el orden de prioridades semánticas: decir que el Gamonéu es un azul que se ahúma, en lugar de un queso ahumado que a veces presenta azul. El queso sería exactamente el mismo. Su comprensión, y su lugar en el patrimonio quesero europeo, radicalmente distintos.
 
 Por último, cabe señalar que el ahumado moderado —tal como se practicaba originalmente en las cabañas— no solo es compatible con el desarrollo del azul sino que crea un perfil sensorial único en el panorama de los quesos azules europeos: la combinación de notas ahumadas y de metilcetonas producidas por *P. roqueforti* genera una complejidad aromática que ningún otro queso del mundo replica. Proteger esa singularidad pasa, paradójicamente, por no forzar el ahumado hasta el punto de anular la bioquímica que la hace posible.
 
