@@ -147,6 +147,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Este blog nace de un mismo interés visto desde dos ángulos: el queso como objeto de estudio, y los datos como herramienta para entenderlo mejor.</p>
 <p>Encontrarás aquí artículos sobre tecnología quesera y también sobre conceptos diversos más abstractos: qué es el <em>terroir</em>, qué debería proteger una denominación de origen, qué define a un queso. Junto a eso, análisis cuantitativos aplicados a la producción —los mismos que desarrollo en mi libro web o publico en LinkedIn— y ejemplos prácticos de estadística y visualización resueltos en Excel, R o Python, con el código disponible para quien quiera reproducirlos.</p>
 <p>Este blog se complementa con mi libro web sobre <a href="https://juanriera.github.io/master-queseria/">la mejora continua en la industria quesera</a>, elaborado como apoyo al <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-21708">Curso de Especialización de Formación Profesional de Grado Superior en Tecnología y Gestión Quesera</a>, que contribuí a impulsar junto con un equipo interdisciplinar de profesionales y docentes, y que desde 2024 forma parte de la oferta formativa de la Formación Profesional en España.</p>
+<p>Los comentarios están habilitados al pie de cada entrada. Para comentar es necesario tener una cuenta en GitHub, que es gratuita. Los comentarios se gestionan a través de <a href="https://giscus.app/">Giscus</a>.</p>
 <p>El blog se publica utilizando <a href="https://quarto.org/">Quarto</a> y <a href="https://posit.co/products/open-source/rstudio/">RStudio</a>, y está alojado en <a href="https://pages.github.com/">GitHub Pages</a>. En la elaboración de gráficos e imágenes utilizo principalmente <a href="https://www.r-project.org/">R</a>, y también otras herramientas libres como <a href="https://www.python.org/">Python</a>, <a href="https://inkscape.org/">Inkscape</a> y <a href="https://www.gimp.org/">GIMP</a>. En la redacción y revisión de textos puedo utilizar <a href="https://www.claude.ai">Claude</a> (Anthropic).</p>
 
 
@@ -565,6 +566,35 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "juanriera/blog";
+    script.dataset.repoId = "R_kgDOI1wAcQ";
+    script.dataset.category = "Announcements";
+    script.dataset.categoryId = "DIC_kwDOI1wAcc4C6dDb";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "es";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 
 

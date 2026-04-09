@@ -18,12 +18,23 @@ website:
     left:
       - text: "Sobre este blog"
         file: about_blog.qmd
+  comments:
+    giscus:
+      repo: juanriera/blog
+      repo-id: R_kgDOI1wAcQ
+      category: Announcements
+      category-id: DIC_kwDOI1wAcc4C6dDb
+      mapping: pathname
+      reactions-enabled: true
+      loading: lazy
+      theme: light
+      language: es
+      
 format:
   html:
     theme: flatly
     css: styles.css
     
-author-title: AUTOR
 published-title: PUBLICADO
-editor: visual
 lang: es
+
