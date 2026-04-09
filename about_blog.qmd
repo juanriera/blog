@@ -16,6 +16,7 @@ about:
     - icon: mastodon
       text: Mastodon
       href: https://mstdn.social/@juanriera
+comments: false      
 ---
 
 Este blog nace de un mismo interés visto desde dos ángulos: el queso como objeto de estudio, y los datos como herramienta para entenderlo mejor.
@@ -27,4 +28,3 @@ Este blog se complementa con mi libro web sobre [la mejora continua en la indust
 Los comentarios están habilitados al pie de cada entrada. Para comentar es necesario tener una cuenta en GitHub, que es gratuita. Los comentarios se gestionan a través de [Giscus](https://giscus.app/).
 
 El blog se publica utilizando [Quarto](https://quarto.org/) y [RStudio](https://posit.co/products/open-source/rstudio/), y está alojado en [GitHub Pages](https://pages.github.com/). En la elaboración de gráficos e imágenes utilizo principalmente [R](https://www.r-project.org/), y también otras herramientas libres como [Python](https://www.python.org/), [Inkscape](https://inkscape.org/) y [GIMP](https://www.gimp.org/). En la redacción y revisión de textos puedo utilizar [Claude](https://www.claude.ai) (Anthropic).
-

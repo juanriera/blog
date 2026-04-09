@@ -8,6 +8,7 @@ listing:
   sort-ui: false
   filter-ui: false
   fields: [image, date, title, description]
+comments: false
 page-layout: full
 title-block-banner: false
 ---
