@@ -70,7 +70,7 @@ Este macizo no respeta fronteras administrativas. Las zonas de producción de lo
 
 La distribución geográfica de la @fig-mapa1 no es una coincidencia histórica: es la expresión cartográfica de un único fenómeno geológico y microbiológico. En la @fig-mapa2 se ve claramente cómo las cuatro zonas de producción de queso se sitúan en los Picos de Europa. Las cuevas calizas de la zona favorecen especialmente el desarrollo del *Penicillium roqueforti* gracias a su temperatura y humedad naturalmente controladas.
 
-![Macizo occidental de los Picos de Europa, zona de producción del queso Gamonéu. A la izquierda, una cabaña de pastor, donde se elabora el queso *Gamoneu del puertu*; a la derecha, el entorno de la montaña caliza y el Lago de La Ercina](imagenes/cabana-paisaje.png)
+![Macizo occidental de los Picos de Europa, zona de producción del queso Gamonéu. A la izquierda, una cabaña de pastor, donde se elabora el queso *Gamonéu del puertu*; a la derecha, el entorno de la montaña caliza y el Lago de La Ercina](imagenes/cabana-paisaje.png)
 
 ### La hipótesis del origen común: un queso ancestral de montaña
 
@@ -89,6 +89,8 @@ La diferenciación posterior entre Cabrales, Gamonéu, Picón y Valdeón es una 
 El ahumado del Gamonéu no nació como un rasgo diferenciador deliberado. Nació de la necesidad más elemental: conservar el queso en las condiciones de una cabaña de pastor en los puertos de alta montaña durante el verano.
 
 En las majadas de los Picos de Europa, los pastores cocinaban en el interior de las cabañas de piedra sobre fuego de leña —haya, brezo, enebro— sin chimenea o con tiro rudimentario. Los quesos recién elaborados se colocaban en las partes altas de la cabaña, en las tablas denominadas *talameras*, donde el humo era más denso, por una razón práctica: el humo mantenía alejadas las moscas, evitaba que los dípteros depositaran larvas en la corteza húmeda del queso fresco y creaba un ambiente poco propicio para las bacterias de putrefacción superficial. Era, en esencia, una técnica de conservación de supervivencia, no un proceso quesero planificado.
+
+![Enrique Remis, pastor elaborador de Gamonéu del puertu, atendiendo el fuego de su ahumadero](imagenes/_DSC5431-2011-09-24-1595.png){fig-align="center"}
 
 Esta forma de ahumado pasivo —que podríamos llamar ahumado ambiental o ahumado residual— impregnaba levemente la corteza sin crear una barrera impermeable. El queso absorbía los compuestos fenólicos del humo (guaiacol, siringol, eugenol) que le conferían ese aroma suave característico, y la corteza se endurecía ligeramente, pero el interior permanecía permeable al intercambio gaseoso, inicialmente con la cabaña y luego con la cueva.
 

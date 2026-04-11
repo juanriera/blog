@@ -34,7 +34,7 @@ format:
   html:
     theme: flatly
     css: styles.css
-    
+
 published-title: PUBLICADO
 lang: es
 
