@@ -18,6 +18,9 @@ website:
     left:
       - text: "Sobre este blog"
         file: about_blog.qmd
+      - text: "La mejora continua en la producción quesera"
+        href: https://juanriera.github.io/master-queseria/
+
   comments:
     giscus:
       repo: juanriera/blog
