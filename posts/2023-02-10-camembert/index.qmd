@@ -9,7 +9,7 @@ draft: false
 code-fold: true
 code-summary: "Mostrar código"
 execute: 
-  freeze: false
+  freeze: true
 ---
 
 El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según la época del año en que se elaboró el queso. Es un ejemplo de cómo las anotaciones sobre el gráfico pueden ayudar a la comprensión de los datos representados.
