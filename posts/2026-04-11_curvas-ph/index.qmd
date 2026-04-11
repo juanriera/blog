@@ -14,7 +14,7 @@ format:
     theme: flatly
 code-fold: true
 code-summary: "Mostrar código R"
-draft: true
+draft: false
 # qmd original: articulo_linkedin_acidificacion_v2.qmd
 # qmd revisado: index.qmd (reestructuración abril 2026)
 ---

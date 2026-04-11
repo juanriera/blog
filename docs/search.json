@@ -4,7 +4,7 @@
     "href": "posts/2026-04-11_curvas-ph/index.html",
     "title": "Modelizar la curva de acidificación del queso: qué nos dice el pH cuando aprendemos a escucharlo",
     "section": "",
-    "text": "Hay un dato que todo quesero registra y pocos analizan con la profundidad que merece: la curva de descenso del pH durante la elaboración. No es un simple indicador de control — es la firma dinámica del fermento, la huella del proceso, y el mejor predictor de la textura final que tenemos disponible en tiempo real. En este artículo explico cómo modelizar esa curva con tres modelos matemáticos de complejidad creciente, qué información extraemos de sus parámetros, cómo elegir entre ellos según los datos disponibles, y qué ocurre cuando los datos son los que la realidad del aula de FP impone."
+    "text": "Control de las curvas de pH en una planta de elaboración de queso\nHay un dato que todo quesero registra y pocos analizan con la profundidad que merece: la curva de descenso del pH durante la elaboración. No es un simple indicador de control — es la firma dinámica del fermento y la huella del proceso: refleja la actividad real de los microorganismos, y su perfil de descenso determina el grado de desmineralización, que tiene una gran influencia en la textura final. En este artículo explico cómo modelizar esa curva con tres modelos matemáticos de complejidad creciente, qué información extraemos de sus parámetros y cómo elegir entre ellos según los datos disponibles."
   },
   {
     "objectID": "posts/2026-04-11_curvas-ph/index.html#por-qué-la-curva-de-acidificación-importa-más-de-lo-que-parece",
