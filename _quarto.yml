@@ -37,7 +37,7 @@ format:
   html:
     theme: flatly
     css: styles.css
-
+bibliography: referencias.bib
 published-title: PUBLICADO
 lang: es
 
