@@ -11,7 +11,7 @@ format:
     toc-title: "Contenido"
     code-fold: true
     theme: flatly
-draft: false
+draft: true
 # qmd original: articulo_linkedin_acidificacion_v2.qmd
 # qmd revisado: index.qmd (reestructuración abril 2026)
 ---
