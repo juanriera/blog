@@ -1,6 +1,7 @@
 ---
-title: "Modelizar la curva de acidificación del queso: qué nos dice el pH cuando aprendemos a escucharlo"
-date: 2026-04-08
+title: "Modelizar la curva de acidificación del queso"
+subtitle: "Qué nos dice el pH cuando aprendemos a escucharlo"
+date: 2026-04-11
 lang: es
 image: "imagenes/linkedin-curvas-pH.jpg"
 categories: [queso, modelos matemáticos, R]
