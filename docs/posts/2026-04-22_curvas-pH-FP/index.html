@@ -1,0 +1,3120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Modelizar la curva de acidificación en un caso real – Blog de Juan Riera</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-6b423f165eeea3787de40cb4f8e821c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Blog de Juan Riera</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about_blog.html"> 
+<span class="menu-text">Sobre este blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://juanriera.github.io/master-queseria/"> 
+<span class="menu-text">La mejora continua en la producción quesera</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Juan Riera</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/juanriera/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/juanriera/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/juanriera.bsky.social"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://mstdn.social/@juanriera/"> <i class="bi bi-mastodon" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Modelizar la curva de acidificación en un caso real</h1>
+            <p class="subtitle lead">Análisis de datos de elaboración</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">queso</div>
+                <div class="quarto-category">estadística</div>
+                <div class="quarto-category">modelos</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">FP</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">PUBLICADO</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">22 de abril de 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul class="collapse">
+  <li><a href="#práctica-con-datos-reales-elaboraciones-en-formación-profesional" id="toc-práctica-con-datos-reales-elaboraciones-en-formación-profesional" class="nav-link active" data-scroll-target="#práctica-con-datos-reales-elaboraciones-en-formación-profesional">Práctica con datos reales: elaboraciones en Formación Profesional</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="práctica-con-datos-reales-elaboraciones-en-formación-profesional" class="level2">
+<h2 class="anchored" data-anchor-id="práctica-con-datos-reales-elaboraciones-en-formación-profesional">Práctica con datos reales: elaboraciones en Formación Profesional</h2>
+<p>Analizamos en este artículo algunos datos de producción obtenidos durante las prácticas del Curso de Especialización en Tecnología y Gestión Quesera, impartido en el Centro de Formación Profesional Juan de Villanueva (Pola de Siero). Retomamos aquí los conceptos presentados en el artículo anterior sobre la modelización de las curvas de acidificación; puede ser útil revisarlo para comprender los distintos modelos, los criterios que justifican la elección de la curva logística estándar como la más adecuada en este caso y la interpretación de los parámetros que la definen.</p>
+<section id="los-datos-del-aula-abundantes-en-variabilidad-limitados-en-densidad" class="level3">
+<h3 class="anchored" data-anchor-id="los-datos-del-aula-abundantes-en-variabilidad-limitados-en-densidad">Los datos del aula: abundantes en variabilidad, limitados en densidad</h3>
+<p>Las prácticas de elaboración de queso en FP de Industrias Alimentarias generan datos reales de proceso, pero con una estructura muy diferente a los datos de laboratorio industrial. Las medidas de pH se toman de forma manual, en los momentos que la dinámica del aula permite: al inicio antes de añadir los fermentos, en los controles periódicos durante la cuba, y en los puntos críticos del proceso (corte de cuajada, inicio de prensado, entrada en salmuera). El resultado es un conjunto de datos con tres características que condicionan el análisis.</p>
+<p>Veamos los datos originales; para ello inicializamos las bibliotecas que vamos a necesitar y leemoslos datos:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Mostrar código R</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>datos_raw <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"../../datos/curvas_acidificacion.csv"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"ISO-8859-1"</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>datos_raw <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-datos-raw" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-datos-raw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;1: Tabla original de datos
+</figcaption>
+<div aria-describedby="tbl-datos-raw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="doqchowvik" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#doqchowvik table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#doqchowvik thead, #doqchowvik tbody, #doqchowvik tfoot, #doqchowvik tr, #doqchowvik td, #doqchowvik th {
+  border-style: none;
+}
+
+#doqchowvik p {
+  margin: 0;
+  padding: 0;
+}
+
+#doqchowvik .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#doqchowvik .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#doqchowvik .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#doqchowvik .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#doqchowvik .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#doqchowvik .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#doqchowvik .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#doqchowvik .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#doqchowvik .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#doqchowvik .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#doqchowvik .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#doqchowvik .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#doqchowvik .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#doqchowvik .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#doqchowvik .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#doqchowvik .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#doqchowvik .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#doqchowvik .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#doqchowvik .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#doqchowvik .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#doqchowvik .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#doqchowvik .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#doqchowvik .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#doqchowvik .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#doqchowvik .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#doqchowvik .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#doqchowvik .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#doqchowvik .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#doqchowvik .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#doqchowvik .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#doqchowvik .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#doqchowvik .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#doqchowvik .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#doqchowvik .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#doqchowvik .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#doqchowvik .gt_left {
+  text-align: left;
+}
+
+#doqchowvik .gt_center {
+  text-align: center;
+}
+
+#doqchowvik .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#doqchowvik .gt_font_normal {
+  font-weight: normal;
+}
+
+#doqchowvik .gt_font_bold {
+  font-weight: bold;
+}
+
+#doqchowvik .gt_font_italic {
+  font-style: italic;
+}
+
+#doqchowvik .gt_super {
+  font-size: 65%;
+}
+
+#doqchowvik .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#doqchowvik .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#doqchowvik .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#doqchowvik .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#doqchowvik .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#doqchowvik .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#doqchowvik .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#doqchowvik .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#doqchowvik div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="lote" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">lote</th>
+<th id="fecha_fab" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">fecha_fab</th>
+<th id="hora_control" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">hora_control</th>
+<th id="punto_control" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">punto_control</th>
+<th id="pH" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">pH</th>
+<th id="temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">temp</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">21/01/2026 8:40</td>
+<td class="gt_row gt_left" headers="punto_control">fermentos</td>
+<td class="gt_row gt_right" headers="pH">6.83</td>
+<td class="gt_row gt_right" headers="temp">4.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">NA</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">NA</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">21/01/2026 11:30</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.67</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">21/01/2026 12:50</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.60</td>
+<td class="gt_row gt_right" headers="temp">38.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">21/01/2026 14:05</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.05</td>
+<td class="gt_row gt_right" headers="temp">37.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">21/01/2026 15:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">5.80</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">21/01/2026 17:15</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.30</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">22/01/2026 10:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">4.80</td>
+<td class="gt_row gt_right" headers="temp">5.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 8:30</td>
+<td class="gt_row gt_left" headers="punto_control">fermentos</td>
+<td class="gt_row gt_right" headers="pH">6.81</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 11:20</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.80</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 11:42</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.75</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 12:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.66</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 12:20</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.65</td>
+<td class="gt_row gt_right" headers="temp">37.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 14:10</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.30</td>
+<td class="gt_row gt_right" headers="temp">37.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 14:30</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">NA</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 14:40</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">6.25</td>
+<td class="gt_row gt_right" headers="temp">33.4</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 0:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">NA</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 16:50</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">5.80</td>
+<td class="gt_row gt_right" headers="temp">25.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">28/01/2026 18:35</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.40</td>
+<td class="gt_row gt_right" headers="temp">16.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">29/01/2026 10:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.25</td>
+<td class="gt_row gt_right" headers="temp">5.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 8:30</td>
+<td class="gt_row gt_left" headers="punto_control">fermentos</td>
+<td class="gt_row gt_right" headers="pH">6.78</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 10:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.68</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 10:40</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.66</td>
+<td class="gt_row gt_right" headers="temp">32.4</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 11:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.67</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 11:20</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.64</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 13:05</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.51</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 13:30</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.51</td>
+<td class="gt_row gt_right" headers="temp">30.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 13:35</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">6.51</td>
+<td class="gt_row gt_right" headers="temp">30.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 17:40</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">6.02</td>
+<td class="gt_row gt_right" headers="temp">23.6</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 18:30</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">5.93</td>
+<td class="gt_row gt_right" headers="temp">22.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">04/02/2026 19:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.82</td>
+<td class="gt_row gt_right" headers="temp">20.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">05/02/2026 10:20</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.50</td>
+<td class="gt_row gt_right" headers="temp">5.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 9:15</td>
+<td class="gt_row gt_left" headers="punto_control">fermentos</td>
+<td class="gt_row gt_right" headers="pH">6.78</td>
+<td class="gt_row gt_right" headers="temp">27.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 10:05</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.68</td>
+<td class="gt_row gt_right" headers="temp">36.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 10:10</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.75</td>
+<td class="gt_row gt_right" headers="temp">34.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 11:35</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.63</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 12:00</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.60</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 13:45</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">6.48</td>
+<td class="gt_row gt_right" headers="temp">34.5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 15:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">NA</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 17:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">NA</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 19:15</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">5.45</td>
+<td class="gt_row gt_right" headers="temp">26.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">18/01/2026 19:30</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.45</td>
+<td class="gt_row gt_right" headers="temp">26.0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">19/01/2026 10:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.25</td>
+<td class="gt_row gt_right" headers="temp">5.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>La primera característica de los datos es la <strong>densidad baja e irregular</strong>. Los cuatro lotes que vamos a considerar tienen entre 7 y 11 medidas de pH válidas cada uno, pero no distribuidas uniformemente en el tiempo.</p>
+<ul>
+<li>El lote 2 concentra cuatro medidas en un intervalo de apenas una hora (de 2,8 h a 3,8 h desde la inoculación), todas en la zona plana inicial donde el pH todavía no ha caído significativamente, y luego salta directamente a las 5,7 h sin cobertura del tramo de máxima actividad.</li>
+<li>El lote 3 tiene cuatro medidas seguidas entre 1,5 h y 2,8 h, también en la fase plana, y después un hueco de casi dos horas hasta el moldeo a las 4,6 h.</li>
+<li>El lote 4 presenta dos medidas en los primeros 55 minutos que reflejan la inercia térmica de la leche (un descenso desde 6,68 hasta 6,75 seguido de una recuperación, probablemente por calentamiento de la cuba) y luego un único punto en la fase de prensa antes de los 4,5 h. Esta irregularidad refleja posiblemente el hecho de que en el aula se trabaja con varias tareas simultáneas y que los procesos de corte, desuerado y prensado han tenido prioridad operativa sobre la toma de datos analíticos.</li>
+</ul>
+<p>La segunda es la <strong>variabilidad entre lotes</strong>. Los pH iniciales oscilan entre 6,78 y 6,83, lo que sugiere leches con calidad de partida similar. Pero las temperaturas de cuba en el momento de inoculación difieren notablemente: el lote 4 registra 27°C al añadir los fermentos y sube a 36°C en los siguientes 50 minutos, mientras que los lotes 2 y 3 arrancan directamente a 32°C. Esa diferencia de arranque térmico afecta al <span class="math inline">\(t_i\)</span> y hace que la comparación directa de velocidades de acidificación entre lotes requiera interpretación cuidadosa.</p>
+<p>La tercera es la <strong>presencia de datos faltantes estructurales</strong>. El lote 1 tiene una fila de cuba sin hora ni pH, que no aporta información al ajuste, y es eliminada en los cálculos. El lote 2 incluye una fila de prensa con hora registrada como medianoche (00:00) — un error de transcripción evidente que produce un tiempo calculado de −8,5 h y debe excluirse. El lote 4 tiene dos filas de prensa consecutivas sin pH, a las 5,75 h y 7,75 h, que dejan un hueco de 5,5 h sin ninguna medida en la fase de caída activa. En todos los lotes, el seguimiento al día siguiente en cámara (en torno a las 25 h) proporciona un punto en el talón, pero con la temperatura ya reducida a 5°C, lo que dificulta determinar si el pH registrado refleja el final de la acidificación activa o una estabilización por frío.</p>
+</section>
+<section id="ajuste-a-los-cuatro-lotes-de-fabricación" class="level3">
+<h3 class="anchored" data-anchor-id="ajuste-a-los-cuatro-lotes-de-fabricación">Ajuste a los cuatro lotes de fabricación</h3>
+<p>Para calcular los tiempos de acidificación de cada lote, agrupamos por lotes, y calculamos los tiempos de referencia por diferencia entre cada valor y el valor inicial en cada grupo, después de haber eliminado las filas para las que no hay valores. El punto de partida es el primer control, que es el momento en el que se han añadido los fermentos. <code>t_ref</code>es el tiempo de referencia inicial para cada lote, y <code>hora</code> es el tiempo transcurrido desde ese momento hasta cada control, expresado en fraccion decimal de hora.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar código R</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos_raw <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pH), <span class="sc">!</span><span class="fu">is.na</span>(hora_control)) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hora_control =</span> <span class="fu">dmy_hm</span>(hora_control), <span class="at">lote =</span> <span class="fu">factor</span>(lote)) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lote) <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_ref =</span> <span class="fu">min</span>(hora_control[punto_control <span class="sc">==</span> <span class="st">"fermentos"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">hora   =</span> <span class="fu">as.numeric</span>(<span class="fu">difftime</span>(hora_control, t_ref, <span class="at">units =</span> <span class="st">"hours"</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hora <span class="sc">&gt;=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-datos-ed" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-datos-ed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;2: Tabla de datos editados
+</figcaption>
+<div aria-describedby="tbl-datos-ed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="svpacmojez" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#svpacmojez table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#svpacmojez thead, #svpacmojez tbody, #svpacmojez tfoot, #svpacmojez tr, #svpacmojez td, #svpacmojez th {
+  border-style: none;
+}
+
+#svpacmojez p {
+  margin: 0;
+  padding: 0;
+}
+
+#svpacmojez .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#svpacmojez .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#svpacmojez .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#svpacmojez .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#svpacmojez .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#svpacmojez .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#svpacmojez .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#svpacmojez .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#svpacmojez .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#svpacmojez .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#svpacmojez .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#svpacmojez .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#svpacmojez .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#svpacmojez .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#svpacmojez .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#svpacmojez .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#svpacmojez .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#svpacmojez .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#svpacmojez .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#svpacmojez .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#svpacmojez .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#svpacmojez .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#svpacmojez .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#svpacmojez .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#svpacmojez .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#svpacmojez .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#svpacmojez .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#svpacmojez .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#svpacmojez .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#svpacmojez .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#svpacmojez .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#svpacmojez .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#svpacmojez .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#svpacmojez .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#svpacmojez .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#svpacmojez .gt_left {
+  text-align: left;
+}
+
+#svpacmojez .gt_center {
+  text-align: center;
+}
+
+#svpacmojez .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#svpacmojez .gt_font_normal {
+  font-weight: normal;
+}
+
+#svpacmojez .gt_font_bold {
+  font-weight: bold;
+}
+
+#svpacmojez .gt_font_italic {
+  font-style: italic;
+}
+
+#svpacmojez .gt_super {
+  font-size: 65%;
+}
+
+#svpacmojez .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#svpacmojez .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#svpacmojez .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#svpacmojez .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#svpacmojez .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#svpacmojez .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#svpacmojez .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#svpacmojez .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#svpacmojez div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="lote" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">lote</th>
+<th id="fecha_fab" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">fecha_fab</th>
+<th id="hora_control" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">hora_control</th>
+<th id="punto_control" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">punto_control</th>
+<th id="pH" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">pH</th>
+<th id="temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">temp</th>
+<th id="t_ref" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">t_ref</th>
+<th id="hora" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">hora</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-21 08:40:00</td>
+<td class="gt_row gt_left" headers="punto_control">fermentos</td>
+<td class="gt_row gt_right" headers="pH">6.83</td>
+<td class="gt_row gt_right" headers="temp">4.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-21 08:40:00</td>
+<td class="gt_row gt_right" headers="hora">0.0000000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-21 11:30:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.67</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-21 08:40:00</td>
+<td class="gt_row gt_right" headers="hora">2.8333333</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-21 12:50:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.60</td>
+<td class="gt_row gt_right" headers="temp">38.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-21 08:40:00</td>
+<td class="gt_row gt_right" headers="hora">4.1666667</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-21 14:05:00</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.05</td>
+<td class="gt_row gt_right" headers="temp">37.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-21 08:40:00</td>
+<td class="gt_row gt_right" headers="hora">5.4166667</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-21 15:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">5.80</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-21 08:40:00</td>
+<td class="gt_row gt_right" headers="hora">6.3333333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-21 17:15:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.30</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-21 08:40:00</td>
+<td class="gt_row gt_right" headers="hora">8.5833333</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">1</td>
+<td class="gt_row gt_left" headers="fecha_fab">21-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-22 10:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">4.80</td>
+<td class="gt_row gt_right" headers="temp">5.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-21 08:40:00</td>
+<td class="gt_row gt_right" headers="hora">25.3333333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 08:30:00</td>
+<td class="gt_row gt_left" headers="punto_control">fermentos</td>
+<td class="gt_row gt_right" headers="pH">6.81</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">0.0000000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 11:20:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.80</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">2.8333333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 11:42:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.75</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">3.2000000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 12:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.66</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">3.5000000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 12:20:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.65</td>
+<td class="gt_row gt_right" headers="temp">37.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">3.8333333</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 14:10:00</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.30</td>
+<td class="gt_row gt_right" headers="temp">37.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">5.6666667</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 14:40:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">6.25</td>
+<td class="gt_row gt_right" headers="temp">33.4</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">6.1666667</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 16:50:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">5.80</td>
+<td class="gt_row gt_right" headers="temp">25.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">8.3333333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-28 18:35:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.40</td>
+<td class="gt_row gt_right" headers="temp">16.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">10.0833333</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_left" headers="fecha_fab">28-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-29 10:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.25</td>
+<td class="gt_row gt_right" headers="temp">5.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-28 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">25.5000000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 08:30:00</td>
+<td class="gt_row gt_left" headers="punto_control">fermentos</td>
+<td class="gt_row gt_right" headers="pH">6.78</td>
+<td class="gt_row gt_right" headers="temp">NA</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">0.0000000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 10:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.68</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">1.5000000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 10:40:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.66</td>
+<td class="gt_row gt_right" headers="temp">32.4</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">2.1666667</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 11:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.67</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">2.5000000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 11:20:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.64</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">2.8333333</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 13:05:00</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.51</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">4.5833333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 13:30:00</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.51</td>
+<td class="gt_row gt_right" headers="temp">30.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">5.0000000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 13:35:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">6.51</td>
+<td class="gt_row gt_right" headers="temp">30.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">5.0833333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 17:40:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">6.02</td>
+<td class="gt_row gt_right" headers="temp">23.6</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">9.1666667</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 18:30:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">5.93</td>
+<td class="gt_row gt_right" headers="temp">22.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">10.0000000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-04 19:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.82</td>
+<td class="gt_row gt_right" headers="temp">20.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">10.5000000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_left" headers="fecha_fab">04-feb</td>
+<td class="gt_row gt_right" headers="hora_control">2026-02-05 10:20:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.50</td>
+<td class="gt_row gt_right" headers="temp">5.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-02-04 08:30:00</td>
+<td class="gt_row gt_right" headers="hora">25.8333333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-18 09:15:00</td>
+<td class="gt_row gt_left" headers="punto_control">fermentos</td>
+<td class="gt_row gt_right" headers="pH">6.78</td>
+<td class="gt_row gt_right" headers="temp">27.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">0.0000000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-18 10:05:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.68</td>
+<td class="gt_row gt_right" headers="temp">36.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">0.8333333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-18 10:10:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.75</td>
+<td class="gt_row gt_right" headers="temp">34.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">0.9166667</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-18 11:35:00</td>
+<td class="gt_row gt_left" headers="punto_control">cuba</td>
+<td class="gt_row gt_right" headers="pH">6.63</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">2.3333333</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-18 12:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">moldeo</td>
+<td class="gt_row gt_right" headers="pH">6.60</td>
+<td class="gt_row gt_right" headers="temp">32.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">2.7500000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-18 13:45:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">6.48</td>
+<td class="gt_row gt_right" headers="temp">34.5</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">4.5000000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-18 19:15:00</td>
+<td class="gt_row gt_left" headers="punto_control">prensa</td>
+<td class="gt_row gt_right" headers="pH">5.45</td>
+<td class="gt_row gt_right" headers="temp">26.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">10.0000000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-18 19:30:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.45</td>
+<td class="gt_row gt_right" headers="temp">26.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">10.2500000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_left" headers="fecha_fab">18-ene</td>
+<td class="gt_row gt_right" headers="hora_control">2026-01-19 10:00:00</td>
+<td class="gt_row gt_left" headers="punto_control">cámara</td>
+<td class="gt_row gt_right" headers="pH">5.25</td>
+<td class="gt_row gt_right" headers="temp">5.0</td>
+<td class="gt_row gt_right" headers="t_ref">2026-01-18 09:15:00</td>
+<td class="gt_row gt_right" headers="hora">24.7500000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Ahora calculamos los parámetros de la curva logística para los valores de pH de cada lote:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar código R</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>analizar_lote <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Ajuste del modelo logístico</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Usamos ti como parámetro de tiempo de inflexión</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  modelo <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>({</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nls</span>(pH <span class="sc">~</span> K <span class="sc">+</span> (A <span class="sc">-</span> K) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(r <span class="sc">*</span> (hora <span class="sc">-</span> ti))), </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">start =</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="fu">max</span>(df<span class="sc">$</span>pH), <span class="at">K =</span> <span class="fu">min</span>(df<span class="sc">$</span>pH), <span class="at">r =</span> <span class="fl">0.5</span>, <span class="at">ti =</span> <span class="fu">median</span>(df<span class="sc">$</span>hora)))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  }, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="fu">return</span>(<span class="cn">NULL</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(modelo)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Extraer coeficientes</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  cf <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  A  <span class="ot">&lt;-</span> cf[<span class="st">"A"</span>]</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  K  <span class="ot">&lt;-</span> cf[<span class="st">"K"</span>]</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  r  <span class="ot">&lt;-</span> cf[<span class="st">"r"</span>]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  ti <span class="ot">&lt;-</span> cf[<span class="st">"ti"</span>]</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. Cálculo de Vmax y estadísticos de calidad</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  v_max <span class="ot">&lt;-</span> <span class="fu">abs</span>(r <span class="sc">*</span> (A <span class="sc">-</span> K) <span class="sc">/</span> <span class="dv">4</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  rss <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(modelo)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  tss <span class="ot">&lt;-</span> <span class="fu">sum</span>((df<span class="sc">$</span>pH <span class="sc">-</span> <span class="fu">mean</span>(df<span class="sc">$</span>pH))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  r2  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (rss <span class="sc">/</span> tss)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. Crear la tabla de resultados para este lote</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">A    =</span> <span class="fu">round</span>(A, <span class="dv">2</span>),</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">K    =</span> <span class="fu">round</span>(K, <span class="dv">2</span>),</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">r    =</span> <span class="fu">round</span>(r, <span class="dv">4</span>),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">ti   =</span> <span class="fu">round</span>(ti, <span class="dv">2</span>),    </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">Vmax =</span> <span class="fu">round</span>(v_max, <span class="dv">4</span>),</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">R2   =</span> <span class="fu">round</span>(r2, <span class="dv">4</span>),</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">AIC  =</span> <span class="fu">round</span>(<span class="fu">AIC</span>(modelo), <span class="dv">2</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Ejecutar el análisis para todos los lotes</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lote) <span class="sc">|&gt;</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="fu">analizar_lote</span>(<span class="fu">pick</span>(<span class="fu">everything</span>())))</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co"># print(tabla_final)</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>resultados <span class="sc">|&gt;</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-param" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-param-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;3: Tabla de parámetros del modelo logístico
+</figcaption>
+<div aria-describedby="tbl-param-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="josnkairxm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#josnkairxm table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#josnkairxm thead, #josnkairxm tbody, #josnkairxm tfoot, #josnkairxm tr, #josnkairxm td, #josnkairxm th {
+  border-style: none;
+}
+
+#josnkairxm p {
+  margin: 0;
+  padding: 0;
+}
+
+#josnkairxm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#josnkairxm .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#josnkairxm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#josnkairxm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#josnkairxm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#josnkairxm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#josnkairxm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#josnkairxm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#josnkairxm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#josnkairxm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#josnkairxm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#josnkairxm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#josnkairxm .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#josnkairxm .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#josnkairxm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#josnkairxm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#josnkairxm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#josnkairxm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#josnkairxm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#josnkairxm .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#josnkairxm .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#josnkairxm .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#josnkairxm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#josnkairxm .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#josnkairxm .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#josnkairxm .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#josnkairxm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#josnkairxm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#josnkairxm .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#josnkairxm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#josnkairxm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#josnkairxm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#josnkairxm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#josnkairxm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#josnkairxm .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#josnkairxm .gt_left {
+  text-align: left;
+}
+
+#josnkairxm .gt_center {
+  text-align: center;
+}
+
+#josnkairxm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#josnkairxm .gt_font_normal {
+  font-weight: normal;
+}
+
+#josnkairxm .gt_font_bold {
+  font-weight: bold;
+}
+
+#josnkairxm .gt_font_italic {
+  font-style: italic;
+}
+
+#josnkairxm .gt_super {
+  font-size: 65%;
+}
+
+#josnkairxm .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#josnkairxm .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#josnkairxm .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#josnkairxm .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#josnkairxm .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#josnkairxm .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#josnkairxm .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#josnkairxm .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#josnkairxm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="lote" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">lote</th>
+<th id="A" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">A</th>
+<th id="K" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">K</th>
+<th id="r" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">r</th>
+<th id="ti" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ti</th>
+<th id="Vmax" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Vmax</th>
+<th id="R2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">R2</th>
+<th id="AIC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AIC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">1</td>
+<td class="gt_row gt_right" headers="A">6.91</td>
+<td class="gt_row gt_right" headers="K">4.83</td>
+<td class="gt_row gt_right" headers="r">0.6142</td>
+<td class="gt_row gt_right" headers="ti">6.28</td>
+<td class="gt_row gt_right" headers="Vmax">0.3196</td>
+<td class="gt_row gt_right" headers="R2">0.9897</td>
+<td class="gt_row gt_right" headers="AIC">-7.06</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">2</td>
+<td class="gt_row gt_right" headers="A">6.87</td>
+<td class="gt_row gt_right" headers="K">5.24</td>
+<td class="gt_row gt_right" headers="r">0.5998</td>
+<td class="gt_row gt_right" headers="ti">6.97</td>
+<td class="gt_row gt_right" headers="Vmax">0.2449</td>
+<td class="gt_row gt_right" headers="R2">0.9946</td>
+<td class="gt_row gt_right" headers="AIC">-25.45</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="lote">3</td>
+<td class="gt_row gt_right" headers="A">6.79</td>
+<td class="gt_row gt_right" headers="K">5.49</td>
+<td class="gt_row gt_right" headers="r">0.3953</td>
+<td class="gt_row gt_right" headers="ti">8.09</td>
+<td class="gt_row gt_right" headers="Vmax">0.1284</td>
+<td class="gt_row gt_right" headers="R2">0.9972</td>
+<td class="gt_row gt_right" headers="AIC">-48.31</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="lote">4</td>
+<td class="gt_row gt_right" headers="A">6.77</td>
+<td class="gt_row gt_right" headers="K">5.25</td>
+<td class="gt_row gt_right" headers="r">0.5630</td>
+<td class="gt_row gt_right" headers="ti">6.85</td>
+<td class="gt_row gt_right" headers="Vmax">0.2146</td>
+<td class="gt_row gt_right" headers="R2">0.9977</td>
+<td class="gt_row gt_right" headers="AIC">-28.21</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="análisis-de-resultados-modelización-de-la-fermentación-láctica" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-de-resultados-modelización-de-la-fermentación-láctica">Análisis de Resultados: Modelización de la Fermentación Láctica</h3>
+<p>A continuación se resumen los estadísticos clave utilizados para evaluar la calidad del ajuste de las curvas de pH obtenidas.</p>
+<section id="tabla-comparativa-r²-vs.-aic" class="level4">
+<h4 class="anchored" data-anchor-id="tabla-comparativa-r²-vs.-aic">1. Tabla Comparativa: R² vs.&nbsp;AIC</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Característica</th>
+<th style="text-align: left;"><span class="math inline">\(R^2\)</span> (Coeficiente de Determinación)</th>
+<th style="text-align: left;">AIC (Criterio de Akaike)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>¿Qué mide?</strong></td>
+<td style="text-align: left;">El porcentaje de variabilidad de los datos que el modelo explica.</td>
+<td style="text-align: left;">La pérdida de información y la eficiencia del modelo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Interpretación</strong></td>
+<td style="text-align: left;">Qué tan “cerca” están los puntos reales de la línea trazada.</td>
+<td style="text-align: left;">El equilibrio entre el buen ajuste y la sencillez del modelo.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Valor ideal</strong></td>
+<td style="text-align: left;">Lo más cercano a <strong>1</strong> (o 100%).</td>
+<td style="text-align: left;">El valor <strong>más bajo</strong> (el más pequeño o más negativo).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Uso principal</strong></td>
+<td style="text-align: left;">Validar la precisión del ajuste en un solo modelo.</td>
+<td style="text-align: left;">Comparar modelos para ver cuál es estadísticamente más robusto.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Puntos débiles</strong></td>
+<td style="text-align: left;">Tiende a subir siempre que añadimos parámetros, aunque no sean útiles.</td>
+<td style="text-align: left;">No indica el % de éxito, solo indica qué modelo es preferible.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="definiciones" class="level4">
+<h4 class="anchored" data-anchor-id="definiciones">2. Definiciones</h4>
+<section id="coeficiente-de-determinación-r2" class="level5">
+<h5 class="anchored" data-anchor-id="coeficiente-de-determinación-r2">Coeficiente de Determinación (<span class="math inline">\(R^2\)</span>)</h5>
+<p>El <span class="math inline">\(R^2\)</span> es una medida de la <strong>bondad de ajuste</strong>. Un valor de <strong>0.99</strong> significa que el modelo logístico explica el 99% de los cambios de pH observados durante la fermentación. Si el valor es bajo (por ejemplo, menor a 0.90), indica que los datos tienen mucho “ruido” o que la fermentación no siguió un curso normal.</p>
+</section>
+<section id="criterio-de-información-de-akaike-aic" class="level5">
+<h5 class="anchored" data-anchor-id="criterio-de-información-de-akaike-aic">Criterio de Información de Akaike (AIC)</h5>
+<p>El AIC es un estadístico de <strong>selección de modelos</strong>. Su función es penalizar a los modelos que son demasiado complejos (con demasiados parámetros) y premiar a los que son sencillos y ajustan bien.</p>
+<p><strong>Regla de oro:</strong> Al comparar lotes, aquel con el AIC más bajo (por ejemplo, -49.4 frente a -7.1) es el que presenta un comportamiento más consistente con la teoría matemática del modelo logístico.</p>
+</section>
+</section>
+<section id="parámetros-de-la-curva-logística" class="level4">
+<h4 class="anchored" data-anchor-id="parámetros-de-la-curva-logística">3. Parámetros de la Curva Logística</h4>
+<p>En la tabla de resultados se encuentran también estos parámetros fundamentales:</p>
+<ul>
+<li><strong><span class="math inline">\(A\)</span> (asíntota superior):</strong> pH inicial de la leche antes de la acidificación intensa.</li>
+<li><strong><span class="math inline">\(K\)</span> (asíntota inferior):</strong> pH final de equilibrio cuando la fermentación se detiene.</li>
+<li><strong><span class="math inline">\(t_i\)</span> (tiempo de inflexión):</strong> Momento exacto (en horas) donde la caída del pH es más rápida. En la curva logística estándar se sitúa en la mitad de la curva (50%)</li>
+<li><strong><span class="math inline">\(r\)</span> (tasa):</strong> Velocidad relativa de caída, la inclinación media de la curva en la sección de descenso (mayor valor <span class="math inline">\(r\)</span> significa mayor inclinación)</li>
+<li><strong><span class="math inline">\(V_{max}\)</span> :</strong> La pendiente máxima de la curva, calculada como <span class="math inline">\(V_{max} = |r \cdot (A - K) / 4|\)</span>. Representa la velocidad máxima de acidificación real en unidades de pH/hora.</li>
+</ul>
+</section>
+</section>
+<section id="gráfico-de-las-curvas-logísticas-ajustadas-a-los-valores-reales-de-los-diferentes-lotes-de-fabricación" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-las-curvas-logísticas-ajustadas-a-los-valores-reales-de-los-diferentes-lotes-de-fabricación">Gráfico de las curvas logísticas ajustadas a los valores reales de los diferentes lotes de fabricación</h3>
+<p>Una vez calculados los parámetros de cada curva, podemos proceder a dibujarlas, dejando que <code>ggplot()</code> se ocupe de dibujar la función logística. Para ello le decimos que utilice la función <code>nls()</code>, que es la función de regresión no linear de R. Necesitamos dar unos valores iniciales, que calculamos con los valores extremos del conjunto de curvas. A veces esta estimación de los valores iniciales no es suficientemente buena para hacer converger la función y genera un error; en ese caso podríamos recurrir a funciones más sofisticadas, como <code>SSlogis()</code>, o usar una función más estable que <code>nls()</code>, como por ejemplo <code>nlsLM()</code> de la librería <code>minpack.lm</code>. Como en este caso no es necesario, mantengo el esquema más simple para facilitar su comprensión. Alternativamente, se pueden explorar también estas opciones.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar código R</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definimos la fórmula logística (más fácil de leer)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>formula_logistica <span class="ot">&lt;-</span> y <span class="sc">~</span> K <span class="sc">+</span> (A <span class="sc">-</span> K) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>r <span class="sc">*</span> (x <span class="sc">-</span> ti)))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Buscamos las estimaciones iniciales para nls</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>K_ini <span class="ot">&lt;-</span> <span class="fu">min</span>(resultados<span class="sc">$</span>K)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>A_ini <span class="ot">&lt;-</span> <span class="fu">max</span>(resultados<span class="sc">$</span>A)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>r_ini <span class="ot">&lt;-</span> <span class="fu">median</span>(resultados<span class="sc">$</span>r)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>ti_ini <span class="ot">&lt;-</span> <span class="fu">median</span>(resultados<span class="sc">$</span>ti)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Creamos el gráfico directamente</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos, <span class="fu">aes</span>(<span class="at">x =</span> hora, <span class="at">y =</span> pH, <span class="at">color =</span> lote)) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"nls"</span>, </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> formula_logistica, </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">start =</span> <span class="fu">list</span>(<span class="at">K =</span> K_ini, <span class="at">A =</span> A_ini, <span class="at">r =</span> r_ini, <span class="at">ti =</span> ti_ini)), </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Ajuste Logístico de pH a los diferentes lotes de fabricación"</span>, <span class="at">x =</span> <span class="st">"Tiempo (h)"</span>, <span class="at">y =</span> <span class="st">"pH"</span>) <span class="sc">+</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-lotesFP1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lotesFP1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-lotesFP1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lotesFP1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Ajuste de la curva logística sobre los 4 lotes de prácticas. Los puntos representan las medidas reales de pH; su distribución temporal irregular es visible en el espaciado entre puntos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="lo-que-los-parámetros-dicen-del-proceso" class="level3">
+<h3 class="anchored" data-anchor-id="lo-que-los-parámetros-dicen-del-proceso">Lo que los parámetros dicen del proceso</h3>
+<p>La elección de la logística como modelo de referencia se apoya en el ajuste estadístico, que en nuestro caso es muy bueno, y la adecuación a la dinámica real de la acidificación láctica y fórmula de <span class="math inline">\(V_{max}\)</span> más sencilla.</p>
+<p>Los resultados de <span class="math inline">\(K\)</span> cuentan la historia del proceso:</p>
+<ul>
+<li><strong>Lote 1</strong> <span class="math inline">\(K\)</span> = 4,83: sobreacidificación. El fermento siguió activo más tiempo del previsto y la cuajada llegó a un pH muy bajo para una pasta prensada estándar. En este lote es de esperar una desmineralización excesiva.</li>
+<li><strong>Lotes 2 y 4</strong> <span class="math inline">\(K\)</span> = 5,25: acidificación correcta para pasta prensada.</li>
+<li><strong>Lote 3</strong> <span class="math inline">\(K\)</span> = 5,49: acidificación incompleta. El fermento no llegó al pH objetivo, posiblemente por temperatura insuficiente o por un problema con el cultivo. Puede haber riesgo de contaminación o de microorganismos no deseados.</li>
+</ul>
+<p>Además de estos resultados, los parámetros del modelo que hemos calculado nos permiten incluir en nuestra tabla de datos de producción los principales indicadores que definen cada curva. Esto nos permitirá su análisis posterior junto con el resto de indicadores de la producción.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "juanriera/blog";
+    script.dataset.repoId = "R_kgDOI1wAcQ";
+    script.dataset.category = "Announcements";
+    script.dataset.categoryId = "DIC_kwDOI1wAcc4C6dDb";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "es";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
