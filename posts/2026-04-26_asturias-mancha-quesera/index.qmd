@@ -1,0 +1,1217 @@
+---
+title: "Asturias, ¿la mayor mancha quesera de Europa? Una revisión."
+subtitle: "Un análisis de la producción quesera en Asturias"
+date: 2026-04-26
+date-format: "DD/MM/YYYY"
+categories: [queso]
+image: "quesos-asturianos.jpg"
+draft: false
+lang: es
+editor: source
+fig-cap-location: top
+bibliography: referencias.bib
+csl: vancouver-superscript.csl
+reference-section-title: "Referencias y fuentes consultadas"
+nocite: |
+  @DAESAE, @eurostat, @cnaol2024, @clal, @scm2024, @nin2022, @ddb2025,
+  @wiki-1-2025, @mapa-1-2023, @mapa-2-2023, @mapa-3-2023, @sek2025, @vadequesum2023,
+  @lne2025-1, @lne2025-2, @lne2024, @lva2022, @ine2025, @ifl2025, @dairy2024, @alimesp2025
+---
+
+# Resumen
+
+Este trabajo revisa la [publicacion que hice en LinkedIn](https://www.linkedin.com/pulse/asturias-la-mayor-mancha-quesera-de-europa-juan-riera-udwwf/) el 18 de abril de 2025, actualizando algunos datos de producción con la información disponible en Eurostat para 2024. Los datos referentes a algunos países, así como al número de empresas *queseras* sigue siendo difícil de encontrar. Los nuevos datos no introducen diferencias significativas en las conclusiones.
+
+Se examina la producción de queso en Asturias, incluyendo los quesos amparados por Denominación de Origen Protegida (DOP) e Indicación Geográfica Protegida (IGP), y se contrasta con datos de España y Europa. La información, obtenida de diversas fuentes online, que se incluyen en las referencias, se centra en el análisis del queso producido y el número de empresas. No se incluyen en el estudio otras variables económicas como inversión, empleo o contribución al PIB debido a la falta de datos detallados del sector. La información referente al número de empresas queseras es bastante precisa en Asturias, pero muy desigual o inexistente en el resto de las áreas estudiadas. La información sobre la producción de queso está en el mismo caso, dificultando la obtención de conclusiones precisas. Además, no ha sido posible cuantificar con detalle el volumen de producción fuera de la certificación DOP/IGP.
+
+El análisis revela que la producción de queso de Asturias no se sitúa como la más elevada a nivel nacional o europeo, ni en el total ni en la de quesos catalogados. Algunos quesos frescos fabricados por grandes multinacionales han tenido y siguen teniendo un papel clave en la producción regional; actualmente representan un 36% de la producción total de queso en la región. Asturias destaca por una relativa alta densidad de empresas queseras, calculada en este estudio bien como número de empresas por 1000 $km^2$ (especialmente en el ámbito de los quesos con certificación DOP/IGP, sólo por detrás de Suiza), o bien por millón de habitantes. Este número de empresas, más que la cantidad de queso producido, podría haber motivado la afirmación de que Asturias es ***la mayor mancha quesera de Europa***. 
+
+Aunque la diversidad de quesos ofrecida es notable, el volumen medio de producción por establecimiento es reducido; el valor añadido real derivado de esta variedad de productos y formatos resulta complejo de determinar. La prevalencia de pequeñas producciones, particularmente artesanales, podría suponer un factor limitante para el crecimiento y la sostenibilidad del sector. En consecuencia, la afirmación antes citada, sobre la importancia de Asturias como primera mancha quesera de Europa, no parece bien fundamentada y resulta bastante imprecisa. Un enfoque pertinente consistiría en la elaboración de un plan estratégico para el sector, que identifique y potencie los atributos distintivos del queso asturiano y apoye los quesos catalogados (DOP e IGP), estableciendo una diferenciación entre los quesos tradicionales asturianos y los producidos en la región sin conexión con su herencia cultural y gastronómica.
+
+# Introducción
+
+Desde hace años, en el entorno quesero y social asturiano, se ha aceptado como un hecho la afirmación de que Asturias constituye ***la mayor mancha quesera de Europa***. Sin embargo, no está muy claro el significado de esta expresión: ¿se refiere a la mayor producción de queso, a la mayor variedad de quesos en general, incluyendo industriales, artesanales, y quesos catalogados con DOP o IGP, o solo a los artesanales o con denominación de origen? 
+
+Es muy pertinente definir qué se considera un *queso asturiano*. ¿Deben incluirse en los quesos asturianos los *quesos fabricados en Asturias*? Es decir, si en Asturias se instala un fabricante de mozzarella, ¿debe incluirse en ellos la mozzarella? Creo que todos aceptaríamos que este queso hilado es, característicamente, un queso italiano, y en mi opinión, no es un queso *asturiano* aunque esté *fabricado en Asturias*. Lo mismo ocurre con algunos fabricantes asentados en la región, que fabrican quesos tipo Burgos o tipo mascarpone, o bien quesos fundidos que podrían fabricarse en cualquier parte, sin vinculación alguna con el territorio. Se podría argumentar que la vinculación se establece a través de la leche utilizada, siempre que sea recogida en Asturias. Sin embargo, queda por determinar el valor añadido para los quesos asturianos de una producción lechera que en muchos casos proviene de ganado mantenido en estabulación y alimentado mayoritariamente con heno o con piensos elaborados con ingredientes importados de otras regiones, o incluso de otros países.
+
+La importancia de esta discusión radica precisamente en establecer cuáles son realmente, o deberían ser, estos elementos de valor añadido de los quesos fabricados en Asturias y considerados *quesos asturianos*.  En mi opinión, entre estos elementos están, sin duda, la producción de leche por razas ganaderas locales, la búsqueda de características genéticas que hagan la leche más apta para la fabricación de queso, y una alimentación mayoritariamente de pasto natural o heno obtenido de pastos asturianos. El manejo de los pastos debería favorecer la diversidad florística para aumentar los componentes aromáticos que potencien las notas distintivas en los quesos. Si Asturias es considerada un *Paraíso Natural*, deberíamos establecer unas normas de calidad para los productos obtenidos en esta región que incluyan los elementos citados y que vienen directamente condicionados por el paisaje y el medio natural asturiano. Otros elementos de valor son consecuencia de la mejora de las capacidades tecnológicas de los queseros y queseras asturianos, lo que debe conseguirse a través de una formación continua en tecnología quesera, incluyendo no sólo los aspectos de fabricación, sino la maduración y el afinado, además de la gestión técnica y económica de las queserías. Sin duda, este es un objetivo ambicioso que no puede lograrse de la noche a la mañana. En este sentido, conviene elaborar un plan estratégico para el sector quesero, de la misma forma que se ha hecho en otras regiones del mundo (ver referencias para Europa[@jeanneaux2018] y Vermont (USA)[@vermont2025]).
+
+Este documento es una primera aproximación a la descripción de la producción quesera asturiana mediante algunos índices indirectos, y pospone la discusión sobre los elementos de valor que deberían definir el queso asturiano. 
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+library (dplyr)
+library (ggplot2)
+library(tidyr)
+library(ggrepel)
+library(readxl)
+library(kableExtra)
+library(gt)
+
+
+df_tabla_quesos <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx", "Producción DOP" )
+df_paises <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","Prod por pais")
+df_DOP_esp <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","DOP España")
+df_consumo <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","España-consumo")
+df_asturias <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","SADEI-Asturias-2025")
+
+colnames(df_tabla_quesos) <- c("queso", "tipo", "toneladas", "año", "pais","leche")
+
+df_paises <- df_paises |>
+  filter (!is.na(prod_ton_DOP_IGP)) |>
+  mutate(
+    num_empresas_millon_hab     = num_empresas_queseras / (habitantes/1e6),
+    num_empresas_DOP_millon_hab = num_empresas_queseras_DOP / (habitantes/1e6),
+    kg_queso_habitante          = prod_total_queso_ton * 1000 / habitantes,
+    kg_DOP_habitante            = prod_ton_DOP_IGP * 1000 / habitantes,
+    ton_tot_km2                  = prod_total_queso_ton / superficie_km2,
+    ton_DOP_km2                  = prod_ton_DOP_IGP / superficie_km2,
+    ton_queso_por_empresa       = prod_total_queso_ton / num_empresas_queseras,
+    ton_queso_DOP_por_empresa   = prod_ton_DOP_IGP / num_empresas_queseras_DOP
+  ) 
+```
+
+# Análisis
+
+## La producción de queso en Asturias
+
+El *Catálogo general de quesos elaborados en Asturias*, en su última edición[@vadequesum2026], referencia con todo detalle las empresas y quesos fabricados en Asturias; recoge un total de **298 referencias producidas en 82 establecimientos**. En su edición anterior, de 2023, citaba 56 que corresponden a productores de denominación catalogada (DOP+IGP). Como la edición de 2025 no detalla esta cifra, mantendré la de 2023 en el análisis, ya que no ha habido en este tiempo cambios sustanciales. 
+
+Estas 298 referencias incluyen todo tipo de quesos, desde artesanos a industriales, fundidos, quesos crema y otros, con el detalle de formatos y marcas, y es la visión más actual de la realidad quesera asturiana. El catálogo ha tenido también el acierto de incluir quesos desaparecidos o en vías de desaparición, que también forman parte de esta cultura quesera asturiana. No obstante, no proporciona el volumen de producción total ni de las diferentes variedades, si exceptuamos los quesos con denominación catalogada (DOP+IGP)
+
+En cuanto al número de empresas queseras, el Ministerio de Agricultura, Pesca y Alimentación (MAPA), en su Anuario de Estadísticas del año 2023[@mapa-1-2023], constata la existencia en España de 1.620 empresas lácteas y 1.990 centros de producción. No especifica el número de empresas queseras ni el volumen total de queso producido. Según datos de la Agencia de Ciencia, Competitividad Empresarial e Innovación Asturiana (SEKUENS)[@sek2026], España contaba en 2024 con 1.577 empresas del sector lácteo *activas*; de ellas, el 5,39% están implantadas en Asturias. Esto equivale a 85 empresas; muy cerca del valor de 82 establecimientos proporcionados por el *Catálogo* mencionado antes; 
+
+La @tbl-tabla-asturias presenta los datos de la producción total de queso en Asturias actualizada a 2025, según la Sociedad Asturiana de Estudios Económicos e Industriales (SADEI)[@sadei].
+
+Desde 2010, la producción de queso en Asturias se mantuvo en torno a 35.000-40.000 toneladas hasta 2022. Entre 2021 y 2023 se registra una caída notable debido principalmente al cierre de la fábrica de Danone en Salas en 2022[@lva2022-2], que traslada la elaboración del queso fresco *Danonino* a otros centros en Francia. A partir de 2023, la producción regional se estabiliza en unas 25.000 toneladas, lo que representa un 4,6% del total nacional,  y en 2025 remonta a 35.310 toneladas, cifra que recoge probablemente el relanzamiento de la actividad en la nueva fábrica de Royal A-Ware en Salas (antigua Danone), especializada en la producción de mozzarella.. Este volumen incluye el queso fresco *Burgo de Arias* y otros quesos frescos fabricados por Mantequerías Arias en su planta de Vegalencia (Soto de Ribera), que elabora anualmente unas 9.000 toneladas de queso (un 36% del total de la región). Si descontamos esta cantidad del total dado por SADEI, podemos situar el volumen de los quesos tradicionales asturianos en torno a las 15.000 toneladas, incluyendo los quesos DOP e IGP.
+
+El detalle de la producción quesera asturiana fuera de las denominaciones de origen no se recoge en ningún informe oficial. Es el caso de quesos importantes y conocidos, algunos tradicionales como Vidiago, Pría, La Peral, Peñamellera, Abredo y otros, y también de los quesos que podrían ser incluidos en los llamados quesos *de autor*, como Rey Silo, Lazana, Varé o La Chivita, y multitud de quesos artesanales producidos en pequeñas queserías, cuyo volumen resulta imposible de estimar.
+
+La @fig-prod-asturias muestra la producción de queso desde 1990. A mitad de los años 2000 se identifica una caída importante de los volúmenes de producción, probablemente reflejo de varios factores, como la crisis de 2008, unida al efecto de la reordenación de la PAC entre 2003 y 2009 y a la relocalización por Mantequerías Arias de una parte importante de la fabricación de Burgo de Arias en la nueva factoría de Burgos, hacia 2006. También se ve claramente el cese de actividad de Danone en Salas en 2023, y el relanzamiento de la actividad por Royal A-Ware en 2025, como comentábamos anteriormente.
+
+```{r}
+#| label: fig-prod-asturias
+#| fig-cap: "Producción de queso en Asturias 1990-2025 (SADEI, 2025)"
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| fig-height: 4
+
+df_asturias |>
+  ggplot(aes(x=año, y = ton))+
+    geom_line(color="#D55E00", linewidth=1.5) +
+    labs(
+    x = "Año",
+    y = "Toneladas"
+    ) +
+    theme_minimal()
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+#| label: tbl-tabla-asturias
+#| tbl-cap: "Producción de queso en Asturias desde 2015 (SADEI, 2025)"
+#| 
+df_asturias %>%
+  filter (año >= 2015) %>%
+   # 1. Creamos el objeto gt
+  gt() %>%
+  
+  # 2. Etiquetas de columna profesionales
+  cols_label(
+    año = "Año",
+    ton = "Queso producido (toneladas)"
+  ) %>%
+  
+  # 3. Formateo numérico "estilo europeo" directamente en gt
+  fmt_number(
+    columns = ton,
+    decimals = 0,
+    sep_mark = ".",
+    dec_mark = ","
+  ) %>%
+  
+  # 4. Alineación
+  cols_align(
+    align = "center", columns = año
+  ) %>%
+  cols_align(
+    align = "right", columns = ton
+  ) %>%
+  
+  # 5. Opciones de estilo adicionales para que quede impecable
+  tab_options(
+    table.width = pct(40),
+    column_labels.font.weight = "bold"
+  )
+
+```
+
+## La producción y consumo de queso en España
+
+Según la Encuesta Anual de Industrias Lácteas del MAPA[@mapa-5-2024], la producción nacional de queso en 2024 fue de 538.300 toneladas.
+
+Los valores de producción de los quesos con DOP o IGP se conocen con detalle, porque estos datos están recogidos por los propios Consejos Reguladores, y también por la Subdirección General de Control de la Calidad Alimentaria y Laboratorios Agroalimentarios del MAPA[@mapa-3-2023].
+
+La @fig-DOP muestra los quesos catalogados españoles con mayor producción en 2023 (más de 300 toneladas/año) según los datos ofrecidos por el MAPA en el informe *Datos de las Denominaciones de Origen Protegidas (D.O.P.), Indicaciones Geográficas Protegidas (I.G.P.) y Especialidades Tradicionales Garantizadas (E.T.G.) de Productos Agroalimentarios*[@mapa-2-2023]. De los quesos con DOP+IGP asturianos, sólo el Cabrales aparece en la tabla, con 361 toneladas en 2023. El detalle de los quesos DOP e IGP españoles puede consultarse en la @tbl-tabla-dop, que figura en anexo.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.pos='H', fig.height=3}
+#| label: fig-DOP
+#| fig-cap: "Quesos DOP españoles con una producción anual superior a 300 toneladas"
+
+df_DOP_esp %>%
+  filter(Ton > 300) %>%
+  mutate(highlight = if_else(Region %in% c("Asturias"), Region, "Otros")) %>%
+  ggplot(aes(y = reorder(Queso, Ton), x = Ton, fill = highlight)) +
+    geom_col() +
+    geom_text(aes(label = if_else(Region == "Asturias", as.character(as.integer(Ton)), NA_character_)), 
+          hjust = 0, size = 3, colour = "grey", na.rm = TRUE) +
+    scale_fill_manual(values = c("Otros" = "grey60",    # Todas las barras en gris
+                               "Asturias" = "#D55E00")) +  # Rojo destacado
+   expand_limits(x = 20000) +
+   labs(x = "toneladas")+
+  scale_x_continuous(labels = scales::comma) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle = 0, hjust = 0.5),# Rotar etiquetas del eje x para mejor legibilidad
+    axis.text = element_text(size = 8), # Cambia el tamaño de las etiquetas del eje
+    axis.title = element_text(size = 10), # Cambia el tamaño de los títulos de los ejes
+    plot.title = element_text(size = 12, hjust = 0.5), # Cambia el tamaño del título principal
+    legend.position = "none",
+    axis.title.y = element_blank())
+```
+
+La @fig-DOP-es muestra la producción y el número de queserías por comunidades autónomas. Asturias tiene un elevado número de queserías DOP, sólo por debajo del País Vasco y Castilla-La Mancha, aunque el volumen total producido no es alto.
+
+:::{#fig-DOP-es layout-ncol=2}
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-DOP-es-ton
+#| fig-cap: "Toneladas producidas"
+
+df_DOP_esp %>%
+  group_by(Region) %>%
+  summarise(TotalTon = sum(Ton, na.rm = TRUE)) %>%
+  mutate(highlight = if_else(Region %in% c("Asturias"), Region, "Otros")) %>%
+  ggplot(aes(y = reorder(Region, TotalTon),
+             x = TotalTon,
+             fill = highlight)) +
+  geom_col() +
+  scale_fill_manual(values = c("Otros" = "grey60",    # Todas las barras en gris
+                               "Asturias" = "#D55E00")) +  # Rojo destacado
+  scale_x_continuous(labels = scales::comma) +
+  # scale_y_discrete(labels = function(x) gsub(" ", "\n", x)) +
+  theme_minimal() +  # Fondo blanco y estilo limpio
+  theme(legend.position = "none",
+        panel.grid.major = element_blank(),  # Eliminamos rejillas para una apariencia más limpia
+        panel.grid.minor = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-DOP-es-queserias
+#| fig-cap: "Número de queserías"
+
+df_DOP_esp %>%
+  group_by(Region) %>%
+  summarise(tot_queserias = sum(queserias, na.rm = TRUE)) %>%
+  mutate(highlight = if_else(Region %in% c("Asturias"), Region, "Otros")) %>%
+  ggplot(aes(y = reorder(Region, tot_queserias),
+             x = tot_queserias,
+             fill = highlight)) +
+  geom_col() +
+  scale_fill_manual(values = c("Otros" = "grey60",    # Todas las barras en gris
+                               "Asturias" = "#D55E00")) +  # Rojo destacado
+  labs(title = "",
+       x = "",
+       y = "") +
+  scale_x_continuous(labels = scales::comma) +
+  # scale_y_discrete(labels = function(x) gsub(" ", "\n", x)) +
+  theme_minimal() +  # Fondo blanco y estilo limpio
+  theme(legend.position = "none",
+        panel.grid.major = element_blank(),  # Eliminamos rejillas para una apariencia más limpia
+        panel.grid.minor = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())
+```
+
+Producción de quesos catalogados (DOP e IGP) en España, por Comunidades Autónomas
+:::
+
+```{r}
+#| label: fig-esp-queserias
+#| fig-cap: "Producción de quesos catalogados con DOP e IGP en España"
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+
+library(ggplot2)
+library(ggrepel)
+
+df_DOP_esp %>%
+  group_by(Region) %>%
+  summarise(TotalTon = sum(Ton, na.rm = TRUE), tot_queserias = sum(queserias, na.rm = TRUE)) %>%
+  # 1. Creamos la misma lógica de resaltado que en tus barras
+  mutate(highlight = case_when(
+      Region == "Asturias" ~ "Asturias",
+      TRUE ~ "Otros")) %>%
+  ggplot(aes(x = TotalTon, y = tot_queserias)) +
+  # 2. Puntos: Gris uniforme para 'Otros' y colores para España/Asturias
+  geom_point(aes(color = highlight), size = 2.5, alpha = 0.7) +
+  # 3. Etiquetas: Solo ponemos nombre a los puntos destacados para evitar ruido
+  # geom_text_repel(aes(label = if_else(highlight == "Otros", "", pais), color = highlight),
+  #                 size = 4, fontface = "bold", box.padding = 0.5) +
+  geom_text_repel(aes(label = Region, color = highlight), 
+                  size = 3, 
+                  fontface = "plain",
+                  max.overlaps = Inf, # Obligamos a que salgan todos
+                  box.padding = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey80') + # Líneas finas hacia los puntos
+  
+    # 4. Paleta exacta a tus gráficos de barras
+  scale_color_manual(values = c("Otros" = "grey60", 
+                                "España" = "#1f77b4", 
+                                "Asturias" = "#D55E00")) +
+  # 5. Formato y limpieza visual
+  scale_x_continuous(labels = scales::comma) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    x = "Toneladas producidas DOP+IGP",
+    y = "Núm de queserías"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(), # Limpio como tus barras
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(color = "grey80") # Una línea base para los ejes
+  )
+```
+
+Respecto al consumo de queso por CCAA, el último Informe anual del consumo alimentario del MAPA para 2023[@mapa-3-2023], estima el consumo total de queso en España en unas 350 mil toneladas, con un consumo per cápita de 7,56 kg. ([@tbl-tabla-consumo]).  Asturias, con un consumo per cápita de 8,1 kg, se sitúa en la zona media‐alta de la tabla.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: tbl-tabla-consumo
+#| tbl-cap: "Datos de consumo per cápita en España por Comunidad Autónoma"
+
+df_consumo %>%
+  arrange(-consumo_por_hab) %>%
+  mutate(
+    poblacion_pct = scales::percent(poblacion_pct/100, accuracy = 0.1),
+    kg_pct = scales::percent(kg_pct/100, accuracy = 0.1),
+    consumo_por_hab = scales::number(consumo_por_hab, big.mark = ".", decimal.mark = ",", accuracy = 0.1)
+  ) %>%
+  knitr::kable(format="markdown",
+               col.names = c("Comunidad Autónoma", "% poblacion", "% kilos", "Consumo per cápita"),
+               align = c("l", "r", "r", "r"))
+```
+
+Para analizar el consumo de queso por Comunidad Autónoma, comparo la participación en el consumo con su cuota poblacional, calculada ésta como el porcentaje de población de cada Comunidad Autónoma sobre la población total. La [@fig-consumo] muestra la diferencia entre el porcentaje de consumo y la cuota poblacional, frente al consumo per cápita; destaca el alto consumo de queso en Canarias, y el bajo consumo de Andalucía y Castilla-La Mancha. Las CCAA que están sobre la línea de división vertical (Asturias y Baleares) tienen un consumo de queso se corresponde con su cuota poblacional.  El diámetro de los puntos es proporcional a la población de cada CCAA.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-consumo
+#| fig-cap: "Consumo de queso por CCAA"
+#| out-width: "125%"
+
+df_consumo |> 
+  mutate(Comunidad = recode(Comunidad,
+    "Cataluña" = "CAT",
+    "Aragón" = "ARA",
+    "Illes Balears" = "BAL",
+    "Comunitat Valenciana" = "VAL",
+    "Región de Murcia" = "MUR",
+    "Andalucía" = "AND",
+    "Comunidad de Madrid" = "MAD",
+    "Castilla-La Mancha" = "CLM",
+    "Extremadura" = "EXT",
+    "Castilla Y Leon" = "CYL",
+    "Galicia" = "GAL",
+    "Pais Vasco" = "EUS",
+    "La Rioja" = "RIO",
+    "C. Foral de Navarra" = "NAV",
+    "Principado de Asturias" = "AST",
+    "Canarias" = "CAN",
+    "Cantabria" = "CB")) %>%
+  mutate(diferencia = kg_pct - poblacion_pct,
+         fill_color = if_else(Comunidad == "Ast", "#D55E00", "grey60"), # Define colores
+         highlight = if_else(Comunidad == "Ast", Comunidad, "Otros")) |> 
+  ggplot(aes(x = diferencia, y = consumo_por_hab, color = highlight, fill = fill_color, alpha = 0.8, size = poblacion_pct)) + 
+  geom_point(shape = 21, alpha = 0.3, stroke = 0.1) +  # Uso de shape 21 para permitir color de borde y relleno
+  geom_vline(xintercept = 0, linetype = "dashed", color = "#1f77b4", size = 0.5) +  
+  geom_hline(yintercept = 7.6, linetype = "dashed", color = "#1f77b4", size = 0.5) +  
+  geom_text(aes(label = Comunidad), 
+                  size = 2,
+                  fontface = "bold",
+                  alpha = 1) +
+scale_color_manual(values = c("Otros" = "black", "Ast" = "#D55E00")) +  
+  scale_fill_identity() +  # Usa directamente los colores definidos en fill_color
+  scale_size_continuous(range = c(2, 10)) +  
+  annotate("segment", x = 0.1, xend = 0.4, y = 10.5, yend = 10.5, 
+         arrow = arrow(length = unit(0.2, "inches")), 
+         color = "#1f77b4", size = 2) +
+  annotate("text", x = 0.1, y = 10, 
+         label = expression("Consumo de queso"~bold("superior")), 
+         color = "#1f77b4",size = 3, hjust = 0) +
+  annotate("text", x = 0.1, y = 9.8, 
+         label = "a la cuota poblacional", 
+         color = "#1f77b4",size = 3, hjust = 0) +
+  annotate("segment", x = -0.1, xend = -0.4, y = 10.5, yend = 10.5, 
+         arrow = arrow(length = unit(0.2, "inches")), 
+         color = "#1f77b4", size = 2) +
+  annotate("text", x = -0.1, y = 10, 
+         label = expression("Consumo de queso"~bold("por debajo")), 
+         color = "#1f77b4",size = 3, hjust = 1) +
+  annotate("text", x = -0.1, y = 9.8, 
+         label = "de la cuota poblacional", 
+         color = "#1f77b4",size = 3, hjust = 1) +
+  annotate("rect", xmin = 0.48, xmax = 1.45, ymin = 7.5, ymax = 7.7, 
+           fill = "white", color = "white") +  # Caja blanca 
+  annotate("text", x = 0.5, y = 7.6, 
+         label = "Consumo per cápita promedio", 
+         color = "#1f77b4",size = 3, hjust = 0) +
+     labs(x = "Diferencia entre porcentaje de consumo y cuota poblacional",
+       y = "Consumo per cápita (kg)") + # Título de la leyenda
+  theme_minimal() +  
+  theme(legend.position = "none",
+        axis.title.x = element_text(size = 9),  # Reducir tamaño del título del eje X
+        axis.title.y = element_text(size = 9),
+        axis.text.x = element_text(hjust = 0.5))
+```
+
+## La producción de queso en Europa
+
+Los datos de la producción de queso en España y Europa (totales y catalogados), recogidos de diversas fuentes que se relacionan al final del artículo, se han agrupado en dos tablas:
+
+La @tbl-tabla-paises presenta la producción quesera en varios países europeos, incluyendo los volúmenes totales y los catalogados con DOP o IGP. En esta tabla recojo también la población y la superficie de estos países. He eliminado los países europeos para los que no dispongo de datos de producción DOP.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: tbl-tabla-paises
+#| tbl-cap: "Estadísticas de población, superficie y producción de queso de algunos países."
+
+df_paises %>%
+  # 1. ORDENAR: Fundamental hacerlo cuando aún son números
+  arrange(
+    if_else(pais == "Asturias", 2, 1), 
+    desc(prod_total_queso_ton)
+  ) %>%
+  
+  # 2. SELECCIONAR: Tus 8 columnas
+  select(1:8) %>%
+  
+  # 3. TRANSFORMAR Y LIMPIAR: 
+  # Aquí 'format' convierte el número en texto. 
+  # El 'if_else' detecta el NA numérico y lo cambia por un "" de texto.
+  mutate(across(where(is.numeric), 
+                ~ if_else(is.na(.), "", format(., big.mark = ".", decimal.mark = ",")))) %>%
+  
+  # 4. LIMPIAR CARACTERES: Por si acaso la columna 'pais' tiene algún NA
+  mutate(across(where(is.character), ~ replace_na(., ""))) %>%
+  
+  # 5. TABLA
+  knitr::kable(
+    format = "markdown",
+    col.names = c("País", "Población", "Km²", "Prod. queso (Ton)", "Prod. queso DOP+IGP (Ton)", 
+                  "Quesos DOP+IGP", "Empresas queseras", "Empresas DOP"),
+    align = c("l", "r", "r", "r", "r", "r", "r", "r")
+  )
+```
+
+::: {.smalltext style="font-size: 0.8em;"}
+Fuentes: Eurostat (2023); FAOSTAT (2023); Statbel (2024); CBS (2023); Destatis (2023); INAO (2023); Qualivita (2023); MAPA (2022); DGADR (2023); AOP-IGP.ch (2023); CNIEL (2023); TSM (2023) y oficinas nacionales de estadística de Austria, Irlanda, Suecia, Noruega, Polonia, Chequia, Bulgaria, Lituania, Rumanía, Letonia, Estonia, Eslovaquia, Chipre, Croacia y Eslovenia.
+:::
+
+Asturias se ha incluido en la tabla para reflejar su posición en comparación con otros países según los índices considerados.
+
+Algunos países, como Francia o Suiza, publican datos detallados; en otros casos he tenido que estimar el número total de empresas queseras y el número de empresas o centros de producción. Tampoco es fácil encontrar el número de empresas queseras por región, ya sean de queso en general o de DOP+IGP, y por eso he hecho el análisis para los datos de países completos. En muchos casos, una misma empresa puede operar en varios centros de producción, y elaborar tanto quesos catalogados como no catalogados. Por todo ello, es posible que los datos no sean completamente exactos y necesiten una revisión adicional. Cualquier información al respecto será de gran ayuda para mejorar el contenido del trabajo en revisiones posteriores.
+
+Los quesos DOP+IGP están bien identificados por país.Se han recogido un total de 221 variedades europeas, que se pueden consultar en la @tbl-tabla-dop incluida como anexo. No he podido confirmar los volúmenes de algunas de estas variedades, y por lo tanto han quedado excluidas del análisis. 
+
+La @fig-produccion-2 muestra las producciones totales de queso y queso DOP+IGP por país. 
+  
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| label: fig-produccion-2
+#| fig-cap: "Producción total de queso"
+
+# 1. Preparación de los datos
+df_long <- df_paises %>%
+  select(pais, prod_total_queso_ton, prod_ton_DOP_IGP) %>%
+  pivot_longer(cols = c(prod_total_queso_ton, prod_ton_DOP_IGP), 
+               names_to = "tipo", 
+               values_to = "toneladas") %>%
+  mutate(
+    # Creamos categorías específicas para el mapeo de colores
+    categoria_color = case_when(
+      pais == "Asturias" & tipo == "prod_total_queso_ton" ~ "Asturias_Total",
+      pais == "Asturias" & tipo == "prod_ton_DOP_IGP"     ~ "Asturias_DOP",
+      pais == "España"   & tipo == "prod_total_queso_ton" ~ "España_Total",
+      pais == "España"   & tipo == "prod_ton_DOP_IGP"     ~ "España_DOP",
+      tipo == "prod_total_queso_ton"                      ~ "Resto_Total",
+      tipo == "prod_ton_DOP_IGP"                          ~ "Resto_DOP"
+    )
+  )
+
+# 2. Generación del gráfico
+ggplot(df_long, aes(x = reorder(pais, toneladas), y = toneladas, fill = categoria_color)) +
+  geom_col(position = position_dodge(width = 0), width = 1.5, alpha = 0.6) +
+  coord_flip() +
+  
+  # 3. Definición manual de los grises y colores de énfasis
+  scale_fill_manual(values = c(
+    "Asturias_Total" = "#D55E00", # Naranja fuerte
+    "Asturias_DOP"   = "#F59E50", # Naranja suave
+    "España_Total"   = "#1f77b4", # Azul fuerte
+    "España_DOP"     = "#A6CEE3", # Azul suave
+    "Resto_Total"    = "#555555", # Gris oscuro para el resto
+    "Resto_DOP"      = "#eeeeee"  # Gris medio para el resto catalogado
+  )) +
+  
+  # Formato de números y etiquetas
+  scale_y_continuous(labels = scales::label_number(big.mark = ".", suffix = " t"),
+                     expand = expansion(mult = c(0, 0.1))) +
+  labs(
+    title = "Situación de Asturias en el contexto quesero europeo",
+    subtitle = "Comparativa de toneladas totales y catalogadas (DOP/IGP)",
+    x = NULL, 
+    y = "Producción en toneladas",
+    caption = "Fuente: Datos de producción regional y nacional"
+  ) +
+  theme_minimal() +
+theme(
+    legend.position = "none",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    
+    # MODIFICACIÓN AQUÍ:
+    axis.text.y = element_text(
+      # 1. Aplicamos negrita a Asturias y España
+      face = if_else(levels(df_long$pais) %in% c("Asturias", "España"), "bold", "plain"),
+      
+      # 2. Aplicamos el color específico a cada uno
+      color = case_when(
+        levels(df_long$pais) == "Asturias" ~ "#D55E00", # Naranja
+        levels(df_long$pais) == "España"   ~ "#1f77b4", # Azul
+        TRUE ~ "black"                                  # Resto en negro o gris oscuro
+      ),
+      
+      size = 10 # Opcional: ajustar tamaño para que resalte más
+    )
+  )
+
+```
+El mayor productor de queso europeo es Alemania; la producción de España es semejante a la de Dinamarca. El mayor productor de queso con DOP o IGP es Italia, gracias al enorme volumen de sus quesos Parmiggiano-Reggiano y Grana Padano. Este país también tiene una gran riqueza de quesos regionales con DOP+IGP (52), a la altura de Francia (57); casi el 50% de su producción quesera está catalogada.
+
+La producción de queso catalogado en Europa es muy superior a la de España y Asturias, tanto en total como en cada variedad. La @tbl-tabla-pct-DOP nos muestra que varios países tienen un porcentaje significativo de su producción quesera catalogada. Si la estrategia para Asturias es fomentar el desarrollo de productos con valor añadido con apoyo institucional, sin duda es de interés conocer en detalle las experiencias y la estructura del sector en estos países, y la forma en la que se articula el apoyo institucional a los quesos catalogados.
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| label: tbl-tabla-pct-DOP
+#| tbl-cap: "Porcentaje de la producción quesera que está catalogado con DOP o IGP en diferentes países"
+
+library(dplyr)
+library(tidyr)
+library(knitr)
+
+df_paises |>
+  mutate(
+    pct_cat = (prod_ton_DOP_IGP / prod_total_queso_ton) 
+  ) |>
+  
+  # 1. ORDENAR: Asturias al final (o según tu lógica) y el resto por porcentaje
+  arrange(
+    desc(pct_cat)
+  ) |>
+  
+  # 2. SELECCIONAR
+  select(pais, pct_cat) |>
+  
+  gt() |>
+  # 1. Formateamos el porcentaje directamente (gt tiene funciones integradas)
+  fmt_percent(
+    columns = pct_cat,
+    decimals = 1,
+    dec_mark = ",",
+    sep_mark = "."
+  ) |>
+  # 2. Etiquetas de columna
+  cols_label(
+    pais = "País",
+    pct_cat = "Queso DOP como % de la producción total"
+  ) |>
+  # 3. Ajustes de estilo: Ancho del 40% y centrado
+  tab_options(
+    table.width = pct(40),      # Ocupa el 40% del ancho del contenedor
+    table.margin.left = "auto", # Margen auto a la izquierda
+    table.margin.right = "auto" # Margen auto a la derecha (estos dos centran la tabla)
+  ) |>
+  # 4. Alineación del texto
+  cols_align(
+    align = "left", columns = pais
+  ) |>
+  cols_align(
+    align = "right", columns = pct_cat
+  ) |>
+  # Sustituir NAs por celda vacía
+  sub_missing(columns = everything(), missing_text = "")
+
+```
+
+La @fig-DOP-queso presenta los quesos europeos con DOP+IGP que hacen más de 10.000 toneladas (recordemos que los quesos asturianos DOP+IGP no alcanzan las 1000 toneladas). La lista está encabezada por un queso holandés, dos italianos, un griego y un francés. 
+
+Entre los quesos españoles, sólo aparece en este gráfico el manchego, con 17.000 toneladas anuales, en una posición intermedia. De los quesos asturianos, el primero en la tabla general sería el Cabrales en la posición 103; no llega a mostrarse en el gráfico.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-DOP-queso
+#| fig-cap: "Quesos DOP europeos con una producción anual superior a 10.000 toneladas"
+
+
+color_paleta <- c(
+  "España"   = "#0072B2",  # Azul (Mantenido)
+  "Asturias" = "#D55E00",  # Naranja/Rojo (Mantenido)
+  
+  # Escala de grises diferenciada (de más oscuro a más claro)
+  "Francia"       = "#333333",  # Gris casi negro (más profundo)
+  "Italia"        = "#666666",  # Gris oscuro
+  "Países Bajos"  = "#888888",  # Gris medio-oscuro (NUEVO)
+  "Suiza"         = "#AAAAAA",  # Gris medio
+  "Grecia"        = "#CCCCCC",  # Gris claro
+  "Otros"         = "#EEEEEE"   # Gris muy claro (fondo/secundario)
+)
+
+df_tabla_quesos %>%
+  filter((toneladas > 10000)) %>%
+  mutate(highlight = case_when(
+    pais == "España" ~ "España",
+    pais == "Asturias" ~ "Asturias",
+    pais == "Francia" ~ "Francia",
+    pais == "Italia" ~ "Italia",
+    pais == "Países Bajos" ~ "Países Bajos",    
+    pais == "Suiza" ~ "Suiza",
+    pais == "Grecia" ~ "Grecia",
+    TRUE ~ "Otros"
+  )) %>%
+  mutate(highlight = factor(highlight, levels = c("España", "Asturias", "Francia", "Italia", "Países Bajos", "Suiza", "Grecia", "Otros"))) %>%
+  ggplot(aes(y = reorder(queso, toneladas), x = toneladas, fill = highlight)) +
+  geom_bar(stat = "identity", width = 0.7) +
+  geom_text(aes(label = if_else(pais == "España", as.character(as.integer(toneladas)), NA_character_)), 
+          hjust = 0, size = 2, colour = "grey", na.rm = TRUE) +
+  scale_fill_manual(values = color_paleta) +  # Aplicamos la paleta personalizada
+  labs(x = "toneladas",
+       fill = "País") +  # Se mantiene la leyenda
+  scale_x_continuous(labels = scales::comma) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    axis.title.y = element_blank(),
+    axis.text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(size = 12, hjust = 0.5))
+```
+
+## Indices comparativos entre Asturias y Europa
+
+Para comparar la producción de queso en Asturias con la producción total de los países de la UE, puede ser útil establecer índices relativos, como la producción por habitante o por $km^2$. 
+
+::: important
+Antes de presentar el análisis de estas ratios, es importante señalar que comparar Asturias con países europeos en su totalidad puede poporcionar una visión distorsionada. La producción de queso no es uniforme a lo largo de un país; suele focalizarse en zonas concretas. Si se dispusiera de datos regionales y se comparasen con las áreas queseras asturianas, es probable que las ratios de producción por habitante o por $km^2$ en otras regiones queseras europeas fueran significativamente mayores. He utilizado las cifras nacionales ante la falta de información regional detallada.}
+:::
+
+La @fig-habitante presenta los datos de producción de queso en kilogramos por habitante. Los mayores productores de queso de acuerdo a este índice son Dinamarca, Países Bajos e Irlanda; en los quesos DOP+IGP, lo son Países Bajos, Chipre y Grecia, con Italia y Suiza a una distancia moderada. Asturias tiene una producción total por habitante superior a la de Italia, Grecia o Suiza. En cambio, en la producción DOP/IGP, se sitúa casi al final de la lista. 
+
+
+```{r}
+#| label: fig-habitante
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| fig-cap: "Producción de queso por habitante"
+
+df_long <- df_paises %>%
+  mutate(pais = reorder(pais, kg_queso_habitante)) %>%
+  select(pais, kg_queso_habitante, kg_DOP_habitante) %>%
+  pivot_longer(cols = c(kg_queso_habitante, kg_DOP_habitante), 
+               names_to = "tipo", 
+               values_to = "toneladas") %>%
+  mutate(
+    # Creamos categorías específicas para el mapeo de colores
+    categoria_color = case_when(
+      pais == "Asturias" & tipo == "kg_queso_habitante" ~ "Asturias_Total",
+      pais == "Asturias" & tipo == "kg_DOP_habitante"     ~ "Asturias_DOP",
+      pais == "España"   & tipo == "kg_queso_habitante" ~ "España_Total",
+      pais == "España"   & tipo == "kg_DOP_habitante"     ~ "España_DOP",
+      tipo == "kg_queso_habitante"                      ~ "Resto_Total",
+      tipo == "kg_DOP_habitante"                          ~ "Resto_DOP"
+    )
+  )
+
+# 2. Generación del gráfico
+ggplot(df_long, aes(x = pais, y = toneladas, fill = categoria_color)) +
+  geom_col(position = position_dodge(width = 0), width = 1.5, alpha = 0.6) +
+  coord_flip() +
+  
+  # 3. Definición manual de los grises y colores de énfasis
+  scale_fill_manual(values = c(
+    "Asturias_Total" = "#D55E00", # Naranja fuerte
+    "Asturias_DOP"   = "#F59E50", # Naranja suave
+    "España_Total"   = "#1f77b4", # Azul fuerte
+    "España_DOP"     = "#A6CEE3", # Azul suave
+    "Resto_Total"    = "#555555", # Gris oscuro para el resto
+    "Resto_DOP"      = "#eeeeee"  # Gris medio para el resto catalogado
+  )) +
+  
+  # Formato de números y etiquetas
+  scale_y_continuous(labels = scales::label_number(big.mark = ".", suffix = " kg"),
+                     expand = expansion(mult = c(0, 0.1))) +
+  labs(
+    title = "Situación de Asturias en el contexto quesero europeo",
+    subtitle = "Comparativa de producción total y catalogada (DOP/IGP) por habitante",
+    x = NULL, 
+    y = "Producción en kg/hab",
+    caption = "Fuente: Datos de producción regional y nacional"
+  ) +
+  theme_minimal() +
+ theme(
+    legend.position = "none",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    
+    # MODIFICACIÓN AQUÍ:
+    axis.text.y = element_text(
+      # 1. Aplicamos negrita a Asturias y España
+      face = if_else(levels(df_long$pais) %in% c("Asturias", "España"), "bold", "plain"),
+      
+      # 2. Aplicamos el color específico a cada uno
+      color = case_when(
+        levels(df_long$pais) == "Asturias" ~ "#D55E00", # Naranja
+        levels(df_long$pais) == "España"   ~ "#1f77b4", # Azul
+        TRUE ~ "black"                                  # Resto en negro o gris oscuro
+      ),
+      
+      size = 10 # Opcional: ajustar tamaño para que resalte más
+    )
+  )
+
+```
+
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| label: tbl-pct-habitante
+#| tbl-cap: "Producción de queso por habitante, total y catalogado (kg)"
+
+df_paises |>
+  # 1. ORDENAR por porcentaje
+  arrange(
+    desc(kg_queso_habitante)
+  ) |>
+  
+  # 2. SELECCIONAR
+  select(pais, kg_queso_habitante, kg_DOP_habitante) |>
+  
+  gt() |>
+# 1. FORMATEO NUMÉRICO: Un decimal y configuración regional (coma para decimales)
+  fmt_number(
+    columns = c(kg_queso_habitante, kg_DOP_habitante),
+    decimals = 1,
+    dec_mark = ",",
+    sep_mark = "."
+  ) |>
+  # 2. Etiquetas de columna
+  cols_label(
+    pais = "País",
+    kg_queso_habitante = "Producción total",
+    kg_DOP_habitante = "Producción DOP+IGP"
+  ) |>
+  # 3. Ajustes de estilo: Ancho del 40% y centrado
+  tab_options(
+    table.width = pct(40),      # Ocupa el 40% del ancho del contenedor
+    table.margin.left = "auto", # Margen auto a la izquierda
+    table.margin.right = "auto" # Margen auto a la derecha (estos dos centran la tabla)
+  ) |>
+  # 4. Alineación del texto
+  cols_align(
+    align = "left", columns = pais
+  ) |>
+  cols_align(
+    align = "right", columns = c(kg_queso_habitante,kg_DOP_habitante)
+  ) |>
+  # Sustituir NAs por celda vacía
+  sub_missing(columns = everything(), missing_text = "")
+
+```
+
+La @fig-km2 presenta la producción de queso por unidad de superficie de la zona considerada (toneladas/$km^2$). Destaca la enorme producción de Países Bajos, tanto total como de DOP. En cuanto al total de queso producido, Asturias presenta un índice superior al de Grecia y al promedio de España. 
+```{r}
+#| label: fig-km2
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| fig-cap: "Producción de queso por km2"
+
+df_long <- df_paises %>%
+  mutate(pais = reorder(pais, ton_tot_km2)) %>%
+  select(pais, ton_tot_km2, ton_DOP_km2) %>%
+  pivot_longer(cols = c(ton_tot_km2, ton_DOP_km2), 
+               names_to = "tipo", 
+               values_to = "toneladas") %>%
+  mutate(
+    # Creamos categorías específicas para el mapeo de colores
+    categoria_color = case_when(
+      pais == "Asturias" & tipo == "kg_queso_km2" ~ "Asturias_Total",
+      pais == "Asturias" & tipo == "ton_DOP_km2"     ~ "Asturias_DOP",
+      pais == "España"   & tipo == "kg_queso_km2" ~ "España_Total",
+      pais == "España"   & tipo == "ton_DOP_km2"     ~ "España_DOP",
+      tipo == "kg_queso_km2"                      ~ "Resto_Total",
+      tipo == "ton_DOP_km2"                          ~ "Resto_DOP"
+    )
+  )
+
+# 2. Generación del gráfico
+ggplot(df_long, aes(x = pais, y = toneladas, fill = categoria_color)) +
+  geom_col(position = position_dodge(width = 0), width = 1.5, alpha = 0.6) +
+  coord_flip() +
+  
+  # 3. Definición manual de los grises y colores de énfasis
+  scale_fill_manual(values = c(
+    "Asturias_Total" = "#D55E00", # Naranja fuerte
+    "Asturias_DOP"   = "#F59E50", # Naranja suave
+    "España_Total"   = "#1f77b4", # Azul fuerte
+    "España_DOP"     = "#A6CEE3", # Azul suave
+    "Resto_Total"    = "#555555", # Gris oscuro para el resto
+    "Resto_DOP"      = "#eeeeee"  # Gris medio para el resto catalogado
+  )) +
+  
+  # Formato de números y etiquetas
+  scale_y_continuous(labels = scales::label_number(big.mark = ".", suffix = " t"),
+                     expand = expansion(mult = c(0, 0.1))) +
+  labs(
+    title = "Situación de Asturias en el contexto quesero europeo",
+    subtitle = "Comparativa de producción total y catalogada (DOP/IGP) por km2",
+    x = NULL, 
+    y = "Producción en toneladas",
+    caption = "Fuente: Datos de producción regional y nacional"
+  ) +
+  theme_minimal() +
+theme(
+    legend.position = "none",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    
+    # MODIFICACIÓN AQUÍ:
+    axis.text.y = element_text(
+      # 1. Aplicamos negrita a Asturias y España
+      face = if_else(levels(df_long$pais) %in% c("Asturias", "España"), "bold", "plain"),
+      
+      # 2. Aplicamos el color específico a cada uno
+      color = case_when(
+        levels(df_long$pais) == "Asturias" ~ "#D55E00", # Naranja
+        levels(df_long$pais) == "España"   ~ "#1f77b4", # Azul
+        TRUE ~ "black"                                  # Resto en negro o gris oscuro
+      ),
+      
+      size = 10 # Opcional: ajustar tamaño para que resalte más
+    )
+  )
+
+```
+
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| label: tbl-prod-km2
+#| tbl-cap: "Producción de queso por unidad de superfice (km2), total y catalogado (toneladas)"
+
+df_paises |>
+  # 1. ORDENAR por porcentaje
+  arrange(
+    desc(ton_tot_km2)
+  ) |>
+  
+  # 2. SELECCIONAR
+  select(pais, ton_tot_km2, ton_DOP_km2) |>
+  
+  gt() |>
+# 1. FORMATEO NUMÉRICO: Un decimal y configuración regional (coma para decimales)
+  fmt_number(
+    columns = c(ton_tot_km2, ton_DOP_km2),
+    decimals = 1,
+    dec_mark = ",",
+    sep_mark = "."
+  ) |>
+  # 2. Etiquetas de columna
+  cols_label(
+    pais = "País",
+    ton_tot_km2 = "Producción total",
+    ton_DOP_km2 = "Producción DOP+IGP"
+  ) |>
+  # 3. Ajustes de estilo: Ancho del 40% y centrado
+  tab_options(
+    table.width = pct(40),      # Ocupa el 40% del ancho del contenedor
+    table.margin.left = "auto", # Margen auto a la izquierda
+    table.margin.right = "auto" # Margen auto a la derecha (estos dos centran la tabla)
+  ) |>
+  # 4. Alineación del texto
+  cols_align(
+    align = "left", columns = pais
+  ) |>
+  cols_align(
+    align = "right", columns = c(ton_tot_km2,ton_DOP_km2)
+  ) |>
+  # Sustituir NAs por celda vacía
+  sub_missing(columns = everything(), missing_text = "")
+
+```
+
+La @fig-empresas muestra la producción media de queso por empresa, total y catalogado. En ambas figuras (@fig-empresas-ton y @fig-empresas-DOP) vemos la pequeña talla de las empresas asturianas.
+
+:::{#fig-empresas layout-ncol=2}
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-empresas-ton
+#| fig-cap: "Producción total"
+#| fig-height: 6
+
+# 1. Preparamos los datos fuera para que los niveles coincidan
+df_plot <- df_paises %>%
+  filter (!is.na(ton_queso_por_empresa)) %>%
+  mutate(
+    # Ordenamos el factor aquí para que el theme pueda leer los niveles correctos
+    pais = reorder(pais, ton_queso_por_empresa),
+    highlight = if_else(pais %in% c("España", "Asturias"), as.character(pais), "Otros")
+  )
+
+# 2. Extraemos los niveles ordenados para el theme
+eje_colores <- case_when(
+  levels(df_plot$pais) == "Asturias" ~ "#D55E00",
+  levels(df_plot$pais) == "España"   ~ "#1f77b4",
+  TRUE ~ "black"
+)
+
+eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
+
+# 3. Gráfico
+ggplot(df_plot, aes(x = pais, y = ton_queso_por_empresa, fill = highlight)) +
+  geom_col() +
+  scale_fill_manual(values = c("Otros" = "grey60", 
+                               "España" = "#1f77b4", 
+                               "Asturias" = "#D55E00")) +
+  scale_y_continuous(labels = scales::comma) +
+  # Usamos una función simple para las etiquetas si no quieres el gsub complicado
+  # scale_x_discrete(labels = function(x) gsub(" ", "\n", x)) +
+  coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none",
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
+        # APLICAMOS LOS VECTORES QUE CREAMOS ARRIBA
+        axis.text.y = element_text(color = eje_colores, 
+                                   face = eje_caras, 
+                                   size = 16) # 16 suele ser muy grande para el eje Y
+  )
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-empresas-DOP
+#| fig-cap: "Producción DOP+IGP"
+#| fig-height: 6
+
+# 1. Preparamos los datos fuera para que los niveles coincidan
+df_plot <- df_paises %>%
+    filter (!is.na(ton_queso_DOP_por_empresa)) %>%
+  mutate(
+    # Ordenamos el factor aquí para que el theme pueda leer los niveles correctos
+    pais = reorder(pais, ton_queso_DOP_por_empresa),
+    highlight = if_else(pais %in% c("España", "Asturias"), as.character(pais), "Otros")
+  )
+
+# 2. Extraemos los niveles ordenados para el theme
+eje_colores <- case_when(
+  levels(df_plot$pais) == "Asturias" ~ "#D55E00",
+  levels(df_plot$pais) == "España"   ~ "#1f77b4",
+  TRUE ~ "black"
+)
+
+eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
+
+# 3. Gráfico
+ggplot(df_plot, aes(x = pais, y = ton_queso_DOP_por_empresa, fill = highlight)) +
+  geom_col() +
+  scale_fill_manual(values = c("Otros" = "grey60", 
+                               "España" = "#1f77b4", 
+                               "Asturias" = "#D55E00")) +
+  scale_y_continuous(labels = scales::comma) +
+  # Usamos una función simple para las etiquetas si no quieres el gsub complicado
+  # scale_x_discrete(labels = function(x) gsub(" ", "\n", x)) +
+  coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none",
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
+        # APLICAMOS LOS VECTORES QUE CREAMOS ARRIBA
+        axis.text.y = element_text(color = eje_colores, 
+                                   face = eje_caras, 
+                                   size = 16) # 16 suele ser muy grande para el eje Y
+  )
+```
+
+
+Producción media por empresa (toneladas)
+
+::: 
+
+La @fig-dotplot-num_empresas muestra que Asturias, según los datos disponibles, es la zona quesera de Europa que tiene el mayor número de empresas fabricantes de queso por millón de habitantes entre todas las analizadas, aunque, como hemos visto en la @fig-empresas, la producción media por empresa está entre las más bajas (recordemos que estamos comparando una región con países completos). Respecto a estas características, Asturias se sitúa cerca de Suiza y Grecia. Este elevado número de empresas en la región podría explicar la afirmación de que Asturias constituye ***la mayor mancha quesera de Europa***, referida al número de empresas y no a la producción total.
+```{r}
+#| label: fig-dotplot-num_empresas
+#| fig-cap: "Número de empresas por millón de habitantes vs. producción media por empresa"
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+
+library(ggplot2)
+library(ggrepel)
+
+df_paises %>%
+  # 1. Creamos la misma lógica de resaltado que en tus barras
+  mutate(highlight = case_when(
+      pais == "España" ~ "España",
+      pais == "Asturias" ~ "Asturias",
+      TRUE ~ "Otros"),
+    kg_queso_km2 = prod_total_queso_ton / superficie_km2,
+    kg_queso_DOP_km2 = prod_ton_DOP_IGP / superficie_km2) %>%
+  ggplot(aes(x = num_empresas_millon_hab, y = ton_queso_por_empresa)) +
+  # 2. Puntos: Gris uniforme para 'Otros' y colores para España/Asturias
+  geom_point(aes(color = highlight), size = 2.5, alpha = 0.7) +
+  # 3. Etiquetas: Solo ponemos nombre a los puntos destacados para evitar ruido
+  # geom_text_repel(aes(label = if_else(highlight == "Otros", "", pais), color = highlight),
+  #                 size = 4, fontface = "bold", box.padding = 0.5) +
+  geom_text_repel(aes(label = pais, color = highlight), 
+                  size = 3, 
+                  fontface = "plain",
+                  max.overlaps = Inf, # Obligamos a que salgan todos
+                  box.padding = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey80') + # Líneas finas hacia los puntos
+  
+    # 4. Paleta exacta a tus gráficos de barras
+  scale_color_manual(values = c("Otros" = "grey60", 
+                                "España" = "#1f77b4", 
+                                "Asturias" = "#D55E00")) +
+  # 5. Formato y limpieza visual
+  scale_x_continuous(labels = scales::comma) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    x = "Núm. de empresas por millón de habitantes",
+    y = "Producción media por empresa (toneladas)"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(), # Limpio como tus barras
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(color = "grey80") # Una línea base para los ejes
+  )
+```
+
+La @fig-dens muestra la implantación de empresas por 1000 $km^2$, índice que he llamado *densidad*. La densidad de empresas queseras en la región de Asturias es semejante a la de Alemania, y está entre las más altas de los países considerados, tanto en total como en quesos catalogados.
+
+:::{#fig-dens layout-ncol=2}
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-dens-total
+#| fig-cap: "Número total de empresas por 1000 $km^2$"
+
+# 1. Preparamos los datos fuera para que los niveles coincidan
+df_plot <- df_paises %>%
+  filter(!is.na(num_empresas_queseras)&!is.na(num_empresas_queseras_DOP)) %>%
+  mutate(
+    highlight = if_else(pais %in% c("España", "Asturias"), pais, "Otros"),
+    empresas_km2 = num_empresas_queseras / (superficie_km2/1000),
+    empresas_DOP_km2 = num_empresas_queseras_DOP / (superficie_km2/1000),
+    pais = reorder(pais, empresas_km2)
+  )
+
+# 2. Extraemos los niveles ordenados para el theme
+eje_colores <- case_when(
+  levels(df_plot$pais) == "Asturias" ~ "#D55E00",
+  levels(df_plot$pais) == "España"   ~ "#1f77b4",
+  TRUE ~ "black"
+)
+
+eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
+
+# 3. Gráfico
+ggplot(df_plot, aes(x = pais, y = empresas_km2, fill = highlight)) +
+  geom_col() +
+  scale_fill_manual(values = c("Otros" = "grey60", 
+                               "España" = "#1f77b4", 
+                               "Asturias" = "#D55E00")) +
+  scale_y_continuous(labels = scales::comma) +
+  # Usamos una función simple para las etiquetas si no quieres el gsub complicado
+  # scale_x_discrete(labels = function(x) gsub(" ", "\n", x)) +
+  coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none",
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
+        # APLICAMOS LOS VECTORES QUE CREAMOS ARRIBA
+        axis.text.y = element_text(color = eje_colores, 
+                                   face = eje_caras, 
+                                   size = 16) # 16 suele ser muy grande para el eje Y
+  )
+```
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-dens-DOP
+#| fig-cap: "Número de empresas DOP+IGP por 1000 $km^2$"
+#| 
+# 1. Preparamos los datos fuera para que los niveles coincidan
+df_plot <- df_paises %>%
+  filter(!is.na(num_empresas_queseras)&!is.na(num_empresas_queseras_DOP)) %>%
+  mutate(
+    highlight = if_else(pais %in% c("España", "Asturias"), pais, "Otros"),
+    empresas_km2 = num_empresas_queseras / (superficie_km2/1000),
+    empresas_DOP_km2 = num_empresas_queseras_DOP / (superficie_km2/1000),
+    pais = reorder(pais, empresas_DOP_km2)
+  )
+
+# 2. Extraemos los niveles ordenados para el theme
+eje_colores <- case_when(
+  levels(df_plot$pais) == "Asturias" ~ "#D55E00",
+  levels(df_plot$pais) == "España"   ~ "#1f77b4",
+  TRUE ~ "black"
+)
+
+eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
+
+# 3. Gráfico
+ggplot(df_plot, aes(x = pais, y = empresas_DOP_km2, fill = highlight)) +
+  geom_col() +
+  scale_fill_manual(values = c("Otros" = "grey60", 
+                               "España" = "#1f77b4", 
+                               "Asturias" = "#D55E00")) +
+  scale_y_continuous(labels = scales::comma) +
+  # Usamos una función simple para las etiquetas si no quieres el gsub complicado
+  # scale_x_discrete(labels = function(x) gsub(" ", "\n", x)) +
+  coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none",
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
+        # APLICAMOS LOS VECTORES QUE CREAMOS ARRIBA
+        axis.text.y = element_text(color = eje_colores, 
+                                   face = eje_caras, 
+                                   size = 16) # 16 suele ser muy grande para el eje Y
+  )
+
+```
+
+Densidad de empresas queseras y DOP+IGP (número de empresas por 1000 $km2$)
+
+:::
+
+```{r}
+#| label: fig-dotplot-dens
+#| fig-cap: "Número de empresas por 1000 km2 vs. número de empresas DOP+IGP por km2"
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+
+library(ggplot2)
+library(ggrepel)
+
+df_paises %>%
+  # 1. Creamos la misma lógica de resaltado que en tus barras
+  mutate(highlight = case_when(
+      pais == "España" ~ "España",
+      pais == "Asturias" ~ "Asturias",
+      TRUE ~ "Otros"),
+      empresas_km2 = num_empresas_queseras / (superficie_km2/1000),
+      empresas_DOP_km2 = num_empresas_queseras_DOP / (superficie_km2/1000)) %>%
+  ggplot(aes(x = empresas_km2, y = empresas_DOP_km2)) +
+  # 2. Puntos: Gris uniforme para 'Otros' y colores para España/Asturias
+  geom_point(aes(color = highlight), size = 2.5, alpha = 0.7) +
+  # 3. Etiquetas: Solo ponemos nombre a los puntos destacados para evitar ruido
+  # geom_text_repel(aes(label = if_else(highlight == "Otros", "", pais), color = highlight),
+  #                 size = 4, fontface = "bold", box.padding = 0.5) +
+  geom_text_repel(aes(label = pais, color = highlight), 
+                  size = 3, 
+                  fontface = "plain",
+                  max.overlaps = Inf, # Obligamos a que salgan todos
+                  box.padding = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey80') + # Líneas finas hacia los puntos
+  
+    # 4. Paleta exacta a tus gráficos de barras
+  scale_color_manual(values = c("Otros" = "grey60", 
+                                "España" = "#1f77b4", 
+                                "Asturias" = "#D55E00")) +
+  # 5. Formato y limpieza visual
+  scale_x_continuous(labels = scales::comma) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    x = "Núm. de empresas por 1000 km2",
+    y = "Núm de empresas DOP+IGP por 1000 km2"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(), # Limpio como tus barras
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(color = "grey80") # Una línea base para los ejes
+  )
+```
+
+La alta densidad de empresas DOP+IGP que muestra la @fig-dens-DOP, unida a la baja producción por empresa, que hemos visto en la @fig-empresas-DOP, refleja una característica de los quesos catalogados en Asturias: su producción depende de muchas pequeñas empresas artesanales con volúmenes reducidos. Esto invita a reflexionar sobre las diferencias entre los quesos DOP e IGP y los quesos *artesanales*; en Europa, muchos quesos con DOP se fabrican a escala industrial o semiindustrial, y su elevado volumen permite una financiación adecuada de los Consejos Reguladores, que disponen de ingresos suficientes para abordar proyectos de mejora de sus productos.
+
+Esta es una discusión compleja en Asturias, porque la distinción entre productos industriales y artesanales sigue siendo objeto de debate y no se ha definido con suficiente claridad. En Asturias, los quesos con certificación DOP o IGP han sido tradicionalmente considerados artesanales, lo que ha limitado su desarrollo dentro de un modelo más amplio de producción; como hemos visto, no es así en el contexto europeo. Podría ser muy interesante para Asturias estudiar la situación de Suiza, también con un gran número de empresas por $km^2$, y un modelo de promoción de sus productos DOP+IGP altamente exitoso.
+
+# Conclusiones
+
+La construcción de diversos índices relativos de la producción quesera asturiana frente a otros países de la Unión Europea permite poner en contexto la situación de los quesos asturianos. El análisis de los datos muestra que Asturias tiene un elevado número de empresas fabricantes de queso (incluyendo las artesanales), y que el volumen medio producido por empresa se encuentra entre los más bajos de las zonas queseras de Europa analizadas. 
+
+Es cierto que el valor de la producción de queso no debe establecerse sólo en función del volumen, sino también de su valor añadido. En el caso de Asturias, se podría pensar que la variedad de quesos ofertada es la que genera este valor añadido, además del valor de los productos por sí mismos. Pero hay que tener en cuenta que la elevada cantidad de empresas con una producción reducida genera estructuras de fabricación de escala reducida. En este caso, aunque el valor añadido unitario sea significativo, los recursos generados pueden ser insuficientes para atender inversiones, amortizaciones y gastos de personal, incluyendo aspectos no directamente productivos, como la formación.
+
+Aunque la producción de queso en Asturias es importante, no es en ningún caso superior a la de otras zonas de Europa, comparando con países completos. Si buscásemos zonas queseras importantes de Europa, seguramente la reducción de la superficie considerada haría subir las ratios para estas zonas de alta producción.  Por ello no parece justificado denominar a Asturias ***la mayor mancha quesera de Europa***, aunque es necesario mejorar la información regional europea para validar esta conclusión. Por otra parte, en el total de queso fabricado en Asturias hay una cantidad importante de productos que no tienen una vinculación con la región más allá de estar fabricados en ella: es el caso de mozzarella, quesos fundidos y otros, que la última edición del **Catálogo general de los quesos elaborados en Asturias** @vadequesum2026 ya ha excluido del catálogo. Resulta clave elaborar un plan estratégico que defina y refuerce los atributos distintivos del queso asturiano y apoye tanto a los quesos con certificación DOP e IGP como a los quesos de autor de alta calidad, diferenciando con claridad los quesos catalogados de los quesos artesanos, y facilitando el desarrollo de iniciativas de consolidación que permitan aumentar el tamaño de las queserías asturianas. En este sentido, estudiar otros modelos regionales, como el suizo, puede ser de gran interés.
+
+## Anexo: Tabla de quesos europeos catalogados (DOP, IGP o ETG)
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+#| label: tbl-tabla-dop
+#| tbl-cap: "Tabla general de queso DOP+IGP por países." 
+  
+options(knitr.kable.NA = "")
+
+df_tabla_quesos %>%
+  mutate(toneladas = scales::comma(as.integer(toneladas), big.mark = ".", decimal.mark = ",")) %>%
+  arrange(pais, queso) %>%
+  group_by(pais) %>%
+  mutate(pais = ifelse(duplicated(pais), "", pais)) %>% # Dejar en blanco los duplicados
+  select(pais, everything()) %>% # Mueve 'pais' a la primera columna
+  knitr::kable(format = "markdown", align = c("l", "l", "r", "r", "r", "r"))
+```
+
