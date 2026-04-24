@@ -8,13 +8,15 @@ image: "quesos-asturianos.jpg"
 draft: false
 lang: es
 editor: source
+execute: 
+  freeze: true
 fig-cap-location: top
 bibliography: referencias.bib
 csl: vancouver-superscript.csl
 reference-section-title: "Referencias y fuentes consultadas"
 nocite: |
   @DAESAE, @eurostat, @cnaol2024, @clal, @scm2024, @nin2022, @ddb2025,
-  @wiki-1-2025, @mapa-1-2023, @mapa-2-2023, @mapa-3-2023, @sek2025, @vadequesum2023,
+  @wiki-1-2025, @mapa-1-2023, @mapa-2-2023, @mapa-3-2023, @sek2025,
   @lne2025-1, @lne2025-2, @lne2024, @lva2022, @ine2025, @ifl2025, @dairy2024, @alimesp2025
 ---
 
@@ -1196,7 +1198,11 @@ La construcción de diversos índices relativos de la producción quesera asturi
 
 Es cierto que el valor de la producción de queso no debe establecerse sólo en función del volumen, sino también de su valor añadido. En el caso de Asturias, se podría pensar que la variedad de quesos ofertada es la que genera este valor añadido, además del valor de los productos por sí mismos. Pero hay que tener en cuenta que la elevada cantidad de empresas con una producción reducida genera estructuras de fabricación de escala reducida. En este caso, aunque el valor añadido unitario sea significativo, los recursos generados pueden ser insuficientes para atender inversiones, amortizaciones y gastos de personal, incluyendo aspectos no directamente productivos, como la formación.
 
-Aunque la producción de queso en Asturias es importante, no es en ningún caso superior a la de otras zonas de Europa, comparando con países completos. Si buscásemos zonas queseras importantes de Europa, seguramente la reducción de la superficie considerada haría subir las ratios para estas zonas de alta producción.  Por ello no parece justificado denominar a Asturias ***la mayor mancha quesera de Europa***, aunque es necesario mejorar la información regional europea para validar esta conclusión. Por otra parte, en el total de queso fabricado en Asturias hay una cantidad importante de productos que no tienen una vinculación con la región más allá de estar fabricados en ella: es el caso de mozzarella, quesos fundidos y otros, que la última edición del **Catálogo general de los quesos elaborados en Asturias** @vadequesum2026 ya ha excluido del catálogo. Resulta clave elaborar un plan estratégico que defina y refuerce los atributos distintivos del queso asturiano y apoye tanto a los quesos con certificación DOP e IGP como a los quesos de autor de alta calidad, diferenciando con claridad los quesos catalogados de los quesos artesanos, y facilitando el desarrollo de iniciativas de consolidación que permitan aumentar el tamaño de las queserías asturianas. En este sentido, estudiar otros modelos regionales, como el suizo, puede ser de gran interés.
+Aunque la producción de queso en Asturias es importante, no es superior a la de muchas otras zonas de Europa, comparando con países completos. Si buscásemos zonas queseras importantes de Europa, seguramente la reducción de la superficie considerada haría subir las ratios para estas zonas de alta producción.  Por ello no parece justificado denominar a Asturias ***la mayor mancha quesera de Europa***, aunque es necesario mejorar la información regional europea para validar esta conclusión. 
+
+Por otra parte, en el total de queso fabricado en Asturias hay una cantidad importante de productos que no tienen una vinculación con la región más allá de estar fabricados en ella: es el caso de mozzarellas, quesos fundidos y otros, que la última edición del **Catálogo general de los quesos elaborados en Asturias** @vadequesum2026 ya ha excluido del catálogo.
+
+Resulta clave elaborar un plan estratégico que defina y refuerce los atributos distintivos del queso asturiano y apoye tanto a los quesos con certificación DOP e IGP como a los quesos de autor de alta calidad, diferenciando con claridad los quesos catalogados de los quesos artesanos, y facilitando el desarrollo de iniciativas de consolidación que permitan aumentar el tamaño de las queserías asturianas. En este sentido, estudiar otros modelos regionales, como el suizo, puede ser de gran interés.
 
 ## Anexo: Tabla de quesos europeos catalogados (DOP, IGP o ETG)
 
