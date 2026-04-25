@@ -1,7 +1,7 @@
 ---
-title: "Asturias, ¿la mayor mancha quesera de Europa? Una revisión."
-subtitle: "Un análisis de la producción quesera en Asturias"
-date: 2026-04-26
+title: "La producción quesera de Asturias en el contexto europeo."
+subtitle: ""
+date: 2026-04-25
 date-format: "DD/MM/YYYY"
 categories: [queso]
 image: "quesos-asturianos.jpg"
@@ -9,36 +9,29 @@ draft: false
 lang: es
 editor: source
 execute: 
-  freeze: true
+  freeze: false
 fig-cap-location: top
 bibliography: referencias.bib
 csl: vancouver-superscript.csl
 reference-section-title: "Referencias y fuentes consultadas"
 nocite: |
   @DAESAE, @eurostat, @cnaol2024, @clal, @scm2024, @nin2022, @ddb2025,
-  @wiki-1-2025, @mapa-1-2023, @mapa-2-2023, @mapa-3-2023, @sek2025,
+  @wiki-1-2025, @mapa-1-2023, @mapa-2-2023, @mapa-3-2023, @sek2025, @vadequesum2023,
   @lne2025-1, @lne2025-2, @lne2024, @lva2022, @ine2025, @ifl2025, @dairy2024, @alimesp2025
 ---
 
 # Resumen
-
 Este trabajo revisa la [publicacion que hice en LinkedIn](https://www.linkedin.com/pulse/asturias-la-mayor-mancha-quesera-de-europa-juan-riera-udwwf/) el 18 de abril de 2025, actualizando algunos datos de producción con la información disponible en Eurostat para 2024. Los datos referentes a algunos países, así como al número de empresas *queseras* sigue siendo difícil de encontrar. Los nuevos datos no introducen diferencias significativas en las conclusiones.
 
-Se examina la producción de queso en Asturias, incluyendo los quesos amparados por Denominación de Origen Protegida (DOP) e Indicación Geográfica Protegida (IGP), y se contrasta con datos de España y Europa. La información, obtenida de diversas fuentes online, que se incluyen en las referencias, se centra en el análisis del queso producido y el número de empresas. No se incluyen en el estudio otras variables económicas como inversión, empleo o contribución al PIB debido a la falta de datos detallados del sector. La información referente al número de empresas queseras es bastante precisa en Asturias, pero muy desigual o inexistente en el resto de las áreas estudiadas. La información sobre la producción de queso está en el mismo caso, dificultando la obtención de conclusiones precisas. Además, no ha sido posible cuantificar con detalle el volumen de producción fuera de la certificación DOP/IGP.
+Examino la producción de queso en Asturias, incluyendo los quesos amparados por Denominación de Origen Protegida (DOP) e Indicación Geográfica Protegida (IGP), y la contrasto con datos de España y Europa. La información, obtenida de diversas fuentes online, que se incluyen en las referencias, se centra en el análisis del queso producido y el número de empresas. No se incluyen en el estudio otras variables económicas como inversión, empleo o contribución al PIB debido a la falta de datos detallados del sector. La información referente al número de empresas queseras es bastante precisa en Asturias, pero muy desigual o inexistente en el resto de las áreas estudiadas. La información sobre la producción de queso está en el mismo caso, dificultando la obtención de conclusiones precisas. Además, no ha sido posible cuantificar con detalle el volumen de producción fuera de la certificación DOP/IGP.
 
-El análisis revela que la producción de queso de Asturias no se sitúa como la más elevada a nivel nacional o europeo, ni en el total ni en la de quesos catalogados. Algunos quesos frescos fabricados por grandes multinacionales han tenido y siguen teniendo un papel clave en la producción regional; actualmente representan un 36% de la producción total de queso en la región. Asturias destaca por una relativa alta densidad de empresas queseras, calculada en este estudio bien como número de empresas por 1000 $km^2$ (especialmente en el ámbito de los quesos con certificación DOP/IGP, sólo por detrás de Suiza), o bien por millón de habitantes. Este número de empresas, más que la cantidad de queso producido, podría haber motivado la afirmación de que Asturias es ***la mayor mancha quesera de Europa***. 
+El análisis revela que la producción de queso de Asturias no se sitúa como la más elevada a nivel nacional o europeo, ni en el total ni en la de quesos catalogados. Algunos quesos frescos fabricados por grandes empresas han tenido y siguen teniendo un papel clave en la producción regional; actualmente representan más del 40% de la producción total de queso en la región. 
 
-Aunque la diversidad de quesos ofrecida es notable, el volumen medio de producción por establecimiento es reducido; el valor añadido real derivado de esta variedad de productos y formatos resulta complejo de determinar. La prevalencia de pequeñas producciones, particularmente artesanales, podría suponer un factor limitante para el crecimiento y la sostenibilidad del sector. En consecuencia, la afirmación antes citada, sobre la importancia de Asturias como primera mancha quesera de Europa, no parece bien fundamentada y resulta bastante imprecisa. Un enfoque pertinente consistiría en la elaboración de un plan estratégico para el sector, que identifique y potencie los atributos distintivos del queso asturiano y apoye los quesos catalogados (DOP e IGP), estableciendo una diferenciación entre los quesos tradicionales asturianos y los producidos en la región sin conexión con su herencia cultural y gastronómica.
+Asturias destaca por una relativa alta densidad de empresas queseras, calculada en este estudio como el número de empresas por 1000 $km^2$ (especialmente en el ámbito de los quesos con certificación DOP/IGP, sólo por detrás de Suiza). Dado que muchas de estas empresas hacen quesos diferentes, se habla en ocasiones de que Asturias *es la mayor mancha quesera de Europa*, para indicar esta gran variedad de productos.    
 
-# Introducción
+Aunque esta diversidad de quesos es notable, el volumen medio de producción por establecimiento es reducido; el valor añadido real derivado de esta variedad de productos y formatos resulta complejo de determinar. La prevalencia de pequeñas producciones, particularmente artesanales, podría suponer un factor limitante para el crecimiento y la sostenibilidad del sector, tanto por la falta de masa crítica para generar los márgenes de explotación suficientes, como por la importancia creciente de los aspectos ambientales y la dificultad para eliminar los residuos generados en una estructura de producción muy repartida y difusa. 
 
-Desde hace años, en el entorno quesero y social asturiano, se ha aceptado como un hecho la afirmación de que Asturias constituye ***la mayor mancha quesera de Europa***. Sin embargo, no está muy claro el significado de esta expresión: ¿se refiere a la mayor producción de queso, a la mayor variedad de quesos en general, incluyendo industriales, artesanales, y quesos catalogados con DOP o IGP, o solo a los artesanales o con denominación de origen? 
-
-Es muy pertinente definir qué se considera un *queso asturiano*. ¿Deben incluirse en los quesos asturianos los *quesos fabricados en Asturias*? Es decir, si en Asturias se instala un fabricante de mozzarella, ¿debe incluirse en ellos la mozzarella? Creo que todos aceptaríamos que este queso hilado es, característicamente, un queso italiano, y en mi opinión, no es un queso *asturiano* aunque esté *fabricado en Asturias*. Lo mismo ocurre con algunos fabricantes asentados en la región, que fabrican quesos tipo Burgos o tipo mascarpone, o bien quesos fundidos que podrían fabricarse en cualquier parte, sin vinculación alguna con el territorio. Se podría argumentar que la vinculación se establece a través de la leche utilizada, siempre que sea recogida en Asturias. Sin embargo, queda por determinar el valor añadido para los quesos asturianos de una producción lechera que en muchos casos proviene de ganado mantenido en estabulación y alimentado mayoritariamente con heno o con piensos elaborados con ingredientes importados de otras regiones, o incluso de otros países.
-
-La importancia de esta discusión radica precisamente en establecer cuáles son realmente, o deberían ser, estos elementos de valor añadido de los quesos fabricados en Asturias y considerados *quesos asturianos*.  En mi opinión, entre estos elementos están, sin duda, la producción de leche por razas ganaderas locales, la búsqueda de características genéticas que hagan la leche más apta para la fabricación de queso, y una alimentación mayoritariamente de pasto natural o heno obtenido de pastos asturianos. El manejo de los pastos debería favorecer la diversidad florística para aumentar los componentes aromáticos que potencien las notas distintivas en los quesos. Si Asturias es considerada un *Paraíso Natural*, deberíamos establecer unas normas de calidad para los productos obtenidos en esta región que incluyan los elementos citados y que vienen directamente condicionados por el paisaje y el medio natural asturiano. Otros elementos de valor son consecuencia de la mejora de las capacidades tecnológicas de los queseros y queseras asturianos, lo que debe conseguirse a través de una formación continua en tecnología quesera, incluyendo no sólo los aspectos de fabricación, sino la maduración y el afinado, además de la gestión técnica y económica de las queserías. Sin duda, este es un objetivo ambicioso que no puede lograrse de la noche a la mañana. En este sentido, conviene elaborar un plan estratégico para el sector quesero, de la misma forma que se ha hecho en otras regiones del mundo (ver referencias para Europa[@jeanneaux2018] y Vermont (USA)[@vermont2025]).
-
-Este documento es una primera aproximación a la descripción de la producción quesera asturiana mediante algunos índices indirectos, y pospone la discusión sobre los elementos de valor que deberían definir el queso asturiano. 
+Parece necesaria la elaboración de un plan estratégico sectorial que identifique y potencie los atributos distintivos del queso asturiano y refuerce los quesos catalogados (DOP e IGP) y los quesos de autor, entendiendo como tales aquellos que responden a  criterios de alta calidad. Dicho plan debería establecer también criterios de diferenciación precisos entre los quesos de tradición asturiana y los elaborados en la región sin vinculación con su herencia cultural y gastronómica, y entre las figuras de calidad regulada y la producción artesanal. A ello habría que añadir medidas para la resolución de los problemas ambientales del sector y mecanismos que favorezcan la concentración empresarial en unidades de mayor tamaño.
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 library (dplyr)
@@ -63,10 +56,12 @@ df_paises <- df_paises |>
   mutate(
     num_empresas_millon_hab     = num_empresas_queseras / (habitantes/1e6),
     num_empresas_DOP_millon_hab = num_empresas_queseras_DOP / (habitantes/1e6),
+    empresas_1000km2            = num_empresas_queseras / (superficie_km2/1000),
+    empresas_DOP_1000km2        = num_empresas_queseras_DOP / (superficie_km2/1000),
     kg_queso_habitante          = prod_total_queso_ton * 1000 / habitantes,
     kg_DOP_habitante            = prod_ton_DOP_IGP * 1000 / habitantes,
-    ton_tot_km2                  = prod_total_queso_ton / superficie_km2,
-    ton_DOP_km2                  = prod_ton_DOP_IGP / superficie_km2,
+    ton_tot_km2                 = prod_total_queso_ton / superficie_km2,
+    ton_DOP_km2                 = prod_ton_DOP_IGP / superficie_km2,
     ton_queso_por_empresa       = prod_total_queso_ton / num_empresas_queseras,
     ton_queso_DOP_por_empresa   = prod_ton_DOP_IGP / num_empresas_queseras_DOP
   ) 
@@ -86,7 +81,7 @@ La @tbl-tabla-asturias presenta los datos de la producción total de queso en As
 
 Desde 2010, la producción de queso en Asturias se mantuvo en torno a 35.000-40.000 toneladas hasta 2022. Entre 2021 y 2023 se registra una caída notable debido principalmente al cierre de la fábrica de Danone en Salas en 2022[@lva2022-2], que traslada la elaboración del queso fresco *Danonino* a otros centros en Francia. A partir de 2023, la producción regional se estabiliza en unas 25.000 toneladas, lo que representa un 4,6% del total nacional,  y en 2025 remonta a 35.310 toneladas, cifra que recoge probablemente el relanzamiento de la actividad en la nueva fábrica de Royal A-Ware en Salas (antigua Danone), especializada en la producción de mozzarella.. Este volumen incluye el queso fresco *Burgo de Arias* y otros quesos frescos fabricados por Mantequerías Arias en su planta de Vegalencia (Soto de Ribera), que elabora anualmente unas 9.000 toneladas de queso (un 36% del total de la región). Si descontamos esta cantidad del total dado por SADEI, podemos situar el volumen de los quesos tradicionales asturianos en torno a las 15.000 toneladas, incluyendo los quesos DOP e IGP.
 
-El detalle de la producción quesera asturiana fuera de las denominaciones de origen no se recoge en ningún informe oficial. Es el caso de quesos importantes y conocidos, algunos tradicionales como Vidiago, Pría, La Peral, Peñamellera, Abredo y otros, y también de los quesos que podrían ser incluidos en los llamados quesos *de autor*, como Rey Silo, Lazana, Varé o La Chivita, y multitud de quesos artesanales producidos en pequeñas queserías, cuyo volumen resulta imposible de estimar.
+El detalle de la producción quesera asturiana fuera de las denominaciones de origen no se recoge en ningún informe oficial. Es el caso de quesos importantes y conocidos, algunos tradicionales como Vidiago, Pría, La Peral, Peñamellera, Abredo y otros, y también de los quesos que podrían ser incluidos en los llamados quesos *de autor*, como Rey Silo, Lazana, Varé o La Chivita, y multitud de quesos artesanos producidos en pequeñas queserías, cuyo volumen resulta imposible de estimar.
 
 La @fig-prod-asturias muestra la producción de queso desde 1990. A mitad de los años 2000 se identifica una caída importante de los volúmenes de producción, probablemente reflejo de varios factores, como la crisis de 2008, unida al efecto de la reordenación de la PAC entre 2003 y 2009 y a la relocalización por Mantequerías Arias de una parte importante de la fabricación de Burgo de Arias en la nueva factoría de Burgos, hacia 2006. También se ve claramente el cese de actividad de Danone en Salas en 2023, y el relanzamiento de la actividad por Royal A-Ware en 2025, como comentábamos anteriormente.
 
@@ -429,7 +424,7 @@ Asturias se ha incluido en la tabla para reflejar su posición en comparación c
 
 Algunos países, como Francia o Suiza, publican datos detallados; en otros casos he tenido que estimar el número total de empresas queseras y el número de empresas o centros de producción. Tampoco es fácil encontrar el número de empresas queseras por región, ya sean de queso en general o de DOP+IGP, y por eso he hecho el análisis para los datos de países completos. En muchos casos, una misma empresa puede operar en varios centros de producción, y elaborar tanto quesos catalogados como no catalogados. Por todo ello, es posible que los datos no sean completamente exactos y necesiten una revisión adicional. Cualquier información al respecto será de gran ayuda para mejorar el contenido del trabajo en revisiones posteriores.
 
-Los quesos DOP+IGP están bien identificados por país.Se han recogido un total de 221 variedades europeas, que se pueden consultar en la @tbl-tabla-dop incluida como anexo. No he podido confirmar los volúmenes de algunas de estas variedades, y por lo tanto han quedado excluidas del análisis. 
+Los quesos DOP+IGP están bien identificados por país. Se han recogido un total de 221 variedades europeas, que se pueden consultar en la @tbl-tabla-dop incluida como anexo. No he podido confirmar los volúmenes de algunas de estas variedades, y por lo tanto han quedado excluidas del análisis. 
 
 La @fig-produccion-2 muestra las producciones totales de queso y queso DOP+IGP por país. 
   
@@ -623,7 +618,7 @@ df_tabla_quesos %>%
 Para comparar la producción de queso en Asturias con la producción total de los países de la UE, puede ser útil establecer índices relativos, como la producción por habitante o por $km^2$. 
 
 ::: important
-Antes de presentar el análisis de estas ratios, es importante señalar que comparar Asturias con países europeos en su totalidad puede poporcionar una visión distorsionada. La producción de queso no es uniforme a lo largo de un país; suele focalizarse en zonas concretas. Si se dispusiera de datos regionales y se comparasen con las áreas queseras asturianas, es probable que las ratios de producción por habitante o por $km^2$ en otras regiones queseras europeas fueran significativamente mayores. He utilizado las cifras nacionales ante la falta de información regional detallada.}
+Antes de presentar el análisis de estas ratios, es importante señalar que comparar Asturias con países europeos en su totalidad puede dar una visión distorsionada. La producción de queso no es uniforme a lo largo de un país; suele focalizarse en zonas concretas. Si se dispusiera de datos regionales y se comparasen con las áreas queseras asturianas, es probable que las ratios de producción por habitante o por $km^2$ en otras regiones queseras europeas fueran significativamente mayores. He utilizado las cifras nacionales ante la falta de información regional detallada.}
 :::
 
 La @fig-habitante presenta los datos de producción de queso en kilogramos por habitante. Los mayores productores de queso de acuerdo a este índice son Dinamarca, Países Bajos e Irlanda; en los quesos DOP+IGP, lo son Países Bajos, Chipre y Grecia, con Italia y Suiza a una distancia moderada. Asturias tiene una producción total por habitante superior a la de Italia, Grecia o Suiza. En cambio, en la producción DOP/IGP, se sitúa casi al final de la lista. 
@@ -980,6 +975,7 @@ Producción media por empresa (toneladas)
 ::: 
 
 La @fig-dotplot-num_empresas muestra que Asturias, según los datos disponibles, es la zona quesera de Europa que tiene el mayor número de empresas fabricantes de queso por millón de habitantes entre todas las analizadas, aunque, como hemos visto en la @fig-empresas, la producción media por empresa está entre las más bajas (recordemos que estamos comparando una región con países completos). Respecto a estas características, Asturias se sitúa cerca de Suiza y Grecia. Este elevado número de empresas en la región podría explicar la afirmación de que Asturias constituye ***la mayor mancha quesera de Europa***, referida al número de empresas y no a la producción total.
+
 ```{r}
 #| label: fig-dotplot-num_empresas
 #| fig-cap: "Número de empresas por millón de habitantes vs. producción media por empresa"
@@ -995,9 +991,7 @@ df_paises %>%
   mutate(highlight = case_when(
       pais == "España" ~ "España",
       pais == "Asturias" ~ "Asturias",
-      TRUE ~ "Otros"),
-    kg_queso_km2 = prod_total_queso_ton / superficie_km2,
-    kg_queso_DOP_km2 = prod_ton_DOP_IGP / superficie_km2) %>%
+      TRUE ~ "Otros")) %>%
   ggplot(aes(x = num_empresas_millon_hab, y = ton_queso_por_empresa)) +
   # 2. Puntos: Gris uniforme para 'Otros' y colores para España/Asturias
   geom_point(aes(color = highlight), size = 2.5, alpha = 0.7) +
@@ -1045,9 +1039,7 @@ df_plot <- df_paises %>%
   filter(!is.na(num_empresas_queseras)&!is.na(num_empresas_queseras_DOP)) %>%
   mutate(
     highlight = if_else(pais %in% c("España", "Asturias"), pais, "Otros"),
-    empresas_km2 = num_empresas_queseras / (superficie_km2/1000),
-    empresas_DOP_km2 = num_empresas_queseras_DOP / (superficie_km2/1000),
-    pais = reorder(pais, empresas_km2)
+    pais = reorder(pais, empresas_1000km2)
   )
 
 # 2. Extraemos los niveles ordenados para el theme
@@ -1060,7 +1052,7 @@ eje_colores <- case_when(
 eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
 
 # 3. Gráfico
-ggplot(df_plot, aes(x = pais, y = empresas_km2, fill = highlight)) +
+ggplot(df_plot, aes(x = pais, y = empresas_1000km2, fill = highlight)) +
   geom_col() +
   scale_fill_manual(values = c("Otros" = "grey60", 
                                "España" = "#1f77b4", 
@@ -1093,9 +1085,7 @@ df_plot <- df_paises %>%
   filter(!is.na(num_empresas_queseras)&!is.na(num_empresas_queseras_DOP)) %>%
   mutate(
     highlight = if_else(pais %in% c("España", "Asturias"), pais, "Otros"),
-    empresas_km2 = num_empresas_queseras / (superficie_km2/1000),
-    empresas_DOP_km2 = num_empresas_queseras_DOP / (superficie_km2/1000),
-    pais = reorder(pais, empresas_DOP_km2)
+    pais = reorder(pais, empresas_DOP_1000km2)
   )
 
 # 2. Extraemos los niveles ordenados para el theme
@@ -1108,7 +1098,7 @@ eje_colores <- case_when(
 eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
 
 # 3. Gráfico
-ggplot(df_plot, aes(x = pais, y = empresas_DOP_km2, fill = highlight)) +
+ggplot(df_plot, aes(x = pais, y = empresas_DOP_1000km2, fill = highlight)) +
   geom_col() +
   scale_fill_manual(values = c("Otros" = "grey60", 
                                "España" = "#1f77b4", 
@@ -1151,10 +1141,8 @@ df_paises %>%
   mutate(highlight = case_when(
       pais == "España" ~ "España",
       pais == "Asturias" ~ "Asturias",
-      TRUE ~ "Otros"),
-      empresas_km2 = num_empresas_queseras / (superficie_km2/1000),
-      empresas_DOP_km2 = num_empresas_queseras_DOP / (superficie_km2/1000)) %>%
-  ggplot(aes(x = empresas_km2, y = empresas_DOP_km2)) +
+      TRUE ~ "Otros")) %>%
+  ggplot(aes(x = empresas_1000km2, y = empresas_DOP_1000km2)) +
   # 2. Puntos: Gris uniforme para 'Otros' y colores para España/Asturias
   geom_point(aes(color = highlight), size = 2.5, alpha = 0.7) +
   # 3. Etiquetas: Solo ponemos nombre a los puntos destacados para evitar ruido
@@ -1188,9 +1176,26 @@ df_paises %>%
   )
 ```
 
-La alta densidad de empresas DOP+IGP que muestra la @fig-dens-DOP, unida a la baja producción por empresa, que hemos visto en la @fig-empresas-DOP, refleja una característica de los quesos catalogados en Asturias: su producción depende de muchas pequeñas empresas artesanales con volúmenes reducidos. Esto invita a reflexionar sobre las diferencias entre los quesos DOP e IGP y los quesos *artesanales*; en Europa, muchos quesos con DOP se fabrican a escala industrial o semiindustrial, y su elevado volumen permite una financiación adecuada de los Consejos Reguladores, que disponen de ingresos suficientes para abordar proyectos de mejora de sus productos.
+# Discusión
+
+Los datos analizados de la producción quesera en Asturias muestran una producción muy diversa. con algunas grandes empresas que elaboran volúmenes importantes de productos genéricos, como quesos frescos, mozzarellas o quesos fundidos (actualmente más del 40% del total de queso elaborado en la región), y un gran número de pequeñas empresas, muchas de ellas artesanales, diseminadas por el territorio, que elaboran productos muy diferentes; en algunos casos se acogen a las figuras existentes de quesos catalogados (DOP e IGP), pero siempre con volúmenes por productor relativamente reducidos.
+
+¿Qué debe considerarse un *queso asturiano*? ¿Deben incluirse en los quesos asturianos los *quesos fabricados en Asturias*? Es decir, si en Asturias se instala un fabricante de mozzarella, ¿debe incluirse en ellos la mozzarella? Creo que todos aceptaríamos que este queso hilado es, característicamente, un queso italiano, y no es un queso *asturiano* aunque esté *fabricado en Asturias*. Lo mismo ocurre con algunos fabricantes asentados en la región, que fabrican quesos frescos o quesos fundidos que podrían fabricarse en cualquier parte, sin vinculación alguna con el territorio. Su contribución a la economía regional es indudable, pero su vinculación con los atributos distintivos del queso asturiano es escasa o inexistente. 
+
+Se podría argumentar que la vinculación se establece a través de la leche utilizada, siempre que sea recogida en Asturias. Sin embargo, la producción lechera regional actual no está enfocada hacia la quesería, ni por las razas utilizadas ni por el tipo de alimentación empleado; una producción que en muchos casos proviene de ganado mantenido en estabulación y alimentado mayoritariamente con heno o con piensos elaborados con ingredientes importados de otras regiones, o incluso de otros países, no proporciona elementos de valor para la fabricación de queso. La mayor parte de la ganadería de Asturias ha evolucionado hacia ganado de carne o hacia el volumen de producción, enfocado a la gran industria láctea de leche envasada, y no se ha trabajado en el desarrollo de las razas de valor añadido para la producción quesera, como se ha hecho en otros países.
+
+La importancia de esta discusión radica precisamente en establecer cuáles son realmente, o deberían ser, estos elementos de valor añadido de los quesos fabricados en Asturias y considerados *quesos asturianos*. En mi opinión, entre estos elementos están, sin duda, la producción de leche por razas ganaderas locales, la búsqueda de características genéticas que hagan la leche más apta para la fabricación de queso, y una alimentación mayoritariamente de pasto natural o heno obtenido de pastos asturianos. El manejo de los pastos debería favorecer la diversidad florística para aumentar los componentes aromáticos que potencien las notas distintivas en los quesos.
+
+Si Asturias es considerada un *Paraíso Natural*, deberíamos establecer unas normas de calidad que incluyan los elementos citados, directamente condicionados por el paisaje y el medio natural asturiano, tarea en la que es necesario que se impliquen la administración regional, los Consejos Reguladores y las asociaciones de productores.
+
+La mejora de las capacidades tecnológicas de los queseros y queseras asturianos constituye igualmente un factor clave, tanto para garantizar la regularidad de la calidad como para preservar las características de los quesos tradicionales e impulsar la innovación en los quesos de autor. A través de una formación continua en tecnología quesera, debe perseguirse la mejora de la fabricación, la maduración y el afinado, además de la gestión técnica y económica de las queserías. Sin duda, se trata de un objetivo ambicioso que no puede alcanzarse a corto plazo, pero que debe emprenderse cuanto antes.
+
+La prevalencia de pequeñas producciones, particularmente artesanales, plantea interrogantes sobre la viabilidad económica del sector. La falta de masa crítica dificulta la generación de márgenes de explotación suficientes para garantizar la sostenibilidad de las empresas a medio y largo plazo. A ello se añade la creciente importancia de los aspectos ambientales que incrementa la presión sobre los pequeños elaboradores: una estructura productiva muy repartida en el territorio complica la gestión y eliminación de los residuos generados. Este problema tiene difícil solución sin una cierta concentración de los centros de producción, si tenemos en cuenta, además, los costes de transporte de los residuos en una región tan montañosa como Asturias.
+
+La alta densidad de empresas DOP+IGP que muestra la @fig-dens-DOP, unida a la baja producción por empresa, que hemos visto en la @fig-empresas-DOP, refleja una característica de los quesos catalogados en Asturias: su producción depende de muchas pequeñas empresas artesanales con volúmenes reducidos. Esto invita a reflexionar sobre las diferencias entre los quesos DOP e IGP y los quesos *artesanos*; en Europa, muchos quesos con DOP se fabrican a escala industrial o semiindustrial, y su elevado volumen permite una financiación adecuada de los Consejos Reguladores, que disponen de ingresos suficientes para abordar proyectos de mejora de sus productos.
 
 Esta es una discusión compleja en Asturias, porque la distinción entre productos industriales y artesanales sigue siendo objeto de debate y no se ha definido con suficiente claridad. En Asturias, los quesos con certificación DOP o IGP han sido tradicionalmente considerados artesanales, lo que ha limitado su desarrollo dentro de un modelo más amplio de producción; como hemos visto, no es así en el contexto europeo. Podría ser muy interesante para Asturias estudiar la situación de Suiza, también con un gran número de empresas por $km^2$, y un modelo de promoción de sus productos DOP+IGP altamente exitoso.
+
 
 # Conclusiones
 
@@ -1198,9 +1203,7 @@ La construcción de diversos índices relativos de la producción quesera asturi
 
 Es cierto que el valor de la producción de queso no debe establecerse sólo en función del volumen, sino también de su valor añadido. En el caso de Asturias, se podría pensar que la variedad de quesos ofertada es la que genera este valor añadido, además del valor de los productos por sí mismos. Pero hay que tener en cuenta que la elevada cantidad de empresas con una producción reducida genera estructuras de fabricación de escala reducida. En este caso, aunque el valor añadido unitario sea significativo, los recursos generados pueden ser insuficientes para atender inversiones, amortizaciones y gastos de personal, incluyendo aspectos no directamente productivos, como la formación.
 
-Aunque la producción de queso en Asturias es importante, no es superior a la de muchas otras zonas de Europa, comparando con países completos. Si buscásemos zonas queseras importantes de Europa, seguramente la reducción de la superficie considerada haría subir las ratios para estas zonas de alta producción.  Por ello no parece justificado denominar a Asturias ***la mayor mancha quesera de Europa***, aunque es necesario mejorar la información regional europea para validar esta conclusión. 
-
-Por otra parte, en el total de queso fabricado en Asturias hay una cantidad importante de productos que no tienen una vinculación con la región más allá de estar fabricados en ella: es el caso de mozzarellas, quesos fundidos y otros, que la última edición del **Catálogo general de los quesos elaborados en Asturias** @vadequesum2026 ya ha excluido del catálogo.
+Aunque la producción de queso en Asturias es importante, no es superior a la de muchas otras zonas de Europa cuando se compara con países completos. Esta cifra, además, debe matizarse si se tiene en cuenta que una parte significativa de esa producción corresponde a productos sin vinculación con la región más allá de su lugar de fabricación: es el caso de mozzarellas, quesos fundidos y otros, que la última edición del Catálogo general de los quesos elaborados en Asturias @vadequesum2026 ya ha excluido del catálogo.
 
 Resulta clave elaborar un plan estratégico que defina y refuerce los atributos distintivos del queso asturiano y apoye tanto a los quesos con certificación DOP e IGP como a los quesos de autor de alta calidad, diferenciando con claridad los quesos catalogados de los quesos artesanos, y facilitando el desarrollo de iniciativas de consolidación que permitan aumentar el tamaño de las queserías asturianas. En este sentido, estudiar otros modelos regionales, como el suizo, puede ser de gran interés.
 
