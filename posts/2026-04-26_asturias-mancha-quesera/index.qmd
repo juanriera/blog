@@ -35,10 +35,6 @@ Aunque esta diversidad de quesos es notable, el volumen medio de producción por
 
 Parece necesaria la elaboración de un plan estratégico sectorial que identifique y potencie los atributos distintivos del queso asturiano y refuerce los quesos catalogados (DOP e IGP) y los quesos de autor, entendiendo como tales aquellos que responden a  criterios de alta calidad. Dicho plan debería establecer también criterios de diferenciación precisos entre los quesos de tradición asturiana y los elaborados en la región sin vinculación con su herencia cultural y gastronómica, y entre las figuras de calidad regulada y la producción artesanal. A ello habría que añadir medidas para la resolución de los problemas ambientales del sector y mecanismos que favorezcan la concentración empresarial en unidades de mayor tamaño.
 
-# Introducción
-
-Este documento es una aproximación a la descripción de la producción quesera asturiana mediante algunos índices indirectos, construidos a partir de los datos de producción y del número de empresas disponibles para Asturias, España y varios países europeos.
-
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 library (dplyr)
 library (ggplot2)
