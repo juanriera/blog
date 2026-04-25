@@ -9,7 +9,7 @@ draft: false
 lang: es
 editor: source
 execute: 
-  freeze: true
+  freeze: false
 fig-cap-location: top
 bibliography: referencias.bib
 csl: vancouver-superscript.csl
