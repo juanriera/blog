@@ -22,6 +22,7 @@ nocite: |
 ![](quesos-asturianos.jpg)
 
 # Resumen
+
 Este trabajo revisa la [publicacion que hice en LinkedIn](https://www.linkedin.com/pulse/asturias-la-mayor-mancha-quesera-de-europa-juan-riera-udwwf/) el 18 de abril de 2025, actualizando algunos datos de producción con la información disponible en Eurostat para 2024. Los datos referentes a algunos países, así como al número de empresas *queseras* sigue siendo difícil de encontrar. Los nuevos datos no introducen diferencias significativas en las conclusiones.
 
 Se examina la producción de queso en Asturias, incluyendo los quesos amparados por Denominación de Origen Protegida (DOP) e Indicación Geográfica Protegida (IGP), y se contrasta con datos de España y Europa. La información, obtenida de diversas fuentes online, que se incluyen en las referencias, se centra en el análisis del queso producido y el número de empresas. No se incluyen en el estudio otras variables económicas como inversión, empleo o contribución al PIB debido a la falta de datos detallados del sector. La información referente al número de empresas queseras es bastante precisa en Asturias, pero muy desigual o inexistente en el resto de las áreas estudiadas. La información sobre la producción de queso está en el mismo caso, dificultando la obtención de conclusiones precisas. Además, no ha sido posible cuantificar con detalle el volumen de producción fuera de la certificación DOP/IGP.
