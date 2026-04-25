@@ -22,7 +22,7 @@ nocite: |
 ![](quesos-asturianos.jpg)
 
 :::{style="font-size: 0.75em; opacity: 0.7;"}
-Quesos asturianos tradicionales. Foto: [Archivo Tierra Astur (https://tierra-astur.com/)](https://tierra-astur.com})
+Quesos asturianos tradicionales. Foto: [Archivo Tierra Astur](https://tierra-astur.com)
 :::
 
 # Resumen
