@@ -163,9 +163,67 @@ Utilizando la herramienta [WebPlotDigitizer](https://automeris.io/WebPlotDigitiz
 
 He ajustado los cuatro modelos (Gompertz, logística, Richards y Baranyi) a cada combinación de cepa y temperatura, limitando el ajuste a la zona de acidificación activa (t ≤ 14 h). Tanto Richards como Baranyi tienen cinco parámetros frente a los cuatro de Gompertz y logística, por lo que el AIC penaliza su mayor complejidad; las mejoras de ajuste que se observan son reales, no un artefacto del mayor número de parámetros.
 
+La velocidad máxima de acidificación $V_{max}$ se calculó numéricamente como el máximo de la derivada discreta 
+$$V_{max}=-\frac{dpH}{dt}$$
+sobre una secuencia de 1000 puntos equiespaciados dentro del intervalo de ajuste, aplicada sobre la curva ajustada de cada modelo. Este enfoque, aunque introduce un error de discretización de orden $O(h) ≈ 10⁻³$ unidades de $pH·h⁻¹$, garantiza comparabilidad entre modelos: en Gompertz y Logística el resultado es equivalente a la expresión analítica exacta $(r·(A−K)·e⁻¹$ y $r·(A−K)·4⁻¹$, respectivamente), mientras que para Richards no existe fórmula cerrada simple al depender $V_{max}$ adicionalmente del parámetro $\nu$, y para Baranyi porque el punto de inflexión real no coincide con el parámetro $t_0$ del modelo.
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+
+library(dplyr)
+library(readr)
+library(gt)
+
+resultados <- read_csv2("../../datos/comparacion_4modelos.csv",
+                        locale = locale(encoding = "ISO-8859-1"),
+                        show_col_types = FALSE)
+
+resultados |>
+  mutate(modelo = factor(modelo, levels = c("Logistica", "Gompertz", "Richards", "Baranyi"))) |>
+  arrange(modelo, cepa, temperatura) |>
+  group_by(modelo) |>
+  mutate(cepa = ifelse(as.character(duplicated(cepa)), "", as.character(cepa))) |>
+  ungroup() |>
+  select(modelo, cepa, temperatura, K, r, Vmax, nu, R2, AIC, BIC) |>
+  gt(groupname_col = "modelo") |>
+  tab_header(
+    title    = "Comparación de modelos de acidificación",
+    subtitle = "Cepas MA11 y TA050 — Datos Danisco/IFF (t ≤ 14 h)"
+  ) |>
+  fmt_number(columns = c(K, r, Vmax, nu), decimals = 3) |>
+  fmt_number(columns = R2,            decimals = 4) |>
+  fmt_number(columns = c(AIC, BIC),   decimals = 1) |>
+  sub_missing(columns = everything(), missing_text = "") |>
+  cols_label(
+    cepa        = "Cepa",
+    temperatura = "Temp. (°C)",
+    K           = md("*K*"),
+    r           = md("*r*"),
+    Vmax        = md("*V*~max~"),
+    nu          = md("*ν*"),
+    R2          = md("R²"),
+    AIC         = "AIC",
+    BIC         = "BIC"
+  ) |>
+  tab_spanner(label = "Parámetros",        columns = c(K, r, Vmax, nu)) |>
+  tab_spanner(label = "Calidad de ajuste", columns = c(R2, AIC, BIC)) |>
+  tab_style(
+    style     = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  ) |>
+  tab_style(
+    style     = cell_fill(color = "#f0f5fb"),
+    locations = cells_row_groups()
+  ) 
+  
+```
+
+
 ![Comparación AIC de los cuatro modelos por cepa y temperatura (datos Danisco/IFF, t ≤ 14 h). Richards supera sistemáticamente a los demás en todos los casos; las diferencias superan las 50 unidades respecto a Gompertz y logística, muy por encima del umbral de 10 que se considera muy significativo. Baranyi, con el mismo número de parámetros que Richards, obtiene resultados similares o ligeramente peores, lo que confirma que la ganancia de ajuste proviene de capturar la asimetría real de la curva (parámetro ν) más que de modelizar la fase de latencia (parámetro h₀).](imagenes/comparacion_modelos.png)
 
-Las diferencias son categóricas. Richards gana en los seis casos. La logística supera a Gompertz en cinco de los seis; la excepción es MA11 a 37°C donde ambos empatan aproximadamente. La mejora de la logística sobre Gompertz se produce con los mismos cuatro parámetros; no hay penalización adicional por complejidad. Es puramente una cuestión de forma.
+Las diferencias son muy claras. Richards gana en los seis casos. La logística supera a Gompertz en cinco de los seis; la excepción es MA11 a 37°C donde ambos empatan aproximadamente. La mejora de la logística sobre Gompertz se produce con los mismos cuatro parámetros; no hay penalización adicional por complejidad. Es puramente una cuestión de forma.
 
 El comportamiento de Baranyi es especialmente informativo: con los datos de Danisco/IFF, que tienen buena cobertura de la fase inicial, Baranyi ajusta bien pero no supera a Richards de forma consistente. Esto sugiere que en estas curvas la asimetría de la caída activa (capturada por $\nu$ en Richards) aporta más información que la fase de latencia (capturada por $h_0$ en Baranyi). Para datos de producción habitual, donde la fase de latencia tiene pocos puntos, la ventaja de Baranyi sobre la logística sería aún menor. Teniendo en cuenta esto y la dificultad del ajuste del modelo, no considero este modelo en los ejemplos posteriores ni en las recomendaciones de utilización.
 
