@@ -176,7 +176,7 @@ library(dplyr)
 library(readr)
 library(gt)
 
-resultados <- read_csv2("../../datos/comparacion_4modelos.csv",
+resultados <- read_csv2("../datos/comparacion_4modelos.csv",
                         locale = locale(encoding = "ISO-8859-1"),
                         show_col_types = FALSE)
 

@@ -19,6 +19,7 @@ nocite: |
   @wiki-1-2025, @mapa-1-2023, @mapa-2-2023, @mapa-3-2023, @sek2025, @vadequesum2023,
   @lne2025-1, @lne2025-2, @lne2024, @lva2022, @ine2025, @ifl2025, @dairy2024, @alimesp2025
 ---
+
 ![](quesos-asturianos.jpg)
 
 :::{style="font-size: 0.75em; opacity: 0.7;"}
@@ -507,6 +508,7 @@ theme(
   )
 
 ```
+
 El mayor productor de queso europeo es Alemania; la producción de España es semejante a la de Dinamarca. El mayor productor de queso con DOP o IGP es Italia, gracias al enorme volumen de sus quesos Parmiggiano-Reggiano y Grana Padano. Este país también tiene una gran riqueza de quesos regionales con DOP+IGP (52), a la altura de Francia (57); casi el 50% de su producción quesera está catalogada.
 
 La producción de queso catalogado en Europa es muy superior a la de España y Asturias, tanto en total como en cada variedad. La @tbl-tabla-pct-DOP nos muestra que varios países tienen un porcentaje significativo de su producción quesera catalogada. Si la estrategia para Asturias es fomentar el desarrollo de productos con valor añadido con apoyo institucional, sin duda es de interés conocer en detalle las experiencias y la estructura del sector en estos países, y la forma en la que se articula el apoyo institucional a los quesos catalogados.
@@ -754,6 +756,7 @@ df_paises |>
 ```
 
 La @fig-km2 presenta la producción de queso por unidad de superficie de la zona considerada (toneladas/$km^2$). Destaca la enorme producción de Países Bajos, tanto total como de DOP. En cuanto al total de queso producido, Asturias presenta un índice superior al de Grecia y al promedio de España. 
+
 ```{r}
 #| label: fig-km2
 #| echo: FALSE
@@ -801,7 +804,7 @@ ggplot(df_long, aes(x = pais, y = toneladas, fill = categoria_color)) +
     title = "Situación de Asturias en el contexto quesero europeo",
     subtitle = "Comparativa de producción total y catalogada (DOP/IGP) por km2",
     x = NULL, 
-    y = "Producción en toneladas",
+    y = "Producción en toneladas/km2",
     caption = "Fuente: Datos de producción regional y nacional"
   ) +
   theme_minimal() +
@@ -1184,11 +1187,13 @@ df_paises %>%
 
 # Discusión
 
-Los datos analizados de la producción quesera en Asturias muestran una producción muy diversa. con algunas grandes empresas que elaboran volúmenes importantes de productos genéricos, como quesos frescos, mozzarellas o quesos fundidos (actualmente más del 40% del total de queso elaborado en la región), y un gran número de pequeñas empresas, muchas de ellas artesanales, diseminadas por el territorio, que elaboran productos muy diferentes; en algunos casos se acogen a las figuras existentes de quesos catalogados (DOP e IGP), pero siempre con volúmenes por productor relativamente reducidos.
+Los datos analizados de la producción quesera total en Asturias muestran una producción muy diversa. con algunas grandes empresas que elaboran volúmenes importantes de productos genéricos, como quesos frescos, mozzarellas o quesos fundidos (actualmente más del 40% del total de queso elaborado en la región), y un gran número de pequeñas empresas, muchas de ellas artesanales, diseminadas por el territorio que elaboran productos muy diferentes. Algunas elaboran quesos de autor de gran calidad presentes en  mercados locales o internacionales; otras se acogen a las figuras existentes de quesos catalogados (DOP e IGP), pero siempre, salvo excepciones, con volúmenes por productor reducidos.
 
-¿Qué debe considerarse un *queso asturiano*? ¿Deben incluirse en los quesos asturianos los *quesos fabricados en Asturias*? Es decir, si en Asturias se instala un fabricante de mozzarella, ¿debe incluirse en ellos la mozzarella? Creo que todos aceptaríamos que este queso hilado es, característicamente, un queso italiano, y no es un queso *asturiano* aunque esté *fabricado en Asturias*. Lo mismo ocurre con algunos fabricantes asentados en la región, que fabrican quesos frescos o quesos fundidos que podrían fabricarse en cualquier parte, sin vinculación alguna con el territorio. Su contribución a la economía regional es indudable, pero su vinculación con los atributos distintivos del queso asturiano es escasa o inexistente. 
+Respecto a la producción de los quesos catalogados en España, Asturias tiene un número elevado de empresas queseras DOP (@fig-DOP-es-queserias), semejante a Galicia y Baleares, e inferior al del País Vasco y Castilla-La Mancha. Sin embargo, las cantidades producidas en Asturias no son elevadas (@fig-DOP-es-ton), de hecho son menores que en las comunidades citadas; el único queso DOP con cierto volumen es el Cabrales, con una producción de 361 toneladas en el año 2023. Los quesos DOP más importantes de España se caracterizan por tener una producción industrial importante, como en el caso del manchego, con más de 15.000 toneladas/año, o el Arzúa-Ulloa, con casi 5.000. 
 
-Se podría argumentar que la vinculación se establece a través de la leche utilizada, siempre que sea recogida en Asturias. Sin embargo, la producción lechera regional actual no está enfocada hacia la quesería, ni por las razas utilizadas ni por el tipo de alimentación empleado; una producción que en muchos casos proviene de ganado mantenido en estabulación y alimentado mayoritariamente con heno o con piensos elaborados con ingredientes importados de otras regiones, o incluso de otros países, no proporciona elementos de valor para la fabricación de queso. La mayor parte de la ganadería de Asturias ha evolucionado hacia ganado de carne o hacia el volumen de producción, enfocado a la gran industria láctea de leche envasada, y no se ha trabajado en el desarrollo de las razas de valor añadido para la producción quesera, como se ha hecho en otros países.
+La primera pregunta, que debemos hacernos es: ¿qué debe considerarse un *queso asturiano*? ¿Deben incluirse en los quesos asturianos los *quesos fabricados en Asturias*? Es decir, si en Asturias se instala un fabricante de mozzarella, ¿debe incluirse en ellos la mozzarella? Creo que todos aceptaríamos que este queso hilado es, característicamente, un queso italiano, y no es un queso *asturiano* aunque esté *fabricado en Asturias*. Lo mismo ocurre con algunos fabricantes asentados en la región, que fabrican quesos frescos o quesos fundidos que podrían fabricarse en cualquier parte, sin vinculación alguna con el territorio. Su contribución a la economía regional es indudable, pero su vinculación con los atributos distintivos del queso asturiano es escasa o inexistente. 
+
+Se podría argumentar que esa vinculación se establece por la implantación física de las fábricas o  por la leche utilizada, siempre que sea recogida en Asturias. Pero el criterio geográfico no funciona correctamente aquí, como tampoco lo hace en el caso de las DOP regionales. La simple recogida local de la leche no es indicativa de valor añadido, ni por las razas utilizadas ni por el tipo de alimentación empleada; una producción que en muchos casos proviene de ganado mantenido en estabulación y alimentado mayoritariamente con heno o con piensos elaborados con ingredientes importados de otras regiones, o incluso de otros países, no proporciona suficientes elementos de valor para la fabricación de un queso con los atributos de calidad necesarios. Además, la mayor parte de la ganadería de Asturias ha evolucionado hacia ganado de carne o hacia el volumen de producción, enfocado a la gran industria láctea de leche envasada, y no se ha trabajado en el desarrollo de las razas especializadas en la producción quesera, como se ha hecho en otros países, ni tampoco los pliegos de condiciones de las DOP incluyen la exigencia de un porcentaje significativo de pasto natural, o de montaña, en el caso de los quesos de montaña.
 
 La importancia de esta discusión radica precisamente en establecer cuáles son realmente, o deberían ser, estos elementos de valor añadido de los quesos fabricados en Asturias y considerados *quesos asturianos*. En mi opinión, entre estos elementos están, sin duda, la producción de leche por razas ganaderas locales, la búsqueda de características genéticas que hagan la leche más apta para la fabricación de queso, y una alimentación mayoritariamente de pasto natural o heno obtenido de pastos asturianos. El manejo de los pastos debería favorecer la diversidad florística para aumentar los componentes aromáticos que potencien las notas distintivas en los quesos.
 
@@ -1201,6 +1206,8 @@ La prevalencia de pequeñas producciones, particularmente artesanales, plantea i
 La alta densidad de empresas DOP+IGP que muestra la @fig-dens-DOP, unida a la baja producción por empresa, que hemos visto en la @fig-empresas-DOP, refleja una característica de los quesos catalogados en Asturias: su producción depende de muchas pequeñas empresas artesanales con volúmenes reducidos. Esto invita a reflexionar sobre las diferencias entre los quesos DOP e IGP y los quesos *artesanos*; en Europa, muchos quesos con DOP se fabrican a escala industrial o semiindustrial, y su elevado volumen permite una financiación adecuada de los Consejos Reguladores, que disponen de ingresos suficientes para abordar proyectos de mejora de sus productos.
 
 Esta es una discusión compleja en Asturias, porque la distinción entre productos industriales y artesanales sigue siendo objeto de debate y no se ha definido con suficiente claridad. En Asturias, los quesos con certificación DOP o IGP han sido tradicionalmente considerados artesanales, lo que ha limitado su desarrollo dentro de un modelo más amplio de producción; como hemos visto, no es así en el contexto europeo. Podría ser muy interesante para Asturias estudiar la situación de Suiza, también con un gran número de empresas por $km^2$, y un modelo de promoción de sus productos DOP+IGP altamente exitoso.
+
+Para terminar, el futuro del sector quesero de valor añadido en Asturias depende críticamente del relevo generacional de ganaderos y queseros. Mientras no haya un plan estratégico para el sector que prepare el futuro y ofrezca a las nuevas generaciones unas expectativas de empleo  y retribución económica satisfactorias, no será posible consolidar a Asturias como una verdadera potencia quesera, a pesar del uso de las *marcas paraguas* del **Paraíso Natural** y de los **Alimentos del Paraíso**.
 
 
 # Conclusiones
