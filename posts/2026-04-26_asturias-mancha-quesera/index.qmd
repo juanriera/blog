@@ -11,7 +11,7 @@ editor: source
 execute: 
   freeze: true
 fig-cap-location: top
-bibliography: referencias.bib
+bibliography: referencias_asturias.bib
 csl: vancouver-superscript.csl
 reference-section-title: "Referencias y fuentes consultadas"
 nocite: |
@@ -424,7 +424,7 @@ df_paises %>%
 ```
 
 ::: {.smalltext style="font-size: 0.8em;"}
-Fuentes: Eurostat (2023); FAOSTAT (2023); Statbel (2024); CBS (2023); Destatis (2023); INAO (2023); Qualivita (2023); MAPA (2022); DGADR (2023); AOP-IGP.ch (2023); CNIEL (2023); TSM (2023) y oficinas nacionales de estadística de Austria, Irlanda, Suecia, Noruega, Polonia, Chequia, Bulgaria, Lituania, Rumanía, Letonia, Estonia, Eslovaquia, Chipre, Croacia y Eslovenia.
+Fuentes: Eurostat(2025) @eurostat_apro_mk_pobta_2025; INAO(2024) @inao_cnaol_2024; Qualivita(2023) @ismea_qualivita_2023; Swiss PDO-PGI Association(2023) @aop_igp_ch_2023; Switzerland Cheese Marketing/TSM (2024) @switzerland_cheese_marketing_2025 ; MAPA(2023) @mapa_dopigp_2023  y otros.
 :::
 
 Asturias se ha incluido en la tabla para reflejar su posición en comparación con otros países según los índices considerados.
