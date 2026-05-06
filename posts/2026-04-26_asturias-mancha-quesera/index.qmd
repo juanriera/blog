@@ -48,7 +48,11 @@ library(ggrepel)
 library(readxl)
 library(kableExtra)
 library(gt)
-
+library(mapSpain)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(scales)
 
 df_tabla_quesos <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx", "Producción DOP" )
 df_paises <- read_excel("AOC-Mancha_quesera_europa_update-claude-202604.xlsx","Prod por pais")
@@ -72,6 +76,14 @@ df_paises <- df_paises |>
     ton_queso_por_empresa       = prod_total_queso_ton / num_empresas_queseras,
     ton_queso_DOP_por_empresa   = prod_ton_DOP_IGP / num_empresas_queseras_DOP
   ) 
+
+asturias_data <- df_paises %>% filter(pais == "Asturias")
+asturias_ton_tot_km2 <- asturias_data %>% pull(ton_tot_km2)
+asturias_ton_dop_km2 <- asturias_data %>% pull(ton_DOP_km2)
+
+# CCAA desde mapSpain
+ccaa <- esp_get_ccaa() |> st_transform(4326)
+
 ```
 
 # Análisis
@@ -186,114 +198,172 @@ df_DOP_esp %>%
     axis.title.y = element_blank())
 ```
 
-La @fig-DOP-es muestra la producción y el número de queserías por comunidades autónomas. Asturias tiene un elevado número de queserías DOP, sólo por debajo del País Vasco y Castilla-La Mancha, aunque el volumen total producido no es alto.
+La @fig-DOP-es muestra la producción y el número de queserías por comunidades autónomas. Asturias es la región con más quesos catalogados (5) y una de las regiones con mayor número de queserías, aunque el volumen total producido es bajo.
 
-:::{#fig-DOP-es layout-ncol=2}
+:::{#fig-DOP-es layout-ncol=1 layout-nrow=3}
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 #| label: fig-DOP-es-ton
 #| fig-cap: "Toneladas producidas"
 
-df_DOP_esp %>%
-  group_by(Region) %>%
-  summarise(TotalTon = sum(Ton, na.rm = TRUE)) %>%
-  mutate(highlight = if_else(Region %in% c("Asturias"), Region, "Otros")) %>%
-  ggplot(aes(y = reorder(Region, TotalTon),
-             x = TotalTon,
-             fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("Otros" = "grey60",    # Todas las barras en gris
-                               "Asturias" = "#D55E00")) +  # Rojo destacado
-  scale_x_continuous(labels = scales::comma) +
-  # scale_y_discrete(labels = function(x) gsub(" ", "\n", x)) +
-  theme_minimal() +  # Fondo blanco y estilo limpio
-  theme(legend.position = "none",
-        panel.grid.major = element_blank(),  # Eliminamos rejillas para una apariencia más limpia
-        panel.grid.minor = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank())
+df_ton_region <- df_DOP_esp |>
+  group_by(Region) |>
+  summarise(tot_ton = sum(Ton, na.rm = TRUE)) |>
+  mutate(tot_ton = round(tot_ton/10)*10)
+
+ccaa_ton <- esp_get_ccaa(moveCAN = TRUE) |>
+  st_transform(4326) |>
+  mutate(Region = case_when(
+    ccaa.shortname.es == "Castilla-La Mancha" ~ "Castilla-La-Mancha",
+    ccaa.shortname.es == "Castilla y León"    ~ "Castilla-León",
+    ccaa.shortname.es == "La Rioja"           ~ "La-Rioja",
+    ccaa.shortname.es == "País Vasco"         ~ "País.Vasco",
+    TRUE ~ ccaa.shortname.es
+  )) |>
+  left_join(df_ton_region, by = "Region")
+
+centroides_ton <- ccaa_ton |> st_centroid()
+
+ggplot(ccaa_ton) +
+  geom_sf(aes(fill = tot_ton), color = "white", linewidth = 0.3) +
+  geom_sf_text(data = centroides_ton,
+               aes(label = scales::comma(tot_ton, big.mark = ".", decimal.mark = ",",accuracy = 1)),
+               size = 2.5, color = "black", na.rm = TRUE) +
+  scale_fill_distiller(
+    palette   = "YlOrRd",
+    direction = 1,
+    name      = "toneladas",
+    na.value  = "grey85",
+    labels    = scales::comma
+  ) +
+  theme_void() +
+  theme(
+    axis.text       = element_blank(),
+    axis.ticks      = element_blank(),
+    panel.grid      = element_blank(),
+    legend.position = "right"
+  ) +
+  labs(caption = "Fuente: MAPA 2023")
+
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 #| label: fig-DOP-es-queserias
-#| fig-cap: "Número de queserías"
+#| fig-cap: "Número de queserías con producción DOP/IGP"
 
-df_DOP_esp %>%
-  group_by(Region) %>%
-  summarise(tot_queserias = sum(queserias, na.rm = TRUE)) %>%
-  mutate(highlight = if_else(Region %in% c("Asturias"), Region, "Otros")) %>%
-  ggplot(aes(y = reorder(Region, tot_queserias),
-             x = tot_queserias,
-             fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("Otros" = "grey60",    # Todas las barras en gris
-                               "Asturias" = "#D55E00")) +  # Rojo destacado
-  labs(title = "",
-       x = "",
-       y = "") +
-  scale_x_continuous(labels = scales::comma) +
-  # scale_y_discrete(labels = function(x) gsub(" ", "\n", x)) +
-  theme_minimal() +  # Fondo blanco y estilo limpio
-  theme(legend.position = "none",
-        panel.grid.major = element_blank(),  # Eliminamos rejillas para una apariencia más limpia
-        panel.grid.minor = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank())
+# Agrega queserías por región
+df_queserias_region <- df_DOP_esp |>
+  group_by(Region) |>
+  summarise(tot_queserias = sum(queserias, na.rm = TRUE))
+
+rm(ccaa_join)
+
+ccaa_join <- esp_get_ccaa() |>
+  st_transform(4326) |>
+  mutate(Region = case_when(
+    ccaa.shortname.es == "Castilla-La Mancha" ~ "Castilla-La-Mancha",
+    ccaa.shortname.es == "Castilla y León"    ~ "Castilla-León",
+    ccaa.shortname.es == "La Rioja"           ~ "La-Rioja",
+    ccaa.shortname.es == "País Vasco"         ~ "País.Vasco",
+    TRUE ~ ccaa.shortname.es
+  )) |>
+  left_join(df_queserias_region, by = "Region")
+
+ggplot(ccaa_join) +
+  geom_sf(aes(fill = tot_queserias), color = "white", linewidth = 0.3) +
+  geom_sf_text(aes(label = tot_queserias), 
+               size = 3, 
+               color = "black",
+               na.rm = TRUE) +
+  scale_fill_distiller(
+    palette   = "YlOrRd",
+    direction = 1,
+    name      = "Queserías",
+    na.value  = "grey85",
+    labels    = scales::comma
+  ) +
+  theme_void() +
+  theme(
+    axis.text       = element_blank(),
+    axis.ticks      = element_blank(),
+    panel.grid      = element_blank(),
+    legend.position = "right"
+  ) +
+  labs(caption = "Fuente: MAPA")
+
 ```
-
-Producción de quesos catalogados (DOP e IGP) en España, por Comunidades Autónomas
-:::
 
 ```{r}
 #| label: fig-esp-queserias
-#| fig-cap: "Producción de quesos catalogados con DOP e IGP en España"
+#| fig-cap: "Producción de quesos catalogados con DOP e IGP en España. El número de denominaciones catalogadas en cada región se indica en el interior de cada punto."
 #| echo: FALSE
 #| warning: FALSE
 #| message: FALSE
 
-library(ggplot2)
-library(ggrepel)
-
 df_DOP_esp %>%
   group_by(Region) %>%
-  summarise(TotalTon = sum(Ton, na.rm = TRUE), tot_queserias = sum(queserias, na.rm = TRUE)) %>%
-  # 1. Creamos la misma lógica de resaltado que en tus barras
-  mutate(highlight = case_when(
+  summarise(
+    TotalTon = sum(Ton, na.rm = TRUE),
+    tot_queserias = sum(queserias, na.rm = TRUE),
+    n_dop_igp = n()   # <-- recuento de DOP/IGP por región
+  ) %>%
+  mutate(
+    highlight = case_when(
       Region == "Asturias" ~ "Asturias",
-      TRUE ~ "Otros")) %>%
+      TRUE ~ "Otros"
+    )
+  ) %>%
   ggplot(aes(x = TotalTon, y = tot_queserias)) +
-  # 2. Puntos: Gris uniforme para 'Otros' y colores para España/Asturias
-  geom_point(aes(color = highlight), size = 2.5, alpha = 0.7) +
-  # 3. Etiquetas: Solo ponemos nombre a los puntos destacados para evitar ruido
-  # geom_text_repel(aes(label = if_else(highlight == "Otros", "", pais), color = highlight),
-  #                 size = 4, fontface = "bold", box.padding = 0.5) +
-  geom_text_repel(aes(label = Region, color = highlight), 
-                  size = 3, 
-                  fontface = "plain",
-                  max.overlaps = Inf, # Obligamos a que salgan todos
-                  box.padding = 0.35, 
-                  point.padding = 0.5,
-                  segment.color = 'grey80') + # Líneas finas hacia los puntos
   
-    # 4. Paleta exacta a tus gráficos de barras
-  scale_color_manual(values = c("Otros" = "grey60", 
-                                "España" = "#1f77b4", 
-                                "Asturias" = "#D55E00")) +
-  # 5. Formato y limpieza visual
+  # Puntos con tamaño proporcional
+  geom_point(aes(color = highlight, size = n_dop_igp), alpha = 0.8) +
+  
+  # Número dentro del punto
+  geom_text(aes(label = n_dop_igp),
+            color = "white",
+            size = 3,
+            fontface = "bold") +
+  
+  # Etiquetas externas con repel
+  geom_text_repel(
+    aes(label = Region, color = highlight),
+    size = 3,
+    fontface = "plain",
+    max.overlaps = Inf,
+    box.padding = 0.8,
+    point.padding = 1.2,
+    min.segment.length = 0,
+    segment.color = 'grey80'
+  ) +
+  
+  scale_color_manual(values = c(
+    "Otros" = "grey60",
+    "España" = "#1f77b4",
+    "Asturias" = "#D55E00"
+  )) +
+  
+  scale_size_continuous(range = c(3, 12)) +
+  
   scale_x_continuous(labels = scales::comma) +
   scale_y_continuous(labels = scales::comma) +
   labs(
     x = "Toneladas producidas DOP+IGP",
-    y = "Núm de queserías"
+    y = "Núm de queserías",
+    size = "Nº DOP/IGP"
   ) +
   theme_minimal() +
   theme(
     legend.position = "none",
-    panel.grid.major = element_blank(), # Limpio como tus barras
+    panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
-    axis.line = element_line(color = "grey80") # Una línea base para los ejes
+    axis.line = element_line(color = "grey80")
   )
+
 ```
+
+Producción de quesos catalogados (DOP e IGP) en España, por Comunidades Autónomas
+
+:::
 
 Respecto al consumo de queso por CCAA, el último Informe anual del consumo alimentario del MAPA para 2023[@mapa-3-2023], estima el consumo total de queso en España en unas 350 mil toneladas, con un consumo per cápita de 7,56 kg. ([@tbl-tabla-consumo]).  Asturias, con un consumo per cápita de 8,1 kg, se sitúa en la zona media‐alta de la tabla.
 
@@ -313,76 +383,76 @@ df_consumo %>%
                align = c("l", "r", "r", "r"))
 ```
 
-Para analizar el consumo de queso por Comunidad Autónoma, comparo la participación en el consumo con su cuota poblacional, calculada ésta como el porcentaje de población de cada Comunidad Autónoma sobre la población total. La [@fig-consumo] muestra la diferencia entre el porcentaje de consumo y la cuota poblacional, frente al consumo per cápita; destaca el alto consumo de queso en Canarias, y el bajo consumo de Andalucía y Castilla-La Mancha. Las CCAA que están sobre la línea de división vertical (Asturias y Baleares) tienen un consumo de queso se corresponde con su cuota poblacional.  El diámetro de los puntos es proporcional a la población de cada CCAA.
+Para analizar el consumo de queso por Comunidad Autónoma, comparo la participación en el consumo con su cuota poblacional, calculada ésta como el porcentaje de población de cada Comunidad Autónoma sobre la población total. La [@fig-consumo] muestra la diferencia entre el porcentaje de consumo y la cuota poblacional, junto con el consumo per cápita; destaca el alto consumo de queso en Canarias, y el bajo consumo de Andalucía y Castilla-La Mancha. Las CCAA que están en color cercano al blanco (Asturias y Baleares) tienen un consumo de queso que se corresponde con su cuota poblacional. Podemos decir que las regiones en las que el consumo de queso es superior a su cuota poblacional son comunidades con un consumo de queso bien establecido y maduro. Las comunidades en las que esta diferencia es negativa, es decir, en las que el consumo es inferior a su cuota poblacional, podrían suponer una oportunidad para el desarollo del consumo del queso, y quizás de los quesos catalogados. Sería también interesante verificar el impacto del turismo europeo sobre el elevado consumo de queso en algunas regiones como Valencia, Baleares y Canarias.
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 #| label: fig-consumo
-#| fig-cap: "Consumo de queso por CCAA"
+#| fig-cap: "Consumo de queso por CCAA."
 #| out-width: "125%"
 
-df_consumo |> 
-  mutate(Comunidad = recode(Comunidad,
-    "Cataluña" = "CAT",
-    "Aragón" = "ARA",
-    "Illes Balears" = "BAL",
-    "Comunitat Valenciana" = "VAL",
-    "Región de Murcia" = "MUR",
-    "Andalucía" = "AND",
-    "Comunidad de Madrid" = "MAD",
-    "Castilla-La Mancha" = "CLM",
-    "Extremadura" = "EXT",
-    "Castilla Y Leon" = "CYL",
-    "Galicia" = "GAL",
-    "Pais Vasco" = "EUS",
-    "La Rioja" = "RIO",
-    "C. Foral de Navarra" = "NAV",
-    "Principado de Asturias" = "AST",
-    "Canarias" = "CAN",
-    "Cantabria" = "CB")) %>%
-  mutate(diferencia = kg_pct - poblacion_pct,
-         fill_color = if_else(Comunidad == "Ast", "#D55E00", "grey60"), # Define colores
-         highlight = if_else(Comunidad == "Ast", Comunidad, "Otros")) |> 
-  ggplot(aes(x = diferencia, y = consumo_por_hab, color = highlight, fill = fill_color, alpha = 0.8, size = poblacion_pct)) + 
-  geom_point(shape = 21, alpha = 0.3, stroke = 0.1) +  # Uso de shape 21 para permitir color de borde y relleno
-  geom_vline(xintercept = 0, linetype = "dashed", color = "#1f77b4", size = 0.5) +  
-  geom_hline(yintercept = 7.6, linetype = "dashed", color = "#1f77b4", size = 0.5) +  
-  geom_text(aes(label = Comunidad), 
-                  size = 2,
-                  fontface = "bold",
-                  alpha = 1) +
-scale_color_manual(values = c("Otros" = "black", "Ast" = "#D55E00")) +  
-  scale_fill_identity() +  # Usa directamente los colores definidos en fill_color
-  scale_size_continuous(range = c(2, 10)) +  
-  annotate("segment", x = 0.1, xend = 0.4, y = 10.5, yend = 10.5, 
-         arrow = arrow(length = unit(0.2, "inches")), 
-         color = "#1f77b4", size = 2) +
-  annotate("text", x = 0.1, y = 10, 
-         label = expression("Consumo de queso"~bold("superior")), 
-         color = "#1f77b4",size = 3, hjust = 0) +
-  annotate("text", x = 0.1, y = 9.8, 
-         label = "a la cuota poblacional", 
-         color = "#1f77b4",size = 3, hjust = 0) +
-  annotate("segment", x = -0.1, xend = -0.4, y = 10.5, yend = 10.5, 
-         arrow = arrow(length = unit(0.2, "inches")), 
-         color = "#1f77b4", size = 2) +
-  annotate("text", x = -0.1, y = 10, 
-         label = expression("Consumo de queso"~bold("por debajo")), 
-         color = "#1f77b4",size = 3, hjust = 1) +
-  annotate("text", x = -0.1, y = 9.8, 
-         label = "de la cuota poblacional", 
-         color = "#1f77b4",size = 3, hjust = 1) +
-  annotate("rect", xmin = 0.48, xmax = 1.45, ymin = 7.5, ymax = 7.7, 
-           fill = "white", color = "white") +  # Caja blanca 
-  annotate("text", x = 0.5, y = 7.6, 
-         label = "Consumo per cápita promedio", 
-         color = "#1f77b4",size = 3, hjust = 0) +
-     labs(x = "Diferencia entre porcentaje de consumo y cuota poblacional",
-       y = "Consumo per cápita (kg)") + # Título de la leyenda
-  theme_minimal() +  
-  theme(legend.position = "none",
-        axis.title.x = element_text(size = 9),  # Reducir tamaño del título del eje X
-        axis.title.y = element_text(size = 9),
-        axis.text.x = element_text(hjust = 0.5))
+
+df_consumo_mapa <- df_consumo |>
+  mutate(
+    diferencia      = kg_pct - poblacion_pct,
+    consumo_por_hab = as.numeric(gsub(",", ".", as.character(consumo_por_hab))),
+    Region = case_when(
+      Comunidad == "Cataluña"                ~ "Cataluña",
+      Comunidad == "Aragón"                  ~ "Aragón",
+      Comunidad == "Illes Balears"           ~ "Baleares",
+      Comunidad == "Comunitat Valenciana"    ~ "Comunidad Valenciana",
+      Comunidad == "Región de Murcia"        ~ "Murcia",
+      Comunidad == "Andalucía"               ~ "Andalucía",
+      Comunidad == "Comunidad de Madrid"     ~ "Madrid",
+      Comunidad == "Castilla-La Mancha"      ~ "Castilla-La Mancha",
+      Comunidad == "Extremadura"             ~ "Extremadura",
+      Comunidad == "Castilla Y Leon"         ~ "Castilla y León",
+      Comunidad == "Galicia"                 ~ "Galicia",
+      Comunidad == "Principado de Asturias"  ~ "Asturias",
+      Comunidad == "Cantabria"               ~ "Cantabria",
+      Comunidad == "Pais Vasco"              ~ "País Vasco",
+      Comunidad == "La Rioja"                ~ "La Rioja",
+      Comunidad == "C. Foral de Navarra"     ~ "Navarra",
+      Comunidad == "Canarias"                ~ "Canarias",
+      TRUE ~ Comunidad
+    )
+  )
+
+lim_dif <- max(abs(df_consumo_mapa$diferencia), na.rm = TRUE)
+
+# Shapefile base
+ccaa_base <- esp_get_ccaa(moveCAN = TRUE) |>
+  st_transform(4326) |>
+  left_join(df_consumo_mapa, by = c("ccaa.shortname.es" = "Region"))
+
+centroides <- ccaa_base |> st_centroid()
+
+
+p2 <- ggplot(ccaa_base) +
+  geom_sf(aes(fill = diferencia), color = "grey50", linewidth = 0.3) +
+  geom_sf(data = centroides,
+          aes(size = consumo_por_hab),
+          shape = 21, fill = "white", color = "grey30",
+          alpha = 0.7, na.rm = TRUE) +
+  geom_sf_text(data = centroides,
+               aes(label = ifelse(!is.na(consumo_por_hab),
+                                  gsub("\\.", ",", sprintf("%.1f", consumo_por_hab)),
+                                  NA)),
+               size = 2.2, color = "black", na.rm = TRUE) +
+  scale_fill_distiller(
+    palette   = "RdBu",
+    direction = -1,
+    name      = "Diferencia\n(%)",
+    na.value  = "grey85",
+    limits    = c(-lim_dif, lim_dif)
+  ) +
+  scale_size_continuous(name = "kg/hab", range = c(2, 16), limits = c(6, NA), guide = "none") +
+  theme_void() +
+  theme(axis.text = element_blank(), axis.ticks = element_blank(),
+        panel.grid = element_blank(), legend.position = "right") +
+  labs( caption  = "Color: diferencia entre % de consumo y % de cuota poblacional·\nTamaño burbuja: consumo per cápita.\nFuente: MAPA 2023")
+
+print(p2)
+
 ```
 
 ## La producción de queso en Europa
@@ -433,139 +503,186 @@ Algunos países, como Francia o Suiza, publican datos detallados; en otros casos
 
 Los quesos DOP+IGP están bien identificados por país. Se han recogido un total de 221 variedades europeas, que se pueden consultar en la @tbl-tabla-dop incluida como anexo. No he podido confirmar los volúmenes de algunas de estas variedades, y por lo tanto han quedado excluidas del análisis. 
 
-La @fig-produccion-2 muestra las producciones totales de queso y queso DOP+IGP por país. 
-  
+La @fig-produccion-2 muestra el mapa de las producciones totales de queso y queso DOP+IGP por país. 
+
 ```{r}
 #| echo: FALSE
 #| warning: FALSE
 #| message: FALSE
 #| label: fig-produccion-2
-#| fig-cap: "Producción total de queso"
+#| fig-cap: "Producción total de queso y queso catalogado en Europa"
 
-# 1. Preparación de los datos
-df_long <- df_paises %>%
-  select(pais, prod_total_queso_ton, prod_ton_DOP_IGP) %>%
-  pivot_longer(cols = c(prod_total_queso_ton, prod_ton_DOP_IGP), 
-               names_to = "tipo", 
-               values_to = "toneladas") %>%
-  mutate(
-    # Creamos categorías específicas para el mapeo de colores
-    categoria_color = case_when(
-      pais == "Asturias" & tipo == "prod_total_queso_ton" ~ "Asturias_Total",
-      pais == "Asturias" & tipo == "prod_ton_DOP_IGP"     ~ "Asturias_DOP",
-      pais == "España"   & tipo == "prod_total_queso_ton" ~ "España_Total",
-      pais == "España"   & tipo == "prod_ton_DOP_IGP"     ~ "España_DOP",
-      tipo == "prod_total_queso_ton"                      ~ "Resto_Total",
-      tipo == "prod_ton_DOP_IGP"                          ~ "Resto_DOP"
-    )
-  )
 
-# 2. Generación del gráfico
-ggplot(df_long, aes(x = reorder(pais, toneladas), y = toneladas, fill = categoria_color)) +
-  geom_col(position = position_dodge(width = 0), width = 1.5, alpha = 0.6) +
-  coord_flip() +
+df_paises <- df_paises %>%
+  filter(pais != "Asturias")
+
+
+df_asturias <- tibble(
+  pais = "Asturias",
+  prod_total_queso_ton = 25168,
+  prod_ton_DOP_IGP = 660
+)
+
+# --- 2. Mapa base Europa ---
+eu <- ne_countries(scale = "medium", returnclass = "sf") %>%
+  filter(region_un == "Europe") %>%
+  rename(pais = name) %>%
+  mutate(pais = case_when(
+    pais == "Germany"        ~ "Alemania",
+    pais == "France"         ~ "Francia",
+    pais == "Italy"          ~ "Italia",
+    pais == "Netherlands"    ~ "Paises Bajos",
+    pais == "Poland"         ~ "Polonia",
+    pais == "Spain"          ~ "España",
+    pais == "Denmark"        ~ "Dinamarca",
+    pais == "Ireland"        ~ "Irlanda",
+    pais == "Greece"         ~ "Grecia",
+    pais == "Switzerland"    ~ "Suiza",
+    pais == "Austria"        ~ "Austria",
+    pais == "Belgium"        ~ "Bélgica",
+    pais == "Norway"         ~ "Noruega",
+    pais == "Portugal"       ~ "Portugal",
+    pais == "Cyprus"         ~ "Chipre",
+    pais == "Croatia"        ~ "Croacia",
+    TRUE ~ pais
+  ))
+
+# --- 3. Join ---
+eu_data <- eu %>%
+  left_join(df_paises, by = "pais")
+
+eu_metro <- eu_data %>%
+  st_crop(xmin = -25, ymin = 34, xmax = 45, ymax = 72) # recorta ultramar antes del centroide
+
+centroides_eu <- st_centroid(eu_metro)
+
+
+# --- 4. Rangos globales (incluye Asturias) ---
+rango_total <- range(c(eu_data$prod_total_queso_ton, df_asturias$prod_total_queso_ton), na.rm = TRUE)
+rango_dop   <- range(c(eu_data$prod_ton_DOP_IGP,     df_asturias$prod_ton_DOP_IGP),     na.rm = TRUE)
+
+# --- 5. Punto Asturias ---
+asturias_pt <- st_sf(
+  df_asturias,
+  geometry = st_sfc(st_point(c(-5.86, 43.36)), crs = 4326)
+)
+
+# coordenadas LAEA de Asturias (aproximadas)
+asturias_laea <- st_transform(asturias_pt, 
+                              crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80")
+asturias_coords <- st_coordinates(asturias_laea)
+esp_ccaa <- ne_states(country = "Spain", returnclass = "sf")
+asturias_pol <- esp_ccaa %>% filter(name == "Asturias")
+
+# --- 6. Mapa principal ---
+p_europa <- ggplot(eu_data) +
+  geom_sf(aes(fill = prod_total_queso_ton), color = "white", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
   
-  # 3. Definición manual de los grises y colores de énfasis
-  scale_fill_manual(values = c(
-    "Asturias_Total" = "#D55E00", # Naranja fuerte
-    "Asturias_DOP"   = "#F59E50", # Naranja suave
-    "España_Total"   = "#1f77b4", # Azul fuerte
-    "España_DOP"     = "#A6CEE3", # Azul suave
-    "Resto_Total"    = "#555555", # Gris oscuro para el resto
-    "Resto_DOP"      = "#eeeeee"  # Gris medio para el resto catalogado
-  )) +
+  # --- capa Asturias ---
+  geom_sf(data = asturias_pol,
+          fill = scales::colour_ramp(
+            RColorBrewer::brewer.pal(9, "YlGnBu"))(
+              (25168 - rango_total[1]) / diff(rango_total)),
+          color = "grey30", linewidth = 0.3) +
   
-  # Formato de números y etiquetas
-  scale_y_continuous(labels = scales::label_number(big.mark = ".", suffix = " t"),
-                     expand = expansion(mult = c(0, 0.1))) +
-  labs(
-    title = "Situación de Asturias en el contexto quesero europeo",
-    subtitle = "Comparativa de toneladas totales y catalogadas (DOP/IGP)",
-    x = NULL, 
-    y = "Producción en toneladas",
-    caption = "Fuente: Datos de producción regional y nacional"
+  geom_sf(data = centroides_eu,
+          aes(size = prod_ton_DOP_IGP),
+          shape = 21, fill = "white", color = "grey30",
+          alpha = 0.8, na.rm = TRUE) +
+  geom_sf_text(data = centroides_eu,
+               aes(label = ifelse(!is.na(prod_ton_DOP_IGP),
+                                  scales::comma(prod_ton_DOP_IGP), "")),
+               size = 2.5, color = "black") +
+  scale_fill_distiller(
+    palette = "YlGnBu",
+    direction = 1,
+    limits = rango_total,
+    name = "Producción total\n(toneladas)",
+    na.value = "grey90",
+    labels = scales::comma
   ) +
-  theme_minimal() +
-theme(
-    legend.position = "none",
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    
-    # MODIFICACIÓN AQUÍ:
-    axis.text.y = element_text(
-      # 1. Aplicamos negrita a Asturias y España
-      face = if_else(levels(df_long$pais) %in% c("Asturias", "España"), "bold", "plain"),
-      
-      # 2. Aplicamos el color específico a cada uno
-      color = case_when(
-        levels(df_long$pais) == "Asturias" ~ "#D55E00", # Naranja
-        levels(df_long$pais) == "España"   ~ "#1f77b4", # Azul
-        TRUE ~ "black"                                  # Resto en negro o gris oscuro
-      ),
-      
-      size = 10 # Opcional: ajustar tamaño para que resalte más
-    )
-  )
+  scale_size_continuous(
+    limits = rango_dop,
+    range = c(2, 18),
+    guide = "none"
+  ) +
+  
+  # añadir al p_europa, después de las demás capas y antes de coord_sf:
+  annotate("segment",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 300000,
+           xend = asturias_coords[1], yend = asturias_coords[2],
+           color = "grey30", linewidth = 0.4, arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("label",
+           x = asturias_coords[1] - 400000, y = asturias_coords[2] + 300000,
+           label = paste0("Asturias\nDOP/IGP: ", scales::comma(660), " t"),
+           size = 2.5, color = "grey20", fill = "white",
+           label.size = 0.3, hjust = 0) +
+  
+  coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
+           xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    panel.grid = element_blank()
+  ) +
+  labs(caption = "Burbuja: Producción de queso DOP/IGP en toneladas\nFuente: elaboración propia" )
+
+p_europa
 
 ```
 
+
 El mayor productor de queso europeo es Alemania; la producción de España es semejante a la de Dinamarca. El mayor productor de queso con DOP o IGP es Italia, gracias al enorme volumen de sus quesos Parmiggiano-Reggiano y Grana Padano. Este país también tiene una gran riqueza de quesos regionales con DOP+IGP (52), a la altura de Francia (57); casi el 50% de su producción quesera está catalogada.
 
-La producción de queso catalogado en Europa es muy superior a la de España y Asturias, tanto en total como en cada variedad. La @tbl-tabla-pct-DOP nos muestra que varios países tienen un porcentaje significativo de su producción quesera catalogada. Si la estrategia para Asturias es fomentar el desarrollo de productos con valor añadido con apoyo institucional, sin duda es de interés conocer en detalle las experiencias y la estructura del sector en estos países, y la forma en la que se articula el apoyo institucional a los quesos catalogados.
+La producción de queso catalogado en Europa es muy superior a la de España y Asturias, tanto en total como en cada variedad. La @fig-tabla-pct-DOP nos muestra que varios países tienen un porcentaje significativo de su producción quesera catalogada. Si la estrategia para Asturias es fomentar el desarrollo de productos con valor añadido con apoyo institucional, sin duda es de interés conocer en detalle las experiencias y la estructura del sector en estos países, y la forma en la que se articula el apoyo institucional a los quesos catalogados.
 
 ```{r}
 #| echo: FALSE
 #| warning: FALSE
 #| message: FALSE
-#| label: tbl-tabla-pct-DOP
-#| tbl-cap: "Porcentaje de la producción quesera que está catalogado con DOP o IGP en diferentes países"
-
-library(dplyr)
-library(tidyr)
-library(knitr)
-
-df_paises |>
+#| label: fig-tabla-pct-DOP
+#| fig-cap: "Peso de la producción DOP/IGP sobre la producción total"
+#| 
+df_pct_dop <- df_paises |>
   mutate(
-    pct_cat = (prod_ton_DOP_IGP / prod_total_queso_ton) 
-  ) |>
-  
-  # 1. ORDENAR: Asturias al final (o según tu lógica) y el resto por porcentaje
-  arrange(
-    desc(pct_cat)
-  ) |>
-  
-  # 2. SELECCIONAR
-  select(pais, pct_cat) |>
-  
-  gt() |>
-  # 1. Formateamos el porcentaje directamente (gt tiene funciones integradas)
-  fmt_percent(
-    columns = pct_cat,
-    decimals = 1,
-    dec_mark = ",",
-    sep_mark = "."
-  ) |>
-  # 2. Etiquetas de columna
-  cols_label(
-    pais = "País",
-    pct_cat = "Queso DOP como % de la producción total"
-  ) |>
-  # 3. Ajustes de estilo: Ancho del 40% y centrado
-  tab_options(
-    table.width = pct(40),      # Ocupa el 40% del ancho del contenedor
-    table.margin.left = "auto", # Margen auto a la izquierda
-    table.margin.right = "auto" # Margen auto a la derecha (estos dos centran la tabla)
-  ) |>
-  # 4. Alineación del texto
-  cols_align(
-    align = "left", columns = pais
-  ) |>
-  cols_align(
-    align = "right", columns = pct_cat
-  ) |>
-  # Sustituir NAs por celda vacía
-  sub_missing(columns = everything(), missing_text = "")
+    pct_dop = (prod_ton_DOP_IGP / prod_total_queso_ton * 100) 
+  )
+eu_pct <- eu %>%
+  left_join(df_pct_dop, by = "pais")
 
+p_pct_dop <- ggplot(eu_pct) +
+  geom_sf(aes(fill = pct_dop), color = "white", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+    # --- capa Asturias ---
+  geom_sf(data = asturias_pol,
+          fill = scales::colour_ramp(
+            RColorBrewer::brewer.pal(9, "YlOrRd"))(
+              (660 / 25168 * 100) / max(df_pct_dop$pct_dop, na.rm = TRUE)),
+          color = "grey30", linewidth = 0.3) +
+  annotate("segment",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 300000,
+           xend = asturias_coords[1], yend = asturias_coords[2],
+           color = "grey30", linewidth = 0.4, arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("label",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 300000,
+           label = paste0("Asturias\nDOP/IGP: ", round(660 / 25168 * 100, 1), "%"),
+           size = 2.5, color = "grey20", fill = "white",
+           label.size = 0.3, hjust = 0) +
+  scale_fill_distiller(
+    palette = "YlOrRd",
+    direction = 1,
+    name = "% producción DOP/IGP\nsobre total",
+    na.value = "grey90",
+    labels = function(x) paste0(x, "%")
+  ) +
+  coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
+           xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
+  theme_void() +
+  theme(legend.position = "right", panel.grid = element_blank()) +
+  labs(caption = "Fuente: elaboración propia")
+
+p_pct_dop
 ```
 
 La @fig-DOP-queso presenta los quesos europeos con DOP+IGP que hacen más de 10.000 toneladas (recordemos que los quesos asturianos DOP+IGP no alcanzan las 1000 toneladas). La lista está encabezada por un queso holandés, dos italianos, un griego y un francés. 
@@ -629,133 +746,82 @@ Para comparar la producción de queso en Asturias con la producción total de lo
 Antes de presentar el análisis de estas ratios, es importante señalar que comparar Asturias con países europeos en su totalidad puede dar una visión distorsionada. La producción de queso no es uniforme a lo largo de un país; suele focalizarse en zonas concretas. Si se dispusiera de datos regionales y se comparasen con las áreas queseras asturianas, es probable que las ratios de producción por habitante o por $km^2$ en otras regiones queseras europeas fueran significativamente mayores. He utilizado las cifras nacionales ante la falta de información regional detallada.}
 :::
 
-La @fig-habitante presenta los datos de producción de queso en kilogramos por habitante. Los mayores productores de queso de acuerdo a este índice son Dinamarca, Países Bajos e Irlanda; en los quesos DOP+IGP, lo son Países Bajos, Chipre y Grecia, con Italia y Suiza a una distancia moderada. Asturias tiene una producción total por habitante superior a la de Italia, Grecia o Suiza. En cambio, en la producción DOP/IGP, se sitúa casi al final de la lista. 
-
+La @fig-pct-habitante presenta los datos de producción de queso en kilogramos por habitante. Los mayores productores de queso de acuerdo a este índice son Dinamarca, Países Bajos e Irlanda; en los quesos DOP+IGP, lo son Países Bajos, Chipre y Grecia, con Italia y Suiza a una distancia moderada. Asturias tiene una producción total por habitante superior a la de Italia, Grecia o Suiza. En cambio, en la producción DOP/IGP, se sitúa casi al final de la lista. 
 
 ```{r}
-#| label: fig-habitante
 #| echo: FALSE
 #| warning: FALSE
 #| message: FALSE
-#| fig-cap: "Producción de queso por habitante"
+#| label: fig-pct-habitante
+#| fig-cap: "Producción de queso por habitante, total y catalogado (kg)"
 
-df_long <- df_paises %>%
-  mutate(pais = reorder(pais, kg_queso_habitante)) %>%
-  select(pais, kg_queso_habitante, kg_DOP_habitante) %>%
-  pivot_longer(cols = c(kg_queso_habitante, kg_DOP_habitante), 
-               names_to = "tipo", 
-               values_to = "toneladas") %>%
-  mutate(
-    # Creamos categorías específicas para el mapeo de colores
-    categoria_color = case_when(
-      pais == "Asturias" & tipo == "kg_queso_habitante" ~ "Asturias_Total",
-      pais == "Asturias" & tipo == "kg_DOP_habitante"     ~ "Asturias_DOP",
-      pais == "España"   & tipo == "kg_queso_habitante" ~ "España_Total",
-      pais == "España"   & tipo == "kg_DOP_habitante"     ~ "España_DOP",
-      tipo == "kg_queso_habitante"                      ~ "Resto_Total",
-      tipo == "kg_DOP_habitante"                          ~ "Resto_DOP"
-    )
-  )
+rango_kg_total <- range(c(df_paises$kg_queso_habitante, 660/1000000*1000), na.rm = TRUE)
+rango_kg_dop   <- range(c(df_paises$kg_DOP_habitante,   660/1000000*1000), na.rm = TRUE)
 
-# 2. Generación del gráfico
-ggplot(df_long, aes(x = pais, y = toneladas, fill = categoria_color)) +
-  geom_col(position = position_dodge(width = 0), width = 1.5, alpha = 0.6) +
-  coord_flip() +
-  
-  # 3. Definición manual de los grises y colores de énfasis
-  scale_fill_manual(values = c(
-    "Asturias_Total" = "#D55E00", # Naranja fuerte
-    "Asturias_DOP"   = "#F59E50", # Naranja suave
-    "España_Total"   = "#1f77b4", # Azul fuerte
-    "España_DOP"     = "#A6CEE3", # Azul suave
-    "Resto_Total"    = "#555555", # Gris oscuro para el resto
-    "Resto_DOP"      = "#eeeeee"  # Gris medio para el resto catalogado
-  )) +
-  
-  # Formato de números y etiquetas
-  scale_y_continuous(labels = scales::label_number(big.mark = ".", suffix = " kg"),
-                     expand = expansion(mult = c(0, 0.1))) +
-  labs(
-    title = "Situación de Asturias en el contexto quesero europeo",
-    subtitle = "Comparativa de producción total y catalogada (DOP/IGP) por habitante",
-    x = NULL, 
-    y = "Producción en kg/hab",
-    caption = "Fuente: Datos de producción regional y nacional"
+eu_kg <- eu %>%
+  left_join(df_paises, by = "pais")
+
+centroides_kg <- st_centroid(eu_kg)
+st_geometry(centroides_kg)[centroides_kg$pais == "Francia"] <- 
+  st_geometry(st_sfc(st_point(c(2.5, 46.5)), crs = 4326))
+
+asturias_kg <- 660 / 1000000 * 1000  # prod_ton_DOP_IGP / habitantes * 1000 = kg/hab
+asturias_kg_total <- 25168 / 1000000 * 1000
+
+p_kg_hab <- ggplot(eu_kg) +
+  geom_sf(aes(fill = kg_queso_habitante), color = "white", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+
+  # --- capa Asturias ---
+  geom_sf(data = asturias_pol,
+          fill = scales::colour_ramp(
+            RColorBrewer::brewer.pal(9, "YlGnBu"))(
+              (asturias_kg_total - rango_kg_total[1]) / diff(rango_kg_total)),
+          color = "grey30", linewidth = 0.3) +
+
+  # burbujas países
+  geom_sf(data = centroides_kg,
+          aes(size = kg_DOP_habitante),
+          shape = 21, fill = "white", color = "grey30",
+          alpha = 0.8, na.rm = TRUE) +
+  geom_sf_text(data = centroides_kg,
+               aes(label = ifelse(!is.na(kg_DOP_habitante),
+                                  scales::number(kg_DOP_habitante, accuracy = 0.1), "")),
+               size = 2.5, color = "black") +
+
+  # anotación Asturias
+  annotate("segment",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 400000,
+           xend = asturias_coords[1], yend = asturias_coords[2],
+           color = "grey30", linewidth = 0.4, arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("label",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 400000,
+           label = paste0("Asturias\n", round(asturias_kg, 2), " kg/hab DOP"),
+           size = 2.5, color = "grey20", fill = "white",
+           label.size = 0.3, hjust = 0) +
+
+  scale_fill_distiller(
+    palette = "YlGnBu", direction = 1,
+    limits = rango_kg_total,
+    name = "Producción total\n(kg/habitante)",
+    na.value = "grey90",
+    labels = scales::label_number(accuracy = 0.1)
   ) +
-  theme_minimal() +
- theme(
-    legend.position = "none",
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    
-    # MODIFICACIÓN AQUÍ:
-    axis.text.y = element_text(
-      # 1. Aplicamos negrita a Asturias y España
-      face = if_else(levels(df_long$pais) %in% c("Asturias", "España"), "bold", "plain"),
-      
-      # 2. Aplicamos el color específico a cada uno
-      color = case_when(
-        levels(df_long$pais) == "Asturias" ~ "#D55E00", # Naranja
-        levels(df_long$pais) == "España"   ~ "#1f77b4", # Azul
-        TRUE ~ "black"                                  # Resto en negro o gris oscuro
-      ),
-      
-      size = 10 # Opcional: ajustar tamaño para que resalte más
-    )
-  )
+  scale_size_continuous(
+    limits = rango_kg_dop,
+    range = c(2, 18),
+    guide = "none"
+  ) +
+  coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
+           xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
+  theme_void() +
+  theme(legend.position = "right", panel.grid = element_blank()) +
+  labs( caption = "Burbuja: Producción de queso DOP/IGP en kg/habitante\nFuente: elaboración propia")
 
+p_kg_hab
 ```
 
-
-```{r}
-#| echo: FALSE
-#| warning: FALSE
-#| message: FALSE
-#| label: tbl-pct-habitante
-#| tbl-cap: "Producción de queso por habitante, total y catalogado (kg)"
-
-df_paises |>
-  # 1. ORDENAR por porcentaje
-  arrange(
-    desc(kg_queso_habitante)
-  ) |>
-  
-  # 2. SELECCIONAR
-  select(pais, kg_queso_habitante, kg_DOP_habitante) |>
-  
-  gt() |>
-# 1. FORMATEO NUMÉRICO: Un decimal y configuración regional (coma para decimales)
-  fmt_number(
-    columns = c(kg_queso_habitante, kg_DOP_habitante),
-    decimals = 1,
-    dec_mark = ",",
-    sep_mark = "."
-  ) |>
-  # 2. Etiquetas de columna
-  cols_label(
-    pais = "País",
-    kg_queso_habitante = "Producción total",
-    kg_DOP_habitante = "Producción DOP+IGP"
-  ) |>
-  # 3. Ajustes de estilo: Ancho del 40% y centrado
-  tab_options(
-    table.width = pct(40),      # Ocupa el 40% del ancho del contenedor
-    table.margin.left = "auto", # Margen auto a la izquierda
-    table.margin.right = "auto" # Margen auto a la derecha (estos dos centran la tabla)
-  ) |>
-  # 4. Alineación del texto
-  cols_align(
-    align = "left", columns = pais
-  ) |>
-  cols_align(
-    align = "right", columns = c(kg_queso_habitante,kg_DOP_habitante)
-  ) |>
-  # Sustituir NAs por celda vacía
-  sub_missing(columns = everything(), missing_text = "")
-
-```
-
-La @fig-km2 presenta la producción de queso por unidad de superficie de la zona considerada (toneladas/$km^2$). Destaca la enorme producción de Países Bajos, tanto total como de DOP. En cuanto al total de queso producido, Asturias presenta un índice superior al de Grecia y al promedio de España. 
+La @fig-km2 presenta la producción de queso por unidad de superficie de la zona considerada (toneladas/$km^2$). Destaca la enorme producción de Países Bajos, tanto total como de DOP. En cuanto al total de queso producido, Asturias presenta un índice ligeramente superior al de Grecia y al promedio de España; en DOP/IGP está entre las regiones más bajas.
 
 ```{r}
 #| label: fig-km2
@@ -764,425 +830,382 @@ La @fig-km2 presenta la producción de queso por unidad de superficie de la zona
 #| message: FALSE
 #| fig-cap: "Producción de queso por km2"
 
-df_long <- df_paises %>%
-  mutate(pais = reorder(pais, ton_tot_km2)) %>%
-  select(pais, ton_tot_km2, ton_DOP_km2) %>%
-  pivot_longer(cols = c(ton_tot_km2, ton_DOP_km2), 
-               names_to = "tipo", 
-               values_to = "toneladas") %>%
-  mutate(
-    # Creamos categorías específicas para el mapeo de colores
-    categoria_color = case_when(
-      pais == "Asturias" & tipo == "kg_queso_km2" ~ "Asturias_Total",
-      pais == "Asturias" & tipo == "ton_DOP_km2"     ~ "Asturias_DOP",
-      pais == "España"   & tipo == "kg_queso_km2" ~ "España_Total",
-      pais == "España"   & tipo == "ton_DOP_km2"     ~ "España_DOP",
-      tipo == "kg_queso_km2"                      ~ "Resto_Total",
-      tipo == "ton_DOP_km2"                          ~ "Resto_DOP"
-    )
-  )
+rango_km2_total <- range(df_paises$ton_tot_km2, na.rm = TRUE)
+rango_km2_dop   <- range(df_paises$ton_DOP_km2, na.rm = TRUE)
 
-# 2. Generación del gráfico
-ggplot(df_long, aes(x = pais, y = toneladas, fill = categoria_color)) +
-  geom_col(position = position_dodge(width = 0), width = 1.5, alpha = 0.6) +
-  coord_flip() +
-  
-  # 3. Definición manual de los grises y colores de énfasis
-  scale_fill_manual(values = c(
-    "Asturias_Total" = "#D55E00", # Naranja fuerte
-    "Asturias_DOP"   = "#F59E50", # Naranja suave
-    "España_Total"   = "#1f77b4", # Azul fuerte
-    "España_DOP"     = "#A6CEE3", # Azul suave
-    "Resto_Total"    = "#555555", # Gris oscuro para el resto
-    "Resto_DOP"      = "#eeeeee"  # Gris medio para el resto catalogado
-  )) +
-  
-  # Formato de números y etiquetas
-  scale_y_continuous(labels = scales::label_number(big.mark = ".", suffix = " t"),
-                     expand = expansion(mult = c(0, 0.1))) +
-  labs(
-    title = "Situación de Asturias en el contexto quesero europeo",
-    subtitle = "Comparativa de producción total y catalogada (DOP/IGP) por km2",
-    x = NULL, 
-    y = "Producción en toneladas/km2",
-    caption = "Fuente: Datos de producción regional y nacional"
+eu_km2 <- eu %>%
+  left_join(df_paises, by = "pais")
+
+centroides_km2 <- st_centroid(eu_km2)
+st_geometry(centroides_km2)[centroides_km2$pais == "Francia"] <-
+  st_geometry(st_sfc(st_point(c(2.5, 46.5)), crs = 4326))
+
+p_km2 <- ggplot(eu_km2) +
+  geom_sf(aes(fill = ton_tot_km2), color = "white", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+
+  # --- capa Asturias ---
+  geom_sf(data = asturias_pol,
+          fill = scales::colour_ramp(
+            RColorBrewer::brewer.pal(9, "YlGnBu"))(
+              (asturias_ton_tot_km2 - rango_km2_total[1]) / diff(rango_km2_total)),
+          color = "grey30", linewidth = 0.3) +
+
+  # burbujas países
+  geom_sf(data = centroides_km2,
+          aes(size = ton_DOP_km2),
+          shape = 21, fill = "white", color = "grey30",
+          alpha = 0.8, na.rm = TRUE) +
+  geom_sf_text(data = centroides_km2,
+               aes(label = ifelse(!is.na(ton_DOP_km2),
+                                  scales::number(ton_DOP_km2, accuracy = 0.01), "")),
+               size = 2.5, color = "black") +
+
+  # anotación Asturias
+  annotate("segment",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 400000,
+           xend = asturias_coords[1], yend = asturias_coords[2],
+           color = "grey30", linewidth = 0.4, arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("label",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 400000,
+           label = paste0("Asturias\n", round(asturias_ton_dop_km2, 2), " t/km² DOP"),
+           size = 2.5, color = "grey20", fill = "white",
+           label.size = 0.3, hjust = 0) +
+
+  scale_fill_distiller(
+    palette = "YlGnBu", direction = 1,
+    limits = rango_km2_total,
+    name = "Producción total\n(t/km²)",
+    na.value = "grey90",
+    labels = scales::label_number(accuracy = 0.01)
   ) +
-  theme_minimal() +
-theme(
-    legend.position = "none",
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    
-    # MODIFICACIÓN AQUÍ:
-    axis.text.y = element_text(
-      # 1. Aplicamos negrita a Asturias y España
-      face = if_else(levels(df_long$pais) %in% c("Asturias", "España"), "bold", "plain"),
-      
-      # 2. Aplicamos el color específico a cada uno
-      color = case_when(
-        levels(df_long$pais) == "Asturias" ~ "#D55E00", # Naranja
-        levels(df_long$pais) == "España"   ~ "#1f77b4", # Azul
-        TRUE ~ "black"                                  # Resto en negro o gris oscuro
-      ),
-      
-      size = 10 # Opcional: ajustar tamaño para que resalte más
-    )
-  )
+  scale_size_continuous(
+    limits = rango_km2_dop,
+    range = c(2, 18),
+    guide = "none"
+  ) +
+  coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
+           xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
+  theme_void() +
+  theme(legend.position = "right", panel.grid = element_blank()) +
+  labs(caption = "Burbuja: Producción de queso DOP/IGP en t/km²\nFuente: elaboración propia")
+
+p_km2
 
 ```
 
+La @fig-empresas muestra la producción media de queso por empresa, total y catalogado.Las cifras muestran la pequeña talla promedio de las empresas asturianas, sobre todo en el caso de las DOP/IGP.
 
-```{r}
-#| echo: FALSE
-#| warning: FALSE
-#| message: FALSE
-#| label: tbl-prod-km2
-#| tbl-cap: "Producción de queso por unidad de superfice (km2), total y catalogado (toneladas)"
-
-df_paises |>
-  # 1. ORDENAR por porcentaje
-  arrange(
-    desc(ton_tot_km2)
-  ) |>
-  
-  # 2. SELECCIONAR
-  select(pais, ton_tot_km2, ton_DOP_km2) |>
-  
-  gt() |>
-# 1. FORMATEO NUMÉRICO: Un decimal y configuración regional (coma para decimales)
-  fmt_number(
-    columns = c(ton_tot_km2, ton_DOP_km2),
-    decimals = 1,
-    dec_mark = ",",
-    sep_mark = "."
-  ) |>
-  # 2. Etiquetas de columna
-  cols_label(
-    pais = "País",
-    ton_tot_km2 = "Producción total",
-    ton_DOP_km2 = "Producción DOP+IGP"
-  ) |>
-  # 3. Ajustes de estilo: Ancho del 40% y centrado
-  tab_options(
-    table.width = pct(40),      # Ocupa el 40% del ancho del contenedor
-    table.margin.left = "auto", # Margen auto a la izquierda
-    table.margin.right = "auto" # Margen auto a la derecha (estos dos centran la tabla)
-  ) |>
-  # 4. Alineación del texto
-  cols_align(
-    align = "left", columns = pais
-  ) |>
-  cols_align(
-    align = "right", columns = c(ton_tot_km2,ton_DOP_km2)
-  ) |>
-  # Sustituir NAs por celda vacía
-  sub_missing(columns = everything(), missing_text = "")
-
-```
-
-La @fig-empresas muestra la producción media de queso por empresa, total y catalogado. En ambas figuras (@fig-empresas-ton y @fig-empresas-DOP) vemos la pequeña talla de las empresas asturianas.
-
-:::{#fig-empresas layout-ncol=2}
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
-#| label: fig-empresas-ton
+#| label: fig-empresas
 #| fig-cap: "Producción total"
 #| fig-height: 6
 
-# 1. Preparamos los datos fuera para que los niveles coincidan
-df_plot <- df_paises %>%
-  filter (!is.na(ton_queso_por_empresa)) %>%
-  mutate(
-    # Ordenamos el factor aquí para que el theme pueda leer los niveles correctos
-    pais = reorder(pais, ton_queso_por_empresa),
-    highlight = if_else(pais %in% c("España", "Asturias"), as.character(pais), "Otros")
-  )
+asturias_ton_emp_total <- asturias_data %>% pull(ton_queso_por_empresa)
+asturias_ton_emp_dop   <- asturias_data %>% pull(ton_queso_DOP_por_empresa)
 
-# 2. Extraemos los niveles ordenados para el theme
-eje_colores <- case_when(
-  levels(df_plot$pais) == "Asturias" ~ "#D55E00",
-  levels(df_plot$pais) == "España"   ~ "#1f77b4",
-  TRUE ~ "black"
-)
+rango_emp_total <- range(df_paises$ton_queso_por_empresa,     na.rm = TRUE)
+rango_emp_dop   <- range(df_paises$ton_queso_DOP_por_empresa, na.rm = TRUE)
 
-eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
+eu_emp <- eu %>%
+  left_join(df_paises, by = "pais")
 
-# 3. Gráfico
-ggplot(df_plot, aes(x = pais, y = ton_queso_por_empresa, fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("Otros" = "grey60", 
-                               "España" = "#1f77b4", 
-                               "Asturias" = "#D55E00")) +
-  scale_y_continuous(labels = scales::comma) +
-  # Usamos una función simple para las etiquetas si no quieres el gsub complicado
-  # scale_x_discrete(labels = function(x) gsub(" ", "\n", x)) +
-  coord_flip() +
-  theme_minimal() +
-  theme(legend.position = "none",
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank(),
-        axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
-        # APLICAMOS LOS VECTORES QUE CREAMOS ARRIBA
-        axis.text.y = element_text(color = eje_colores, 
-                                   face = eje_caras, 
-                                   size = 16) # 16 suele ser muy grande para el eje Y
-  )
-```
+centroides_emp <- st_centroid(eu_emp)
+st_geometry(centroides_emp)[centroides_emp$pais == "Francia"] <-
+  st_geometry(st_sfc(st_point(c(2.5, 46.5)), crs = 4326))
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-#| label: fig-empresas-DOP
-#| fig-cap: "Producción DOP+IGP"
-#| fig-height: 6
+p_emp <- ggplot(eu_emp) +
+  geom_sf(aes(fill = ton_queso_por_empresa), color = "white", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
 
-# 1. Preparamos los datos fuera para que los niveles coincidan
-df_plot <- df_paises %>%
-    filter (!is.na(ton_queso_DOP_por_empresa)) %>%
-  mutate(
-    # Ordenamos el factor aquí para que el theme pueda leer los niveles correctos
-    pais = reorder(pais, ton_queso_DOP_por_empresa),
-    highlight = if_else(pais %in% c("España", "Asturias"), as.character(pais), "Otros")
-  )
+  geom_sf(data = asturias_pol,
+          fill = scales::colour_ramp(
+            RColorBrewer::brewer.pal(9, "YlGnBu"))(
+              (asturias_ton_emp_total - rango_emp_total[1]) / diff(rango_emp_total)),
+          color = "grey30", linewidth = 0.3) +
 
-# 2. Extraemos los niveles ordenados para el theme
-eje_colores <- case_when(
-  levels(df_plot$pais) == "Asturias" ~ "#D55E00",
-  levels(df_plot$pais) == "España"   ~ "#1f77b4",
-  TRUE ~ "black"
-)
+  geom_sf(data = centroides_emp,
+          aes(size = ton_queso_DOP_por_empresa),
+          shape = 21, fill = "white", color = "grey30",
+          alpha = 0.8, na.rm = TRUE) +
+  geom_sf_text(data = centroides_emp,
+               aes(label = ifelse(!is.na(ton_queso_DOP_por_empresa),
+                                  scales::number(ton_queso_DOP_por_empresa, accuracy = 1), "")),
+               size = 2.5, color = "black") +
 
-eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
+  annotate("segment",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 400000,
+           xend = asturias_coords[1], yend = asturias_coords[2],
+           color = "grey30", linewidth = 0.4, arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("label",
+           x = asturias_coords[1] - 300000, y = asturias_coords[2] + 400000,
+           label = paste0("Asturias\n", round(asturias_ton_emp_dop, 1), " t/emp DOP"),
+           size = 2.5, color = "grey20", fill = "white",
+           label.size = 0.3, hjust = 0) +
 
-# 3. Gráfico
-ggplot(df_plot, aes(x = pais, y = ton_queso_DOP_por_empresa, fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("Otros" = "grey60", 
-                               "España" = "#1f77b4", 
-                               "Asturias" = "#D55E00")) +
-  scale_y_continuous(labels = scales::comma) +
-  # Usamos una función simple para las etiquetas si no quieres el gsub complicado
-  # scale_x_discrete(labels = function(x) gsub(" ", "\n", x)) +
-  coord_flip() +
-  theme_minimal() +
-  theme(legend.position = "none",
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank(),
-        axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
-        # APLICAMOS LOS VECTORES QUE CREAMOS ARRIBA
-        axis.text.y = element_text(color = eje_colores, 
-                                   face = eje_caras, 
-                                   size = 16) # 16 suele ser muy grande para el eje Y
-  )
+  scale_fill_distiller(
+    palette = "YlGnBu", direction = 1,
+    limits = rango_emp_total,
+    name = "Producción media\npor empresa (t)",
+    na.value = "grey90",
+    labels = scales::label_number(accuracy = 1)
+  ) +
+  scale_size_continuous(
+    limits = rango_emp_dop,
+    range = c(2, 18),
+    guide = "none"
+  ) +
+  coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
+           xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
+  theme_void() +
+  theme(legend.position = "right", panel.grid = element_blank()) +
+  labs(caption = "Burbuja: Producción de queso DOP/IGP por empresa en toneladas\nFuente: elaboración  propia" )
+
+p_emp
+
 ```
 
 
-Producción media por empresa (toneladas)
-
-::: 
-
-La @fig-dotplot-num_empresas muestra que Asturias, según los datos disponibles, es la zona quesera de Europa que tiene el mayor número de empresas fabricantes de queso por millón de habitantes entre todas las analizadas, aunque, como hemos visto en la @fig-empresas, la producción media por empresa está entre las más bajas (recordemos que estamos comparando una región con países completos). Respecto a estas características, Asturias se sitúa cerca de Suiza y Grecia. Este elevado número de empresas en la región podría explicar la afirmación de que Asturias constituye ***la mayor mancha quesera de Europa***, referida al número de empresas y no a la producción total.
+La @fig-dotplot-num_empresas muestra que Asturias, según los datos disponibles, es una de las zonas queseras de Europa que tiene el mayor número de empresas fabricantes de queso por millón de habitantes entre todas las analizadas, aunque, como hemos visto en la @fig-empresas, la producción media por empresa está entre las más bajas (recordemos que estamos comparando una región con países completos). Respecto a estas características, Asturias se sitúa cerca de Suiza y Grecia. Este elevado número de empresas en la región podría explicar la afirmación de que Asturias constituye ***la mayor mancha quesera de Europa***, referida al número de empresas y no a la producción total.
 
 ```{r}
 #| label: fig-dotplot-num_empresas
-#| fig-cap: "Número de empresas por millón de habitantes vs. producción media por empresa"
+#| fig-cap: "Estructura comparada del sector quesero asturiano frente al europeo. Líneas de referencia: mediana de cada eje"
 #| echo: FALSE
 #| warning: FALSE
 #| message: FALSE
 
-library(ggplot2)
-library(ggrepel)
 
-df_paises %>%
-  # 1. Creamos la misma lógica de resaltado que en tus barras
+
+med_x <- median(df_paises$num_empresas_millon_hab, na.rm = TRUE)
+med_y <- median(df_paises$ton_queso_por_empresa,   na.rm = TRUE)
+
+df_plot2 <- df_paises |>
+  bind_rows(asturias_data) |>
   mutate(highlight = case_when(
-      pais == "España" ~ "España",
-      pais == "Asturias" ~ "Asturias",
-      TRUE ~ "Otros")) %>%
-  ggplot(aes(x = num_empresas_millon_hab, y = ton_queso_por_empresa)) +
-  # 2. Puntos: Gris uniforme para 'Otros' y colores para España/Asturias
-  geom_point(aes(color = highlight), size = 2.5, alpha = 0.7) +
-  # 3. Etiquetas: Solo ponemos nombre a los puntos destacados para evitar ruido
-  # geom_text_repel(aes(label = if_else(highlight == "Otros", "", pais), color = highlight),
-  #                 size = 4, fontface = "bold", box.padding = 0.5) +
-  geom_text_repel(aes(label = pais, color = highlight), 
-                  size = 3, 
-                  fontface = "plain",
-                  max.overlaps = Inf, # Obligamos a que salgan todos
-                  box.padding = 0.35, 
-                  point.padding = 0.5,
-                  segment.color = 'grey80') + # Líneas finas hacia los puntos
+    pais == "España"   ~ "España",
+    pais == "Asturias" ~ "Asturias",
+    TRUE               ~ "Otros"
+  ))
+
+p_cuadrante <- ggplot(df_plot2, aes(x = num_empresas_millon_hab, y = ton_queso_por_empresa)) +
   
-    # 4. Paleta exacta a tus gráficos de barras
-  scale_color_manual(values = c("Otros" = "grey60", 
-                                "España" = "#1f77b4", 
+  # fondos de cuadrante
+  annotate("rect", xmin = -Inf,  xmax = med_x, ymin = med_y,  ymax = Inf,
+           fill = "#f0f7ee", alpha = 0.6) +
+  annotate("rect", xmin = med_x, xmax = Inf,   ymin = med_y,  ymax = Inf,
+           fill = "#e8f4f8", alpha = 0.6) +
+  annotate("rect", xmin = -Inf,  xmax = med_x, ymin = -Inf,   ymax = med_y,
+           fill = "#fef9e7", alpha = 0.6) +
+  annotate("rect", xmin = med_x, xmax = Inf,   ymin = -Inf,   ymax = med_y,
+           fill = "#fdf2f8", alpha = 0.6) +
+  
+  # líneas de mediana
+  geom_vline(xintercept = med_x, linetype = "dashed", color = "grey50", linewidth = 0.4) +
+  geom_hline(yintercept = med_y, linetype = "dashed", color = "grey50", linewidth = 0.4) +
+  
+  # etiquetas de cuadrante
+  annotate("text", x = -Inf, y = Inf,
+           label = "Pocas empresas\nalta producción\n(concentración industrial)",
+           hjust = -0.05, vjust = 1.4, size = 2.8, color = "grey40", fontface = "italic") +
+  annotate("text", x = Inf, y = Inf,
+           label = "Muchas empresas\nalta producción",
+           hjust = 1.05, vjust = 1.4, size = 2.8, color = "grey40", fontface = "italic") +
+  annotate("text", x = -Inf, y = -Inf,
+           label = "Pocas empresas\nbaja producción\n",
+           hjust = -0.05, vjust = -0.4, size = 2.8, color = "grey40", fontface = "italic") +
+  annotate("text", x = Inf, y = -Inf,
+           label = "Muchas empresas\nbaja producción\n(estructura artesanal)",
+           hjust = 1.05, vjust = -0.4, size = 2.8, color = "grey40", fontface = "italic") +
+
+  # puntos
+  geom_point(aes(color = highlight), size = 3, alpha = 1) +
+  geom_text_repel(aes(label = pais, color = highlight),
+                  size = 3, fontface = "plain",
+                  max.overlaps = Inf,
+                  box.padding = 0.35, point.padding = 0.5,
+                  segment.color = "grey80") +
+  
+  scale_color_manual(values = c("Otros"    = "grey60",
+                                "España"   = "#1f77b4",
                                 "Asturias" = "#D55E00")) +
-  # 5. Formato y limpieza visual
-  scale_x_continuous(labels = scales::comma) +
-  scale_y_continuous(labels = scales::comma) +
+  scale_x_continuous(
+    labels = scales::comma, 
+    # Asegura que el eje X llegue al menos hasta Asturias o un poco más
+    limits = c(0, max(df_plot2$num_empresas_millon_hab, na.rm = TRUE) * 1.1),
+    expand = expansion(mult = c(0, 0.05))
+  )+
+  scale_y_continuous(
+    labels = scales::comma,
+    # mult = c(margen_inferior, margen_superior)
+    # 0.05 es el estándar, 0.3 añade un 30% de espacio extra arriba
+    expand = expansion(mult = c(0.2, 0.3)) 
+  ) +
   labs(
-    x = "Núm. de empresas por millón de habitantes",
+    caption = "Fuente: Elaboración propia",
+    x = "Empresas por millón de habitantes",
     y = "Producción media por empresa (toneladas)"
   ) +
-  theme_minimal() +
+  theme_bw() +
   theme(
     legend.position = "none",
-    panel.grid.major = element_blank(), # Limpio como tus barras
-    panel.grid.minor = element_blank(),
-    axis.line = element_line(color = "grey80") # Una línea base para los ejes
+    panel.grid = element_blank()
   )
+
+p_cuadrante + expand_limits(y = c(-100, max(df_plot2$ton_queso_por_empresa) * 1.2))
+
+```
+La @tbl-dotplot-num_empresas proporciona los principales valores numéricos.
+
+```{r}
+#| label: tbl-dotplot-num_empresas
+#| tbl-cap: ""
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+
+library(gt)
+library(gtExtras)
+
+df_tabla <- df_paises |>
+    bind_rows(asturias_data) |>
+     mutate(highlight = case_when(
+       pais == "España"   ~ "España",
+       pais == "Asturias" ~ "Asturias",
+       TRUE               ~ "Otros"
+      )) |>
+  filter(!is.na(num_empresas_millon_hab) & !is.na(ton_queso_por_empresa)) %>%
+  arrange(desc(ton_queso_por_empresa)) %>%
+  select(
+    pais,
+    prod_total_queso_ton,
+    num_empresas_queseras,
+    ton_queso_por_empresa,
+    num_empresas_millon_hab,
+    ton_queso_DOP_por_empresa
+  )
+
+gt_tabla <- df_tabla %>%
+  gt() %>%
+  
+  # encabezados
+  cols_label(
+    pais                      = "País",
+    prod_total_queso_ton      = "Producción total (t)",
+    num_empresas_queseras     = "Nº empresas",
+    ton_queso_por_empresa     = "t / empresa",
+    num_empresas_millon_hab   = "Empresas / M hab",
+    ton_queso_DOP_por_empresa = "t DOP / empresa"
+  ) %>%
+  
+  # formato numérico
+  fmt_number(columns = prod_total_queso_ton,      decimals = 0, sep_mark = ".") %>%
+  fmt_number(columns = num_empresas_queseras,     decimals = 0, sep_mark = ".") %>%
+  fmt_number(columns = ton_queso_por_empresa,     decimals = 1, sep_mark = ".") %>%
+  fmt_number(columns = num_empresas_millon_hab,   decimals = 1, sep_mark = ".") %>%
+  fmt_number(columns = ton_queso_DOP_por_empresa, decimals = 1, sep_mark = ".", 
+             dec_mark = ",") %>%
+  
+  # escala de color en columnas clave
+  data_color(columns = ton_queso_por_empresa,
+             palette = "Blues") %>%
+  data_color(columns = num_empresas_millon_hab,
+             palette = "Oranges") %>%
+  
+  # resaltar España y Asturias
+  tab_style(
+    style = list(cell_text(weight = "bold", color = "#1f77b4")),
+    locations = cells_body(rows = pais == "España")
+  ) %>%
+  tab_style(
+    style = list(cell_text(weight = "bold", color = "#D55E00")),
+    locations = cells_body(rows = pais == "Asturias")
+  ) %>%
+  
+  tab_header(
+    title    = "Estructura del sector quesero europeo",
+    subtitle = "Producción y número de empresas por país"
+  ) %>%
+  tab_source_note("Fuente: elaboración propia") %>%
+  tab_options(
+    table.font.size   = 12,
+    heading.align     = "left",
+    column_labels.font.weight = "bold"
+  )
+
+gt_tabla
+
 ```
 
 La @fig-dens muestra la implantación de empresas por 1000 $km^2$, índice que he llamado *densidad*. La densidad de empresas queseras en la región de Asturias es semejante a la de Alemania, y está entre las más altas de los países considerados, tanto en total como en quesos catalogados.
 
-:::{#fig-dens layout-ncol=2}
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
-#| label: fig-dens-total
+#| label: fig-dens
 #| fig-cap: "Número total de empresas por 1000 $km^2$"
 
-# 1. Preparamos los datos fuera para que los niveles coincidan
-df_plot <- df_paises %>%
-  filter(!is.na(num_empresas_queseras)&!is.na(num_empresas_queseras_DOP)) %>%
-  mutate(
-    highlight = if_else(pais %in% c("España", "Asturias"), pais, "Otros"),
-    pais = reorder(pais, empresas_1000km2)
-  )
+asturias_emp_km2_total <- asturias_data$empresas_1000km2
+asturias_emp_km2_dop   <- asturias_data$empresas_DOP_1000km2
 
-# 2. Extraemos los niveles ordenados para el theme
-eje_colores <- case_when(
-  levels(df_plot$pais) == "Asturias" ~ "#D55E00",
-  levels(df_plot$pais) == "España"   ~ "#1f77b4",
-  TRUE ~ "black"
-)
+rango_emp_km2_total <- range(df_paises$empresas_1000km2,     na.rm = TRUE)
+rango_emp_km2_dop   <- range(df_paises$empresas_DOP_1000km2, na.rm = TRUE)
 
-eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
+eu_emp_km2 <- eu %>%
+  left_join(df_paises, by = "pais")
 
-# 3. Gráfico
-ggplot(df_plot, aes(x = pais, y = empresas_1000km2, fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("Otros" = "grey60", 
-                               "España" = "#1f77b4", 
-                               "Asturias" = "#D55E00")) +
-  scale_y_continuous(labels = scales::comma) +
-  # Usamos una función simple para las etiquetas si no quieres el gsub complicado
-  # scale_x_discrete(labels = function(x) gsub(" ", "\n", x)) +
-  coord_flip() +
-  theme_minimal() +
-  theme(legend.position = "none",
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank(),
-        axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
-        # APLICAMOS LOS VECTORES QUE CREAMOS ARRIBA
-        axis.text.y = element_text(color = eje_colores, 
-                                   face = eje_caras, 
-                                   size = 16) # 16 suele ser muy grande para el eje Y
-  )
-```
+centroides_emp_km2 <- st_centroid(eu_emp_km2)
+st_geometry(centroides_emp_km2)[centroides_emp_km2$pais == "Francia"] <-
+  st_geometry(st_sfc(st_point(c(2.5, 46.5)), crs = 4326))
 
+p_emp_km2 <- ggplot(eu_emp_km2) +
+  geom_sf(aes(fill = empresas_1000km2), color = "white", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-#| label: fig-dens-DOP
-#| fig-cap: "Número de empresas DOP+IGP por 1000 $km^2$"
-#| 
-# 1. Preparamos los datos fuera para que los niveles coincidan
-df_plot <- df_paises %>%
-  filter(!is.na(num_empresas_queseras)&!is.na(num_empresas_queseras_DOP)) %>%
-  mutate(
-    highlight = if_else(pais %in% c("España", "Asturias"), pais, "Otros"),
-    pais = reorder(pais, empresas_DOP_1000km2)
-  )
+  geom_sf(data = asturias_pol,
+          fill = scales::colour_ramp(
+            RColorBrewer::brewer.pal(9, "YlGnBu"))(
+              (asturias_emp_km2_total - rango_emp_km2_total[1]) / diff(rango_emp_km2_total)),
+          color = "grey30", linewidth = 0.3) +
 
-# 2. Extraemos los niveles ordenados para el theme
-eje_colores <- case_when(
-  levels(df_plot$pais) == "Asturias" ~ "#D55E00",
-  levels(df_plot$pais) == "España"   ~ "#1f77b4",
-  TRUE ~ "black"
-)
+  geom_sf(data = centroides_emp_km2,
+          aes(size = empresas_DOP_1000km2),
+          shape = 21, fill = "white", color = "grey30",
+          alpha = 0.8, na.rm = TRUE) +
+  geom_sf_text(data = centroides_emp_km2,
+               aes(label = ifelse(!is.na(empresas_DOP_1000km2),
+                                  scales::number(empresas_DOP_1000km2, accuracy = 0.01), "")),
+               size = 2.5, color = "black") +
 
-eje_caras <- if_else(levels(df_plot$pais) %in% c("Asturias", "España"), "bold", "plain")
+  annotate("segment",
+           x = asturias_coords[1] - 200000, y = asturias_coords[2] + 400000,
+           xend = asturias_coords[1], yend = asturias_coords[2],
+           color = "grey30", linewidth = 0.4, arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("label",
+           x = asturias_coords[1] - 500000, y = asturias_coords[2] + 400000,
+           label = paste0("Asturias\n", round(asturias_emp_km2_dop, 2), " empresas\nDOP/1000km²"),
+           size = 2.5, color = "grey20", fill = "white",
+           label.size = 0.3, hjust = 0) +
 
-# 3. Gráfico
-ggplot(df_plot, aes(x = pais, y = empresas_DOP_1000km2, fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("Otros" = "grey60", 
-                               "España" = "#1f77b4", 
-                               "Asturias" = "#D55E00")) +
-  scale_y_continuous(labels = scales::comma) +
-  # Usamos una función simple para las etiquetas si no quieres el gsub complicado
-  # scale_x_discrete(labels = function(x) gsub(" ", "\n", x)) +
-  coord_flip() +
-  theme_minimal() +
-  theme(legend.position = "none",
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank(),
-        axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
-        # APLICAMOS LOS VECTORES QUE CREAMOS ARRIBA
-        axis.text.y = element_text(color = eje_colores, 
-                                   face = eje_caras, 
-                                   size = 16) # 16 suele ser muy grande para el eje Y
-  )
-
-```
-
-Densidad de empresas queseras y DOP+IGP (número de empresas por 1000 $km2$)
-
-:::
-
-```{r}
-#| label: fig-dotplot-dens
-#| fig-cap: "Número de empresas por 1000 km2 vs. número de empresas DOP+IGP por km2"
-#| echo: FALSE
-#| warning: FALSE
-#| message: FALSE
-
-library(ggplot2)
-library(ggrepel)
-
-df_paises %>%
-  # 1. Creamos la misma lógica de resaltado que en tus barras
-  mutate(highlight = case_when(
-      pais == "España" ~ "España",
-      pais == "Asturias" ~ "Asturias",
-      TRUE ~ "Otros")) %>%
-  ggplot(aes(x = empresas_1000km2, y = empresas_DOP_1000km2)) +
-  # 2. Puntos: Gris uniforme para 'Otros' y colores para España/Asturias
-  geom_point(aes(color = highlight), size = 2.5, alpha = 0.7) +
-  # 3. Etiquetas: Solo ponemos nombre a los puntos destacados para evitar ruido
-  # geom_text_repel(aes(label = if_else(highlight == "Otros", "", pais), color = highlight),
-  #                 size = 4, fontface = "bold", box.padding = 0.5) +
-  geom_text_repel(aes(label = pais, color = highlight), 
-                  size = 3, 
-                  fontface = "plain",
-                  max.overlaps = Inf, # Obligamos a que salgan todos
-                  box.padding = 0.35, 
-                  point.padding = 0.5,
-                  segment.color = 'grey80') + # Líneas finas hacia los puntos
-  
-    # 4. Paleta exacta a tus gráficos de barras
-  scale_color_manual(values = c("Otros" = "grey60", 
-                                "España" = "#1f77b4", 
-                                "Asturias" = "#D55E00")) +
-  # 5. Formato y limpieza visual
-  scale_x_continuous(labels = scales::comma) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(
-    x = "Núm. de empresas por 1000 km2",
-    y = "Núm de empresas DOP+IGP por 1000 km2"
+  scale_fill_distiller(
+    palette = "YlGnBu", direction = 1,
+    limits = rango_emp_km2_total,
+    name = "Empresas queseras\npor 1000 km²",
+    na.value = "grey90",
+    labels = scales::label_number(accuracy = 0.01)
   ) +
-  theme_minimal() +
-  theme(
-    legend.position = "none",
-    panel.grid.major = element_blank(), # Limpio como tus barras
-    panel.grid.minor = element_blank(),
-    axis.line = element_line(color = "grey80") # Una línea base para los ejes
-  )
+  scale_size_continuous(
+    limits = rango_emp_km2_dop,
+    range = c(2, 18),
+    guide = "none"
+  ) +
+  coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
+           xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
+  theme_void() +
+  theme(legend.position = "right", panel.grid = element_blank()) +
+  labs(caption = "Burbuja: Empresas queseras DOP/IGP por 1000 km²\nFuente: elaboración propia" )
+
+p_emp_km2
 ```
 
 # Discusión
@@ -1203,7 +1226,7 @@ La mejora de las capacidades tecnológicas de los queseros y queseras asturianos
 
 La prevalencia de pequeñas producciones, particularmente artesanales, plantea interrogantes sobre la viabilidad económica del sector. La falta de masa crítica dificulta la generación de márgenes de explotación suficientes para garantizar la sostenibilidad de las empresas a medio y largo plazo. A ello se añade la creciente importancia de los aspectos ambientales que incrementa la presión sobre los pequeños elaboradores: una estructura productiva muy repartida en el territorio complica la gestión y eliminación de los residuos generados. Este problema tiene difícil solución sin una cierta concentración de los centros de producción, si tenemos en cuenta, además, los costes de transporte de los residuos en una región tan montañosa como Asturias.
 
-La alta densidad de empresas DOP+IGP que muestra la @fig-dens-DOP, unida a la baja producción por empresa, que hemos visto en la @fig-empresas-DOP, refleja una característica de los quesos catalogados en Asturias: su producción depende de muchas pequeñas empresas artesanales con volúmenes reducidos. Esto invita a reflexionar sobre las diferencias entre los quesos DOP e IGP y los quesos *artesanos*; en Europa, muchos quesos con DOP se fabrican a escala industrial o semiindustrial, y su elevado volumen permite una financiación adecuada de los Consejos Reguladores, que disponen de ingresos suficientes para abordar proyectos de mejora de sus productos.
+La alta densidad de empresas DOP+IGP que muestra la @fig-dens, unida a la baja producción por empresa, que hemos visto en la @fig-empresas, refleja una característica de los quesos catalogados en Asturias: su producción depende de muchas pequeñas empresas artesanales con volúmenes reducidos. Esto invita a reflexionar sobre las diferencias entre los quesos DOP e IGP y los quesos *artesanos*; en Europa, muchos quesos con DOP se fabrican a escala industrial o semiindustrial, y su elevado volumen permite una financiación adecuada de los Consejos Reguladores, que disponen de ingresos suficientes para abordar proyectos de mejora de sus productos.
 
 Esta es una discusión compleja en Asturias, porque la distinción entre productos industriales y artesanales sigue siendo objeto de debate y no se ha definido con suficiente claridad. En Asturias, los quesos con certificación DOP o IGP han sido tradicionalmente considerados artesanales, lo que ha limitado su desarrollo dentro de un modelo más amplio de producción; como hemos visto, no es así en el contexto europeo. Podría ser muy interesante para Asturias estudiar la situación de Suiza, también con un gran número de empresas por $km^2$, y un modelo de promoción de sus productos DOP+IGP altamente exitoso.
 
