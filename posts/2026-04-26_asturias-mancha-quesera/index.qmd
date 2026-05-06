@@ -387,6 +387,8 @@ Producción de quesos catalogados (DOP e IGP) en España, por Comunidades Autón
 
 :::
 
+### El consumo de queso en España
+
 Respecto al consumo de queso por CCAA, el último Informe anual del consumo alimentario del MAPA para 2023[@mapa-3-2023], estima el consumo total de queso en España en unas 350 mil toneladas, con un consumo per cápita de 7,56 kg. ([@tbl-tabla-consumo]).  Asturias, con un consumo per cápita de 8,1 kg, se sitúa en la zona media‐alta de la tabla.
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
