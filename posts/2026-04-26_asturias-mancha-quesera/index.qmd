@@ -81,6 +81,28 @@ asturias_data <- df_paises %>% filter(pais == "Asturias")
 asturias_ton_tot_km2 <- asturias_data %>% pull(ton_tot_km2)
 asturias_ton_dop_km2 <- asturias_data %>% pull(ton_DOP_km2)
 
+df_DOP_esp %>%
+  group_by(Region) %>%
+  summarise(tot_queserias = sum(queserias, na.rm = TRUE)) %>%
+  mutate(highlight = if_else(Region %in% c("Asturias"), Region, "Otros")) %>%
+  ggplot(aes(y = reorder(Region, tot_queserias),
+             x = tot_queserias,
+             fill = highlight)) +
+  geom_col() +
+  scale_fill_manual(values = c("Otros" = "grey60",    # Todas las barras en gris
+                               "Asturias" = "#D55E00")) +  # Rojo destacado
+  labs(title = "",
+       x = "",
+       y = "") +
+  scale_x_continuous(labels = scales::comma) +
+  # scale_y_discrete(labels = function(x) gsub(" ", "\n", x)) +
+  theme_minimal() +  # Fondo blanco y estilo limpio
+  theme(legend.position = "none",
+        panel.grid.major = element_blank(),  # Eliminamos rejillas para una apariencia más limpia
+        panel.grid.minor = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())
+
 # CCAA desde mapSpain
 ccaa <- esp_get_ccaa() |> st_transform(4326)
 
@@ -511,6 +533,7 @@ La @fig-produccion-2 muestra el mapa de las producciones totales de queso y ques
 #| message: FALSE
 #| label: fig-produccion-2
 #| fig-cap: "Producción total de queso y queso catalogado en Europa"
+#| out-width: "100%"
 
 
 df_paises <- df_paises %>%
@@ -525,7 +548,7 @@ df_asturias <- tibble(
 
 # --- 2. Mapa base Europa ---
 eu <- ne_countries(scale = "medium", returnclass = "sf") %>%
-  filter(region_un == "Europe") %>%
+  filter(region_un == "Europe" | name == "Turkey") %>%
   rename(pais = name) %>%
   mutate(pais = case_when(
     pais == "Germany"        ~ "Alemania",
@@ -544,6 +567,7 @@ eu <- ne_countries(scale = "medium", returnclass = "sf") %>%
     pais == "Portugal"       ~ "Portugal",
     pais == "Cyprus"         ~ "Chipre",
     pais == "Croatia"        ~ "Croacia",
+    pais == "Turkey"         ~ "Turquía",
     TRUE ~ pais
   ))
 
@@ -576,8 +600,8 @@ asturias_pol <- esp_ccaa %>% filter(name == "Asturias")
 
 # --- 6. Mapa principal ---
 p_europa <- ggplot(eu_data) +
-  geom_sf(aes(fill = prod_total_queso_ton), color = "white", linewidth = 0.2) +
-  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+  geom_sf(aes(fill = prod_total_queso_ton), color = "grey70", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey70", linewidth = 0.4) +
   
   # --- capa Asturias ---
   geom_sf(data = asturias_pol,
@@ -593,13 +617,13 @@ p_europa <- ggplot(eu_data) +
   geom_sf_text(data = centroides_eu,
                aes(label = ifelse(!is.na(prod_ton_DOP_IGP),
                                   scales::comma(prod_ton_DOP_IGP), "")),
-               size = 2.5, color = "black") +
+               size = 2.5, color = "grey30") +
   scale_fill_distiller(
     palette = "YlGnBu",
     direction = 1,
     limits = rango_total,
     name = "Producción total\n(toneladas)",
-    na.value = "grey90",
+    na.value = "grey95",
     labels = scales::comma
   ) +
   scale_size_continuous(
@@ -621,13 +645,32 @@ p_europa <- ggplot(eu_data) +
   
   coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
            xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
-  theme_void() +
+theme_void() +
   theme(
-    legend.position = "right",
+    # Posicionamiento interno
+    legend.position = "inside",
+    # x = 0.02 (muy pegado al borde izquierdo), y = 0.2 (bajo)
+    legend.position.inside = c(0.02, 0.55),
+    # Anclamos la leyenda por su esquina inferior izquierda
+    legend.justification = c(0, 0),
+    
+    # Reducción del tamaño de letra
+    legend.title = element_text(size = 7, face = "bold"), # Título más pequeño
+    legend.text = element_text(size = 6),                # Números más pequeños
+    
+    # Reducimos también el tamaño de la clave (el cuadradito de color) 
+    # para que toda la leyenda sea más compacta
+    legend.key.size = unit(0.3, "cm"),
+    
+    # Fondo minimalista
+    legend.background = element_rect(fill = alpha("white", 0.6), color = NA),
+    
+    # ELIMINA LOS MÁRGENES DEL PLOT
+    plot.margin = margin(0, 0, 0, 0, "pt"),
+    
     panel.grid = element_blank()
   ) +
-  labs(caption = "Burbuja: Producción de queso DOP/IGP en toneladas\nFuente: elaboración propia" )
-
+  labs(caption = "Burbuja: Producción de queso DOP/IGP en toneladas\nFuente: elaboración propia")
 p_europa
 
 ```
@@ -643,7 +686,8 @@ La producción de queso catalogado en Europa es muy superior a la de España y A
 #| message: FALSE
 #| label: fig-tabla-pct-DOP
 #| fig-cap: "Peso de la producción DOP/IGP sobre la producción total"
-#| 
+#| out-width: "100%"
+
 df_pct_dop <- df_paises |>
   mutate(
     pct_dop = (prod_ton_DOP_IGP / prod_total_queso_ton * 100) 
@@ -651,9 +695,18 @@ df_pct_dop <- df_paises |>
 eu_pct <- eu %>%
   left_join(df_pct_dop, by = "pais")
 
+centroides_pct <- st_centroid(st_crop(eu_pct, xmin = -25, ymin = 34, xmax = 45, ymax = 72))
+
 p_pct_dop <- ggplot(eu_pct) +
-  geom_sf(aes(fill = pct_dop), color = "white", linewidth = 0.2) +
-  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+  geom_sf(aes(fill = pct_dop), color = "grey70", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey70", linewidth = 0.4) +
+  geom_sf_text(data = centroides_pct,
+               aes(label = ifelse(!is.na(pct_dop), 
+                                  paste0(round(pct_dop, 0), "%"), 
+                                  "")),
+               size = 2.5, 
+               color = "grey30",
+               fontface = "bold") +
     # --- capa Asturias ---
   geom_sf(data = asturias_pol,
           fill = scales::colour_ramp(
@@ -666,7 +719,7 @@ p_pct_dop <- ggplot(eu_pct) +
            color = "grey30", linewidth = 0.4, arrow = arrow(length = unit(0.15, "cm"))) +
   annotate("label",
            x = asturias_coords[1] - 300000, y = asturias_coords[2] + 300000,
-           label = paste0("Asturias\nDOP/IGP: ", round(660 / 25168 * 100, 1), "%"),
+           label = paste0("Asturias: peso\nDOP/IGP: ", round(660 / 25168 * 100, 1), "%"),
            size = 2.5, color = "grey20", fill = "white",
            label.size = 0.3, hjust = 0) +
   scale_fill_distiller(
@@ -679,7 +732,31 @@ p_pct_dop <- ggplot(eu_pct) +
   coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
            xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
   theme_void() +
-  theme(legend.position = "right", panel.grid = element_blank()) +
+theme_void() +
+  theme(
+    # Posicionamiento interno
+    legend.position = "inside",
+    # x = 0.02 (muy pegado al borde izquierdo), y = 0.2 (bajo)
+    legend.position.inside = c(0.02, 0.55),
+    # Anclamos la leyenda por su esquina inferior izquierda
+    legend.justification = c(0, 0),
+    
+    # Reducción del tamaño de letra
+    legend.title = element_text(size = 7, face = "bold"), # Título más pequeño
+    legend.text = element_text(size = 6),                # Números más pequeños
+    
+    # Reducimos también el tamaño de la clave (el cuadradito de color) 
+    # para que toda la leyenda sea más compacta
+    legend.key.size = unit(0.3, "cm"),
+    
+    # Fondo minimalista
+    legend.background = element_rect(fill = alpha("white", 0.6), color = NA),
+    
+    # ELIMINA LOS MÁRGENES DEL PLOT
+    plot.margin = margin(0, 0, 0, 0, "pt"),
+    
+    panel.grid = element_blank()
+  ) +
   labs(caption = "Fuente: elaboración propia")
 
 p_pct_dop
@@ -754,6 +831,7 @@ La @fig-pct-habitante presenta los datos de producción de queso en kilogramos p
 #| message: FALSE
 #| label: fig-pct-habitante
 #| fig-cap: "Producción de queso por habitante, total y catalogado (kg)"
+#| out-width: "100%"
 
 rango_kg_total <- range(c(df_paises$kg_queso_habitante, 660/1000000*1000), na.rm = TRUE)
 rango_kg_dop   <- range(c(df_paises$kg_DOP_habitante,   660/1000000*1000), na.rm = TRUE)
@@ -769,8 +847,8 @@ asturias_kg <- 660 / 1000000 * 1000  # prod_ton_DOP_IGP / habitantes * 1000 = kg
 asturias_kg_total <- 25168 / 1000000 * 1000
 
 p_kg_hab <- ggplot(eu_kg) +
-  geom_sf(aes(fill = kg_queso_habitante), color = "white", linewidth = 0.2) +
-  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+  geom_sf(aes(fill = kg_queso_habitante), color = "grey70", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey70", linewidth = 0.4) +
 
   # --- capa Asturias ---
   geom_sf(data = asturias_pol,
@@ -814,8 +892,31 @@ p_kg_hab <- ggplot(eu_kg) +
   ) +
   coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
            xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
-  theme_void() +
-  theme(legend.position = "right", panel.grid = element_blank()) +
+theme_void() +
+  theme(
+    # Posicionamiento interno
+    legend.position = "inside",
+    # x = 0.02 (muy pegado al borde izquierdo), y = 0.2 (bajo)
+    legend.position.inside = c(0.02, 0.55),
+    # Anclamos la leyenda por su esquina inferior izquierda
+    legend.justification = c(0, 0),
+    
+    # Reducción del tamaño de letra
+    legend.title = element_text(size = 7, face = "bold"), # Título más pequeño
+    legend.text = element_text(size = 6),                # Números más pequeños
+    
+    # Reducimos también el tamaño de la clave (el cuadradito de color) 
+    # para que toda la leyenda sea más compacta
+    legend.key.size = unit(0.3, "cm"),
+    
+    # Fondo minimalista
+    legend.background = element_rect(fill = alpha("white", 0.6), color = NA),
+    
+    # ELIMINA LOS MÁRGENES DEL PLOT
+    plot.margin = margin(0, 0, 0, 0, "pt"),
+    
+    panel.grid = element_blank()
+  ) +
   labs( caption = "Burbuja: Producción de queso DOP/IGP en kg/habitante\nFuente: elaboración propia")
 
 p_kg_hab
@@ -829,6 +930,7 @@ La @fig-km2 presenta la producción de queso por unidad de superficie de la zona
 #| warning: FALSE
 #| message: FALSE
 #| fig-cap: "Producción de queso por km2"
+#| out-width: "100%"
 
 rango_km2_total <- range(df_paises$ton_tot_km2, na.rm = TRUE)
 rango_km2_dop   <- range(df_paises$ton_DOP_km2, na.rm = TRUE)
@@ -841,8 +943,8 @@ st_geometry(centroides_km2)[centroides_km2$pais == "Francia"] <-
   st_geometry(st_sfc(st_point(c(2.5, 46.5)), crs = 4326))
 
 p_km2 <- ggplot(eu_km2) +
-  geom_sf(aes(fill = ton_tot_km2), color = "white", linewidth = 0.2) +
-  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+  geom_sf(aes(fill = ton_tot_km2), color = "grey70", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey70", linewidth = 0.4) +
 
   # --- capa Asturias ---
   geom_sf(data = asturias_pol,
@@ -886,8 +988,31 @@ p_km2 <- ggplot(eu_km2) +
   ) +
   coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
            xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
-  theme_void() +
-  theme(legend.position = "right", panel.grid = element_blank()) +
+theme_void() +
+  theme(
+    # Posicionamiento interno
+    legend.position = "inside",
+    # x = 0.02 (muy pegado al borde izquierdo), y = 0.2 (bajo)
+    legend.position.inside = c(0.02, 0.55),
+    # Anclamos la leyenda por su esquina inferior izquierda
+    legend.justification = c(0, 0),
+    
+    # Reducción del tamaño de letra
+    legend.title = element_text(size = 7, face = "bold"), # Título más pequeño
+    legend.text = element_text(size = 6),                # Números más pequeños
+    
+    # Reducimos también el tamaño de la clave (el cuadradito de color) 
+    # para que toda la leyenda sea más compacta
+    legend.key.size = unit(0.3, "cm"),
+    
+    # Fondo minimalista
+    legend.background = element_rect(fill = alpha("white", 0.6), color = NA),
+    
+    # ELIMINA LOS MÁRGENES DEL PLOT
+    plot.margin = margin(0, 0, 0, 0, "pt"),
+    
+    panel.grid = element_blank()
+  ) +
   labs(caption = "Burbuja: Producción de queso DOP/IGP en t/km²\nFuente: elaboración propia")
 
 p_km2
@@ -900,7 +1025,7 @@ La @fig-empresas muestra la producción media de queso por empresa, total y cata
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 #| label: fig-empresas
 #| fig-cap: "Producción total"
-#| fig-height: 6
+#| out-width: "100%"
 
 asturias_ton_emp_total <- asturias_data %>% pull(ton_queso_por_empresa)
 asturias_ton_emp_dop   <- asturias_data %>% pull(ton_queso_DOP_por_empresa)
@@ -916,8 +1041,8 @@ st_geometry(centroides_emp)[centroides_emp$pais == "Francia"] <-
   st_geometry(st_sfc(st_point(c(2.5, 46.5)), crs = 4326))
 
 p_emp <- ggplot(eu_emp) +
-  geom_sf(aes(fill = ton_queso_por_empresa), color = "white", linewidth = 0.2) +
-  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+  geom_sf(aes(fill = ton_queso_por_empresa), color = "grey70", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey70", linewidth = 0.4) +
 
   geom_sf(data = asturias_pol,
           fill = scales::colour_ramp(
@@ -958,8 +1083,31 @@ p_emp <- ggplot(eu_emp) +
   ) +
   coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
            xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
-  theme_void() +
-  theme(legend.position = "right", panel.grid = element_blank()) +
+theme_void() +
+  theme(
+    # Posicionamiento interno
+    legend.position = "inside",
+    # x = 0.02 (muy pegado al borde izquierdo), y = 0.2 (bajo)
+    legend.position.inside = c(0.02, 0.55),
+    # Anclamos la leyenda por su esquina inferior izquierda
+    legend.justification = c(0, 0),
+    
+    # Reducción del tamaño de letra
+    legend.title = element_text(size = 7, face = "bold"), # Título más pequeño
+    legend.text = element_text(size = 6),                # Números más pequeños
+    
+    # Reducimos también el tamaño de la clave (el cuadradito de color) 
+    # para que toda la leyenda sea más compacta
+    legend.key.size = unit(0.3, "cm"),
+    
+    # Fondo minimalista
+    legend.background = element_rect(fill = alpha("white", 0.6), color = NA),
+    
+    # ELIMINA LOS MÁRGENES DEL PLOT
+    plot.margin = margin(0, 0, 0, 0, "pt"),
+    
+    panel.grid = element_blank()
+  ) +
   labs(caption = "Burbuja: Producción de queso DOP/IGP por empresa en toneladas\nFuente: elaboración  propia" )
 
 p_emp
@@ -1144,6 +1292,7 @@ La @fig-dens muestra la implantación de empresas por 1000 $km^2$, índice que h
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 #| label: fig-dens
 #| fig-cap: "Número total de empresas por 1000 $km^2$"
+#| out-width: "100%"
 
 asturias_emp_km2_total <- asturias_data$empresas_1000km2
 asturias_emp_km2_dop   <- asturias_data$empresas_DOP_1000km2
@@ -1159,8 +1308,8 @@ st_geometry(centroides_emp_km2)[centroides_emp_km2$pais == "Francia"] <-
   st_geometry(st_sfc(st_point(c(2.5, 46.5)), crs = 4326))
 
 p_emp_km2 <- ggplot(eu_emp_km2) +
-  geom_sf(aes(fill = empresas_1000km2), color = "white", linewidth = 0.2) +
-  geom_sf(fill = NA, color = "grey30", linewidth = 0.4) +
+  geom_sf(aes(fill = empresas_1000km2), color = "grey70", linewidth = 0.2) +
+  geom_sf(fill = NA, color = "grey70", linewidth = 0.4) +
 
   geom_sf(data = asturias_pol,
           fill = scales::colour_ramp(
@@ -1201,8 +1350,31 @@ p_emp_km2 <- ggplot(eu_emp_km2) +
   ) +
   coord_sf(crs = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80",
            xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
-  theme_void() +
-  theme(legend.position = "right", panel.grid = element_blank()) +
+theme_void() +
+  theme(
+    # Posicionamiento interno
+    legend.position = "inside",
+    # x = 0.02 (muy pegado al borde izquierdo), y = 0.2 (bajo)
+    legend.position.inside = c(0.02, 0.55),
+    # Anclamos la leyenda por su esquina inferior izquierda
+    legend.justification = c(0, 0),
+    
+    # Reducción del tamaño de letra
+    legend.title = element_text(size = 7, face = "bold"), # Título más pequeño
+    legend.text = element_text(size = 6),                # Números más pequeños
+    
+    # Reducimos también el tamaño de la clave (el cuadradito de color) 
+    # para que toda la leyenda sea más compacta
+    legend.key.size = unit(0.3, "cm"),
+    
+    # Fondo minimalista
+    legend.background = element_rect(fill = alpha("white", 0.6), color = NA),
+    
+    # ELIMINA LOS MÁRGENES DEL PLOT
+    plot.margin = margin(0, 0, 0, 0, "pt"),
+    
+    panel.grid = element_blank()
+  ) +
   labs(caption = "Burbuja: Empresas queseras DOP/IGP por 1000 km²\nFuente: elaboración propia" )
 
 p_emp_km2
