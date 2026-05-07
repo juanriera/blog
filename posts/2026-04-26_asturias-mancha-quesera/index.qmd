@@ -5,7 +5,7 @@ date: 2026-04-25
 date-format: "DD/MM/YYYY"
 categories: [queso]
 image: "quesos-asturianos.jpg"
-draft: true
+draft: false
 lang: es
 editor: source
 execute: 
@@ -834,12 +834,11 @@ Es interesante destacar que una parte muy importante de la producción quesera D
 #| out-width: "100%"
 
 # --- 1. Datos DOP ---
-dop_raw <- read_csv("dop_nuts2.csv")
+dop_raw <- read_csv2("dop_nuts2.csv", locale = locale(encoding = "latin1"))
 
 dop_nuts2 <- dop_raw %>%
-  mutate(ton_asignada = ton / n_regiones) %>%
   group_by(nuts2_code, nuts2_nombre) %>%
-  summarise(ton_dop = sum(ton_asignada, na.rm = TRUE), .groups = "drop") %>%
+  summarise(ton_dop = sum(ton, na.rm = TRUE), .groups = "drop") %>%
   arrange(desc(ton_dop))
 
 top15 <- dop_nuts2 %>% slice_head(n = 15)
