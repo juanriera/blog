@@ -973,7 +973,7 @@ asturias_rows <- tibble(
   nuts2_nombre = c("Asturias - Total", "Asturias - DOP/IGP"),
   nuts2_code   = c("ES12", "ES12"),
   ton_dop      = c(35310, 670),
-  quesos       = c("-", "Afuega'l Pitu, Cabrales, Gamonedo, Casín, Los Beyos")
+  quesos       = c("-", "Afuega'l Pitu, Cabrales, Gamonéu, Casín, Los Beyos")
 )
 
 gt_data <- bind_rows(top10, asturias_rows) %>%
