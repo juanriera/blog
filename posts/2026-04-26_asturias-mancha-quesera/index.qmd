@@ -956,44 +956,47 @@ p_dop_nuts2
 #| label: tbl-mapa-europa
 #| fig-cap: ""
 
-# --- 4. Tabla gt top 15 más asturias ---
-dop_nuts2 <- dop_raw %>%
+quesos_por_region <- dop_raw %>%
   mutate(ton_asignada = ton / n_regiones) %>%
-  group_by(nuts2_code, nuts2_nombre) %>%
-  summarise(ton_dop = sum(ton_asignada, na.rm = TRUE), .groups = "drop") %>%
-  arrange(desc(ton_dop))
+  arrange(nuts2_code, desc(ton_asignada)) %>%
+  group_by(nuts2_code) %>%
+  summarise(quesos = paste(queso, collapse = ", "), .groups = "drop")
 
-top15 <- dop_nuts2 %>%
-  slice_head(n = 15) %>%
-  left_join(dop_raw %>% distinct(nuts2_code, pais), by = "nuts2_code")
+top10 <- dop_nuts2 %>%
+  slice_head(n = 10) %>%
+  left_join(dop_raw %>% distinct(nuts2_code, pais), by = "nuts2_code") %>%
+  left_join(quesos_por_region, by = "nuts2_code")
 
 asturias_rows <- tibble(
   ranking      = c("-", "-"),
   pais         = c("España", "España"),
   nuts2_nombre = c("Asturias - Total", "Asturias - DOP/IGP"),
   nuts2_code   = c("ES12", "ES12"),
-  ton_dop      = c(35310, 670)
+  ton_dop      = c(35310, 670),
+  quesos       = c("-", "Afuega'l Pitu, Cabrales, Gamonedo, Casín, Los Beyos")
 )
 
-gt_data <- bind_rows(top15, asturias_rows) %>%
-  mutate(ranking = c(as.character(1:15), "-", "-")) %>%
-  select(ranking, pais, nuts2_nombre, nuts2_code, ton_dop)
+gt_data <- bind_rows(top10, asturias_rows) %>%
+  mutate(ranking = c(as.character(1:10), "-", "-")) %>%
+  select(ranking, pais, nuts2_nombre, nuts2_code, ton_dop, quesos)
 
-gt_top15 <- gt_data %>%
+gt_top10 <- gt_data %>%
   gt() %>%
   cols_label(
     ranking      = "#",
     pais         = "País",
     nuts2_nombre = "Región NUTS2",
     nuts2_code   = "Código",
+    quesos = "Quesos DOP/IGP",
     ton_dop      = "Producción DOP (t)"
   ) %>%
   cols_width(
-    ranking      ~ px(40),
-    pais         ~ px(80),
-    nuts2_nombre ~ px(200),
-    nuts2_code   ~ px(80),
-    ton_dop      ~ px(120)
+    ranking      ~ px(20),
+    pais         ~ px(60),
+    nuts2_nombre ~ px(160),
+    nuts2_code   ~ px(50),
+    quesos       ~ px(360),
+    ton_dop      ~ px(80)
   ) %>%
   fmt_number(columns = ton_dop, decimals = 0, sep_mark = ".", dec_mark = ",") %>%
   data_color(columns = ton_dop, palette = "Blues") %>%
@@ -1013,11 +1016,10 @@ Resto: MAPA, INAO, CLAL, DOOR · elaboración propia"
   tab_options(
     table.font.size = 12,
     heading.align = "left",
-    column_labels.font.weight = "bold",
-    table.width       = px(540)   # suma aproximada de tus columnas: 40+80+200+80+120+márgenes
+    column_labels.font.weight = "bold"
   )
 
-gt_top15
+gt_top10
 
 ```
 
