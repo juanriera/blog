@@ -128,9 +128,7 @@ El detalle de la producción quesera asturiana fuera de las denominaciones de or
 
 La @fig-prod-asturias muestra la producción de queso desde 1990. A mitad de los años 2000 se identifica una caída importante de los volúmenes de producción, probablemente reflejo de varios factores, como la crisis de 2008, unida al efecto de la reordenación de la PAC entre 2003 y 2009 y a la relocalización por Mantequerías Arias de una parte importante de la fabricación de Burgo de Arias en la nueva factoría de Burgos, hacia 2006. También se ve claramente el cese de actividad de Danone en Salas en 2023. 
 
-No dispongo de datos específicos que expliquen el relanzamiento de 2025, ya que la fábrica de Royal A-Ware estaba en proceso de arranque en 2025 y probablemente no ha consolidado sus volúmenes en esta cifra.
-
-Como veremos al hablar de los quesos DOP europeos, 
+No dispongo de datos específicos que expliquen el relanzamiento de 2025, ya que la fábrica de Royal A-Ware estaba en proceso de arranque en 2025 y probablemente sus volúmenes no están consolidados en el valor de este año.
 
 ```{r}
 #| label: fig-prod-asturias
