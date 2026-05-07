@@ -44,11 +44,13 @@ Parece necesaria la elaboración de un plan estratégico sectorial que identifiq
 library (dplyr)
 library (ggplot2)
 library(tidyr)
+library(readr)
 library(ggrepel)
 library(readxl)
 library(kableExtra)
 library(gt)
 library(mapSpain)
+library(giscoR)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
@@ -817,13 +819,214 @@ df_tabla_quesos %>%
     plot.title = element_text(size = 12, hjust = 0.5))
 ```
 
+## La producción DOP/IGP en las principales regiones queseras de Europa
+
+El mapa y la tabla a continuación muestran la producción de Asturias en relación con la producción europea de queso DOP/IGP. Para situar mejor el contexto, en la tabla he añadido los valores de producción total de Asturias. Con el fin de ajustar este total de forma más realista, se podrían restar unas 5.000 ton para Mantequerías Arias y para Quesería Lafuente, así como unas 9.000 ton para Royal Aware. La cifra aproximada sin las principales producciones industriales sería de unas 17.000 ton, lo que situaría el total de Asturias en la tabla comparada de producción DOP sólo por delante de Grecia. Dicho de otra forma, la producción total de Asturias, sin sus principales quesos industriales, es inferior a la producción sólo DOP/IGP de 13 de las principales zonas queseras de Europa. Hay que tener en cuenta, además, que hay otros países con una producción importante (caso de Países Bajos, con una producción de Gouda Holland en torno a 300.000 ton) que no he podido confirmar con detalle y he preferido dejar fuera de este mapa.
+
+Es interesante destacar que una parte muy importante de la producción quesera DOP europea se concentra en las  zonas montañosas de Francia, Italia y Suiza, de manera semejante a lo que sucede en Asturias en torno a los Picos de Europa. Hay que preguntarse si esta producción de quesos de montaña asturianos tienen el apoyo suficiente para desarrollarse adecuadamente.
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| label: fig-mapa-europa
+#| fig-cap: "Producción de queso DOP/IGP por región europea (regiones principales)"
+#| out-width: "100%"
+
+# --- 1. Datos DOP ---
+dop_raw <- read_csv("dop_nuts2.csv")
+
+dop_nuts2 <- dop_raw %>%
+  mutate(ton_asignada = ton / n_regiones) %>%
+  group_by(nuts2_code, nuts2_nombre) %>%
+  summarise(ton_dop = sum(ton_asignada, na.rm = TRUE), .groups = "drop") %>%
+  arrange(desc(ton_dop))
+
+top15 <- dop_nuts2 %>% slice_head(n = 15)
+
+# --- 2. Geometrías NUTS2 ---
+nuts2 <- gisco_get_nuts(year = "2021", epsg = "4326", resolution = "10", nuts_level = "2")
+
+nuts2_eu <- nuts2 %>%
+  filter(
+    !NUTS_ID %in% c("FRY1", "FRY2", "FRY3", "FRY4", "FRY5",
+                    "ES63", "ES64", "ES70",
+                    "PT20", "PT30")
+  ) %>%
+  left_join(dop_nuts2, by = c("NUTS_ID" = "nuts2_code"))
+
+# centroides para etiquetas (solo top15)
+nuts2_top15 <- nuts2_eu %>%
+  filter(NUTS_ID %in% top15$nuts2_code)
+
+centroides_top15 <- st_centroid(nuts2_top15)
+
+# reproyectar a LAEA para las coordenadas de etiquetas
+laea_crs <- "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80"
+centroides_laea <- st_transform(centroides_top15, crs = laea_crs)
+
+# --- 3. Mapa ---
+p_dop_nuts2 <- ggplot(nuts2_eu) +
+  geom_sf(aes(fill = ton_dop), color = "white", linewidth = 0.1) +
+  geom_sf(data = nuts2_top15, fill = NA, color = "grey30", linewidth = 0.3) +
+  # contorno naranja Asturias
+  geom_sf(data = nuts2_eu %>% filter(NUTS_ID == "ES12"),
+          fill = NA, color = "#D55E00", linewidth = 0.5, alpha = 0.8) +
+  geom_text_repel(
+    data = centroides_laea,
+    aes(label = paste0(nuts2_nombre, "\n", scales::comma(round(ton_dop)), " t"),
+        geometry = geometry),
+    stat = "sf_coordinates",
+    size = 2.2,
+    color = "grey40",
+    bg.color = "white",
+    bg.r = 0.15,
+    fontface = "bold",
+    box.padding = 0.5,
+    point.padding = 0.3,
+    segment.color = "grey50",
+    segment.size = 0.3,
+    max.overlaps = Inf
+  ) +
+  scale_fill_distiller(
+    palette = "YlGnBu",
+    direction = 1,
+    name = "Producción DOP/IGP\n(toneladas)",
+    na.value = "grey90",
+    labels = scales::comma
+  ) +
+  # etiqueta Asturias
+  # annotate("segment",
+  #          x = asturias_coords[1] - 300000, y = asturias_coords[2] + 400000,
+  #          xend = asturias_coords[1], yend = asturias_coords[2],
+  #          color = "#D55E00", linewidth = 0.4,
+  #          arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("label",
+           x = asturias_coords[1] - 00000, y = asturias_coords[2] + 100000,
+           label = paste0("Asturias\n", scales::comma(round(
+             dop_nuts2 %>% filter(nuts2_code == "ES12") %>% pull(ton_dop)
+           )), " t"),
+           size = 2.2, color = "#D55E00", fill = "white",
+           label.size = 0.3, hjust = 0, fontface = "bold") +
+  
+  # para toda Europa
+  # coord_sf(crs = laea_crs,
+  #          xlim = c(2500000, 6600000), ylim = c(1500000, 5500000)) +
+  coord_sf(crs = laea_crs,
+           xlim = c(2200000, 5800000), ylim = c(1500000, 3100000)) +
+  theme_void() +
+  theme(
+    # Posicionamiento interno
+    legend.position = "inside",
+    # x = 0.02 (muy pegado al borde izquierdo), y = 0.2 (bajo)
+    legend.position.inside = c(0.02, 0.55),
+    # Anclamos la leyenda por su esquina inferior izquierda
+    legend.justification = c(0, 0),
+    
+    # Reducción del tamaño de letra
+    legend.title = element_text(size = 9, face = "bold"), # Título más pequeño
+    legend.text = element_text(size = 8),                # Números más pequeños
+    
+    # Reducimos también el tamaño de la clave (el cuadradito de color) 
+    # para que toda la leyenda sea más compacta
+    legend.key.size = unit(0.3, "cm"),
+    
+    # Fondo minimalista
+    legend.background = element_rect(fill = alpha("white", 0.6), color = NA),
+    
+    # ELIMINA LOS MÁRGENES DEL PLOT
+    plot.margin = margin(0, 0, 0, 0, "pt"),
+    
+    panel.grid = element_blank()
+  ) +
+  labs(caption = "Producción distribuida equitativamente entre regiones NUTS2 del ámbito geográfico de cada DOP
+Fuente: MAPA, INAO, CLAL, DOOR, TSM
+Datos Suiza (Gruyère, Emmental, Appenzeller, Raclette du Valais, Sbrinz):\nestimaciones aproximadas a partir de fuentes secundarias (TSM/Agristat, ca. 2022)
+Elaboración propia"
+  )
+
+p_dop_nuts2
+
+```
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| label: tbl-mapa-europa
+#| fig-cap: ""
+
+# --- 4. Tabla gt top 15 más asturias ---
+dop_nuts2 <- dop_raw %>%
+  mutate(ton_asignada = ton / n_regiones) %>%
+  group_by(nuts2_code, nuts2_nombre) %>%
+  summarise(ton_dop = sum(ton_asignada, na.rm = TRUE), .groups = "drop") %>%
+  arrange(desc(ton_dop))
+
+top15 <- dop_nuts2 %>%
+  slice_head(n = 15) %>%
+  left_join(dop_raw %>% distinct(nuts2_code, pais), by = "nuts2_code")
+
+asturias_rows <- tibble(
+  ranking      = c("-", "-"),
+  pais         = c("España", "España"),
+  nuts2_nombre = c("Asturias - Total", "Asturias - DOP/IGP"),
+  nuts2_code   = c("ES12", "ES12"),
+  ton_dop      = c(35310, 670)
+)
+
+gt_data <- bind_rows(top15, asturias_rows) %>%
+  mutate(ranking = c(as.character(1:15), "-", "-")) %>%
+  select(ranking, pais, nuts2_nombre, nuts2_code, ton_dop)
+
+gt_top15 <- gt_data %>%
+  gt() %>%
+  cols_label(
+    ranking      = "#",
+    pais         = "País",
+    nuts2_nombre = "Región NUTS2",
+    nuts2_code   = "Código",
+    ton_dop      = "Producción DOP (t)"
+  ) %>%
+  cols_width(
+    ranking      ~ px(40),
+    pais         ~ px(80),
+    nuts2_nombre ~ px(200),
+    nuts2_code   ~ px(80),
+    ton_dop      ~ px(120)
+  ) %>%
+  fmt_number(columns = ton_dop, decimals = 0, sep_mark = ".", dec_mark = ",") %>%
+  data_color(columns = ton_dop, palette = "Blues") %>%
+  tab_style(
+    style = list(cell_text(weight = "bold", color = "#D55E00")),
+    locations = cells_body(rows = nuts2_code == "ES12")
+  ) %>%
+  tab_header(
+    title    = "Principales regiones europeas productoras de queso DOP/IGP",
+    subtitle = "Top 15 por volumen de producción asignado · España, Francia, Italia y Grecia"
+  ) %>%
+  tab_source_note(
+    "Producción distribuida equitativamente entre regiones NUTS2 del ámbito geográfico de cada DOP
+Asturias total: SADEI 2026 · Asturias DOP/IGP: MAPA 2023
+Resto: MAPA, INAO, CLAL, DOOR · elaboración propia"
+  ) %>%
+  tab_options(
+    table.font.size = 12,
+    heading.align = "left",
+    column_labels.font.weight = "bold",
+    table.width       = px(540)   # suma aproximada de tus columnas: 40+80+200+80+120+márgenes
+  )
+
+gt_top15
+
+```
+
+
 ## Indices comparativos entre Asturias y Europa
 
 Para comparar la producción de queso en Asturias con la producción total de los países de la UE, puede ser útil establecer índices relativos, como la producción por habitante o por $km^2$. 
 
-::: important
-Antes de presentar el análisis de estas ratios, es importante señalar que comparar Asturias con países europeos en su totalidad puede dar una visión distorsionada. La producción de queso no es uniforme a lo largo de un país; suele focalizarse en zonas concretas. Si se dispusiera de datos regionales y se comparasen con las áreas queseras asturianas, es probable que las ratios de producción por habitante o por $km^2$ en otras regiones queseras europeas fueran significativamente mayores. He utilizado las cifras nacionales ante la falta de información regional detallada.}
-:::
+Antes de presentar el análisis de estas ratios, es importante señalar que las ratios de producción por habitante o por $km^2$ en las regiones queseras europeas que hemos visto son significativamente más altas, al concentrar la producción en un área más reducida que sus países respectivos completos(ver @tbl-mapa-europa). He usado las ratios por países para dar una visión general, que creo que sigue siendo válida y permite comparar con países para los que no he podido obtener datos regionales detallados.
 
 La @fig-pct-habitante presenta los datos de producción de queso en kilogramos por habitante. Los mayores productores de queso de acuerdo a este índice son Dinamarca, Países Bajos e Irlanda; en los quesos DOP+IGP, lo son Países Bajos, Chipre y Grecia, con Italia y Suiza a una distancia moderada. Asturias tiene una producción total por habitante superior a la de Italia, Grecia o Suiza. En cambio, en la producción DOP/IGP, se sitúa casi al final de la lista. 
 
