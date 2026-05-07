@@ -1006,7 +1006,7 @@ gt_top10 <- gt_data %>%
   ) %>%
   tab_header(
     title    = "Principales regiones europeas productoras de queso DOP/IGP",
-    subtitle = "Top 15 por volumen de producción asignado · España, Francia, Italia y Grecia"
+    subtitle = "Top 10 por volumen de producción asignado · España, Francia, Italia y Grecia"
   ) %>%
   tab_source_note(
     "Producción distribuida equitativamente entre regiones NUTS2 del ámbito geográfico de cada DOP
