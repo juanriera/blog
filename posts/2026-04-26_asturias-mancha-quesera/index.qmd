@@ -899,18 +899,62 @@ ggplot() +
   geom_sf(data = nuts2_eu %>% filter(NUTS_ID == "ES12"),
           fill = NA, color = "#D55E00", linewidth = 0.5, alpha = 0.8) +
   geom_text_repel(
-    data = centroides_laea,
+    data = centroides_laea |> filter(nuts2_nombre == "Région lémanique"),
     aes(label = paste0(nuts2_nombre, "\n", scales::comma(round(ton_dop)), " t"),
         geometry = geometry),
     stat          = "sf_coordinates",
     size          = 2.2,
-    color         = "grey40",
+    color         = "grey30",
     bg.color      = "white",
     bg.r          = 0.15,
     fontface      = "bold",
-    box.padding   = 0.5,
-    point.padding = 0.3,
-    segment.color = "grey90",
+    box.padding   = 0.1,
+    point.padding = 0.1,
+    nudge_x       = -300000,   # ajusta hasta que quede bien
+    nudge_y       =   100000,
+    direction     = "x",
+    force         = 0,
+    force_pull    = 0.5,
+    segment.color = "grey30",
+    segment.size  = 0.3,
+    max.overlaps  = Inf
+  ) +
+  geom_text_repel(
+    data = centroides_laea |> filter(nuts2_nombre == "Espace Mittelland"),
+    aes(label = paste0(nuts2_nombre, "\n", scales::comma(round(ton_dop)), " t"),
+        geometry = geometry),
+    stat          = "sf_coordinates",
+    size          = 2.2,
+    color         = "grey30",
+    bg.color      = "white",
+    bg.r          = 0.15,
+    fontface      = "bold",
+    box.padding   = 0.1,
+    point.padding = 0.1,
+    nudge_x       = -30000,   # ajusta hasta que quede bien
+    nudge_y       = +150000,
+    direction     = "x",
+    force         = 0,
+    force_pull    = 0.5,
+    segment.color = "grey30",
+    segment.size  = 0.3,
+    max.overlaps  = Inf
+  ) +
+  geom_text_repel(
+    data = centroides_laea |> filter(!nuts2_nombre %in% c("Région lémanique","Espace Mittelland")),
+    aes(label = paste0(nuts2_nombre, "\n", scales::comma(round(ton_dop)), " t"),
+        geometry = geometry),
+    stat          = "sf_coordinates",
+    size          = 2.2,
+    color         = "grey30",
+    bg.color      = "white",
+    bg.r          = 0.15,
+    fontface      = "bold",
+    box.padding   = 0.1,
+    point.padding = 0.1,
+    force         = 0.5,
+    force_pull    = 2,
+    segment.color = "grey30",
     segment.size  = 0.3,
     max.overlaps  = Inf
   ) +
@@ -918,13 +962,13 @@ ggplot() +
           fill = NA,
           color = "grey70",
           linewidth = 0.5) +
-  annotate("label",
-           x = asturias_coords[1], y = asturias_coords[2] + 100000,
-           label = paste0("Asturias\n", scales::comma(round(
+  annotate("text",
+           x = asturias_coords[1]-50000, y = asturias_coords[2] + 100000,
+           label = paste0("Asturias\n  ", scales::comma(round(
              dop_nuts2 %>% filter(nuts2_code == "ES12") %>% pull(ton_dop)
            )), " t"),
-           size = 2.2, color = "#D55E00", fill = "white",
-           label.size = 0.3, hjust = 0, fontface = "bold") +
+           size = 2.2, color = "#D55E00",
+           hjust = 0, fontface = "bold")+
   coord_sf(crs  = laea_crs,
            xlim = c(2200000, 5800000), ylim = c(1500000, 3100000)) +
   theme_void() +
@@ -939,10 +983,7 @@ ggplot() +
     plot.margin            = margin(0, 0, 0, 0, "pt"),
     panel.grid             = element_blank()
   ) +
-  labs(
-    title    = "Producción de queso DOP/IGP por región europea",
-    subtitle = "España, Francia, Italia, Suiza y Grecia · datos 2021-2023 · 15 principales regiones etiquetadas",
-    caption  = "Producción distribuida equitativamente entre regiones NUTS2 del ámbito geográfico de cada DOP
+  labs(caption  = "Producción distribuida equitativamente entre regiones NUTS2 del ámbito geográfico de cada DOP
 Datos Suiza (Gruyère, Emmental, Appenzeller, Raclette du Valais, Sbrinz): estimaciones aproximadas (TSM/Agristat, ca. 2022)
 Fuente: MAPA, INAO, CLAL, DOOR, TSM · elaboración propia"
   )
