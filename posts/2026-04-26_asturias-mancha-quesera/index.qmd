@@ -944,7 +944,7 @@ ggplot() +
     panel.grid             = element_blank()
   ) +
   labs(caption  = "Datos Suiza (Gruyère, Emmental, Appenzeller, Raclette du Valais, Sbrinz): estimaciones aproximadas (TSM/Agristat, ca. 2022)
-División administrativa Francia: NUTS pre-2016 (22 regiones)
+División administrativa regional: NUTS 2024 Eurostat/GISCO
 Fuente: MAPA, INAO, CLAL, DOOR, TSM · elaboración propia"
   )
 ```
@@ -1008,7 +1008,8 @@ gt_top10 <- gt_data %>%
     subtitle = "Top 10 por volumen de producción asignado · España, Francia, Italia, Suiza y Grecia"
   ) %>%
   tab_source_note("Asturias total: SADEI 2026 · Asturias DOP/IGP: MAPA 2023
-Resto: MAPA, INAO, CLAL, DOOR · elaboración propia"
+  División administrativa regional: NUTS 2024 Eurostat/GISCO
+  Resto: MAPA, INAO, CLAL, DOOR · elaboración propia"
   ) %>%
   tab_options(
     table.font.size = 12,
