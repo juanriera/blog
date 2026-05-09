@@ -11,9 +11,9 @@
 "España";"Picón-Bejes-Tresviso";23,601;2023;"ES13";"Cantabria";1
 "España";"Queso Camerano";40,085;2023;"ES23";"La Rioja";1
 "España";"Queso Casín";9,668;2023;"ES12";"Asturias";1
-"España";"Queso Castellano";497,683333333333;2023;"ES41";"Castilla y León";1
-"España";"Queso Castellano";497,683333333333;2023;"ES42";"Castilla-La Mancha";1
-"España";"Queso Castellano";497,683333333333;2023;"ES24";"Aragón";1
+"España";"Queso Castellano";497,683;2023;"ES41";"Castilla y León";1
+"España";"Queso Castellano";497,683;2023;"ES42";"Castilla-La Mancha";1
+"España";"Queso Castellano";497,683;2023;"ES24";"Aragón";1
 "España";"Queso de Acehúche";24,859;2023;"ES43";"Extremadura";1
 "España";"Queso de Flor de Guía";17,099;2023;"ES70";"Canarias";1
 "España";"Queso de L'Alt Urgell y la Cerdanya";360,348;2023;"ES51";"Cataluña";1
@@ -32,67 +32,69 @@
 "España";"Roncal";302,477;2023;"ES22";"Navarra";1
 "España";"San Simón da Costa";580,359;2023;"ES11";"Galicia";1
 "España";"Torta del Casar";357,568;2023;"ES43";"Extremadura";1
-"Francia";"Bleu d'Auvergne";4905;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Bleu des Causses";435;2021;"FRL0";"Occitanie";1
-"Francia";"Bleu du Vercors-Sassenage";473;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Fourme d'Ambert";5685;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Fourme de Montbrison";734;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Abondance";3479;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Beaufort";5340;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Comté";64500;2021;"FRK2";"Bourgogne-Franche-Comté";1
-"Francia";"Cantal";11264;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Laguiole";689;2021;"FRL0";"Occitanie";1
-"Francia";"Morbier";11871;2021;"FRK2";"Bourgogne-Franche-Comté";1
-"Francia";"Reblochon";16360;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Saint-Nectaire";14448;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Salers";1237;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Tome des Bauges";970;2021;"FRK2";"Auvergne-Rhône-Alpes";1
+"Francia";"Bleu d'Auvergne";4905;2021;"FRK1";"Auvergne";1
+"Francia";"Bleu du Vercors-Sassenage";473;2021;"FRK2";"Rhône-Alpes";1
+"Francia";"Fourme d'Ambert";5685;2021;"FRK1";"Auvergne";1
+"Francia";"Fourme de Montbrison";734;2021;"FRK2";"Rhône-Alpes";1
+"Francia";"Abondance";3479;2021;"FRK2";"Rhône-Alpes";1
+"Francia";"Beaufort";5340;2021;"FRK2";"Rhône-Alpes";1
+"Francia";"Comté";64500;2021;"FRC2";"Franche-Comté";1
+"Francia";"Cantal";11264;2021;"FRK1";"Auvergne";1
+"Francia";"Laguiole";689;2021;"FRJ1";"Languedoc-Roussillon";1
+"Francia";"Morbier";11871;2021;"FRC2";"Franche-Comté";1
+"Francia";"Reblochon";16360;2021;"FRK2";"Rhône-Alpes";1
+"Francia";"Saint-Nectaire";14448;2021;"FRK1";"Auvergne";1
+"Francia";"Salers";1237;2021;"FRK1";"Auvergne";1
+"Francia";"Tome des Bauges";970;2021;"FRK2";"Rhône-Alpes";1
 "Francia";"Brie de Meaux";3424,5;2021;"FR10";"Île-de-France";1
-"Francia";"Brie de Meaux";3424,5;2021;"FRE2";"Grand Est";1
+"Francia";"Brie de Meaux";3424,5;2021;"FRF2";"Champagne-Ardenne";1
 "Francia";"Brie de Melun";234;2021;"FR10";"Île-de-France";1
-"Francia";"Camembert de Normandie";6015;2021;"FRD2";"Normandie";1
-"Francia";"Chaource";1299;2021;"FRK2";"Bourgogne-Franche-Comté";1
-"Francia";"Chaource";1299;2021;"FRE2";"Grand Est";1
-"Francia";"Epoisses";1545;2021;"FRK2";"Bourgogne-Franche-Comté";1
-"Francia";"Langres";344;2021;"FRK2";"Bourgogne-Franche-Comté";1
-"Francia";"Langres";344;2021;"FRE2";"Grand Est";1
-"Francia";"Livarot";725;2021;"FRD2";"Normandie";1
-"Francia";"Maroilles";4424;2021;"FRE1";"Hauts-de-France";1
-"Francia";"Mont d'Or";5992;2021;"FRK2";"Bourgogne-Franche-Comté";1
-"Francia";"Munster";5902;2021;"FRE2";"Grand Est";1
-"Francia";"Neufchâtel";1633;2021;"FRD2";"Normandie";1
-"Francia";"Pont-l'Evêque";2195;2021;"FRD2";"Normandie";1
+"Francia";"Camembert de Normandie";3007,5;2021;"FRD1";"Basse-Normandie";1
+"Francia";"Camembert de Normandie";3007,5;2021;"FRD2";"Haute-Normandie";1
+"Francia";"Chaource";1299;2021;"FRC1";"Bourgogne";1
+"Francia";"Chaource";1299;2021;"FRF2";"Champagne-Ardenne";1
+"Francia";"Epoisses";1545;2021;"FRC1";"Bourgogne";1
+"Francia";"Langres";344;2021;"FRC1";"Bourgogne";1
+"Francia";"Langres";344;2021;"FRF2";"Champagne-Ardenne";1
+"Francia";"Livarot";725;2021;"FRD1";"Basse-Normandie";1
+"Francia";"Maroilles";2212;2021;"FRE1";"Nord-Pas de Calais";1
+"Francia";"Maroilles";2212;2021;"FRE2";"Picardie";1
+"Francia";"Mont d'Or";5992;2021;"FRC2";"Franche-Comté";1
+"Francia";"Munster";5902;2021;"FRF1";"Alsace";1
+"Francia";"Neufchâtel";1633;2021;"FRD2";"Haute-Normandie";1
+"Francia";"Pont-l'Evêque";2195;2021;"FRD1";"Basse-Normandie";1
 "Francia";"Brocciu";416;2021;"FRM0";"Corse";1
-"Francia";"Ossau-Iraty";5041;2021;"FRI3";"Nouvelle-Aquitaine";1
-"Francia";"Roquefort";15885;2021;"FRL0";"Occitanie";1
-"Francia";"Banon";49;2021;"FRL0";"Occitanie";1
-"Francia";"Banon";49;2021;"FRJ2";"Provence-Alpes-Côte d'Azur";1
-"Francia";"Brousse du Rove";16;2021;"FRJ2";"Provence-Alpes-Côte d'Azur";1
-"Francia";"Chabichou du Poitou";281;2021;"FRI2";"Nouvelle-Aquitaine";1
-"Francia";"Charolais";111;2021;"FRK2";"Bourgogne-Franche-Comté";1
-"Francia";"Chavignol";852;2021;"FRB0";"Centre-Val de Loire";1
-"Francia";"Chevrotin";80;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Mâconnais";107;2021;"FRK2";"Bourgogne-Franche-Comté";1
-"Francia";"Pélardon";293;2021;"FRL0";"Occitanie";1
-"Francia";"Picodon";281;2021;"FRL0";"Occitanie";1
-"Francia";"Picodon";281;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Pouligny-Saint-Pierre";244;2021;"FRB0";"Centre-Val de Loire";1
-"Francia";"Rigotte de Condrieu";62;2021;"FRK2";"Auvergne-Rhône-Alpes";1
-"Francia";"Rocamadour";1357;2021;"FRL0";"Occitanie";1
-"Francia";"Sainte-Maure de Touraine";1940;2021;"FRB0";"Centre-Val de Loire";1
-"Francia";"Selles-sur-Cher";1145;2021;"FRB0";"Centre-Val de Loire";1
-"Francia";"Valençay";329;2021;"FRB0";"Centre-Val de Loire";1
-"Italia";"Grana Padano";42366,2;2023;"ITC4";"Lombardia";1
-"Italia";"Grana Padano";42366,2;2023;"ITH3";"Veneto";1
-"Italia";"Grana Padano";42366,2;2023;"ITC1";"Piemonte";1
-"Italia";"Grana Padano";42366,2;2023;"ITH5";"Emilia-Romagna";1
-"Italia";"Grana Padano";42366,2;2023;"ITH2";"Trentino-Alto Adige";1
-"Italia";"Parmigiano Reggiano";80611,5;2023;"ITH5";"Emilia-Romagna";1
-"Italia";"Parmigiano Reggiano";80611,5;2023;"ITC4";"Lombardia";1
-"Italia";"Gorgonzola";31073,5;2023;"ITC4";"Lombardia";1
-"Italia";"Gorgonzola";31073,5;2023;"ITC1";"Piemonte";1
-"Italia";"Asiago";10216,5;2023;"ITH3";"Veneto";1
-"Italia";"Asiago";10216,5;2023;"ITH2";"Trentino-Alto Adige";1
+"Francia";"Ossau-Iraty";5041;2021;"FRI1";"Aquitaine";1
+"Francia";"Roquefort";15885;2021;"FRJ1";"Languedoc-Roussillon";1
+"Francia";"Banon";49;2021;"FRJ1";"Languedoc-Roussillon";1
+"Francia";"Banon";49;2021;"FRL0";"Provence-Alpes-Côte d'Azur";1
+"Francia";"Brousse du Rove";16;2021;"FRL0";"Provence-Alpes-Côte d'Azur";1
+"Francia";"Chabichou du Poitou";140,5;2021;"FRI2";"Limousin";1
+"Francia";"Chabichou du Poitou";140,5;2021;"FRI3";"Poitou-Charentes";1
+"Francia";"Charolais";111;2021;"FRC1";"Bourgogne";1
+"Francia";"Chavignol";852;2021;"FRB0";"Centre - Val de Loire";1
+"Francia";"Chevrotin";80;2021;"FRK2";"Rhône-Alpes";1
+"Francia";"Mâconnais";107;2021;"FRC1";"Bourgogne";1
+"Francia";"Pélardon";293;2021;"FRJ1";"Languedoc-Roussillon";1
+"Francia";"Picodon";281;2021;"FRJ1";"Languedoc-Roussillon";1
+"Francia";"Picodon";281;2021;"FRK2";"Rhône-Alpes";1
+"Francia";"Pouligny-Saint-Pierre";244;2021;"FRB0";"Centre - Val de Loire";1
+"Francia";"Rigotte de Condrieu";62;2021;"FRK2";"Rhône-Alpes";1
+"Francia";"Rocamadour";1357;2021;"FRJ2";"Midi-Pyrénées";1
+"Francia";"Sainte-Maure de Touraine";1940;2021;"FRB0";"Centre - Val de Loire";1
+"Francia";"Selles-sur-Cher";1145;2021;"FRB0";"Centre - Val de Loire";1
+"Francia";"Valençay";329;2021;"FRB0";"Centre - Val de Loire";1
+"Italia";"Grana Padano";108033,81;2023;"ITC4";"Lombardia";1
+"Italia";"Grana Padano";32833,805;2023;"ITH3";"Veneto";1
+"Italia";"Grana Padano";31774,65;2023;"ITC1";"Piemonte";1
+"Italia";"Grana Padano";26478,875;2023;"ITH5";"Emilia-Romagna";1
+"Italia";"Grana Padano";12709,86;2023;"ITH2";"Trentino-Alto Adige";1
+"Italia";"Parmigiano Reggiano";142620,346;2023;"ITH5";"Emilia-Romagna";1
+"Italia";"Parmigiano Reggiano";18602,654;2023;"ITC4";"Lombardia";1
+"Italia";"Gorgonzola";21751,45;2023;"ITC4";"Lombardia";1
+"Italia";"Gorgonzola";40395,55;2023;"ITC1";"Piemonte";1
+"Italia";"Asiago";18389,7;2023;"ITH3";"Veneto";1
+"Italia";"Asiago";2043,3;2023;"ITH2";"Trentino-Alto Adige";1
 "Italia";"Taleggio";4396;2023;"ITC4";"Lombardia";1
 "Italia";"Taleggio";4396;2023;"ITH3";"Veneto";1
 "Italia";"Provolone Valpadana";2344;2023;"ITC4";"Lombardia";1
@@ -131,25 +133,24 @@
 "Italia";"Robiola di Roccaverano";139;2023;"ITC1";"Piemonte";1
 "Italia";"Casciotta d'Urbino";63,3;2023;"ITI3";"Marche";1
 "Italia";"Murazzano";10;2023;"ITC1";"Piemonte";1
-"Italia";"Mozzarella di bufala campana";18529,3333333333;2023;"ITF3";"Campania";1
-"Italia";"Mozzarella di bufala campana";18529,3333333333;2023;"ITF4";"Puglia";1
-"Italia";"Mozzarella di bufala campana";18529,3333333333;2023;"ITI4";"Lazio";1
-"Italia";"Pecorino Romano";12218,3333333333;2023;"ITG2";"Sardegna";1
-"Italia";"Pecorino Romano";12218,3333333333;2023;"ITI4";"Lazio";1
-"Italia";"Pecorino Romano";12218,3333333333;2023;"ITI3";"Marche";1
+"Italia";"Mozzarella di bufala campana";47249,8;2023;"ITF3";"Campania";1
+"Italia";"Mozzarella di bufala campana";5558,8;2023;"ITI4";"Lazio";1
+"Italia";"Mozzarella di bufala campana";2779,4;2023;"ITF4";"Puglia";1
+"Italia";"Pecorino Romano";35555,35;2023;"ITG2";"Sardegna";1
+"Italia";"Pecorino Romano";1099,65;2023;"ITI4";"Lazio";1
 "Italia";"Pecorino Toscano";2844;2023;"ITI1";"Toscana";1
 "Italia";"Pecorino Sardo";1741;2023;"ITG2";"Sardegna";1
 "Italia";"Fiore Sardo";542;2023;"ITG2";"Sardegna";1
 "Italia";"Pecorino Siciliano";115;2023;"ITG1";"Sicilia";1
-"Grecia";"Feta";13349,6666666667;2021;"EL51";"Makedonia Anatoliki";1
-"Grecia";"Feta";13349,6666666667;2021;"EL52";"Kentriki Makedonia";1
-"Grecia";"Feta";13349,6666666667;2021;"EL53";"Dytiki Makedonia";1
-"Grecia";"Feta";13349,6666666667;2021;"EL54";"Ipeiros";1
-"Grecia";"Feta";13349,6666666667;2021;"EL61";"Thessalia";1
-"Grecia";"Feta";13349,6666666667;2021;"EL62";"Ionia Nisia";1
-"Grecia";"Feta";13349,6666666667;2021;"EL63";"Dytiki Ellada";1
-"Grecia";"Feta";13349,6666666667;2021;"EL64";"Sterea Ellada";1
-"Grecia";"Feta";13349,6666666667;2021;"EL65";"Peloponnisos";1
+"Grecia";"Feta";13349,667;2021;"EL51";"Makedonia Anatoliki";1
+"Grecia";"Feta";13349,667;2021;"EL52";"Kentriki Makedonia";1
+"Grecia";"Feta";13349,667;2021;"EL53";"Dytiki Makedonia";1
+"Grecia";"Feta";13349,667;2021;"EL54";"Ipeiros";1
+"Grecia";"Feta";13349,667;2021;"EL61";"Thessalia";1
+"Grecia";"Feta";13349,667;2021;"EL62";"Ionia Nisia";1
+"Grecia";"Feta";13349,667;2021;"EL63";"Dytiki Ellada";1
+"Grecia";"Feta";13349,667;2021;"EL64";"Sterea Ellada";1
+"Grecia";"Feta";13349,667;2021;"EL65";"Peloponnisos";1
 "Grecia";"Feta organico";1542;2021;"EL51";"Makedonia Anatoliki";1
 "Grecia";"Feta organico";1542;2021;"EL52";"Kentriki Makedonia";1
 "Grecia";"Feta organico";1542;2021;"EL53";"Dytiki Makedonia";1
@@ -193,11 +194,11 @@
 "Grecia";"Krasotyri Ko";1;2021;"EL42";"Notio Aigaio";1
 "Suiza";"Gruyère AOP";22500;2022;"CH01";"Région lémanique";1
 "Suiza";"Gruyère AOP";22500;2022;"CH02";"Espace Mittelland";1
-"Suiza";"Emmental AOP";8333,33333333333;2022;"CH02";"Espace Mittelland";1
-"Suiza";"Emmental AOP";8333,33333333333;2022;"CH03";"Nordwestschweiz";1
-"Suiza";"Emmental AOP";8333,33333333333;2022;"CH06";"Zentralschweiz";1
+"Suiza";"Emmental AOP";8333,333;2022;"CH02";"Espace Mittelland";1
+"Suiza";"Emmental AOP";8333,333;2022;"CH03";"Nordwestschweiz";1
+"Suiza";"Emmental AOP";8333,333;2022;"CH06";"Zentralschweiz";1
 "Suiza";"Appenzeller";10000;2022;"CH05";"Ostschweiz";1
 "Suiza";"Raclette du Valais AOP";5000;2022;"CH01";"Région lémanique";1
-"Suiza";"Sbrinz AOP";666,666666666667;2022;"CH02";"Espace Mittelland";1
-"Suiza";"Sbrinz AOP";666,666666666667;2022;"CH05";"Ostschweiz";1
-"Suiza";"Sbrinz AOP";666,666666666667;2022;"CH06";"Zentralschweiz";1
+"Suiza";"Sbrinz AOP";666,667;2022;"CH02";"Espace Mittelland";1
+"Suiza";"Sbrinz AOP";666,667;2022;"CH05";"Ostschweiz";1
+"Suiza";"Sbrinz AOP";666,667;2022;"CH06";"Zentralschweiz";1

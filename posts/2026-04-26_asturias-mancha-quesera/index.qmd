@@ -846,6 +846,7 @@ Es interesante destacar que una parte muy importante de la producción quesera D
 #| out-width: "100%"
 
 # --- 1. Datos DOP ---
+
 dop_raw <- read_csv2("dop_nuts2.csv", locale = locale(encoding = "latin1"))
 
 dop_nuts2 <- dop_raw %>%
@@ -899,49 +900,8 @@ ggplot() +
   geom_sf(data = nuts2_eu %>% filter(NUTS_ID == "ES12"),
           fill = NA, color = "#D55E00", linewidth = 0.5, alpha = 0.8) +
   geom_text_repel(
-    data = centroides_laea |> filter(nuts2_nombre == "Région lémanique"),
-    aes(label = paste0(nuts2_nombre, "\n", scales::comma(round(ton_dop)), " t"),
-        geometry = geometry),
-    stat          = "sf_coordinates",
-    size          = 2.2,
-    color         = "grey30",
-    bg.color      = "white",
-    bg.r          = 0.15,
-    fontface      = "bold",
-    box.padding   = 0.1,
-    point.padding = 0.1,
-    nudge_x       = -300000,   # ajusta hasta que quede bien
-    nudge_y       =   100000,
-    direction     = "x",
-    force         = 0,
-    force_pull    = 0.5,
-    segment.color = "grey30",
-    segment.size  = 0.3,
-    max.overlaps  = Inf
-  ) +
-  geom_text_repel(
-    data = centroides_laea |> filter(nuts2_nombre == "Espace Mittelland"),
-    aes(label = paste0(nuts2_nombre, "\n", scales::comma(round(ton_dop)), " t"),
-        geometry = geometry),
-    stat          = "sf_coordinates",
-    size          = 2.2,
-    color         = "grey30",
-    bg.color      = "white",
-    bg.r          = 0.15,
-    fontface      = "bold",
-    box.padding   = 0.1,
-    point.padding = 0.1,
-    nudge_x       = -30000,   # ajusta hasta que quede bien
-    nudge_y       = +150000,
-    direction     = "x",
-    force         = 0,
-    force_pull    = 0.5,
-    segment.color = "grey30",
-    segment.size  = 0.3,
-    max.overlaps  = Inf
-  ) +
-  geom_text_repel(
-    data = centroides_laea |> filter(!nuts2_nombre %in% c("Région lémanique","Espace Mittelland")),
+  # data = centroides_laea |> filter(!nuts2_nombre %in% c("Région lémanique","Espace Mittelland")),
+    data = centroides_laea,
     aes(label = paste0(nuts2_nombre, "\n", scales::comma(round(ton_dop)), " t"),
         geometry = geometry),
     stat          = "sf_coordinates",
@@ -983,11 +943,10 @@ ggplot() +
     plot.margin            = margin(0, 0, 0, 0, "pt"),
     panel.grid             = element_blank()
   ) +
-  labs(caption  = "Producción distribuida equitativamente entre regiones NUTS2 del ámbito geográfico de cada DOP
-Datos Suiza (Gruyère, Emmental, Appenzeller, Raclette du Valais, Sbrinz): estimaciones aproximadas (TSM/Agristat, ca. 2022)
+  labs(caption  = "Datos Suiza (Gruyère, Emmental, Appenzeller, Raclette du Valais, Sbrinz): estimaciones aproximadas (TSM/Agristat, ca. 2022)
+División administrativa Francia: NUTS pre-2016 (22 regiones)
 Fuente: MAPA, INAO, CLAL, DOOR, TSM · elaboración propia"
   )
-
 ```
 
 ```{r}
@@ -998,8 +957,7 @@ Fuente: MAPA, INAO, CLAL, DOOR, TSM · elaboración propia"
 #| fig-cap: ""
 
 quesos_por_region <- dop_raw %>%
-  mutate(ton_asignada = ton / n_regiones) %>%
-  arrange(nuts2_code, desc(ton_asignada)) %>%
+  arrange(nuts2_code, desc(ton)) %>%
   group_by(nuts2_code) %>%
   summarise(quesos = paste(queso, collapse = ", "), .groups = "drop")
 
@@ -1049,9 +1007,7 @@ gt_top10 <- gt_data %>%
     title    = "Principales regiones europeas productoras de queso DOP/IGP",
     subtitle = "Top 10 por volumen de producción asignado · España, Francia, Italia, Suiza y Grecia"
   ) %>%
-  tab_source_note(
-    "Producción distribuida equitativamente entre regiones NUTS2 del ámbito geográfico de cada DOP
-Asturias total: SADEI 2026 · Asturias DOP/IGP: MAPA 2023
+  tab_source_note("Asturias total: SADEI 2026 · Asturias DOP/IGP: MAPA 2023
 Resto: MAPA, INAO, CLAL, DOOR · elaboración propia"
   ) %>%
   tab_options(
