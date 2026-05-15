@@ -120,42 +120,14 @@ Estas 298 referencias incluyen todo tipo de quesos, desde artesanos a industrial
 
 En cuanto al número de empresas queseras, el Ministerio de Agricultura, Pesca y Alimentación (MAPA), en su Anuario de Estadísticas del año 2023[@mapa-1-2023], constata la existencia en España de 1.620 empresas lácteas y 1.990 centros de producción. No especifica el número de empresas queseras ni el volumen total de queso producido. Según datos de la Agencia de Ciencia, Competitividad Empresarial e Innovación Asturiana (SEKUENS)[@sek2026], España contaba en 2024 con 1.577 empresas del sector lácteo *activas*; de ellas, el 5,39% están implantadas en Asturias. Esto equivale a 85 empresas; muy cerca del valor de 82 establecimientos proporcionados por el *Catálogo* mencionado antes; 
 
-La @tbl-tabla-asturias presenta los datos de la producción total de queso en Asturias actualizada a 2025, según la Sociedad Asturiana de Estudios Económicos e Industriales (SADEI)[@sadei].
-
-Desde 2010, la producción de queso en Asturias se mantuvo en torno a 35.000-40.000 toneladas hasta 2022. Entre 2021 y 2023 se registra una caída notable debido principalmente al cierre de la fábrica de Danone en Salas en 2022[@lva2022-2], que traslada la elaboración del queso fresco *Danonino* a otros centros en Francia. A partir de 2023, la producción regional se estabiliza en unas 25.000 toneladas, lo que representa un 4,6% del total nacional,  y en 2025 remonta a 35.310 toneladas. Este volumen incluye productos industriales de gran volumen, como el queso fresco *Burgo de Arias* y otros quesos frescos fabricados por Mantequerías Arias en su planta de Vegalencia (Soto de Ribera), la mozzarella que fabrica Reny Picot en Anleo (Navia) y los quesos mascarpone y mozzarella fabricados por Quesería Lafuente en Arriondas. Si descontamos estos volúmenes del total dado por SADEI, podemos situar el volumen de los quesos tradicionales asturianos en torno a las 10.000 toneladas, incluyendo los quesos DOP e IGP, como veremos en el capítulo dedicado a los quesos DOP europeos.
-
-El detalle de la producción quesera asturiana fuera de las denominaciones de origen no se recoge en ningún informe oficial. Es el caso de quesos importantes y conocidos, algunos tradicionales como Vidiago, Pría, La Peral, Peñamellera, Abredo y otros, y también de los quesos que podrían ser incluidos en los llamados quesos *de autor*, como Rey Silo, Lazana, Varé o La Chivita, y multitud de quesos artesanos producidos en pequeñas queserías, cuyo volumen me ha resultado imposible de estimar con los datos de que dispongo.
-
-La @fig-prod-asturias muestra la producción de queso desde 1990. A mitad de los años 2000 se identifica una caída importante de los volúmenes de producción, probablemente reflejo de varios factores, como la crisis de 2008, unida al efecto de la reordenación de la PAC entre 2003 y 2009 y a la relocalización por Mantequerías Arias de una parte importante de la fabricación de Burgo de Arias en la nueva factoría de Burgos, hacia 2006. También se ve claramente el cese de actividad de Danone en Salas en 2023. 
-
-No dispongo de datos específicos que expliquen el relanzamiento de 2025, ya que la fábrica de Royal A-Ware estaba en proceso de arranque en 2025 y probablemente sus volúmenes no están consolidados en el valor de este año.
-
-```{r}
-#| label: fig-prod-asturias
-#| fig-cap: "Producción de queso en Asturias 1990-2025 (SADEI, 2025)"
-#| echo: FALSE
-#| warning: FALSE
-#| message: FALSE
-#| fig-height: 4
-
-df_asturias |>
-  ggplot(aes(x=año, y = ton))+
-    geom_line(color="#D55E00", linewidth=1.5) +
-    labs(
-    x = "Año",
-    y = "Toneladas"
-    ) +
-    theme_minimal()
-
-```
-
+La @tbl-tabla-asturias presenta los datos de la producción total de queso en Asturias en los últimos quince años, actualizada a 2025, según la Sociedad Asturiana de Estudios Económicos e Industriales (SADEI)[@sadei].
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
 #| label: tbl-tabla-asturias
 #| tbl-cap: "Producción de queso en Asturias desde 2015 (SADEI, 2025)"
 #| 
 df_asturias %>%
-  filter (año >= 2015) %>%
+  filter (año >= 2010) %>%
    # 1. Creamos el objeto gt
   gt() %>%
   
@@ -188,6 +160,36 @@ df_asturias %>%
   )
 
 ```
+
+La producción de queso en Asturias se mantuvo en torno a 35.000-40.000 toneladas desde 2010 hasta 2022. Entre 2021 y 2023 se registra una caída notable debido principalmente al cierre de la fábrica de Danone en Salas en 2022[@lva2022-2], que traslada la elaboración del queso fresco *Danonino* a otros centros en Francia. A partir de 2023, la producción regional se estabiliza en unas 25.000 toneladas, lo que representa un 4,6% del total nacional,  y en 2025 remonta a 35.310 toneladas. Este volumen incluye productos industriales de gran volumen, como el queso fresco *Burgo de Arias* y otros quesos frescos fabricados por Mantequerías Arias en su planta de Vegalencia (Soto de Ribera), la mozzarella que fabrica Reny Picot en Anleo (Navia) y los quesos mascarpone y mozzarella fabricados por Quesería Lafuente en Arriondas. Si descontamos estos volúmenes del total dado por SADEI, podemos situar el volumen de los quesos tradicionales asturianos en torno a las 10.000 toneladas, incluyendo los quesos DOP e IGP, como veremos en el capítulo dedicado a los quesos DOP europeos.
+
+El detalle de la producción quesera asturiana fuera de las denominaciones de origen no se recoge en ningún informe oficial. Es el caso de quesos importantes y conocidos, algunos tradicionales como Vidiago, Pría, La Peral, Peñamellera, Abredo y otros, y también de los quesos que podrían ser incluidos en los llamados quesos *de autor*, como Rey Silo, Lazana, Varé o La Chivita, y multitud de quesos artesanos producidos en pequeñas queserías, cuyo volumen me ha resultado imposible de estimar con los datos de que dispongo.
+
+La @fig-prod-asturias muestra la producción de queso desde 1990. En el período 2005 a 2010 se identifica una caída importante de los volúmenes de producción, probablemente reflejo de varios factores, como la crisis de 2008, unida al efecto de la reordenación de la PAC entre 2003 y 2009 y a la relocalización por Mantequerías Arias de una parte importante de la fabricación de Burgo de Arias en la nueva factoría de Burgos, hacia 2006. También se ve claramente el cese de actividad de Danone en Salas en 2023. 
+
+No dispongo de datos específicos que expliquen el relanzamiento de 2025, ya que la fábrica de Royal A-Ware estaba en proceso de arranque en 2025 y probablemente sus volúmenes no están consolidados en el valor de este año.
+
+```{r}
+#| label: fig-prod-asturias
+#| fig-cap: "Producción de queso en Asturias 1990-2025 (SADEI, 2025)"
+#| echo: FALSE
+#| warning: FALSE
+#| message: FALSE
+#| fig-height: 4
+
+df_asturias |>
+  ggplot(aes(x=año, y = ton))+
+    geom_line(color="#D55E00", linewidth=1.5) +
+    labs(
+    x = "Año",
+    y = "Toneladas"
+    ) +
+    theme_minimal()
+
+```
+
+
+
 
 ## La producción y consumo de queso en España
 
