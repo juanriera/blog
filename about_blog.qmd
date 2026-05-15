@@ -1,8 +1,8 @@
 ---
-title: "Sobre este blog"
-image: about_blog.png
+title: "La Talamera"
+image: imagenes/talamera/talamera-5.png
 about:
-  template: jolla
+  template: marquee
   links:
     - icon: linkedin
       text: LinkedIn
@@ -19,7 +19,9 @@ about:
 comments: false      
 ---
 
-Este blog nace de un mismo interés visto desde dos ángulos: el queso como objeto de estudio, y los datos como herramienta para entenderlo mejor.
+En las cabañas de los pastores del macizo occidental de los Picos de Europa, en las que se elabora el queso de Gamonéu, la talamera es la tabla en la que se colocan los quesos para que se sequen al humo.
+
+Las páginas de **La Talamera** nacen de un mismo interés visto desde dos ángulos: el queso como objeto de estudio, y los datos como herramienta para entenderlo mejor.
 
 Encontrarás aquí artículos sobre tecnología quesera y también sobre conceptos diversos más abstractos: qué es el *terroir*, qué debería proteger una denominación de origen, qué define a un queso. Junto a eso, análisis cuantitativos aplicados a la producción —los mismos que desarrollo en mi libro web o publico en LinkedIn— y ejemplos prácticos de estadística y visualización resueltos en Excel, R o Python, con el código disponible para quien quiera reproducirlos.
 

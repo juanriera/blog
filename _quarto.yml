@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Blog de Juan Riera"
+  title: "La Talamera"
   navbar:
     right:
       - about.qmd
@@ -16,7 +16,7 @@ website:
       - icon: mastodon
         href: https://mstdn.social/@juanriera/
     left:
-      - text: "Sobre este blog"
+      - text: "Qué es La Talamera"
         file: about_blog.qmd
       - text: "La mejora continua en la producción quesera"
         href: https://juanriera.github.io/master-queseria/
@@ -41,4 +41,7 @@ bibliography: bibliografia_general.bib
 csl: estilos/apa.csl
 published-title: PUBLICADO
 lang: es
+resources:
+  - CNAME
+
 
