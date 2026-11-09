@@ -16,10 +16,8 @@ website:
       - icon: mastodon
         href: https://mstdn.social/@juanriera/
     left:
-      - text: "Qué es La Talamera"
-        file: about_blog.qmd
-      - text: "La mejora continua en la producción quesera"
-        href: https://juanriera.github.io/master-queseria/
+      - text: "Blog"
+        file: blog.qmd
 
   comments:
     giscus:
