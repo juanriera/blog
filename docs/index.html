@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -33,18 +36,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6b423f165eeea3787de40cb4f8e821c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-92404dd89b1444827012a9e3a58cda88.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,70 +72,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Buscar"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-categories','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -153,12 +95,8 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about_blog.html"> 
-<span class="menu-text">Qué es La Talamera</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://juanriera.github.io/master-queseria/"> 
-<span class="menu-text">La mejora continua en la producción quesera</span></a>
+    <a class="nav-link" href="./blog.html"> 
+<span class="menu-text">Blog</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -194,365 +132,65 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categorías</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Todas <span class="quarto-category-count">(11)</span></div><div class="category" data-category="Y2xpbWE=">clima <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZXN0YWQlQzMlQURzdGljYQ==">estadística <span class="quarto-category-count">(7)</span></div><div class="category" data-category="RXhjZWw=">Excel <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RlA=">FP <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bW9kZWxvcw==">modelos <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bW9kZWxvcyUyMG1hdGVtJUMzJUExdGljb3M=">modelos matemáticos <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVlc28=">queso <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(8)</span></div></div></div>
+    
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
-
-
-
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="cXVlc28=" data-listing-date-sort="1777068000000" data-listing-file-modified-sort="1778885324252" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="77" data-listing-word-count-sort="15241">
-<div class="thumbnail"><a href="./posts/2026-04-26_asturias-mancha-quesera/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2026-04-26_asturias-mancha-quesera/quesos-asturianos.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-04-26_asturias-mancha-quesera/index.html" class="no-external">La producción quesera de Asturias en el contexto español y europeo.</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVlc28='); return false;">queso</div>
-
+<div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="imagenes/talamera/talamera-5.png" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">La Talamera</h1>
 </div>
-<div class="delink listing-description"><a href="./posts/2026-04-26_asturias-mancha-quesera/index.html" class="no-external">
-Quesos asturianos tradicionales. Foto: Archivo Tierra Astur
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-04-26_asturias-mancha-quesera/index.html" class="no-external">
-<div class="listing-date">
-25 abr 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="cXVlc28lMkNlc3RhZCVDMyVBRHN0aWNhJTJDbW9kZWxvcyUyQ1IlMkNGUA==" data-listing-date-sort="1776808800000" data-listing-file-modified-sort="1776879730981" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2096">
-<div class="thumbnail"><a href="./posts/2026-04-22_curvas-pH-FP/index.html" class="no-external">
+<div class="quarto-title-meta">
+  </div>
+</header> <main class="content" id="quarto-document-content">
+<p>¡Hola! Te doy la bienvenida a mi sitio web, <strong>La Talamera</strong>.</p>
+<p>En las cabañas de los pastores del macizo occidental de los Picos de Europa, en las que se elabora el queso de Gamonéu, la talamera es la tabla en la que se colocan los útiles de la cocina y también los quesos para que se sequen al humo.</p>
+<p>Las páginas de <strong>La Talamera</strong> nacen de un mismo interés visto desde dos ángulos: el queso como objeto de estudio, y los datos como herramienta para entenderlo mejor.</p>
+<p>Encontrarás aquí artículos sobre tecnología quesera y también sobre conceptos diversos más abstractos: qué es el <em>terroir</em>, qué debería proteger una denominación de origen, qué define a un queso. Junto a eso, análisis cuantitativos aplicados a la producción —los mismos que desarrollo en mi libro web o publico en LinkedIn— y ejemplos prácticos de estadística y visualización resueltos en Excel, R o Python, con el código disponible para quien quiera reproducirlos.</p>
+<p>Algunos recursos adicionales:</p>
+<ul>
+<li><p><a href="https://juanriera.github.io/master-queseria/">La mejora continua en la industria quesera</a>, libro web elaborado como apoyo al <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-21708">Curso de Especialización de Formación Profesional de Grado Superior en Tecnología y Gestión Quesera</a>, curso que contribuí a diseñar e impulsar junto con un equipo interdisciplinar de profesionales y docentes, y que desde 2024 forma parte de la oferta formativa de la Formación Profesional en España.</p></li>
+<li><p><a href="https://github.com/juanriera/gestion-queseria">La gestión industrial de la quesería</a> es un repositorio de varios documentos en PDF sobre tecnología quesera y gestión de la quesería. Complementan el documento anterior para el Curso de Especialización de Formación Profesional de Grado Superior en Tecnología y Gestión Quesera. En este repositorio se incluye una carpeta <a href="https://github.com/juanriera/gestion-queseria/tree/main/recursos">recursos</a>, desde la que se pueden descargar hojas de cálculo con diversos ejemplos y modelos.</p></li>
+</ul>
+<p>Los comentarios al blog están habilitados al pie de cada entrada. Para comentar es necesario tener una cuenta en GitHub, que es gratuita. Los comentarios se gestionan a través de <a href="https://giscus.app/">Giscus</a>.</p>
+<p>Este sitio web se publica utilizando <a href="https://quarto.org/">Quarto</a> y <a href="https://posit.co/products/open-source/rstudio/">RStudio</a>, y está alojado en <a href="https://pages.github.com/">GitHub Pages</a>. En la elaboración de gráficos e imágenes utilizo principalmente <a href="https://www.r-project.org/">R</a>, y también otras herramientas libres como <a href="https://www.python.org/">Python</a>, <a href="https://inkscape.org/">Inkscape</a> y <a href="https://www.gimp.org/">GIMP</a>. En la redacción y revisión de textos puedo utilizar <a href="https://www.claude.ai">Claude</a> (Anthropic).</p>
 
-<img loading="lazy" src="./posts/2026-04-22_curvas-pH-FP/curvas-pH-FP.png" class="thumbnail-image">
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-04-22_curvas-pH-FP/index.html" class="no-external">Modelizar la curva de acidificación en un caso real</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVlc28='); return false;">queso</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZXN0YWQlQzMlQURzdGljYQ=='); return false;">estadística</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bW9kZWxvcw=='); return false;">modelos</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RlA='); return false;">FP</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2026-04-22_curvas-pH-FP/index.html" class="no-external">
-Analizamos en este artículo algunos datos de producción obtenidos durante las prácticas del Curso de Especialización en Tecnología y Gestión Quesera, impartido en el Centro…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-04-22_curvas-pH-FP/index.html" class="no-external">
-<div class="listing-date">
-22 abr 2026
-</div>
-</a>
+</main> 
+    <div class="about-footer"><div class="about-links">
+  <a href="/blog.html" class="about-link" rel="" target="">
+    <i class="bi bi-journal-text"></i>
+     <span class="about-link-text">Blog</span>
+  </a>
+  <a href="https://linkedin.com/in/juanriera/" class="about-link" rel="" target="">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+  <a href="https://github.com/juanriera/" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+  <a href="https://bsky.app/profile/juanriera.bsky.social" class="about-link" rel="" target="">
+    <i class="bi bi-bluesky"></i>
+     <span class="about-link-text">Bluesky</span>
+  </a>
+  <a href="https://mstdn.social/@juanriera" class="about-link" rel="" target="">
+    <i class="bi bi-mastodon"></i>
+     <span class="about-link-text">Mastodon</span>
+  </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="cXVlc28lMkNtb2RlbG9zJTIwbWF0ZW0lQzMlQTF0aWNvcyUyQ1I=" data-listing-date-sort="1775858400000" data-listing-file-modified-sort="1777197952557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="34" data-listing-word-count-sort="6732">
-<div class="thumbnail"><a href="./posts/2026-04-11_curvas-ph/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2026-04-11_curvas-ph/imagenes/linkedin-curvas-pH.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-04-11_curvas-ph/index.html" class="no-external">Modelizar la curva de acidificación del queso</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVlc28='); return false;">queso</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bW9kZWxvcyUyMG1hdGVtJUMzJUExdGljb3M='); return false;">modelos matemáticos</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
+  </div>
 </div>
-<div class="delink listing-description"><a href="./posts/2026-04-11_curvas-ph/index.html" class="no-external">
-Hay un dato que todo quesero registra y pocos analizan con la profundidad que merece: la curva de descenso del pH durante la elaboración. Sin embargo, el perfil de descenso…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-04-11_curvas-ph/index.html" class="no-external">
-<div class="listing-date">
-11 abr 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="ZXN0YWQlQzMlQURzdGljYSUyQ2NsaW1hJTJDUg==" data-listing-date-sort="1775426400000" data-listing-file-modified-sort="1775574708710" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3435">
-<div class="thumbnail"><a href="./posts/2026-04-06_clima-economist/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2026-04-06_clima-economist/grafico-media-varianza.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-04-06_clima-economist/index.html" class="no-external">Media, varianza y eventos extremos</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZXN0YWQlQzMlQURzdGljYQ=='); return false;">estadística</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xpbWE='); return false;">clima</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2026-04-06_clima-economist/index.html" class="no-external">
-Cuando hablamos del clima, solemos pensar en la temperatura media: “este verano ha sido más cálido que el anterior” o “el invierno ha sido más frío de lo normal”. Pero la…<strong></strong><strong></strong>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-04-06_clima-economist/index.html" class="no-external">
-<div class="listing-date">
-6 abr 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="ZXN0YWQlQzMlQURzdGljYSUyQ1I=" data-listing-date-sort="1775340000000" data-listing-file-modified-sort="1775573955300" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2347">
-<div class="thumbnail"><a href="./posts/2026-04-05_frecuencia-probabilidad/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2026-04-05_frecuencia-probabilidad/histograma-normal.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-04-05_frecuencia-probabilidad/index.html" class="no-external">De la frecuencia a la probabilidad</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZXN0YWQlQzMlQURzdGljYQ=='); return false;">estadística</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2026-04-05_frecuencia-probabilidad/index.html" class="no-external">
-Cuando medimos una variable en un conjunto de muestras — por ejemplo, el extracto seco total de una serie de quesos — obtenemos una colección de valores numéricos. El primer…<strong></strong>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-04-05_frecuencia-probabilidad/index.html" class="no-external">
-<div class="listing-date">
-5 abr 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="cXVlc28=" data-listing-date-sort="1774393200000" data-listing-file-modified-sort="1775749564351" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="24" data-listing-word-count-sort="4655">
-<div class="thumbnail"><a href="./posts/2026-03-25_gamoneu-azul/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2026-03-25_gamoneu-azul/imagenes/_DSC5588-2011-10-23-1749.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-03-25_gamoneu-azul/index.html" class="no-external">El Gamonéu, un queso azul</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVlc28='); return false;">queso</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2026-03-25_gamoneu-azul/index.html" class="no-external">
-El queso Gamonéu (DOP), elaborado en los concejos asturianos de Cangas de Onís y Onís, se define en su pliego de condiciones como «<strong>queso graso, madurado</strong>, de corteza natural…<strong></strong><strong></strong><sup></sup>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-03-25_gamoneu-azul/index.html" class="no-external">
-<div class="listing-date">
-25 mar 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="ZXN0YWQlQzMlQURzdGljYSUyQ0V4Y2VsJTJDUg==" data-listing-date-sort="1676761200000" data-listing-file-modified-sort="1775736621789" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="826">
-<div class="thumbnail"><a href="./posts/2023-02-19_excel-normal/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2023-02-19_excel-normal/excel-norm-11.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2023-02-19_excel-normal/index.html" class="no-external">La curva de distribución normal en Excel</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZXN0YWQlQzMlQURzdGljYQ=='); return false;">estadística</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RXhjZWw='); return false;">Excel</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2023-02-19_excel-normal/index.html" class="no-external">
-Hay muchos métodos en internet para hacer el gráfico de la distribución normal con Microsoft Excel. Aquí vamos a utilizar un método sencillo mediante los gráficos de…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2023-02-19_excel-normal/index.html" class="no-external">
-<div class="listing-date">
-19 feb 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="cXVlc28lMkNS" data-listing-date-sort="1675983600000" data-listing-file-modified-sort="1775936804488" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="897">
-<div class="thumbnail"><a href="./posts/2023-02-10-camembert/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2023-02-10-camembert/imagenes/camembert_hfd_ph.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2023-02-10-camembert/index.html" class="no-external">Gráfico de dispersión multiserie anotado con R</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cXVlc28='); return false;">queso</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2023-02-10-camembert/index.html" class="no-external">
-El gráfico muestra la relación entre el índice de humedad en base al extracto magro (HFD) y el pH en un queso de pasta blanda tipo Camembert, diferenciando los datos según…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2023-02-10-camembert/index.html" class="no-external">
-<div class="listing-date">
-10 feb 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="ZXN0YWQlQzMlQURzdGljYSUyQ0V4Y2VsJTJDUg==" data-listing-date-sort="1675292400000" data-listing-file-modified-sort="1775573978815" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3819">
-<div class="thumbnail"><a href="./posts/2023-02-02_excel-xy-pinguinos/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2023-02-02_excel-xy-pinguinos/pinguinos2.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2023-02-02_excel-xy-pinguinos/index.html" class="no-external">Gráficos de dispersión multiserie en Microsoft Excel (parte 2)</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZXN0YWQlQzMlQURzdGljYQ=='); return false;">estadística</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RXhjZWw='); return false;">Excel</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2023-02-02_excel-xy-pinguinos/index.html" class="no-external">
-En el post anterior hemos visto cómo crear un gráfico de dispersión multiserie a partir de una tabla de datos arreglados, en la que una columna proporciona los criterios…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2023-02-02_excel-xy-pinguinos/index.html" class="no-external">
-<div class="listing-date">
-2 feb 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="ZXN0YWQlQzMlQURzdGljYSUyQ1I=" data-listing-date-sort="1674255600000" data-listing-file-modified-sort="1775573900198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="836">
-<div class="thumbnail"><a href="./posts/2023-01-21_tabla-frec/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts\2023-01-21_tabla-frec\2023-01-21.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2023-01-21_tabla-frec/index.html" class="no-external">Cómo hacer una tabla de frecuencias en R con <code>tidyverse</code></a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZXN0YWQlQzMlQURzdGljYQ=='); return false;">estadística</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2023-01-21_tabla-frec/index.html" class="no-external">
-Para hacer una tabla de frecuencias, el primer paso es cargar la librería <code>tidyverse</code> y leer los datos en <span class="math inline">\(R\)</span>, en este caso a partir de un archivo <em>CSV</em>.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2023-01-21_tabla-frec/index.html" class="no-external">
-<div class="listing-date">
-21 ene 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="ZXN0YWQlQzMlQURzdGljYSUyQ0V4Y2Vs" data-listing-date-sort="1673650800000" data-listing-file-modified-sort="1677084125000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="824">
-<div class="thumbnail"><a href="./posts/2023-01-14_tabla-frec-excel/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2023-01-14_tabla-frec-excel/image-20230121163619049.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2023-01-14_tabla-frec-excel/index.html" class="no-external">Cómo hacer una tabla de frecuencias en Excel</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZXN0YWQlQzMlQURzdGljYQ=='); return false;">estadística</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RXhjZWw='); return false;">Excel</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2023-01-14_tabla-frec-excel/index.html" class="no-external">
-Hay varias formas de preparar una tabla de frecuencia en Excel. Aquí usaremos dos métodos:
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2023-01-14_tabla-frec-excel/index.html" class="no-external">
-<div class="listing-date">
-14 ene 2023
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No hay resultados</div>
-</div></main> <!-- /main -->
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
