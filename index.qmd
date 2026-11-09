@@ -28,14 +28,14 @@ En las cabañas de los pastores del macizo occidental de los Picos de Europa, en
 
 Las páginas de **La Talamera** nacen de un mismo interés visto desde dos ángulos: el queso como objeto de estudio, y los datos como herramienta para entenderlo mejor.
 
-Encontrarás aquí artículos sobre tecnología quesera y también sobre conceptos diversos más abstractos: qué es el *terroir*, qué debería proteger una denominación de origen, qué define a un queso. Junto a eso, análisis cuantitativos aplicados a la producción —los mismos que desarrollo en mi libro web o publico en LinkedIn— y ejemplos prácticos de estadística y visualización resueltos en Excel, R o Python, con el código disponible para quien quiera reproducirlos.
-
-Algunos recursos adicionales:
+Encontrarás aquí el acceso a diversos recursos:
 
 - [La mejora continua en la industria quesera](https://juanriera.github.io/master-queseria/), libro web elaborado como apoyo al [Curso de Especialización de Formación Profesional de Grado Superior en Tecnología y Gestión Quesera](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-21708), curso que contribuí a diseñar e impulsar junto con un equipo interdisciplinar de profesionales y docentes, y que desde 2024 forma parte de la oferta formativa de la Formación Profesional en España.
 
 - [La gestión industrial de la quesería](https://github.com/juanriera/gestion-queseria) es un repositorio de varios documentos en PDF sobre tecnología quesera y gestión de la quesería. Complementan el documento anterior para el Curso de Especialización de Formación Profesional de Grado Superior en Tecnología y Gestión Quesera. En este repositorio se incluye una carpeta [recursos](https://github.com/juanriera/gestion-queseria/tree/main/recursos), desde la que se pueden descargar hojas de cálculo con diversos ejemplos y modelos.
 
-Los comentarios al blog están habilitados al pie de cada entrada. Para comentar es necesario tener una cuenta en GitHub, que es gratuita. Los comentarios se gestionan a través de [Giscus](https://giscus.app/).
+- El [cuaderno de notas](https://talamera.com/blog.html), al que se acede desde el menú, incluye artículos sobre tecnología quesera y también otros contenidos diversos,  como análisis cuantitativos aplicados a la producción —los mismos que desarrollo en mi libro web o publico en LinkedIn— y ejemplos prácticos de estadística y visualización resueltos en Excel, R o Python, con el código disponible para quien quiera reproducirlos.
+
+Los comentarios al cuaderno de notas están habilitados al pie de cada entrada. Para comentar es necesario tener una cuenta en GitHub, que es gratuita. Los comentarios se gestionan a través de [Giscus](https://giscus.app/).
 
 Este sitio web se publica utilizando [Quarto](https://quarto.org/) y [RStudio](https://posit.co/products/open-source/rstudio/), y está alojado en [GitHub Pages](https://pages.github.com/). En la elaboración de gráficos e imágenes utilizo principalmente [R](https://www.r-project.org/), y también otras herramientas libres como [Python](https://www.python.org/), [Inkscape](https://inkscape.org/) y [GIMP](https://www.gimp.org/). En la redacción y revisión de textos puedo utilizar [Claude](https://www.claude.ai) (Anthropic).
