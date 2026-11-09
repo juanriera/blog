@@ -16,7 +16,7 @@ website:
       - icon: mastodon
         href: https://mstdn.social/@juanriera/
     left:
-      - text: "Blog"
+      - text: "Cuaderno de notas"
         file: blog.qmd
 
   comments:

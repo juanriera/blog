@@ -5,7 +5,7 @@ about:
   template: marquee
   links:
     - icon: journal-text
-      text: Blog
+      text: Cuaderno de notas
       href: blog.qmd
     - icon: linkedin
       text: LinkedIn
