@@ -28,7 +28,7 @@ Las páginas de **La Talamera** nacen de un mismo interés visto desde dos ángu
 
 Encontrarás aquí el acceso a diversos recursos:
 
-- [La mejora continua en la producción quesera](https://juanriera.github.io/master-queseria/), libro web elaborado como apoyo al [Curso de Especialización de Formación Profesional de Grado Superior en Tecnología y Gestión Quesera](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-21708), curso que contribuí a diseñar e impulsar junto con un equipo interdisciplinar de profesionales y docentes, y que desde 2024 forma parte de la oferta formativa de la Formación Profesional en España.
+- [La mejora continua en la producción quesera](https://juanriera.github.io/mejora-continua/), libro web elaborado como apoyo al [Curso de Especialización de Formación Profesional de Grado Superior en Tecnología y Gestión Quesera](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-21708), curso que contribuí a diseñar e impulsar junto con un equipo interdisciplinar de profesionales y docentes, y que desde 2024 forma parte de la oferta formativa de la Formación Profesional en España.
 
 - [La gestión industrial de la quesería](https://github.com/juanriera/gestion-queseria) es un repositorio de varios documentos en PDF sobre tecnología quesera y gestión de la quesería, que complementan el libro anterior. En este repositorio se incluye una carpeta [recursos](https://github.com/juanriera/gestion-queseria/tree/main/recursos), desde la que se pueden descargar hojas de cálculo con diversos ejemplos y modelos.
 
